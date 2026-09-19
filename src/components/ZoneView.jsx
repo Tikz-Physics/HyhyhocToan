@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Volume2, Sparkles, ChevronRight, HelpCircle, Target, Minimize2 } from 'lucide-react';
+import { ArrowLeft, Volume2, Sparkles, ChevronRight, ChevronLeft, HelpCircle, Target, Minimize2 } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
 import InteractiveCanvas from './InteractiveCanvas';
 import FloatingPetCompanion from './FloatingPetCompanion';
@@ -54,6 +54,16 @@ export default function ZoneView({
       } else {
         onBack();
       }
+    }
+  };
+
+  const handlePrev = () => {
+    if (levelIndex > 0) {
+      soundManager.playPop();
+      setIsCompletedCurrent(false);
+      setShowHint(false);
+      setLastAnswerStatus('idle');
+      setLevelIndex(levelIndex - 1);
     }
   };
 
@@ -226,19 +236,20 @@ export default function ZoneView({
         />
       </div>
 
-      {/* Success Next Button */}
+      {/* Success Celebration Banner */}
       {isCompletedCurrent && (
-        <div className="mt-2 p-2.5 rounded-2xl bg-emerald-50 border-2 border-emerald-400 text-emerald-950 flex items-center justify-between gap-2 animate-pop">
-          <span className="font-black text-xs sm:text-sm flex items-center gap-1">
-            <span>🎉 Giỏi quá!</span>
+        <div className="mt-2.5 p-2.5 rounded-2xl bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-400 text-emerald-950 flex items-center justify-between gap-2 animate-pop shadow-xs">
+          <span className="font-black text-xs sm:text-sm flex items-center gap-1.5">
+            <span className="text-xl">🎉</span>
+            <span>Bé làm đúng rồi! Giỏi quá!</span>
           </span>
 
           <button
             type="button"
             onClick={handleNext}
-            className="flex items-center gap-1 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 text-amber-950 font-black text-xs sm:text-sm px-4 py-2 rounded-xl shadow-md btn-kid-3d cursor-pointer"
+            className="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs sm:text-sm px-3.5 py-1.5 rounded-xl shadow-xs btn-kid-3d cursor-pointer"
           >
-            <span>{levelIndex < currentList.length - 1 ? 'Câu kế tiếp' : 'Xong bài!'}</span>
+            <span>Sang câu kế</span>
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
@@ -266,6 +277,43 @@ export default function ZoneView({
           )}
         </div>
       )}
+
+      {/* Main Question Navigation Bar (Luôn hiển thị: Câu trước, Vị trí câu, Câu tiếp theo) */}
+      <div className="mt-3.5 pt-2.5 border-t border-amber-200/80 flex items-center justify-between gap-2 w-full max-w-md mx-auto">
+        <button
+          type="button"
+          onClick={handlePrev}
+          disabled={levelIndex === 0}
+          className={`flex items-center gap-1 px-3.5 py-2 rounded-2xl font-black text-xs sm:text-sm transition-all btn-kid-3d ${
+            levelIndex === 0
+              ? 'opacity-35 bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed'
+              : 'bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300 shadow-xs cursor-pointer active:scale-95'
+          }`}
+        >
+          <ChevronLeft className="w-4 h-4" />
+          <span>Câu trước</span>
+        </button>
+
+        <div className="flex items-center gap-1.5 bg-amber-100/90 border border-amber-300 px-3 py-1.5 rounded-xl text-amber-950 font-black text-xs sm:text-sm shadow-2xs">
+          <span>Câu</span>
+          <span className="text-rose-600 font-extrabold text-sm sm:text-base">{levelIndex + 1}</span>
+          <span className="text-slate-400">/</span>
+          <span>{currentList.length}</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleNext}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-2xl font-black text-xs sm:text-sm transition-all shadow-md btn-kid-3d cursor-pointer active:scale-95 ${
+            isCompletedCurrent
+              ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-2 border-emerald-600 animate-bounce ring-4 ring-emerald-200'
+              : 'bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 text-amber-950 border-2 border-amber-500'
+          }`}
+        >
+          <span>{levelIndex < currentList.length - 1 ? 'Câu tiếp theo' : 'Hoàn thành 🎉'}</span>
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
 
       {/* Floating Pet Companion */}
       <FloatingPetCompanion

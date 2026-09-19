@@ -52,21 +52,37 @@ class SoundManager {
   initSpeech() {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       const loadVoices = () => {
-        const voices = window.speechSynthesis.getVoices();
-        // Look for genuine Vietnamese voices (vi-VN, vi_VN, vi)
-        this.vietnameseVoice = voices.find(
-          (v) =>
-            v.lang.toLowerCase().startsWith('vi') ||
-            v.lang.toLowerCase().includes('vietnam') ||
-            v.name.toLowerCase().includes('vietnamese')
-        ) || null;
+        this.vietnameseVoice = this.getVietnameseVoice();
       };
-
       loadVoices();
       if (window.speechSynthesis.onvoiceschanged !== undefined) {
         window.speechSynthesis.onvoiceschanged = loadVoices;
       }
     }
+  }
+
+  getVietnameseVoice() {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return null;
+    const voices = window.speechSynthesis.getVoices() || [];
+    if (voices.length === 0) return null;
+
+    // 1. Exact Vietnamese language tags
+    let match = voices.find(
+      (v) => v.lang === 'vi-VN' || v.lang === 'vi_VN' || v.lang.toLowerCase() === 'vi'
+    );
+    if (match) return match;
+
+    // 2. Prefixed with 'vi'
+    match = voices.find((v) => v.lang.toLowerCase().startsWith('vi'));
+    if (match) return match;
+
+    // 3. Known Vietnamese voice names (Microsoft HoaiMy, NamMinh, Google Tiếng Việt, Apple Linh, etc.)
+    match = voices.find((v) =>
+      /vietnam|tiếng việt|tieng viet|hoaimy|namminh|linh/i.test(v.name)
+    );
+    if (match) return match;
+
+    return null;
   }
 
   onSpeechChange(callback) {
@@ -100,11 +116,17 @@ class SoundManager {
     this.stopSpeaking();
     this.notifySpeech(true, cleanText);
 
-    // Primary Engine: Local Server Audio Stream (/api/tts) - Zero Referer/CORS block
+    // Primary Engine: Standard Google Vietnamese TTS Audio (Warm, Natural, Authentic Vietnamese)
+    this.speakGoogleVietnamese(cleanText);
+  }
+
+  speakGoogleVietnamese(cleanText) {
     try {
-      const encoded = encodeURIComponent(cleanText.substring(0, 180));
-      const ttsUrl = `/api/tts?text=${encoded}`;
-      const audio = new Audio(ttsUrl);
+      const encoded = encodeURIComponent(cleanText.substring(0, 190));
+      const primaryUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=tw-ob&q=${encoded}`;
+      const audio = new Audio();
+      audio.referrerPolicy = 'no-referrer';
+      audio.src = primaryUrl;
       this.currentAudio = audio;
 
       audio.onended = () => {
@@ -116,7 +138,8 @@ class SoundManager {
 
       audio.onerror = () => {
         if (this.currentAudio !== audio) return;
-        this.speakDirectGoogle(cleanText);
+        // Secondary Google TTS endpoint fallback
+        this.speakGoogleBackup(cleanText);
       };
 
       const playPromise = audio.play();
@@ -124,19 +147,21 @@ class SoundManager {
         playPromise.catch((err) => {
           if (this.currentAudio !== audio) return;
           if (err && (err.name === 'AbortError' || err.code === 20)) return;
-          this.speakDirectGoogle(cleanText);
+          this.speakGoogleBackup(cleanText);
         });
       }
     } catch {
-      this.speakDirectGoogle(cleanText);
+      this.speakGoogleBackup(cleanText);
     }
   }
 
-  speakDirectGoogle(cleanText) {
+  speakGoogleBackup(cleanText) {
     try {
-      const encoded = encodeURIComponent(cleanText.substring(0, 180));
-      const directUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=tw-ob&q=${encoded}`;
-      const audio = new Audio(directUrl);
+      const encoded = encodeURIComponent(cleanText.substring(0, 190));
+      const backupUrl = `https://translate.googleapis.com/translate_tts?client=gtx&tl=vi&ie=UTF-8&q=${encoded}`;
+      const audio = new Audio();
+      audio.referrerPolicy = 'no-referrer';
+      audio.src = backupUrl;
       this.currentAudio = audio;
 
       audio.onended = () => {
@@ -172,13 +197,14 @@ class SoundManager {
 
     try {
       window.speechSynthesis.cancel();
+      const viVoice = this.getVietnameseVoice();
       const utterance = new SpeechSynthesisUtterance(cleanText);
-      if (this.vietnameseVoice) {
-        utterance.voice = this.vietnameseVoice;
-      }
       utterance.lang = 'vi-VN';
-      utterance.rate = 0.88;
-      utterance.pitch = 1.1;
+      if (viVoice) {
+        utterance.voice = viVoice;
+      }
+      utterance.rate = 0.9;
+      utterance.pitch = 1.05;
 
       utterance.onend = () => this.notifySpeech(false, '');
       utterance.onerror = () => this.notifySpeech(false, '');
