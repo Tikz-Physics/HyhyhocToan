@@ -415,23 +415,28 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
                 </div>
               </div>
 
-              <div className="text-[11px] font-bold text-slate-500 mb-1.5 text-center">
-                👇 Bé chạm trực tiếp vào thẻ đáp án đúng:
+              <div className="flex items-center justify-center gap-1.5 mb-2">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100/90 border border-amber-300 rounded-full shadow-2xs">
+                  <span className="text-sm animate-bounce">👇</span>
+                  <span className="text-xs sm:text-sm font-black text-amber-950 uppercase tracking-wide">
+                    Bé chạm vào thẻ đáp án đúng:
+                  </span>
+                </div>
               </div>
 
-              {/* Interactive Direct Choice Tiles (No ABCD letter tags) */}
+              {/* Interactive Direct Choice Tiles with Clear Letter Badges */}
               <div className="grid grid-cols-1 sm:grid-cols-2 landscape:grid-cols-2 gap-2 my-2">
                 {currentQ.options.map((opt) => {
                   const isChosen = userAnswers[currentQ.id] === opt.id;
                   const isCorrectAnswer = opt.id === currentQ.correctAnswer;
                   const showResult = (examMode === 'practice' && isChosen) || isSubmitted;
 
-                  let btnStyle = 'bg-white hover:bg-amber-50 border-2 border-amber-300 text-slate-800';
+                  let btnStyle = 'bg-white hover:bg-amber-50 active:scale-95 border-2 border-amber-300 text-slate-800 shadow-xs hover:shadow-md';
                   if (showResult) {
                     if (isCorrectAnswer) {
-                      btnStyle = 'bg-emerald-500 border-emerald-600 text-white ring-4 ring-emerald-200';
+                      btnStyle = 'bg-emerald-500 border-emerald-600 text-white ring-4 ring-emerald-200 shadow-md';
                     } else if (isChosen && !isCorrectAnswer) {
-                      btnStyle = 'bg-rose-500 border-rose-600 text-white';
+                      btnStyle = 'bg-rose-500 border-rose-600 text-white animate-wiggle shadow-xs';
                     }
                   } else if (isChosen) {
                     btnStyle = 'bg-amber-300 border-amber-500 text-amber-950 font-black ring-2 ring-amber-400 scale-102';
@@ -442,22 +447,32 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
                       key={opt.id}
                       type="button"
                       onClick={() => handleSelectOption(opt.id)}
-                      className={`p-3 rounded-2xl font-black text-sm sm:text-base text-left transition-all flex items-center justify-between btn-kid-3d shadow-sm ${btnStyle}`}
+                      className={`p-2.5 sm:p-3 rounded-2xl font-black text-sm sm:text-base text-left transition-all flex items-center justify-between gap-2 btn-kid-3d shadow-sm cursor-pointer ${btnStyle}`}
                     >
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg">✨</span>
+                      <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                        <span
+                          className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center flex-shrink-0 shadow-2xs transition-colors ${
+                            showResult && isCorrectAnswer
+                              ? 'bg-white text-emerald-700'
+                              : showResult && isChosen && !isCorrectAnswer
+                              ? 'bg-white text-rose-700'
+                              : 'bg-amber-200 text-amber-950 border border-amber-300'
+                          }`}
+                        >
+                          {opt.id}
+                        </span>
                         {opt.image && (
                           <img
                             src={getAssetUrl(opt.image)}
                             alt={opt.text}
-                            className="h-8 sm:h-10 w-auto object-contain bg-white rounded-lg border border-slate-200 p-1 shadow-2xs"
+                            className="h-8 sm:h-10 w-auto object-contain bg-white rounded-lg border border-slate-200 p-1 shadow-2xs flex-shrink-0"
                           />
                         )}
-                        <span>{opt.text}</span>
+                        <span className="break-words font-black leading-snug">{opt.text}</span>
                       </div>
 
-                      {showResult && isCorrectAnswer && <CheckCircle2 className="w-5 h-5 text-white animate-pop" />}
-                      {showResult && isChosen && !isCorrectAnswer && <XCircle className="w-5 h-5 text-white" />}
+                      {showResult && isCorrectAnswer && <CheckCircle2 className="w-5 h-5 text-white animate-pop flex-shrink-0" />}
+                      {showResult && isChosen && !isCorrectAnswer && <XCircle className="w-5 h-5 text-white flex-shrink-0" />}
                     </button>
                   );
                 })}

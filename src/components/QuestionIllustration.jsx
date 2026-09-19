@@ -57,27 +57,30 @@ export default function QuestionIllustration({ level }) {
 
   const id = level.id;
 
-  // 1. GEOMETRY: Circle, Square, Triangle
+  // 1. GEOMETRY: Circle, Square, Triangle (Cohesive Scene - No button-like cards)
   if (id === 'geo1') {
     return (
-      <div className="flex items-center justify-center gap-3 sm:gap-4 my-2 p-2 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border-2 border-amber-200 shadow-2xs">
-        <div className="flex flex-col items-center bg-white p-2 sm:p-2.5 rounded-xl border border-amber-300 shadow-2xs">
-          <div className="w-12 h-12 rounded-full bg-yellow-400 border-2 border-yellow-500 shadow-xs flex items-center justify-center text-xl animate-bounce-slow">
-            🟡
+      <div className="flex flex-col items-center my-2 p-3 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border-2 border-amber-200 shadow-2xs max-w-md mx-auto">
+        <div className="flex items-center justify-center gap-3 sm:gap-4 mb-2">
+          <div className="flex flex-col items-center">
+            <span className="text-3xl animate-bounce-slow">⚽</span>
+            <span className="text-[10px] font-bold text-slate-600">Quả bóng</span>
           </div>
-          <span className="text-[11px] font-black text-amber-900 mt-1">Hình Tròn</span>
-        </div>
-        <div className="flex flex-col items-center bg-white p-2 sm:p-2.5 rounded-xl border border-blue-200 shadow-2xs">
-          <div className="w-12 h-12 bg-blue-400 border-2 border-blue-600 rounded-lg shadow-xs flex items-center justify-center text-xl">
-            🟦
+          <div className="flex flex-col items-center">
+            <span className="text-3xl animate-bounce-slow">🛞</span>
+            <span className="text-[10px] font-bold text-slate-600">Bánh xe</span>
           </div>
-          <span className="text-[11px] font-black text-blue-900 mt-1">Hình Vuông</span>
+          <div className="flex flex-col items-center">
+            <span className="text-3xl animate-bounce-slow">⏰</span>
+            <span className="text-[10px] font-bold text-slate-600">Đồng hồ</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-3xl animate-bounce-slow">🪙</span>
+            <span className="text-[10px] font-bold text-slate-600">Đồng xu</span>
+          </div>
         </div>
-        <div className="flex flex-col items-center bg-white p-2 sm:p-2.5 rounded-xl border border-rose-200 shadow-2xs">
-          <svg viewBox="0 0 50 50" className="w-12 h-12">
-            <polygon points="25,5 45,45 5,45" fill="#f43f5e" stroke="#be123c" strokeWidth="2" />
-          </svg>
-          <span className="text-[11px] font-black text-rose-900 mt-1">Hình Tam Giác</span>
+        <div className="text-xs font-black text-amber-900 bg-amber-100/90 px-3 py-1 rounded-xl border border-amber-300 shadow-2xs text-center">
+          ✨ Các đồ vật trên đều cong tròn đều và lăn tròn vo được!
         </div>
       </div>
     );
@@ -87,18 +90,15 @@ export default function QuestionIllustration({ level }) {
   if (id === 'geo2') {
     return (
       <div className="flex flex-col items-center my-2 p-3 bg-rose-50 rounded-2xl border-2 border-rose-200 shadow-2xs max-w-sm mx-auto">
-        <svg viewBox="0 0 160 120" className="w-44 h-32">
+        <svg viewBox="0 0 160 120" className="w-40 h-28">
           <line x1="80" y1="20" x2="20" y2="105" stroke="#ef4444" strokeWidth="5" strokeLinecap="round" />
           <line x1="80" y1="20" x2="140" y2="105" stroke="#3b82f6" strokeWidth="5" strokeLinecap="round" />
           <line x1="20" y1="105" x2="140" y2="105" stroke="#10b981" strokeWidth="5" strokeLinecap="round" />
           <circle cx="80" cy="20" r="7" fill="#fbbf24" stroke="#d97706" strokeWidth="2" />
           <circle cx="20" cy="105" r="7" fill="#fbbf24" stroke="#d97706" strokeWidth="2" />
           <circle cx="140" cy="105" r="7" fill="#fbbf24" stroke="#d97706" strokeWidth="2" />
-          <text x="35" y="55" fill="#ef4444" fontSize="11" fontWeight="bold">Cạnh 1</text>
-          <text x="115" y="55" fill="#3b82f6" fontSize="11" fontWeight="bold">Cạnh 2</text>
-          <text x="70" y="118" fill="#10b981" fontSize="11" fontWeight="bold">Cạnh 3</text>
         </svg>
-        <span className="text-xs font-black text-rose-900 mt-1">🔺 Hình tam giác có 3 đỉnh vàng và 3 cạnh</span>
+        <span className="text-xs font-black text-rose-900 mt-1">🔺 Bé hãy đếm số cạnh của hình tam giác nhé!</span>
       </div>
     );
   }
@@ -107,22 +107,23 @@ export default function QuestionIllustration({ level }) {
   if (id === 'geo3') {
     return (
       <div className="flex flex-col items-center my-2 p-3 bg-emerald-50 rounded-2xl border-2 border-emerald-200 shadow-2xs max-w-sm mx-auto">
-        <div className="relative w-48 h-24 bg-emerald-100 border-4 border-emerald-600 rounded-xl flex flex-col items-center justify-center shadow-xs">
-          <span className="absolute -top-3 text-[10px] font-black bg-emerald-600 text-white px-2 py-0.5 rounded-full">
-            Cạnh dài (trên)
-          </span>
-          <span className="absolute -bottom-3 text-[10px] font-black bg-emerald-600 text-white px-2 py-0.5 rounded-full">
-            Cạnh dài (dưới)
-          </span>
-          <span className="absolute -left-3 rotate-90 text-[9px] font-black bg-emerald-500 text-white px-1.5 rounded-full">
-            Cạnh ngắn
-          </span>
-          <span className="absolute -right-3 -rotate-90 text-[9px] font-black bg-emerald-500 text-white px-1.5 rounded-full">
-            Cạnh ngắn
-          </span>
-          <span className="text-xs font-black text-emerald-900">🟩 Hình Chữ Nhật</span>
+        <div className="flex items-center justify-center gap-4 my-1">
+          <div className="flex flex-col items-center">
+            <span className="text-4xl">✉️</span>
+            <span className="text-[10px] font-bold text-emerald-800">Phong bì thư</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-4xl">📘</span>
+            <span className="text-[10px] font-bold text-emerald-800">Quyển sách toán</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-4xl">📱</span>
+            <span className="text-[10px] font-bold text-emerald-800">Điện thoại</span>
+          </div>
         </div>
-        <span className="text-[11px] font-bold text-emerald-800 mt-3">2 cạnh dài bằng nhau • 2 cạnh ngắn bằng nhau</span>
+        <span className="text-[11px] font-bold text-emerald-900 mt-2 bg-emerald-100/90 px-3 py-1 rounded-xl border border-emerald-300">
+          Các đồ vật này đều có dạng Hình Chữ Nhật 🟩
+        </span>
       </div>
     );
   }
@@ -133,11 +134,8 @@ export default function QuestionIllustration({ level }) {
       <div className="flex items-center justify-center gap-4 my-2 p-2.5 bg-sky-50 rounded-2xl border-2 border-sky-200 shadow-2xs max-w-sm mx-auto">
         <div className="text-5xl animate-bounce-slow">🧃</div>
         <div className="text-left">
-          <div className="text-xs sm:text-sm font-black text-sky-950">Hộp sữa tươi 100%</div>
-          <div className="text-[11px] font-bold text-sky-800">Có 6 mặt hình chữ nhật</div>
-          <span className="inline-block mt-1 bg-sky-200 text-sky-900 text-[10px] font-black px-2 py-0.5 rounded-md">
-            👉 Khối hộp chữ nhật
-          </span>
+          <div className="text-xs sm:text-sm font-black text-sky-950">Hộp sữa tươi dinh dưỡng</div>
+          <div className="text-[11px] font-bold text-sky-800">Các mặt của hộp sữa là hình chữ nhật</div>
         </div>
       </div>
     );

@@ -968,7 +968,7 @@ export default function InteractiveCanvas({
           <QuestionIllustration level={level} />
         )}
 
-      {/* 10. THẺ CHỌN ĐÁP ÁN TRỰC QUAN */}
+      {/* 10. THẺ CHỌN ĐÁP ÁN TRỰC QUAN (RÕ RÀNG VỚI NHÃN A, B, C, D) */}
       {!hasDirectGame && level.options && level.options.length > 0 && (() => {
         const isNumeric = level.options.every((opt) => String(opt).length <= 4);
         const count = level.options.length;
@@ -982,18 +982,30 @@ export default function InteractiveCanvas({
           gridCols = 'grid-cols-2 max-w-xs';
         }
 
+        const letterBadges = ['A', 'B', 'C', 'D'];
+
         return (
-          <div className="mt-2 pt-2 border-t border-slate-100">
-            <div className={`grid ${gridCols} gap-2 mx-auto`}>
+          <div className="mt-3 pt-2.5 border-t-2 border-dashed border-amber-200/90">
+            {/* Chỉ dẫn rõ ràng vị trí bé bấm chọn đáp án */}
+            <div className="flex items-center justify-center gap-1.5 mb-2.5">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-amber-100/95 border border-amber-300 rounded-full shadow-2xs">
+                <span className="text-sm animate-bounce">👇</span>
+                <span className="text-xs sm:text-sm font-black text-amber-950 uppercase tracking-wide">
+                  Bé bấm chọn 1 đáp án đúng:
+                </span>
+              </div>
+            </div>
+
+            <div className={`grid ${gridCols} gap-2 sm:gap-2.5 mx-auto`}>
               {level.options.map((opt, i) => {
                 const isChosen = selectedOption === opt;
                 const isWrong = wrongOption === opt;
 
-                let style = 'bg-white hover:bg-amber-50 border-2 border-amber-400 text-amber-950 shadow-xs';
+                let style = 'bg-white hover:bg-amber-50/80 active:scale-95 border-2 border-amber-400 text-slate-800 shadow-xs hover:shadow-md';
                 if (isSuccess && isChosen) {
-                  style = 'bg-emerald-500 border-emerald-600 text-white shadow-md';
+                  style = 'bg-emerald-500 border-2 border-emerald-600 text-white shadow-md ring-4 ring-emerald-200';
                 } else if (isWrong) {
-                  style = 'bg-rose-500 border-rose-600 text-white animate-wiggle shadow-xs';
+                  style = 'bg-rose-500 border-2 border-rose-600 text-white animate-wiggle shadow-xs';
                 }
 
                 return (
@@ -1001,12 +1013,34 @@ export default function InteractiveCanvas({
                     key={i}
                     type="button"
                     onClick={() => handleOptionCardTouch(opt, i)}
-                    className={`rounded-xl font-black transition-all flex items-center justify-center gap-1 btn-kid-3d ${
-                      isNumeric ? 'text-xl sm:text-2xl h-11 sm:h-12' : 'text-xs sm:text-sm h-11 sm:h-12 px-2 text-center'
+                    className={`rounded-2xl font-black transition-all flex items-center justify-between gap-1.5 p-2 sm:p-2.5 btn-kid-3d cursor-pointer ${
+                      isNumeric ? 'text-lg sm:text-2xl h-12 sm:h-14' : 'text-xs sm:text-sm h-12 sm:h-14'
                     } ${style}`}
                   >
-                    <span>{opt}</span>
-                    {isSuccess && isChosen && <Check className="w-4 h-4 text-white ml-0.5 animate-pop" />}
+                    {/* Nhãn chữ cái phương án A, B, C, D */}
+                    <span
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center flex-shrink-0 shadow-2xs transition-colors ${
+                        isSuccess && isChosen
+                          ? 'bg-white text-emerald-700'
+                          : isWrong
+                          ? 'bg-white text-rose-700'
+                          : 'bg-amber-200 text-amber-950 border border-amber-300'
+                      }`}
+                    >
+                      {letterBadges[i] || (i + 1)}
+                    </span>
+
+                    {/* Nội dung đáp án */}
+                    <span className="flex-1 text-center font-black leading-snug break-words px-1">
+                      {opt}
+                    </span>
+
+                    {/* Icon kiểm tra khi chọn đúng */}
+                    {isSuccess && isChosen ? (
+                      <Check className="w-5 h-5 text-white animate-pop flex-shrink-0 ml-0.5" />
+                    ) : (
+                      <span className="w-4 flex-shrink-0" />
+                    )}
                   </button>
                 );
               })}
@@ -1017,7 +1051,16 @@ export default function InteractiveCanvas({
 
       {/* 11. BÀN PHÍM SỐ KẸO NGỌT */}
       {!hasDirectGame && (!level.options || level.options.length === 0) && (
-        <div className="mt-2 pt-1.5 border-t border-slate-100 flex flex-col items-center">
+        <div className="mt-3 pt-2.5 border-t-2 border-dashed border-amber-200/90 flex flex-col items-center">
+          <div className="flex items-center justify-center gap-1.5 mb-2.5">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-amber-100/95 border border-amber-300 rounded-full shadow-2xs">
+              <span className="text-sm animate-bounce">👇</span>
+              <span className="text-xs sm:text-sm font-black text-amber-950 uppercase tracking-wide">
+                Bé bấm số vào bàn phím:
+              </span>
+            </div>
+          </div>
+
           <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 max-w-sm">
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((n) => (
               <button
