@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { Volume2, Lightbulb, Music, X, Sparkles, Heart } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
+import AnimatedCharacter from './AnimatedCharacter';
 
 const COMPANION_PETS = [
   { id: 'dino', name: 'Khủng Long Dino', icon: '🦖', quote: 'Dino dũng cảm cùng bé vượt qua mọi thử thách!' },
@@ -23,6 +24,7 @@ export default function FloatingPetCompanion({
   const [speechBubble, setSpeechBubble] = useState('');
   const [isMinimized, setIsMinimized] = useState(false);
   const [showHearts, setShowHearts] = useState(false);
+  const [eatingTreat, setEatingTreat] = useState(null);
   const [activeCompanion, setActiveCompanion] = useState(null);
   const speechTimerRef = useRef(null);
 
@@ -247,6 +249,7 @@ export default function FloatingPetCompanion({
     e?.stopPropagation();
     soundManager.playPop(1.5);
     setMood('eating');
+    setEatingTreat(treatType);
     setShowHearts(true);
 
     if (treatType === 'apple') {
@@ -274,6 +277,7 @@ export default function FloatingPetCompanion({
 
     setTimeout(() => {
       setMood('idle');
+      setEatingTreat(null);
       setShowHearts(false);
     }, 1800);
   };
@@ -377,9 +381,11 @@ export default function FloatingPetCompanion({
             setIsMinimized(false);
           }}
           title="Gọi thú cưng đồng hành"
-          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 border-3 border-white shadow-xl flex items-center justify-center text-2xl sm:text-3xl cursor-pointer hover:scale-110 active:scale-95 transition-transform animate-bounce-slow"
+          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 border-3 border-white shadow-xl flex items-center justify-center overflow-hidden cursor-pointer hover:scale-110 active:scale-95 transition-transform animate-bounce-slow p-1"
         >
-          <span>{currentPet.icon}</span>
+          <div className="scale-75 pointer-events-none">
+            <AnimatedCharacter type={currentPet.id || 'dino'} mood="idle" />
+          </div>
         </button>
       </div>
     );
@@ -607,24 +613,28 @@ export default function FloatingPetCompanion({
             </div>
           )}
 
-          {/* Mascot Box */}
+          {/* Mascot Full-Body Animated Cartoon Character */}
           <div
-            className={`relative w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-white border-2 border-amber-400 shadow-md flex flex-col items-center justify-center transition-all ${
+            className={`relative flex flex-col items-center justify-center transition-all ${
               mood === 'happy'
-                ? 'animate-bounce scale-110'
+                ? 'scale-115'
                 : mood === 'eating'
-                ? 'animate-wiggle scale-105'
+                ? 'scale-105'
                 : mood === 'dancing'
-                ? 'animate-wiggle scale-110'
-                : !isHopping
-                ? 'animate-bounce-slow'
+                ? 'animate-wiggle scale-115'
                 : ''
             }`}
           >
-            <span className="text-2xl sm:text-3xl leading-none pointer-events-none">{currentPet.icon}</span>
+            <AnimatedCharacter
+              type={currentPet.id || 'dino'}
+              mood={mood}
+              isHopping={isHopping}
+              isDragging={isDragging}
+              eatingTreat={eatingTreat}
+            />
 
             {/* Stage Tag */}
-            <span className="absolute -bottom-1.5 bg-rose-500 text-white text-[7px] font-black px-1 rounded-full border border-white shadow-2xs pointer-events-none">
+            <span className="absolute -bottom-1 bg-gradient-to-r from-rose-500 to-amber-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded-full border border-white shadow-xs pointer-events-none">
               {currentPet.stage ? `C${currentPet.stage}` : '⭐'}
             </span>
           </div>

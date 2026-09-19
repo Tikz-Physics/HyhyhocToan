@@ -217,10 +217,10 @@ export default function App() {
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1">
-                    <span className="font-black text-xs sm:text-sm text-amber-950 truncate max-w-[80px] sm:max-w-[120px]">
+                    <span className="font-black text-xs sm:text-sm text-amber-950 break-words leading-tight">
                       {currentAccount.name || 'Bé Học'}
                     </span>
-                    <span className="bg-rose-500 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full">
+                    <span className="bg-rose-500 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full flex-shrink-0">
                       Cấp {currentPet.stage}
                     </span>
                   </div>

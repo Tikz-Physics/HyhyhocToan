@@ -3,6 +3,7 @@ import confetti from 'canvas-confetti';
 import { soundManager } from '../utils/soundManager';
 import { getAssetUrl } from '../utils/assetHelper';
 import { Check } from 'lucide-react';
+import QuestionIllustration from './QuestionIllustration';
 
 const getTimeOfDayInfo = (h) => {
   if (h >= 6 && h <= 10) {
@@ -949,18 +950,41 @@ export default function InteractiveCanvas({
         </div>
       )}
 
+      {/* 9b. QUESTION ILLUSTRATION (For all levels needing visual representations) */}
+      {!level.image &&
+        !level.itemIcon &&
+        !level.type?.startsWith('train') &&
+        level.type !== 'number_bond' &&
+        level.type !== 'tens_ones' &&
+        level.type !== 'ruler_cm' &&
+        level.type !== 'picture_graph' &&
+        level.type !== 'visual_add' &&
+        level.type !== 'visual_sub' &&
+        level.layout !== 'bear_tree' &&
+        level.leftCount === undefined &&
+        level.leftNum === undefined &&
+        level.symbol === undefined &&
+        level.hour === undefined && (
+          <QuestionIllustration level={level} />
+        )}
+
       {/* 10. THẺ CHỌN ĐÁP ÁN TRỰC QUAN */}
       {!hasDirectGame && level.options && level.options.length > 0 && (() => {
         const isNumeric = level.options.every((opt) => String(opt).length <= 4);
+        const count = level.options.length;
+        let gridCols = 'grid-cols-2 max-w-sm';
+        if (count === 3) {
+          // 3 đáp án: 3 cột thẳng hàng cân đối, tuyệt đối không bị 2 trên 1 dưới
+          gridCols = 'grid-cols-3 max-w-md';
+        } else if (count === 4) {
+          gridCols = isNumeric ? 'grid-cols-2 sm:grid-cols-4 max-w-md' : 'grid-cols-2 max-w-md';
+        } else if (count === 2) {
+          gridCols = 'grid-cols-2 max-w-xs';
+        }
+
         return (
           <div className="mt-2 pt-2 border-t border-slate-100">
-            <div
-              className={`grid gap-2 mx-auto ${
-                isNumeric
-                  ? 'grid-cols-2 sm:grid-cols-4 max-w-sm'
-                  : 'grid-cols-2 max-w-md'
-              }`}
-            >
+            <div className={`grid ${gridCols} gap-2 mx-auto`}>
               {level.options.map((opt, i) => {
                 const isChosen = selectedOption === opt;
                 const isWrong = wrongOption === opt;

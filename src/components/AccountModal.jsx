@@ -108,7 +108,7 @@ export default function AccountModal({
 
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <h4 className="font-black text-base text-slate-800 truncate">
+                          <h4 className="font-black text-base text-slate-800 break-words">
                             {acc.name}
                           </h4>
                           {isCurrent && (

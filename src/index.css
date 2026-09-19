@@ -107,6 +107,57 @@
   animation: petHop 0.6s ease-in-out infinite;
 }
 
+/* Character Body Part Keyframes */
+@keyframes walkLegL {
+  0%, 100% { transform: rotate(-18deg); }
+  50% { transform: rotate(20deg); }
+}
+
+@keyframes walkLegR {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(-18deg); }
+}
+
+@keyframes tailWaggle {
+  0%, 100% { transform: rotate(-12deg); }
+  50% { transform: rotate(16deg); }
+}
+
+@keyframes eyeBlinkCycle {
+  0%, 88%, 100% { transform: scaleY(1); }
+  94% { transform: scaleY(0.12); }
+}
+
+@keyframes armWaveMotion {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(25deg); }
+}
+
+.anim-walk-leg-l {
+  animation: walkLegL 0.45s ease-in-out infinite;
+  transform-origin: 50% 10%;
+}
+
+.anim-walk-leg-r {
+  animation: walkLegR 0.45s ease-in-out infinite;
+  transform-origin: 50% 10%;
+}
+
+.anim-tail-wag {
+  animation: tailWaggle 0.7s ease-in-out infinite;
+  transform-origin: 10% 50%;
+}
+
+.anim-eye-blink {
+  animation: eyeBlinkCycle 3.2s infinite ease-in-out;
+  transform-origin: 50% 50%;
+}
+
+.anim-arm-wave {
+  animation: armWaveMotion 0.8s ease-in-out infinite;
+  transform-origin: 20% 20%;
+}
+
 /* Focus Mode Glow */
 @keyframes focusPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
