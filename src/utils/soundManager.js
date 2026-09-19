@@ -1,6 +1,63 @@
 // SoundManager - Web Audio API Synthesizer & Natural Vietnamese Speech Engine
 // Ensures 100% natural Vietnamese pronunciation across all devices (Windows, iPad, iPhone, Android)
 
+/**
+ * Helper: Pre-processes Vietnamese math questions for natural, accurate Speech Synthesis (TTS).
+ * Fixes:
+ * - Hyphens between numbers (e.g. '68 - 25') being misinterpreted as a range ('68 đến 25') -> converts to '68 trừ 25'
+ * - Plus signs ('+') -> converts to 'cộng'
+ * - Equal question ('= ?') -> converts to 'bằng bao nhiêu?'
+ * - Missing operand in equations ('6 + ? = 10') -> converts to '6 cộng mấy bằng 10'
+ * - Units ('cm') -> converts to 'xăng-ti-mét'
+ * - All emojis stripped cleanly
+ * - Colons after keywords softened to pauses
+ */
+export function formatMathForSpeech(text) {
+  if (!text) return '';
+  let res = String(text);
+
+  // 1. Remove emojis and pictographs
+  res = res.replace(/\p{Extended_Pictographic}/gu, '');
+
+  // 2. Units: 'cm' -> 'xăng-ti-mét'
+  res = res.replace(/(\d+)\s*cm\b/gi, (m, num) => `${num} xăng-ti-mét`);
+  res = res.replace(/\bcm\b/gi, 'xăng-ti-mét');
+
+  // 3. Question equals: '= ?' -> 'bằng bao nhiêu?'
+  res = res.replace(/\s*=\s*\?/g, ' bằng bao nhiêu?');
+
+  // 4. Missing number in equation: '6 + ? = 10'
+  res = res.replace(/(?<=\+|\-|\×|\*|\:|\÷)\s*\?/g, ' mấy');
+  res = res.replace(/\?\s*(?==)/g, 'mấy ');
+
+  // 5. Minus sign between numbers or operands -> 'trừ'
+  // Crucial: TTS reads '68 - 25' as '68 đến 25' without this!
+  res = res.replace(/(\d+)\s*[-−–]\s*(\d+)/g, (m, a, b) => `${a} trừ ${b}`);
+  res = res.replace(/(?<=\d|\))\s*[-−–]\s*/g, ' trừ ');
+  res = res.replace(/\s*[-−–]\s*(?=\d|\()/g, ' trừ ');
+
+  // 6. Plus sign -> 'cộng'
+  res = res.replace(/(\d+)\s*\+\s*(\d+)/g, (m, a, b) => `${a} cộng ${b}`);
+  res = res.replace(/(?<=\d|\))\s*\+\s*/g, ' cộng ');
+  res = res.replace(/\s*\+\s*(?=\d|\()/g, ' cộng ');
+  res = res.replace(/\s*\+\s*/g, ' cộng ');
+
+  // 7. Equal sign -> 'bằng'
+  res = res.replace(/\s*=\s*/g, ' bằng ');
+
+  // 8. Comparisons & ranges
+  res = res.replace(/(\d+)\s*(\.{3,}|…)\s*(\d+)/g, (m, a, dots, b) => `${a} với ${b}`);
+  res = res.replace(/\s*>\s*/g, ' lớn hơn ');
+  res = res.replace(/\s*<\s*/g, ' bé hơn ');
+
+  // 9. Soften colons after keywords to avoid TTS saying "hai chấm"
+  res = res.replace(/(Tính|Tính nhẩm|Tìm giá trị của|Đố bé|Quan sát)\s*:/gi, (m, word) => `${word},`);
+
+  // 10. Clean up spaces
+  res = res.replace(/\s+/g, ' ').trim();
+  return res;
+}
+
 class SoundManager {
   constructor() {
     this.ctx = null;
@@ -98,10 +155,7 @@ class SoundManager {
   speak(text) {
     if (!this.voiceEnabled || !text) return;
 
-    const cleanText = text
-      .replace(/[🎨🍎🍏🎈🦆🍓🍬🧸🎄🍉🐊🦉🧩🏆⭐]/gu, '')
-      .replace(/\s+/g, ' ')
-      .trim();
+    const cleanText = formatMathForSpeech(text);
 
     if (!cleanText) return;
 
