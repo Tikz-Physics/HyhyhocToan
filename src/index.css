@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Nunito', 'Quicksand', system-ui, -apple-system, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.9); opacity: 0; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+  50% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.8); }
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 2.5s infinite ease-in-out;
+}
+
+.animate-wiggle {
+  animation: wiggle 1.2s infinite ease-in-out;
+}
+
+.animate-pop {
+  animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.animate-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 3D Kid Button effect */
+.btn-kid-3d {
+  transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.12s ease;
+  position: relative;
+  user-select: none;
+}
+.btn-kid-3d:active {
+  transform: translateY(4px) scale(0.98);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Candy number keypad tactile button */
+.btn-candy-number {
+  transition: all 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+}
+.btn-candy-number:active {
+  transform: translateY(3px) scale(0.96);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Custom friendly scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fef3c7;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb {
+  background: #f59e0b;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d97706;
+}
+
