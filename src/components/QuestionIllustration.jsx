@@ -118,7 +118,7 @@ export default function QuestionIllustration({ level }) {
           </div>
         </div>
         <span className="text-[11px] font-bold text-emerald-900 mt-2 bg-emerald-100/90 px-3 py-1 rounded-xl border border-emerald-300">
-          Các đồ vật này đều có dạng Hình Chữ Nhật 🟩
+          🔍 Bé hãy quan sát các đồ vật quen thuộc này nhé!
         </span>
       </div>
     );
@@ -195,7 +195,7 @@ export default function QuestionIllustration({ level }) {
               ))}
             </div>
             <div className="w-32 h-2.5 bg-amber-700 rounded-full mt-1" />
-            <span className="text-[10px] font-black text-emerald-900 mt-0.5">5 chú còn đậu trên cành</span>
+            <span className="text-[10px] font-black text-emerald-900 mt-0.5">Còn lại: [ ? ] chú chim</span>
           </div>
 
           <div className="flex flex-col items-center">
@@ -255,7 +255,7 @@ export default function QuestionIllustration({ level }) {
           <span>➖</span>
           <div className="flex flex-col items-center bg-rose-50 p-1.5 rounded-xl border border-rose-200 text-rose-800">
             <span className="text-2xl">🚗 3 + 2</span>
-            <span className="text-[10px]">Rời đi (5 ô tô)</span>
+            <span className="text-[10px]">Rời đi: 3 rồi 2 xe</span>
           </div>
           <span>ℹ️</span>
           <div className="flex flex-col items-center bg-slate-50 p-1.5 rounded-xl border border-slate-200 text-slate-500">
@@ -411,9 +411,9 @@ export default function QuestionIllustration({ level }) {
           68
         </div>
         <div className="text-left text-xs font-black text-indigo-950">
-          <div>• 6 chục (sáu mươi que 🎋)</div>
-          <div>• 8 que rời (tám 🥢)</div>
-          <div className="text-amber-800 text-[11px] font-bold mt-0.5">👉 Bé hãy chọn cách đọc đúng bên dưới!</div>
+          <div>• Hàng chục: 6 chục (60 que 🎋)</div>
+          <div>• Hàng đơn vị: 8 que rời (🥢)</div>
+          <div className="text-amber-800 text-[11px] font-bold mt-0.5">👉 Bé hãy chọn cách đọc số đúng bên dưới nhé!</div>
         </div>
       </div>
     );
@@ -693,12 +693,15 @@ export default function QuestionIllustration({ level }) {
   // 29. TIME: ts3 (7 days in a week)
   if (id === 'ts3') {
     return (
-      <div className="flex flex-wrap items-center justify-center gap-1 my-2 p-2.5 bg-gradient-to-r from-rose-50 via-amber-50 to-sky-50 rounded-2xl border-2 border-amber-200 shadow-2xs max-w-md mx-auto">
-        {['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ Nhật'].map((d, i) => (
-          <span key={i} className="text-[10px] font-black bg-white border border-amber-300 text-amber-900 px-2 py-1 rounded-lg shadow-2xs">
-            {d}
-          </span>
-        ))}
+      <div className="flex flex-col items-center my-2 p-2.5 bg-gradient-to-r from-rose-50 via-amber-50 to-sky-50 rounded-2xl border-2 border-amber-200 shadow-2xs max-w-md mx-auto">
+        <div className="flex flex-wrap items-center justify-center gap-1">
+          {['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ Nhật'].map((d, i) => (
+            <span key={i} className="text-[10px] font-black bg-white border border-amber-300 text-amber-900 px-2 py-1 rounded-lg shadow-2xs">
+              {d}
+            </span>
+          ))}
+        </div>
+        <span className="text-xs font-black text-amber-900 mt-1">🗓️ Bé hãy đếm xem có bao nhiêu ngày trong một tuần nhé!</span>
       </div>
     );
   }

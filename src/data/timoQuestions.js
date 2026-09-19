@@ -265,7 +265,7 @@ export const TIMO_EXAM_2025 = [
       { id: 'D', text: '13 - 6 + 5 = 14' },
     ],
     correctAnswer: 'C',
-    hint: 'Bé thử tính nhẩm từng câu: 13 - 5 = 8; sau đó 8 + 6 = 14!',
+    hint: 'Bé hãy tính nhẩm từng phép tính từ trái sang phải xem câu nào có kết quả đúng bằng 14 nhé!',
     explanation: 'Ta có 13 - 5 + 6 = 8 + 6 = 14. Phép tính này hoàn toàn chính xác! Đáp án đúng là C.',
   },
   {
@@ -283,7 +283,7 @@ export const TIMO_EXAM_2025 = [
       { id: 'D', text: '111' },
     ],
     correctAnswer: 'B',
-    hint: 'Chữ số đầu tiên phải nhỏ nhất khác 0 (là 1), chữ số thứ hai nhỏ nhất (là 0), chữ số thứ ba khác 1 và 0 (là 2).',
+    hint: 'Để được số nhỏ nhất có 3 chữ số khác nhau: chữ số hàng trăm phải nhỏ nhất khác 0, rồi chọn tiếp các chữ số nhỏ nhất còn lại nhé!',
     explanation: 'Để số nhỏ nhất: chữ số hàng trăm là 1, hàng chục là 0, hàng đơn vị là 2. Ba chữ số 1, 0, 2 đều khác nhau -> 102. Đáp án đúng là B.',
   },
 
