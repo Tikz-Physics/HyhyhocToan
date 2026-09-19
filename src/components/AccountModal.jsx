@@ -40,6 +40,7 @@ export default function AccountModal({
 
     setNewName('');
     setIsCreating(false);
+    onClose();
   };
 
   return (

@@ -4,15 +4,28 @@
 class SoundManager {
   constructor() {
     this.ctx = null;
-    let savedMaster = true;
+    let savedSound = true;
+    let savedVoice = true;
     try {
-      const saved = localStorage.getItem('toan_lop1_master_audio');
-      if (saved !== null) savedMaster = saved === 'true';
+      const s = localStorage.getItem('hyhyhoctoan_sound_enabled') ?? localStorage.getItem('toan_lop1_sound_enabled');
+      if (s !== null) {
+        savedSound = s === 'true';
+      } else {
+        localStorage.setItem('hyhyhoctoan_sound_enabled', 'true');
+        localStorage.setItem('toan_lop1_sound_enabled', 'true');
+      }
+      const v = localStorage.getItem('hyhyhoctoan_voice_enabled') ?? localStorage.getItem('toan_lop1_voice_enabled');
+      if (v !== null) {
+        savedVoice = v === 'true';
+      } else {
+        localStorage.setItem('hyhyhoctoan_voice_enabled', 'true');
+        localStorage.setItem('toan_lop1_voice_enabled', 'true');
+      }
     } catch {
       // ignore
     }
-    this.soundEnabled = savedMaster;
-    this.voiceEnabled = savedMaster;
+    this.soundEnabled = savedSound;
+    this.voiceEnabled = savedVoice;
     this.vietnameseVoice = null;
     this.currentAudio = null;
     this.isSpeaking = false;
@@ -346,12 +359,38 @@ class SoundManager {
     });
   }
 
-  setMasterAudio(enabled) {
-    this.soundEnabled = enabled;
-    this.voiceEnabled = enabled;
-    if (!enabled) {
+  setSound(enabled) {
+    this.soundEnabled = !!enabled;
+    try {
+      localStorage.setItem('hyhyhoctoan_sound_enabled', this.soundEnabled ? 'true' : 'false');
+      localStorage.setItem('toan_lop1_sound_enabled', this.soundEnabled ? 'true' : 'false');
+    } catch {}
+    return this.soundEnabled;
+  }
+
+  toggleSound() {
+    return this.setSound(!this.soundEnabled);
+  }
+
+  setVoice(enabled) {
+    this.voiceEnabled = !!enabled;
+    if (!this.voiceEnabled) {
       this.stopSpeaking();
     }
+    try {
+      localStorage.setItem('hyhyhoctoan_voice_enabled', this.voiceEnabled ? 'true' : 'false');
+      localStorage.setItem('toan_lop1_voice_enabled', this.voiceEnabled ? 'true' : 'false');
+    } catch {}
+    return this.voiceEnabled;
+  }
+
+  toggleVoice() {
+    return this.setVoice(!this.voiceEnabled);
+  }
+
+  setMasterAudio(enabled) {
+    this.setSound(enabled);
+    this.setVoice(enabled);
     try {
       localStorage.setItem('toan_lop1_master_audio', enabled ? 'true' : 'false');
     } catch {}
@@ -360,19 +399,6 @@ class SoundManager {
 
   toggleMasterAudio() {
     return this.setMasterAudio(!this.soundEnabled);
-  }
-
-  toggleSound() {
-    this.soundEnabled = !this.soundEnabled;
-    return this.soundEnabled;
-  }
-
-  toggleVoice() {
-    this.voiceEnabled = !this.voiceEnabled;
-    if (!this.voiceEnabled) {
-      this.stopSpeaking();
-    }
-    return this.voiceEnabled;
   }
 }
 

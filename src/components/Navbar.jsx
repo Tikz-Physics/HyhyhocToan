@@ -1,22 +1,31 @@
 import React from 'react';
-import { Volume2, VolumeX, Trophy, Home, Award, Users } from 'lucide-react';
+import { Volume2, VolumeX, Mic, MicOff, Trophy, Home, Award, Users } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
 
 export default function Navbar({
   currentView,
   setCurrentView,
   stars,
-  audioOn,
-  setAudioOn,
+  soundOn,
+  setSoundOn,
+  voiceOn,
+  setVoiceOn,
   currentAccount,
   onOpenAccountModal,
 }) {
-  const handleToggleAudio = () => {
-    const newState = soundManager.toggleMasterAudio();
-    setAudioOn(newState);
-    if (newState) {
-      soundManager.playPop();
-      soundManager.speak('Âm thanh và giọng đọc đã bật!');
+  const handleToggleSound = () => {
+    const next = soundManager.toggleSound();
+    setSoundOn(next);
+    if (next) soundManager.playPop();
+  };
+
+  const handleToggleVoice = () => {
+    const next = soundManager.toggleVoice();
+    setVoiceOn(next);
+    if (next) {
+      soundManager.speak('Giọng đọc đã bật');
+    } else {
+      soundManager.stopSpeaking();
     }
   };
 
@@ -131,30 +140,58 @@ export default function Navbar({
               <span>{stars}</span>
             </div>
 
-            {/* Single Master Audio Toggle (Cả Âm thanh hiệu ứng & Giọng đọc cô giáo) */}
+            {/* Nút 1: Loa (Hiệu ứng âm thanh: ting-ting, pháo hoa, click) */}
             <button
               type="button"
-              onClick={handleToggleAudio}
+              onClick={handleToggleSound}
               title={
-                audioOn
-                  ? 'Âm thanh & Giọng đọc: Đang BẬT (Bấm để tắt)'
-                  : 'Âm thanh & Giọng đọc: Đang TẮT (Bấm để bật)'
+                soundOn
+                  ? 'Âm thanh hiệu ứng: Đang BẬT (Bấm để tắt)'
+                  : 'Âm thanh hiệu ứng: Đang TẮT (Bấm để bật)'
               }
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs ${
-                audioOn
-                  ? 'bg-emerald-100 hover:bg-emerald-200 border-emerald-400 text-emerald-900'
-                  : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-500 line-through opacity-75'
+              className={`flex items-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs ${
+                soundOn
+                  ? 'bg-amber-100 hover:bg-amber-200 border-amber-400 text-amber-900'
+                  : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-400 line-through opacity-70'
               }`}
             >
-              {audioOn ? (
+              {soundOn ? (
                 <>
-                  <Volume2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 animate-pulse" />
-                  <span className="hidden xs:inline">Âm thanh</span>
+                  <Volume2 className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 animate-pulse" />
+                  <span className="hidden md:inline">Loa</span>
                 </>
               ) : (
                 <>
-                  <VolumeX className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500" />
-                  <span className="hidden xs:inline">Tắt tiếng</span>
+                  <VolumeX className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400" />
+                  <span className="hidden md:inline">Tắt loa</span>
+                </>
+              )}
+            </button>
+
+            {/* Nút 2: Mic (Giọng đọc cô giáo đọc đề bài) */}
+            <button
+              type="button"
+              onClick={handleToggleVoice}
+              title={
+                voiceOn
+                  ? 'Giọng đọc cô giáo: Đang BẬT (Bấm để tắt)'
+                  : 'Giọng đọc cô giáo: Đang TẮT (Bấm để bật)'
+              }
+              className={`flex items-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs ${
+                voiceOn
+                  ? 'bg-emerald-100 hover:bg-emerald-200 border-emerald-400 text-emerald-900'
+                  : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-400 line-through opacity-70'
+              }`}
+            >
+              {voiceOn ? (
+                <>
+                  <Mic className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 animate-pulse" />
+                  <span className="hidden md:inline">Giọng đọc</span>
+                </>
+              ) : (
+                <>
+                  <MicOff className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400" />
+                  <span className="hidden md:inline">Tắt giọng</span>
                 </>
               )}
             </button>

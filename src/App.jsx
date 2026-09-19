@@ -11,72 +11,44 @@ import PetEvolution from './components/PetEvolution';
 import AccountModal from './components/AccountModal';
 import { getPetStage } from './data/petData';
 import { Award, Sparkles, ChevronRight } from 'lucide-react';
+import {
+  loadAccounts,
+  saveAccounts,
+  loadActiveAccountId,
+  saveActiveAccountId,
+} from './utils/accountStorage';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('map'); // 'map', 'zone', 'timo_arena', 'trophies', 'parents'
   const [selectedZoneId, setSelectedZoneId] = useState(CURRICULUM_ZONES[0]?.id || 'counting_numbers_10');
   const [selectedSemester, setSelectedSemester] = useState('all'); // 'all', 1, 2
 
-  // Multi-account profile management
-  const [accounts, setAccounts] = useState(() => {
-    try {
-      const saved = localStorage.getItem('toan_lop1_accounts');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      }
-    } catch {
-      // ignore
-    }
-
-    // Migrate from legacy single-profile storage if present
-    const existingStars = Number(localStorage.getItem('toan_lop1_stars') || 10);
-    let existingTasks = [];
-    try { existingTasks = JSON.parse(localStorage.getItem('toan_lop1_completed') || '[]'); } catch {}
-    let existingMedals = [];
-    try { existingMedals = JSON.parse(localStorage.getItem('toan_lop1_medals') || '[]'); } catch {}
-    let existingPets = ['dino'];
-    try { existingPets = JSON.parse(localStorage.getItem('toan_lop1_pets') || '["dino"]'); } catch {}
-    const existingActivePet = localStorage.getItem('toan_lop1_active_pet') || 'dino';
-
-    return [{
-      id: 'default_child',
-      name: 'Bé Yêu 🎈',
-      avatar: '🦁',
-      stars: existingStars,
-      completedTasks: existingTasks,
-      userMedals: existingMedals,
-      unlockedPets: existingPets,
-      activePet: existingActivePet,
-      createdAt: Date.now(),
-    }];
-  });
-
+  // Multi-account profile management with 100% persistent synchronous storage
+  const [accounts, setAccounts] = useState(() => loadAccounts());
   const [currentAccountId, setCurrentAccountId] = useState(() => {
-    return localStorage.getItem('toan_lop1_current_account_id') || 'default_child';
+    const initial = loadAccounts();
+    return loadActiveAccountId(initial);
   });
 
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
-  const [audioOn, setAudioOn] = useState(() => {
-    try {
-      const saved = localStorage.getItem('toan_lop1_master_audio');
-      return saved !== null ? saved === 'true' : true;
-    } catch {
-      return true;
-    }
-  });
+
+  // Independent Audio States: Sound Effects (Loa) & Teacher Voice Reading (Mic)
+  const [soundOn, setSoundOn] = useState(() => soundManager.soundEnabled);
+  const [voiceOn, setVoiceOn] = useState(() => soundManager.voiceEnabled);
 
   // Derive active account
-  const currentAccount = accounts.find((a) => a.id === currentAccountId) || accounts[0] || {
-    id: 'default_child',
-    name: 'Bé Yêu 🎈',
-    avatar: '🦁',
-    stars: 10,
-    completedTasks: [],
-    userMedals: [],
-    unlockedPets: ['dino'],
-    activePet: 'dino',
-  };
+  const currentAccount =
+    accounts.find((a) => a.id === currentAccountId) ||
+    accounts[0] || {
+      id: 'default_child',
+      name: 'Bé Yêu 🎈',
+      avatar: '🦁',
+      stars: 10,
+      completedTasks: [],
+      userMedals: [],
+      unlockedPets: ['dino'],
+      activePet: 'dino',
+    };
 
   const stars = currentAccount.stars ?? 10;
   const completedTasks = currentAccount.completedTasks || [];
@@ -84,23 +56,29 @@ export default function App() {
   const unlockedPets = currentAccount.unlockedPets || ['dino'];
   const activePet = currentAccount.activePet || 'dino';
 
-  // Synchronize accounts to localStorage
+  // Synchronize accounts and active ID to localStorage as safety net
   useEffect(() => {
-    localStorage.setItem('toan_lop1_accounts', JSON.stringify(accounts));
+    saveAccounts(accounts);
   }, [accounts]);
 
   useEffect(() => {
-    localStorage.setItem('toan_lop1_current_account_id', currentAccountId);
+    saveActiveAccountId(currentAccountId);
   }, [currentAccountId]);
 
   const updateCurrentAccount = (updater) => {
     setAccounts((prevAccounts) => {
-      return prevAccounts.map((acc) => {
-        if (acc.id === currentAccount.id) {
+      const targetId = currentAccountId;
+      const exists = prevAccounts.some((a) => a.id === targetId);
+      const effectiveId = exists ? targetId : prevAccounts[0]?.id;
+
+      const nextAccounts = prevAccounts.map((acc) => {
+        if (acc.id === effectiveId) {
           return typeof updater === 'function' ? updater(acc) : { ...acc, ...updater };
         }
         return acc;
       });
+      saveAccounts(nextAccounts);
+      return nextAccounts;
     });
   };
 
@@ -164,23 +142,28 @@ export default function App() {
       activePet: 'dino',
       createdAt: Date.now(),
     };
-    setAccounts((prev) => [...prev, newAcc]);
+    const nextAccounts = [...accounts, newAcc];
+    setAccounts(nextAccounts);
     setCurrentAccountId(newId);
+    saveAccounts(nextAccounts);
+    saveActiveAccountId(newId);
+    setIsAccountModalOpen(false);
   };
 
   const handleSwitchAccount = (id) => {
     setCurrentAccountId(id);
+    saveActiveAccountId(id);
     setIsAccountModalOpen(false);
   };
 
   const handleDeleteAccount = (id) => {
-    setAccounts((prev) => {
-      const remaining = prev.filter((a) => a.id !== id);
-      if (currentAccountId === id && remaining.length > 0) {
-        setCurrentAccountId(remaining[0].id);
-      }
-      return remaining;
-    });
+    const remaining = accounts.filter((a) => a.id !== id);
+    if (remaining.length === 0) return;
+    const nextActiveId = currentAccountId === id ? remaining[0].id : currentAccountId;
+    setAccounts(remaining);
+    setCurrentAccountId(nextActiveId);
+    saveAccounts(remaining);
+    saveActiveAccountId(nextActiveId);
   };
 
   const handleResetProgress = () => {
@@ -205,8 +188,10 @@ export default function App() {
         currentView={currentView}
         setCurrentView={setCurrentView}
         stars={stars}
-        audioOn={audioOn}
-        setAudioOn={setAudioOn}
+        soundOn={soundOn}
+        setSoundOn={setSoundOn}
+        voiceOn={voiceOn}
+        setVoiceOn={setVoiceOn}
         currentAccount={currentAccount}
         onOpenAccountModal={() => setIsAccountModalOpen(true)}
       />
