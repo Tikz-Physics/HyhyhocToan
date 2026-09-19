@@ -214,27 +214,30 @@ export default function QuestionIllustration({ level }) {
   // 8. QUICK ADDITION: 8 + 9 + 1 + 2 + 3 (Candies)
   if (id === 'tas1') {
     return (
-      <div className="flex flex-col items-center my-2 p-2.5 bg-purple-50 rounded-2xl border-2 border-purple-200 shadow-2xs max-w-md mx-auto">
-        <span className="text-xs font-black text-purple-950 mb-1.5">
-          🍬 Ghép các nhóm tròn 10 viên kẹo:
-        </span>
-        <div className="flex items-center gap-2 flex-wrap justify-center text-xs font-black">
-          <div className="flex items-center gap-1 bg-white border-2 border-blue-300 px-2 py-1 rounded-xl">
-            <span>🍬 8 + 2</span>
-            <span className="bg-blue-100 text-blue-900 text-[10px] px-1 rounded">= 10</span>
-          </div>
+      <div className="flex flex-col items-center my-2 p-3 bg-purple-50 rounded-2xl border-2 border-purple-200 shadow-2xs max-w-md mx-auto">
+        <div className="flex items-center justify-around w-full max-w-sm mb-2 flex-wrap gap-1.5 text-xs font-black">
+          <span className="bg-white border-2 border-purple-300 px-2.5 py-1 rounded-xl shadow-2xs text-purple-950">
+            🍬 8
+          </span>
           <span>+</span>
-          <div className="flex items-center gap-1 bg-white border-2 border-pink-300 px-2 py-1 rounded-xl">
-            <span>🍬 9 + 1</span>
-            <span className="bg-pink-100 text-pink-900 text-[10px] px-1 rounded">= 10</span>
-          </div>
+          <span className="bg-white border-2 border-pink-300 px-2.5 py-1 rounded-xl shadow-2xs text-pink-950">
+            🍬 9
+          </span>
           <span>+</span>
-          <div className="flex items-center gap-1 bg-white border-2 border-emerald-300 px-2 py-1 rounded-xl">
-            <span>🍬 3</span>
-          </div>
+          <span className="bg-white border-2 border-pink-300 px-2.5 py-1 rounded-xl shadow-2xs text-pink-950">
+            🍬 1
+          </span>
+          <span>+</span>
+          <span className="bg-white border-2 border-purple-300 px-2.5 py-1 rounded-xl shadow-2xs text-purple-950">
+            🍬 2
+          </span>
+          <span>+</span>
+          <span className="bg-white border-2 border-emerald-300 px-2.5 py-1 rounded-xl shadow-2xs text-emerald-950">
+            🍬 3
+          </span>
         </div>
-        <div className="mt-1.5 text-[11px] font-bold text-purple-900">
-          👉 10 + 10 + 3 = 23 viên kẹo
+        <div className="text-xs font-black text-purple-900 bg-purple-100/90 px-3 py-1 rounded-xl border border-purple-300 shadow-2xs text-center">
+          💡 Mẹo tính nhanh: Bé hãy tìm và gộp các cặp số có tổng bằng 10 nhé!
         </div>
       </div>
     );
@@ -315,7 +318,7 @@ export default function QuestionIllustration({ level }) {
         </div>
 
         <div className="mt-2 text-[11px] font-bold text-slate-700">
-          👉 2 que lẻ + 3 que lẻ = <span className="text-emerald-700 font-black">5 que lẻ</span> • 10 + 5 = 15
+          👉 Bé hãy cộng số que lẻ lại rồi gộp với 1 bó chục nhé!
         </div>
       </div>
     );
@@ -345,7 +348,7 @@ export default function QuestionIllustration({ level }) {
         </div>
 
         <div className="mt-2 text-[11px] font-bold text-slate-700">
-          👉 8 que bớt 5 que còn <span className="text-rose-700 font-black">3 que lẻ</span> • 10 + 3 = 13
+          👉 Bé hãy bớt đi 5 que lẻ rồi đếm số que tính còn lại nhé!
         </div>
       </div>
     );
@@ -377,12 +380,12 @@ export default function QuestionIllustration({ level }) {
         <div className="flex items-center justify-around w-full text-xs font-black">
           <div className="flex flex-col items-center bg-white p-2 rounded-xl border border-sky-300">
             <div className="flex gap-1 text-lg">🥛🥛🥛</div>
-            <span className="text-[11px] text-sky-900 mt-1">7 chiếc còn nguyên</span>
+            <span className="text-[11px] text-sky-900 mt-1">Còn nguyên: [ ? ] chiếc</span>
           </div>
           <span>➕</span>
           <div className="flex flex-col items-center bg-rose-50 p-2 rounded-xl border border-rose-300 text-rose-800">
             <div className="flex gap-1 text-lg">💥💥💥</div>
-            <span className="text-[11px] text-rose-900 mt-1">6 chiếc bị vỡ</span>
+            <span className="text-[11px] text-rose-900 mt-1">Bị vỡ: 6 chiếc</span>
           </div>
         </div>
       </div>
@@ -410,7 +413,7 @@ export default function QuestionIllustration({ level }) {
         <div className="text-left text-xs font-black text-indigo-950">
           <div>• 6 chục (sáu mươi que 🎋)</div>
           <div>• 8 que rời (tám 🥢)</div>
-          <div className="text-rose-600 text-[11px] font-bold mt-0.5">👉 Đọc là: Sáu mươi tám</div>
+          <div className="text-amber-800 text-[11px] font-bold mt-0.5">👉 Bé hãy chọn cách đọc đúng bên dưới!</div>
         </div>
       </div>
     );
@@ -478,7 +481,7 @@ export default function QuestionIllustration({ level }) {
       <div className="flex flex-col items-center my-2 p-3 bg-rose-50 rounded-2xl border-2 border-rose-200 shadow-2xs max-w-sm mx-auto">
         <div className="w-full bg-white p-2 rounded-xl border border-rose-300 flex items-center gap-1 relative">
           <div className="h-6 bg-emerald-500 text-white text-[10px] font-black rounded flex items-center justify-center" style={{ width: '66%' }}>
-            Còn lại 10 cm
+            Còn lại: [ ? ] cm
           </div>
           <div className="h-6 bg-rose-200 text-rose-800 border-dashed border-2 border-rose-400 text-[10px] font-black rounded flex items-center justify-center" style={{ width: '34%' }}>
             ✂️ Cắt 5 cm
@@ -515,7 +518,7 @@ export default function QuestionIllustration({ level }) {
         </div>
 
         <div className="mt-2 text-xs font-bold text-slate-700">
-          👉 3 bó que + 2 bó que = <span className="text-emerald-700 font-black">5 bó que tính</span> (50 que)
+          👉 Bé hãy gộp 3 bó chục và 2 bó chục để tìm kết quả nhé!
         </div>
       </div>
     );
@@ -549,7 +552,7 @@ export default function QuestionIllustration({ level }) {
         </div>
 
         <div className="mt-2 text-xs font-bold text-slate-700">
-          👉 Còn lại: <span className="text-emerald-700 font-black">4 bó que tính</span> = <span className="text-rose-600 font-black">40 que</span>
+          👉 Bé hãy đếm xem còn lại bao nhiêu bó que tính nhé!
         </div>
       </div>
     );
@@ -582,7 +585,7 @@ export default function QuestionIllustration({ level }) {
           </div>
         </div>
         <div className="mt-2 text-[11px] font-bold text-slate-700">
-          👉 3 que lẻ + 5 que lẻ = <span className="text-blue-700 font-black">8 que lẻ</span> • 40 + 8 = 48
+          👉 Bé hãy cộng số que lẻ lại rồi gộp với 4 bó chục nhé!
         </div>
       </div>
     );
@@ -598,15 +601,15 @@ export default function QuestionIllustration({ level }) {
         <div className="w-full bg-white p-2.5 rounded-xl border border-purple-200 flex flex-col gap-2">
           <div className="flex items-center justify-between text-xs font-bold px-2">
             <span>Bó chục:</span>
-            <span className="text-purple-900 font-black">3 bó 🎋🎋🎋 + 2 bó 🎋🎋 = 5 bó (50 que)</span>
+            <span className="text-purple-900 font-black">3 bó 🎋🎋🎋 + 2 bó 🎋🎋 = [ ? ] bó</span>
           </div>
           <div className="flex items-center justify-between text-xs font-bold px-2 border-t pt-1.5">
             <span>Que lẻ:</span>
-            <span className="text-indigo-900 font-black">4 que 🥢 + 3 que 🥢 = 7 que lẻ</span>
+            <span className="text-indigo-900 font-black">4 que 🥢 + 3 que 🥢 = [ ? ] que</span>
           </div>
         </div>
         <div className="mt-1.5 text-[11px] font-bold text-emerald-800">
-          👉 Tổng cộng = <span className="font-black text-emerald-900">57 que tính</span>
+          👉 Bé hãy gộp các bó chục và que lẻ để tìm kết quả nhé!
         </div>
       </div>
     );
@@ -622,15 +625,15 @@ export default function QuestionIllustration({ level }) {
         <div className="w-full bg-white p-2.5 rounded-xl border border-rose-200 flex flex-col gap-2">
           <div className="flex items-center justify-between text-xs font-bold px-2">
             <span>Bó chục:</span>
-            <span className="text-rose-900 font-black">6 bó bớt 2 bó ➡️ còn 4 bó chục (40)</span>
+            <span className="text-rose-900 font-black">6 bó bớt 2 bó ➡️ còn [ ? ] bó chục</span>
           </div>
           <div className="flex items-center justify-between text-xs font-bold px-2 border-t pt-1.5">
             <span>Que lẻ:</span>
-            <span className="text-rose-900 font-black">8 que bớt 5 que ➡️ còn 3 que lẻ</span>
+            <span className="text-rose-900 font-black">8 que bớt 5 que ➡️ còn [ ? ] que lẻ</span>
           </div>
         </div>
         <div className="mt-1.5 text-[11px] font-bold text-emerald-800">
-          👉 Còn lại = <span className="font-black text-emerald-900">43 que tính</span>
+          👉 Bé hãy tính xem còn lại bao nhiêu que tính nhé!
         </div>
       </div>
     );
@@ -743,10 +746,10 @@ export default function QuestionIllustration({ level }) {
           <span className="bg-white border px-2 py-1 rounded-lg">24 bút ✏️</span>
           <span>➖</span>
           <span className="bg-rose-50 text-rose-700 border border-rose-200 px-2 py-1 rounded-lg">Bớt 8</span>
-          <span>➡️</span>
-          <span className="bg-blue-50 text-blue-900 border border-blue-200 px-2 py-1 rounded-lg">16 bút</span>
           <span>➕</span>
           <span className="bg-emerald-50 text-emerald-900 border border-emerald-200 px-2 py-1 rounded-lg">Thêm 1</span>
+          <span>🟰</span>
+          <span className="bg-blue-50 text-blue-900 border-2 border-dashed border-blue-400 px-2 py-1 rounded-lg font-black animate-pulse">[ ? ] bút</span>
         </div>
       </div>
     );
@@ -755,22 +758,22 @@ export default function QuestionIllustration({ level }) {
   // 33. TÍNH NHANH: 4 + 1 + 5 + 7 + 4 + 1 + 5 = ? (Nhóm sao lấp lánh)
   if (id === 'tn20_3') {
     return (
-      <div className="flex flex-col items-center my-2 p-2.5 bg-teal-50 rounded-2xl border-2 border-teal-200 shadow-2xs max-w-md mx-auto">
-        <div className="text-xs font-black text-teal-950 mb-1.5">
-          ⭐ Ghép các nhóm 10 ngôi sao lấp lánh:
-        </div>
-        <div className="flex items-center gap-2 text-xs font-black flex-wrap justify-center">
+      <div className="flex flex-col items-center my-2 p-3 bg-teal-50 rounded-2xl border-2 border-teal-200 shadow-2xs max-w-md mx-auto">
+        <div className="flex items-center gap-2 text-xs font-black flex-wrap justify-center mb-2">
           <span className="bg-white border border-teal-300 px-2.5 py-1 rounded-xl text-teal-900 shadow-2xs">
-            (4 + 1 + 5 = 10 ⭐)
+            ⭐ 4 + 1 + 5
           </span>
           <span>+</span>
           <span className="bg-white border border-amber-300 px-2.5 py-1 rounded-xl text-amber-900 shadow-2xs">
-            7 ⭐
+            ⭐ 7
           </span>
           <span>+</span>
           <span className="bg-white border border-teal-300 px-2.5 py-1 rounded-xl text-teal-900 shadow-2xs">
-            (4 + 1 + 5 = 10 ⭐)
+            ⭐ 4 + 1 + 5
           </span>
+        </div>
+        <div className="text-xs font-black text-teal-900 bg-teal-100/90 px-3 py-1 rounded-xl border border-teal-300 shadow-2xs text-center">
+          💡 Mẹo tính nhanh: Bé hãy tìm xem những nhóm số nào cộng lại tròn 10 nhé!
         </div>
       </div>
     );
