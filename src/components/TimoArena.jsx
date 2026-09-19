@@ -10,6 +10,8 @@ import {
   RotateCcw,
   Sparkles,
   BookOpen,
+  Target,
+  Minimize2,
 } from 'lucide-react';
 import { TIMO_SECTIONS, TIMO_EXAM_2025 } from '../data/timoQuestions';
 import { soundManager } from '../utils/soundManager';
@@ -27,6 +29,7 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
   const [timeLeft, setTimeLeft] = useState(40 * 60); // 40 minutes in seconds
   const [timerActive, setTimerActive] = useState(false);
   const [lastAnswerStatus, setLastAnswerStatus] = useState('idle');
+  const [isFocusMode, setIsFocusMode] = useState(false);
   const timerRef = useRef(null);
 
   const currentPet = getPetStage(completedTasks.length);
@@ -318,9 +321,15 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
       )}
 
       {/* Main Question Interface */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Left 3 cols: Current Question */}
-        <div className="lg:col-span-3 bg-white rounded-3xl border-4 border-slate-200 shadow-xl p-4 sm:p-7 relative">
+      <div className={isFocusMode ? '' : 'grid grid-cols-1 lg:grid-cols-4 gap-6'}>
+        {/* Left 3 cols (or Fullscreen when in Focus Mode): Current Question */}
+        <div
+          className={
+            isFocusMode
+              ? 'fixed inset-0 z-50 bg-gradient-to-b from-amber-50 via-orange-50/70 to-yellow-50 overflow-y-auto p-3 sm:p-6 landscape:p-2.5 flex flex-col justify-start'
+              : 'lg:col-span-3 bg-white rounded-3xl border-4 border-slate-200 shadow-xl p-4 sm:p-7 relative'
+          }
+        >
           {/* Header */}
           <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-3 mb-4">
             <div className="flex items-center gap-2">
@@ -332,114 +341,144 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
               </span>
             </div>
 
-            <button
-              onClick={() => soundManager.speak(currentQ.titleVi)}
-              className="flex items-center gap-1 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl font-bold text-xs btn-kid-3d shadow-sm"
-            >
-              <Volume2 className="w-4 h-4 text-amber-700 animate-pulse" />
-              <span>Đọc đề tiếng Việt</span>
-            </button>
-          </div>
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => soundManager.speak(currentQ.titleVi)}
+                className="flex items-center gap-1 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl font-bold text-xs btn-kid-3d shadow-xs cursor-pointer"
+              >
+                <Volume2 className="w-4 h-4 text-amber-700 animate-pulse" />
+                <span className="hidden sm:inline">Đọc đề tiếng Việt</span>
+              </button>
 
-          {/* Bilingual Questions */}
-          <div className="mb-4">
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
-              English:
-            </p>
-            <p className="text-sm sm:text-base font-semibold text-slate-600 italic mb-2">
-              {currentQ.titleEn}
-            </p>
-            <p className="text-xs font-semibold text-rose-500 uppercase tracking-wider mb-1">
-              Tiếng Việt:
-            </p>
-            <p className="text-lg sm:text-xl font-extrabold text-slate-800 leading-relaxed">
-              {currentQ.titleVi}
-            </p>
-          </div>
-
-          {/* Question Image (if any) */}
-          {currentQ.image && (
-            <div className="my-4 p-3 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl flex justify-center">
-              <img
-                src={getAssetUrl(currentQ.image)}
-                alt="Hình đề thi Timo"
-                className="max-h-60 object-contain rounded-xl shadow-sm bg-white p-2"
-              />
-            </div>
-          )}
-
-          {/* Interactive Answer Slot directly on question */}
-          <div className="flex items-center justify-center gap-3 my-3 bg-amber-50/80 p-3.5 rounded-2xl border-2 border-amber-300 shadow-sm">
-            <span className="font-extrabold text-slate-700 text-sm sm:text-base">
-              Đáp án của bé:
-            </span>
-            <div className="min-w-16 h-12 px-4 rounded-2xl bg-white border-4 border-amber-400 flex items-center justify-center text-lg sm:text-xl font-black text-amber-950 shadow-inner">
-              {currentQ.options.find((o) => o.id === userAnswers[currentQ.id])?.text || '?'}
+              <button
+                type="button"
+                onClick={() => {
+                  soundManager.playPop();
+                  setIsFocusMode(!isFocusMode);
+                }}
+                title={isFocusMode ? 'Thoát chế độ tập trung' : 'Chế độ tập trung câu hỏi'}
+                className={`flex items-center gap-1 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl font-black text-xs btn-kid-3d shadow-xs cursor-pointer border ${
+                  isFocusMode
+                    ? 'bg-rose-500 hover:bg-rose-600 text-white border-rose-600'
+                    : 'bg-indigo-100 hover:bg-indigo-200 text-indigo-900 border-indigo-300'
+                }`}
+              >
+                {isFocusMode ? (
+                  <>
+                    <Minimize2 className="w-4 h-4 text-white" />
+                    <span>Thoát</span>
+                  </>
+                ) : (
+                  <>
+                    <Target className="w-4 h-4 text-indigo-600 animate-pulse" />
+                    <span className="hidden sm:inline">Tập trung</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
 
-          <div className="text-xs font-bold text-slate-500 mb-2">
-            👇 Bé chạm trực tiếp vào thẻ đáp án đúng:
-          </div>
-
-          {/* Interactive Direct Choice Tiles (No ABCD letter tags) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 my-4">
-            {currentQ.options.map((opt) => {
-              const isChosen = userAnswers[currentQ.id] === opt.id;
-              const isCorrectAnswer = opt.id === currentQ.correctAnswer;
-              const showResult = (examMode === 'practice' && isChosen) || isSubmitted;
-
-              let btnStyle = 'bg-white hover:bg-amber-50 border-2 border-amber-300 text-slate-800';
-              if (showResult) {
-                if (isCorrectAnswer) {
-                  btnStyle = 'bg-emerald-500 border-emerald-600 text-white ring-4 ring-emerald-200';
-                } else if (isChosen && !isCorrectAnswer) {
-                  btnStyle = 'bg-rose-500 border-rose-600 text-white';
-                }
-              } else if (isChosen) {
-                btnStyle = 'bg-amber-300 border-amber-500 text-amber-950 font-black ring-2 ring-amber-400 scale-102';
-              }
-
-              return (
-                <button
-                  key={opt.id}
-                  type="button"
-                  onClick={() => handleSelectOption(opt.id)}
-                  className={`p-4 rounded-2xl font-black text-base sm:text-lg text-left transition-all flex items-center justify-between btn-kid-3d shadow-md ${btnStyle}`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-xl">✨</span>
-                    {opt.image && (
-                      <img
-                        src={getAssetUrl(opt.image)}
-                        alt={opt.text}
-                        className="h-10 sm:h-12 w-auto object-contain bg-white rounded-lg border border-slate-200 p-1 shadow-sm"
-                      />
-                    )}
-                    <span>{opt.text}</span>
-                  </div>
-
-                  {showResult && isCorrectAnswer && <CheckCircle2 className="w-6 h-6 text-white animate-pop" />}
-                  {showResult && isChosen && !isCorrectAnswer && <XCircle className="w-6 h-6 text-white" />}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Practice Mode Explanation Box */}
-          {(showExplanation[currentQ.id] || isSubmitted) && (
-            <div className="p-4 rounded-2xl bg-blue-50 border-2 border-blue-200 text-blue-950 mb-4 animate-pop">
-              <div className="flex items-center gap-2 mb-1">
-                <Sparkles className="w-4 h-4 text-amber-500" />
-                <h4 className="font-black text-sm text-blue-900">
-                  Mẹo giải bài toán Timo của Khủng Long Dino 🦖:
-                </h4>
+          {/* Main Question & Choices: In landscape mode, split side-by-side! */}
+          <div className="landscape:grid landscape:grid-cols-2 landscape:gap-4 landscape:items-start">
+            {/* Left Column in Landscape: Question Text & Image */}
+            <div>
+              {/* Bilingual Questions */}
+              <div className="mb-3">
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">English:</p>
+                <p className="text-xs sm:text-sm font-semibold text-slate-600 italic mb-1.5">{currentQ.titleEn}</p>
+                <p className="text-[10px] font-bold text-rose-500 uppercase tracking-wider mb-0.5">Tiếng Việt:</p>
+                <p className="text-base sm:text-lg font-extrabold text-slate-800 leading-snug">{currentQ.titleVi}</p>
               </div>
-              <p className="text-sm font-semibold whitespace-pre-line leading-relaxed">
-                {currentQ.explanation}
-              </p>
+
+              {/* Question Image (if any) */}
+              {currentQ.image && (
+                <div className="my-2 p-2 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl flex justify-center">
+                  <img
+                    src={getAssetUrl(currentQ.image)}
+                    alt="Hình đề thi Timo"
+                    className="max-h-40 sm:max-h-52 landscape:max-h-32 object-contain rounded-xl shadow-2xs bg-white p-1"
+                  />
+                </div>
+              )}
             </div>
-          )}
+
+            {/* Right Column in Landscape: Answer Slot & Interactive Options */}
+            <div>
+              {/* Interactive Answer Slot directly on question */}
+              <div className="flex items-center justify-center gap-2.5 my-2 bg-amber-50/80 p-2 rounded-2xl border-2 border-amber-300 shadow-2xs">
+                <span className="font-extrabold text-slate-700 text-xs sm:text-sm">
+                  Đáp án của bé:
+                </span>
+                <div className="min-w-12 h-9 px-3 rounded-xl bg-white border-3 border-amber-400 flex items-center justify-center text-base font-black text-amber-950 shadow-inner">
+                  {currentQ.options.find((o) => o.id === userAnswers[currentQ.id])?.text || '?'}
+                </div>
+              </div>
+
+              <div className="text-[11px] font-bold text-slate-500 mb-1.5 text-center">
+                👇 Bé chạm trực tiếp vào thẻ đáp án đúng:
+              </div>
+
+              {/* Interactive Direct Choice Tiles (No ABCD letter tags) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 landscape:grid-cols-2 gap-2 my-2">
+                {currentQ.options.map((opt) => {
+                  const isChosen = userAnswers[currentQ.id] === opt.id;
+                  const isCorrectAnswer = opt.id === currentQ.correctAnswer;
+                  const showResult = (examMode === 'practice' && isChosen) || isSubmitted;
+
+                  let btnStyle = 'bg-white hover:bg-amber-50 border-2 border-amber-300 text-slate-800';
+                  if (showResult) {
+                    if (isCorrectAnswer) {
+                      btnStyle = 'bg-emerald-500 border-emerald-600 text-white ring-4 ring-emerald-200';
+                    } else if (isChosen && !isCorrectAnswer) {
+                      btnStyle = 'bg-rose-500 border-rose-600 text-white';
+                    }
+                  } else if (isChosen) {
+                    btnStyle = 'bg-amber-300 border-amber-500 text-amber-950 font-black ring-2 ring-amber-400 scale-102';
+                  }
+
+                  return (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => handleSelectOption(opt.id)}
+                      className={`p-3 rounded-2xl font-black text-sm sm:text-base text-left transition-all flex items-center justify-between btn-kid-3d shadow-sm ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">✨</span>
+                        {opt.image && (
+                          <img
+                            src={getAssetUrl(opt.image)}
+                            alt={opt.text}
+                            className="h-8 sm:h-10 w-auto object-contain bg-white rounded-lg border border-slate-200 p-1 shadow-2xs"
+                          />
+                        )}
+                        <span>{opt.text}</span>
+                      </div>
+
+                      {showResult && isCorrectAnswer && <CheckCircle2 className="w-5 h-5 text-white animate-pop" />}
+                      {showResult && isChosen && !isCorrectAnswer && <XCircle className="w-5 h-5 text-white" />}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Practice Mode Explanation Box */}
+              {(showExplanation[currentQ.id] || isSubmitted) && (
+                <div className="p-3 rounded-2xl bg-blue-50 border-2 border-blue-200 text-blue-950 mb-3 animate-pop">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                    <h4 className="font-black text-xs text-blue-900">
+                      Mẹo giải bài toán Timo của Khủng Long Dino 🦖:
+                    </h4>
+                  </div>
+                  <p className="text-xs font-semibold whitespace-pre-line leading-relaxed">
+                    {currentQ.explanation}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
 
           {/* Navigation Between Questions */}
           <div className="flex items-center justify-between pt-4 border-t border-slate-100">

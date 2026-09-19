@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Volume2, Sparkles, ChevronRight, HelpCircle } from 'lucide-react';
+import { ArrowLeft, Volume2, Sparkles, ChevronRight, HelpCircle, Target, Minimize2 } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
 import InteractiveCanvas from './InteractiveCanvas';
 import FloatingPetCompanion from './FloatingPetCompanion';
@@ -17,6 +17,7 @@ export default function ZoneView({
   const [isCompletedCurrent, setIsCompletedCurrent] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [lastAnswerStatus, setLastAnswerStatus] = useState('idle');
+  const [isFocusMode, setIsFocusMode] = useState(false);
 
   const currentPet = getPetStage(completedTasks.length);
   const currentList = activeTab === 'basic' ? zone.basicLevels : zone.timoChallenges;
@@ -61,20 +62,30 @@ export default function ZoneView({
   };
 
   return (
-    <div className="max-w-xl mx-auto p-1.5 sm:p-3 pb-8 flex flex-col justify-start">
-      {/* 1-Line Top Navigation: Back + Tabs + Progress Dots + Read Button */}
-      <div className="flex items-center justify-between gap-1.5 mb-1.5">
+    <div
+      className={
+        isFocusMode
+          ? 'fixed inset-0 z-50 bg-gradient-to-b from-amber-50 via-orange-50/60 to-yellow-50 overflow-y-auto p-2 sm:p-4 landscape:p-2 flex flex-col justify-start'
+          : 'max-w-xl landscape:max-w-3xl mx-auto p-1.5 sm:p-3 pb-8 flex flex-col justify-start'
+      }
+    >
+      {/* 1-Line Top Navigation: Back + Tabs + Progress Dots + Read Button + Focus Mode Button */}
+      <div className="flex items-center justify-between gap-1.5 mb-1.5 flex-wrap">
         <button
           type="button"
           onClick={() => {
             soundManager.playPop();
             soundManager.stopSpeaking();
-            onBack();
+            if (isFocusMode) {
+              setIsFocusMode(false);
+            } else {
+              onBack();
+            }
           }}
           className="flex items-center gap-1 bg-white border border-slate-300 active:scale-95 text-slate-700 font-bold px-2 py-1 rounded-xl shadow-2xs text-xs btn-kid-3d cursor-pointer flex-shrink-0"
         >
           <ArrowLeft className="w-3.5 h-3.5 text-slate-500" />
-          <span>Về</span>
+          <span>{isFocusMode ? 'Thu nhỏ' : 'Về'}</span>
         </button>
 
         {/* Tab switch mini */}
@@ -119,16 +130,45 @@ export default function ZoneView({
           </button>
         </div>
 
-        {/* Re-read speaker button */}
-        <button
-          type="button"
-          onClick={speakCurrent}
-          title="Đọc lại đề bài"
-          className="flex items-center gap-1 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-2 py-1 rounded-xl font-black text-xs btn-kid-3d shadow-2xs flex-shrink-0 cursor-pointer"
-        >
-          <Volume2 className="w-3.5 h-3.5 text-amber-700 animate-pulse" />
-          <span className="hidden xs:inline">Đọc đề</span>
-        </button>
+        <div className="flex items-center gap-1 flex-shrink-0">
+          {/* Re-read speaker button */}
+          <button
+            type="button"
+            onClick={speakCurrent}
+            title="Đọc lại đề bài"
+            className="flex items-center gap-1 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-2 py-1 rounded-xl font-black text-xs btn-kid-3d shadow-2xs cursor-pointer"
+          >
+            <Volume2 className="w-3.5 h-3.5 text-amber-700 animate-pulse" />
+            <span className="hidden xs:inline">Đọc đề</span>
+          </button>
+
+          {/* Focus Mode Button */}
+          <button
+            type="button"
+            onClick={() => {
+              soundManager.playPop();
+              setIsFocusMode(!isFocusMode);
+            }}
+            title={isFocusMode ? 'Thoát chế độ tập trung' : 'Chế độ tập trung vào câu hỏi'}
+            className={`flex items-center gap-1 px-2 py-1 rounded-xl font-black text-xs btn-kid-3d shadow-2xs cursor-pointer border ${
+              isFocusMode
+                ? 'bg-rose-500 hover:bg-rose-600 text-white border-rose-600'
+                : 'bg-indigo-100 hover:bg-indigo-200 text-indigo-900 border-indigo-300'
+            }`}
+          >
+            {isFocusMode ? (
+              <>
+                <Minimize2 className="w-3.5 h-3.5 text-white" />
+                <span className="hidden xs:inline">Thoát</span>
+              </>
+            ) : (
+              <>
+                <Target className="w-3.5 h-3.5 text-indigo-600 animate-pulse" />
+                <span className="hidden xs:inline">Tập trung</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mini Progress Dots Bar */}
@@ -159,8 +199,18 @@ export default function ZoneView({
       </div>
 
       {/* Question Box: Short, Clear, Minimalist */}
-      <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 rounded-2xl p-2.5 mb-1.5 text-center shadow-xs">
-        <p className="text-base sm:text-xl font-black text-slate-800 leading-snug">
+      <div
+        className={`border-2 border-amber-300 rounded-2xl p-2.5 mb-1.5 text-center shadow-xs transition-all ${
+          isFocusMode
+            ? 'bg-white focus-glow ring-2 ring-amber-400 py-3 sm:py-4 max-w-2xl mx-auto w-full'
+            : 'bg-gradient-to-r from-amber-50 to-orange-50'
+        }`}
+      >
+        <p
+          className={`font-black leading-snug ${
+            isFocusMode ? 'text-lg sm:text-2xl text-amber-950' : 'text-base sm:text-xl text-slate-800'
+          }`}
+        >
           {currentLevel.question}
         </p>
       </div>
