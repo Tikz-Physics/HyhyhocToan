@@ -236,24 +236,6 @@ export default function ZoneView({
         />
       </div>
 
-      {/* Success Celebration Banner */}
-      {isCompletedCurrent && (
-        <div className="mt-2.5 p-2.5 rounded-2xl bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-400 text-emerald-950 flex items-center justify-between gap-2 animate-pop shadow-xs">
-          <span className="font-black text-xs sm:text-sm flex items-center gap-1.5">
-            <span className="text-xl">🎉</span>
-            <span>Bé làm đúng rồi! Giỏi quá!</span>
-          </span>
-
-          <button
-            type="button"
-            onClick={handleNext}
-            className="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs sm:text-sm px-3.5 py-1.5 rounded-xl shadow-xs btn-kid-3d cursor-pointer"
-          >
-            <span>Sang câu kế</span>
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-      )}
 
       {/* Hint Accordion */}
       {!isCompletedCurrent && currentLevel.hint && (
