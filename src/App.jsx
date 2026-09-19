@@ -213,166 +213,116 @@ export default function App() {
 
       {/* Main Content Areas */}
       <main className="flex-1">
-        {/* VIEW 1: MAP / DASHBOARD */}
+        {/* VIEW 1: MAP / DASHBOARD (SIÊU TINH GỌN - VỪA KHÍT MÀN HÌNH ĐIỆN THOẠI) */}
         {currentView === 'map' && (
-          <div className="max-w-6xl mx-auto p-3 sm:p-6 space-y-8 pb-24">
-            {/* Hero Mascot Welcome Banner */}
-            <div className="relative bg-gradient-to-r from-amber-300 via-orange-300 to-yellow-400 rounded-3xl p-6 sm:p-8 border-4 border-amber-400 shadow-xl overflow-hidden">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-                <div className="flex items-center gap-4 sm:gap-6 text-center sm:text-left">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-white/95 border-4 border-amber-500 flex items-center justify-center text-5xl sm:text-6xl shadow-lg animate-bounce-slow flex-shrink-0">
-                    <span>{currentPet.icon}</span>
-                    <span className="absolute -bottom-2 bg-rose-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow">
+          <div className="max-w-4xl mx-auto p-2 sm:p-4 pb-20 sm:pb-8 flex flex-col gap-2.5">
+            {/* Compact Top Bar: Pet Status + Semester Tabs + Luyện Đề Button */}
+            <div className="bg-gradient-to-r from-amber-200 via-orange-200 to-yellow-200 rounded-2xl p-2 sm:p-3 border-2 border-amber-300 shadow-xs flex items-center justify-between gap-2">
+              {/* Pet Info */}
+              <div
+                onClick={() => {
+                  soundManager.playPop();
+                  setCurrentView('trophies');
+                }}
+                className="flex items-center gap-2 cursor-pointer active:scale-95 transition-transform"
+                title="Bấm để xem thú cưng và đổi thưởng"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white border-2 border-amber-400 flex items-center justify-center text-2xl shadow-xs animate-bounce-slow flex-shrink-0">
+                  {currentPet.icon}
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1">
+                    <span className="font-black text-xs sm:text-sm text-amber-950 truncate max-w-[80px] sm:max-w-[120px]">
+                      {currentAccount.name || 'Bé Học'}
+                    </span>
+                    <span className="bg-rose-500 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full">
                       Cấp {currentPet.stage}
                     </span>
                   </div>
-                  <div>
-                    <div className="inline-flex items-center gap-1.5 bg-rose-500 text-white font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow-sm">
-                      <Sparkles className="w-3.5 h-3.5 animate-wiggle" />
-                      <span>Chào mừng bé vào lớp 1!</span>
-                    </div>
-                    <h1 className="text-2xl sm:text-4xl font-black text-amber-950 leading-tight">
-                      Vương Quốc Toán Học Tuổi Thơ 🎈
-                    </h1>
-                    <p className="text-sm sm:text-base font-bold text-amber-900 mt-1 max-w-xl">
-                      Học toán trực quan tương tác, cùng bạn <span className="font-extrabold underline decoration-amber-600">{currentPet.name}</span> tích lũy năng lượng tiến hóa và chinh phục Timo!
-                    </p>
-                  </div>
-                </div>
-
-                {/* Quick Action Button to Timo Arena */}
-                <div className="flex flex-col gap-2 w-full sm:w-auto">
-                  <button
-                    onClick={() => {
-                      soundManager.playFanfare();
-                      setCurrentView('timo_arena');
-                    }}
-                    className="bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-black px-6 py-3.5 rounded-2xl shadow-xl flex items-center justify-center gap-2 text-base sm:text-lg ring-4 ring-rose-200 btn-kid-3d transition-all"
-                  >
-                    <Award className="w-5 h-5 text-yellow-300 animate-bounce" />
-                    <span>Luyện Thi Timo 2025</span>
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
-
-                  <div className="text-center text-[11px] font-bold text-amber-900">
-                    🏆 25 Câu Chuẩn Thi • Song Ngữ Anh - Việt
+                  <div className="text-[10px] font-bold text-amber-800">
+                    {completedTasks.length} bài xong • ⭐ {stars}
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* CHUỖI TIẾN HÓA THÚ CƯNG (Phương án A) */}
-            <PetEvolution completedTasks={completedTasks} stars={stars} />
-
-            {/* Featured Timo Showcase Banner */}
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-5 sm:p-6 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 border-2 border-blue-400">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-3xl border border-white/20">
-                  🏅
-                </div>
-                <div>
-                  <h3 className="font-black text-lg sm:text-xl flex items-center gap-2">
-                    <span>Thử Thách Đan Xen Toán Timo</span>
-                    <span className="bg-amber-400 text-amber-950 text-xs px-2 py-0.5 rounded-full font-extrabold">
-                      Mới!
-                    </span>
-                  </h3>
-                  <p className="text-xs sm:text-sm text-blue-100 font-medium mt-0.5">
-                    Mỗi khu vườn đều có huy hiệu Timo xanh dương. Bé hãy thử sức để nhận thêm nhiều sao thưởng nhé!
-                  </p>
-                </div>
+              {/* Semester Filter Tabs */}
+              <div className="flex items-center bg-white/80 p-0.5 rounded-xl border border-amber-300 shadow-2xs">
+                <button
+                  onClick={() => {
+                    soundManager.playClick();
+                    setSelectedSemester('all');
+                  }}
+                  className={`px-2 py-1 rounded-lg text-xs font-black transition-all ${
+                    selectedSemester === 'all'
+                      ? 'bg-amber-400 text-amber-950 shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  Tất Cả
+                </button>
+                <button
+                  onClick={() => {
+                    soundManager.playClick();
+                    setSelectedSemester(1);
+                  }}
+                  className={`px-2 py-1 rounded-lg text-xs font-black transition-all ${
+                    selectedSemester === 1
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'text-slate-600 hover:text-blue-700'
+                  }`}
+                >
+                  Kì 1
+                </button>
+                <button
+                  onClick={() => {
+                    soundManager.playClick();
+                    setSelectedSemester(2);
+                  }}
+                  className={`px-2 py-1 rounded-lg text-xs font-black transition-all ${
+                    selectedSemester === 2
+                      ? 'bg-emerald-600 text-white shadow-xs'
+                      : 'text-slate-600 hover:text-emerald-700'
+                  }`}
+                >
+                  Kì 2
+                </button>
               </div>
 
+              {/* Quick Button to Luyện Đề */}
               <button
+                type="button"
                 onClick={() => {
-                  soundManager.playClick();
-                  setCurrentView('trophies');
+                  soundManager.playFanfare();
+                  setCurrentView('timo_arena');
                 }}
-                className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-4 py-2 rounded-xl border border-white/30 whitespace-nowrap"
+                className="bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 text-white font-black px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-xl shadow-sm flex items-center gap-1 text-xs sm:text-sm btn-kid-3d transition-all flex-shrink-0 cursor-pointer"
+                title="Luyện Đề Toán Tư Duy Timo"
               >
-                Xem Tủ Cúp & Huy Hiệu 🏆
+                <Award className="w-3.5 h-3.5 text-yellow-300 animate-bounce" />
+                <span>Luyện Đề</span>
               </button>
             </div>
 
-            {/* 8 Learning Zones by Semester */}
-            <div>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">🗺️</span>
-                  <div>
-                    <h2 className="text-xl sm:text-2xl font-black text-slate-800">
-                      Bản Đồ 8 Chủ Đề Học Tập SGK Mới
-                    </h2>
-                    <p className="text-xs font-bold text-slate-500">
-                      Chuẩn Chương trình Giáo dục phổ thông mới (CTGDPT 2018) & Timo
-                    </p>
-                  </div>
-                </div>
-
-                {/* Semester Filter Tabs */}
-                <div className="flex items-center bg-slate-100 p-1.5 rounded-2xl border-2 border-slate-200 self-start sm:self-auto shadow-xs">
-                  <button
-                    onClick={() => {
-                      soundManager.playClick();
-                      setSelectedSemester('all');
+            {/* 8 Learning Zones - 2 columns on mobile, 4 columns on tablet/desktop */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+              {CURRICULUM_ZONES.filter(
+                (zone) => selectedSemester === 'all' || zone.semester === selectedSemester
+              ).map((zone) => {
+                const completedInZone = completedTasks.filter((t) =>
+                  t.startsWith(zone.id)
+                ).length;
+                return (
+                  <ZoneCard
+                    key={zone.id}
+                    zone={zone}
+                    completedCount={completedInZone}
+                    onSelect={(zoneId) => {
+                      setSelectedZoneId(zoneId);
+                      setCurrentView('zone');
                     }}
-                    className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-black transition-all ${
-                      selectedSemester === 'all'
-                        ? 'bg-amber-400 text-amber-950 shadow-sm'
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    Tất Cả ({CURRICULUM_ZONES.length})
-                  </button>
-                  <button
-                    onClick={() => {
-                      soundManager.playClick();
-                      setSelectedSemester(1);
-                    }}
-                    className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-black transition-all ${
-                      selectedSemester === 1
-                        ? 'bg-blue-600 text-white shadow-sm'
-                        : 'text-slate-600 hover:text-blue-700'
-                    }`}
-                  >
-                    📘 Học Kì 1 (4)
-                  </button>
-                  <button
-                    onClick={() => {
-                      soundManager.playClick();
-                      setSelectedSemester(2);
-                    }}
-                    className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-black transition-all ${
-                      selectedSemester === 2
-                        ? 'bg-emerald-600 text-white shadow-sm'
-                        : 'text-slate-600 hover:text-emerald-700'
-                    }`}
-                  >
-                    📙 Học Kì 2 (4)
-                  </button>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {CURRICULUM_ZONES.filter(
-                  (zone) => selectedSemester === 'all' || zone.semester === selectedSemester
-                ).map((zone) => {
-                  const completedInZone = completedTasks.filter((t) =>
-                    t.startsWith(zone.id)
-                  ).length;
-                  return (
-                    <ZoneCard
-                      key={zone.id}
-                      zone={zone}
-                      completedCount={completedInZone}
-                      onSelect={(zoneId) => {
-                        setSelectedZoneId(zoneId);
-                        setCurrentView('zone');
-                      }}
-                    />
-                  );
-                })}
-              </div>
+                  />
+                );
+              })}
             </div>
           </div>
         )}
@@ -434,11 +384,9 @@ export default function App() {
         onDeleteAccount={handleDeleteAccount}
       />
 
-      {/* Friendly Bottom Footer */}
-      <footer className="bg-white/80 border-t border-amber-200 py-4 px-4 text-center text-xs font-bold text-slate-500">
-        <p>
-          🌈 Ứng Dụng Học Toán Lớp 1 & Luyện Thi Timo • Thiết kế sinh động, trực quan dành riêng cho học sinh lớp 1
-        </p>
+      {/* Compact Desktop-only footer */}
+      <footer className="hidden sm:block py-1.5 px-4 text-center text-[11px] font-bold text-slate-400">
+        <p>HyhyhocToan • Học Toán Lớp 1 & Luyện Thi Timo 🎈</p>
       </footer>
     </div>
   );

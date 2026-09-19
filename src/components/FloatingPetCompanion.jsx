@@ -292,26 +292,21 @@ export default function FloatingPetCompanion({
               }
             }}
             title="Chạm vào tớ để trò chuyện và chơi đùa nhé!"
-            className={`relative w-16 h-16 sm:w-18 sm:h-18 rounded-3xl bg-white border-4 border-amber-400 shadow-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-200 active:scale-90 hover:scale-105 ${
+            className={`relative w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-white border-2 sm:border-3 border-amber-400 shadow-md flex flex-col items-center justify-center cursor-pointer transition-all duration-200 active:scale-90 hover:scale-105 ${
               mood === 'happy'
-                ? 'animate-bounce scale-110 ring-4 ring-amber-300'
+                ? 'animate-bounce scale-110 ring-2 ring-amber-300'
                 : mood === 'eating'
-                ? 'animate-wiggle scale-105 ring-4 ring-rose-300'
+                ? 'animate-wiggle scale-105 ring-2 ring-rose-300'
                 : mood === 'dancing'
-                ? 'animate-wiggle scale-110 ring-4 ring-purple-300'
+                ? 'animate-wiggle scale-110 ring-2 ring-purple-300'
                 : 'animate-bounce-slow'
             }`}
           >
-            <span className="text-4xl sm:text-5xl leading-none">{currentPet.icon}</span>
+            <span className="text-2xl sm:text-3xl leading-none">{currentPet.icon}</span>
 
             {/* Stage indicator tag */}
-            <span className="absolute -bottom-2 bg-rose-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full border-2 border-white shadow-xs">
-              Cấp {currentPet.stage}
-            </span>
-
-            {/* Tap cue icon */}
-            <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-amber-400 border-2 border-white rounded-full flex items-center justify-center text-[10px] shadow-sm animate-pulse">
-              💬
+            <span className="absolute -bottom-1.5 bg-rose-500 text-white text-[8px] font-black px-1 rounded-full border border-white shadow-2xs">
+              C{currentPet.stage}
             </span>
           </button>
         </div>

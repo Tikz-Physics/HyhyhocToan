@@ -244,39 +244,30 @@ export default function InteractiveCanvas({
 
   return (
     <div className={`w-full transition-all ${errorShake ? 'animate-wiggle' : ''}`}>
-      {/* 1. NÔNG TRẠI ĐẾM SỐ (Ducks, Strawberries, Candies) - QUAN SÁT ĐỒ VẬT ĐỂ NHẬP SỐ */}
+      {/* 1. NÔNG TRẠI ĐẾM SỐ (Ducks, Strawberries, Candies) */}
       {level.itemIcon && level.count && (
-        <div className="flex flex-col items-center w-full max-w-lg mx-auto">
-          <div className="bg-sky-100 border border-sky-300 px-4 py-1.5 rounded-full text-xs font-black text-sky-900 mb-2.5 flex items-center gap-2">
-            <span>👀 Bé hãy quan sát hình và đếm xem có bao nhiêu {level.itemIcon}:</span>
-          </div>
-
-          {/* Ao nước / vườn quả hiển thị đồ vật để bé quan sát đếm */}
-          <div className="w-full bg-gradient-to-b from-sky-100 via-blue-50/70 to-emerald-50/60 p-5 sm:p-6 rounded-3xl border-3 border-sky-300 shadow-inner flex flex-wrap items-center justify-center gap-3 sm:gap-4 my-2">
+        <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+          {/* Ao nước / vườn quả hiển thị đồ vật */}
+          <div className="w-full bg-gradient-to-b from-sky-100 via-blue-50/70 to-emerald-50/60 p-2.5 sm:p-3 rounded-2xl border-2 border-sky-300 shadow-inner flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 my-1">
             {Array.from({ length: level.count }).map((_, i) => (
               <div
                 key={i}
-                className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/95 border-2 border-sky-200 shadow-sm flex items-center justify-center text-3xl sm:text-4xl select-none transform hover:scale-110 transition-transform"
+                className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white/95 border border-sky-200 shadow-xs flex items-center justify-center text-2xl sm:text-3xl select-none"
               >
                 <span>{level.itemIcon}</span>
               </div>
             ))}
           </div>
 
-          {/* Ô hiển thị kết quả bé chọn */}
-          <div className="mt-3 flex items-center gap-2.5 bg-white px-5 py-2.5 rounded-2xl border-2 border-amber-300 shadow-sm">
-            <span className="font-extrabold text-slate-700 text-sm sm:text-base">
-              Bé đếm được:
-            </span>
-            <div className="w-14 h-12 rounded-xl bg-amber-100 border-3 border-amber-400 flex items-center justify-center text-xl font-black text-amber-950 shadow-inner">
+          {/* Ô kết quả */}
+          <div className="mt-1 flex items-center gap-2 bg-white px-3 py-1 rounded-xl border border-amber-300 shadow-2xs text-xs sm:text-sm font-bold text-slate-700">
+            <span>Đếm được:</span>
+            <div className="w-9 h-7 rounded-lg bg-amber-100 border border-amber-400 flex items-center justify-center text-base font-black text-amber-950">
               {userValue || '?'}
             </div>
-            <span className="font-bold text-slate-700 text-sm sm:text-base">
-              {level.itemIcon === '🦆' ? 'chú vịt' : level.itemIcon === '🍓' ? 'quả dâu' : 'viên kẹo'}
-            </span>
             {isSuccess && (
-              <span className="flex items-center gap-1 text-emerald-600 font-black text-sm ml-2 animate-pop">
-                <Check className="w-4 h-4" /> Chính xác!
+              <span className="flex items-center gap-0.5 text-emerald-600 font-black text-xs">
+                <Check className="w-3.5 h-3.5" /> Đúng!
               </span>
             )}
           </div>
@@ -286,16 +277,16 @@ export default function InteractiveCanvas({
       {/* 2. ĐOÀN TÀU TÌM SỐ (Train Carriages) */}
       {level.type === 'train' && (
         <div className="flex flex-col items-center">
-          <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto py-3 max-w-full px-2">
-            <div className="text-4xl sm:text-5xl animate-bounce-slow">🚂</div>
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto py-1 max-w-full px-1">
+            <div className="text-3xl sm:text-4xl animate-bounce-slow">🚂</div>
             {level.sequence.map((item, idx) => (
               <div
                 key={idx}
-                className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl font-black shadow-md border-3 transition-all ${
+                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center text-lg sm:text-xl font-black shadow-xs border-2 transition-all ${
                   item === '?'
                     ? userValue
                       ? isSuccess
-                        ? 'bg-emerald-400 border-emerald-600 text-white scale-105'
+                        ? 'bg-emerald-400 border-emerald-600 text-white'
                         : 'bg-rose-400 border-rose-600 text-white'
                       : 'bg-amber-200 border-amber-400 text-rose-700 animate-pulse'
                     : 'bg-white border-blue-400 text-blue-900'
@@ -306,28 +297,23 @@ export default function InteractiveCanvas({
             ))}
           </div>
 
-          <div className="mt-4 text-center">
-            <p className="text-xs font-bold text-slate-500 mb-2">
-              👇 Bé chạm vào toa số thích hợp để gắn vào tàu:
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-2.5">
-              {level.options.map((opt, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => handleSelectTrainCarriage(opt, i)}
-                  className={`w-13 h-13 sm:w-15 sm:h-15 rounded-2xl font-black text-xl shadow-md border-2 btn-kid-3d ${
-                    selectedOption === opt
-                      ? isSuccess
-                        ? 'bg-emerald-500 text-white border-emerald-600'
-                        : 'bg-rose-500 text-white border-rose-600'
-                      : 'bg-amber-400 hover:bg-amber-500 text-amber-950 border-amber-500'
-                  }`}
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+            {level.options.map((opt, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => handleSelectTrainCarriage(opt, i)}
+                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl font-black text-base sm:text-lg shadow-xs border-2 btn-kid-3d ${
+                  selectedOption === opt
+                    ? isSuccess
+                      ? 'bg-emerald-500 text-white border-emerald-600'
+                      : 'bg-rose-500 text-white border-rose-600'
+                    : 'bg-amber-400 hover:bg-amber-500 text-amber-950 border-amber-500'
+                }`}
+              >
+                {opt}
+              </button>
+            ))}
           </div>
         </div>
       )}
@@ -812,35 +798,35 @@ export default function InteractiveCanvas({
           </div>
 
           {/* Direct Chomp Controls */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex items-center justify-center gap-2">
             <button
               type="button"
               onClick={() => handleChomp('left')}
-              className={`px-5 py-3.5 rounded-2xl font-black text-base sm:text-lg shadow-md border-3 btn-kid-3d ${
-                crocDirection === 'left' ? 'bg-amber-400 border-amber-500 text-amber-950 scale-105 shadow-lg ring-4 ring-amber-200' : 'bg-white border-slate-200 hover:bg-amber-50 text-slate-800'
+              className={`px-3 py-2 rounded-xl font-black text-xs sm:text-sm shadow-xs border-2 btn-kid-3d ${
+                crocDirection === 'left' ? 'bg-amber-400 border-amber-500 text-amber-950 shadow-sm' : 'bg-white border-slate-300 text-slate-800'
               }`}
             >
-              👈 Ngoạm Trái (&gt;)
+              👈 Lớn hơn (&gt;)
             </button>
 
             <button
               type="button"
               onClick={() => handleChomp('equal')}
-              className={`px-5 py-3.5 rounded-2xl font-black text-base sm:text-lg shadow-md border-3 btn-kid-3d ${
-                crocDirection === 'equal' ? 'bg-amber-400 border-amber-500 text-amber-950 scale-105 shadow-lg ring-4 ring-amber-200' : 'bg-white border-slate-200 hover:bg-amber-50 text-slate-800'
+              className={`px-3 py-2 rounded-xl font-black text-xs sm:text-sm shadow-xs border-2 btn-kid-3d ${
+                crocDirection === 'equal' ? 'bg-amber-400 border-amber-500 text-amber-950 shadow-sm' : 'bg-white border-slate-300 text-slate-800'
               }`}
             >
-              🤝 Bằng Nhau (=)
+              🤝 Bằng (=)
             </button>
 
             <button
               type="button"
               onClick={() => handleChomp('right')}
-              className={`px-5 py-3.5 rounded-2xl font-black text-base sm:text-lg shadow-md border-3 btn-kid-3d ${
-                crocDirection === 'right' ? 'bg-amber-400 border-amber-500 text-amber-950 scale-105 shadow-lg ring-4 ring-amber-200' : 'bg-white border-slate-200 hover:bg-amber-50 text-slate-800'
+              className={`px-3 py-2 rounded-xl font-black text-xs sm:text-sm shadow-xs border-2 btn-kid-3d ${
+                crocDirection === 'right' ? 'bg-amber-400 border-amber-500 text-amber-950 shadow-sm' : 'bg-white border-slate-300 text-slate-800'
               }`}
             >
-              👉 Ngoạm Phải (&lt;)
+              👉 Bé hơn (&lt;)
             </button>
           </div>
         </div>
@@ -954,40 +940,36 @@ export default function InteractiveCanvas({
 
       {/* 9. IMAGE BANNER (If question has image, e.g. Timo leaves, scales, 3D cubes) */}
       {level.image && (
-        <div className="my-3 p-3 bg-white border-2 border-slate-200 rounded-2xl shadow-sm flex justify-center">
+        <div className="my-1.5 p-1.5 bg-white border border-slate-200 rounded-xl shadow-2xs flex justify-center">
           <img
             src={getAssetUrl(level.image)}
-            alt="Hình minh họa bài tập"
-            className="max-h-52 object-contain rounded-xl"
+            alt="Hình bài tập"
+            className="max-h-32 sm:max-h-40 object-contain rounded-lg"
           />
         </div>
       )}
 
-      {/* 10. THẺ CHỌN ĐÁP ÁN TRỰC QUAN (CHỈ hiển thị cho các câu KHÔNG CÓ trò chơi tương tác trực tiếp lên đồ vật) */}
+      {/* 10. THẺ CHỌN ĐÁP ÁN TRỰC QUAN */}
       {!hasDirectGame && level.options && level.options.length > 0 && (() => {
         const isNumeric = level.options.every((opt) => String(opt).length <= 4);
         return (
-          <div className="mt-4 pt-3 border-t border-slate-100">
-            <p className="text-xs sm:text-sm font-black text-slate-500 text-center mb-3">
-              👇 Chạm chọn đáp án đúng:
-            </p>
-
+          <div className="mt-2 pt-2 border-t border-slate-100">
             <div
-              className={`grid gap-3 sm:gap-4 mx-auto ${
+              className={`grid gap-2 mx-auto ${
                 isNumeric
-                  ? 'grid-cols-2 sm:grid-cols-4 max-w-md'
-                  : 'grid-cols-1 sm:grid-cols-2 max-w-xl'
+                  ? 'grid-cols-2 sm:grid-cols-4 max-w-sm'
+                  : 'grid-cols-2 max-w-md'
               }`}
             >
               {level.options.map((opt, i) => {
                 const isChosen = selectedOption === opt;
                 const isWrong = wrongOption === opt;
 
-                let style = 'bg-white hover:bg-amber-50 border-3 border-amber-400 text-amber-950 shadow-md';
+                let style = 'bg-white hover:bg-amber-50 border-2 border-amber-400 text-amber-950 shadow-xs';
                 if (isSuccess && isChosen) {
-                  style = 'bg-emerald-500 border-emerald-600 text-white ring-4 ring-emerald-200 scale-105 shadow-lg';
+                  style = 'bg-emerald-500 border-emerald-600 text-white shadow-md';
                 } else if (isWrong) {
-                  style = 'bg-rose-500 border-rose-600 text-white animate-wiggle shadow-md';
+                  style = 'bg-rose-500 border-rose-600 text-white animate-wiggle shadow-xs';
                 }
 
                 return (
@@ -995,13 +977,12 @@ export default function InteractiveCanvas({
                     key={i}
                     type="button"
                     onClick={() => handleOptionCardTouch(opt, i)}
-                    className={`rounded-3xl font-black transition-all flex items-center justify-center gap-2 btn-kid-3d ${
-                      isNumeric ? 'text-2xl sm:text-3xl h-16 sm:h-20' : 'text-base sm:text-lg py-4 px-5 text-left justify-between'
+                    className={`rounded-xl font-black transition-all flex items-center justify-center gap-1 btn-kid-3d ${
+                      isNumeric ? 'text-xl sm:text-2xl h-11 sm:h-12' : 'text-xs sm:text-sm h-11 sm:h-12 px-2 text-center'
                     } ${style}`}
                   >
-                    {!isNumeric && <span className="text-xl">✨</span>}
                     <span>{opt}</span>
-                    {isSuccess && isChosen && <Check className="w-7 h-7 text-white ml-1 animate-pop" />}
+                    {isSuccess && isChosen && <Check className="w-4 h-4 text-white ml-0.5 animate-pop" />}
                   </button>
                 );
               })}
@@ -1010,19 +991,16 @@ export default function InteractiveCanvas({
         );
       })()}
 
-      {/* 11. BÀN PHÍM SỐ KẸO NGỌT (CHỈ hiển thị cho câu hỏi dạng điền số mở: KHÔNG CÓ tương tác đồ vật VÀ KHÔNG CÓ thẻ lựa chọn) */}
+      {/* 11. BÀN PHÍM SỐ KẸO NGỌT */}
       {!hasDirectGame && (!level.options || level.options.length === 0) && (
-        <div className="mt-4 pt-3 border-t border-slate-100 flex flex-col items-center">
-          <span className="text-xs font-black text-amber-900 bg-amber-100 px-3 py-1 rounded-full mb-3 shadow-2xs">
-            🍬 Chạm số trên bàn phím kẹo ngọt:
-          </span>
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 max-w-lg">
+        <div className="mt-2 pt-1.5 border-t border-slate-100 flex flex-col items-center">
+          <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 max-w-sm">
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((n) => (
               <button
                 key={n}
                 type="button"
                 onClick={() => handleKeypadPress(n)}
-                className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-b from-amber-50 to-orange-100 hover:from-amber-100 hover:to-orange-200 active:from-amber-200 active:to-orange-300 text-amber-950 border-3 border-amber-300 hover:border-amber-400 font-black text-xl sm:text-2xl shadow-md btn-candy-number flex items-center justify-center cursor-pointer"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-b from-amber-50 to-orange-100 active:from-amber-200 text-amber-950 border-2 border-amber-300 font-black text-sm sm:text-base shadow-2xs btn-candy-number flex items-center justify-center cursor-pointer"
               >
                 {n}
               </button>

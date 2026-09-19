@@ -38,23 +38,18 @@ export default function Navbar({
               soundManager.playPop();
               setCurrentView('map');
             }}
-            className="flex items-center gap-2 cursor-pointer group select-none"
+            className="flex items-center gap-1.5 cursor-pointer group select-none"
           >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-2xl flex items-center justify-center text-xl sm:text-2xl shadow-md border-2 border-amber-400 group-hover:rotate-6 transition-transform flex-shrink-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-xl flex items-center justify-center text-lg sm:text-xl shadow-xs border-2 border-amber-400 group-hover:rotate-6 transition-transform flex-shrink-0">
               🦖
             </div>
-            <div>
-              <div className="flex items-center gap-1">
-                <span className="font-extrabold text-base sm:text-xl text-amber-950 tracking-tight whitespace-nowrap">
-                  HyhyhocToan
-                </span>
-                <span className="bg-rose-500 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full uppercase tracking-wider animate-pulse">
-                  Lớp 1 + Timo
-                </span>
-              </div>
-              <p className="text-[10px] sm:text-[11px] font-semibold text-amber-900 hidden xs:block">
-                Bé Học Toán Trực Quan & Tư Duy 🎈
-              </p>
+            <div className="flex items-center gap-1">
+              <span className="font-black text-sm sm:text-lg text-amber-950 tracking-tight whitespace-nowrap">
+                HyhyhocToan
+              </span>
+              <span className="bg-rose-500 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase tracking-wider">
+                Lớp 1 🎈
+              </span>
             </div>
           </div>
 
@@ -83,7 +78,7 @@ export default function Navbar({
               }`}
             >
               <Award className="w-4 h-4 text-amber-400 animate-bounce-slow" />
-              <span>Luyện Đề Timo</span>
+              <span>Luyện Đề</span>
             </button>
 
             <button
@@ -192,7 +187,7 @@ export default function Navbar({
           }`}
         >
           <Award className="w-5 h-5 text-rose-500" />
-          <span className="text-[10px] mt-0.5">Đề Timo</span>
+          <span className="text-[10px] mt-0.5">Luyện Đề</span>
         </button>
 
         <button

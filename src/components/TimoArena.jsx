@@ -152,62 +152,52 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
   const answeredCount = Object.keys(userAnswers).length;
 
   return (
-    <div className="max-w-5xl mx-auto p-3 sm:p-6 pb-28 sm:pb-24">
-      {/* Title & Badge */}
-      <div className="bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 rounded-3xl p-5 sm:p-6 text-white shadow-xl mb-6 relative overflow-hidden">
-        <div className="absolute -right-6 -bottom-6 text-8xl opacity-20 pointer-events-none">
-          🏆
-        </div>
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="max-w-2xl mx-auto p-1.5 sm:p-3 pb-20">
+      {/* Title & Mode Switch - Compact Bar */}
+      <div className="bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 rounded-2xl p-2.5 sm:p-3 text-white shadow-sm mb-2 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <span className="text-2xl">🏆</span>
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">
-                Phòng Luyện Thi Chính Thức
-              </span>
-              <span className="bg-yellow-400 text-amber-950 px-2 py-0.5 rounded-full text-xs font-black">
-                Năm 2025
-              </span>
-            </div>
-            <h1 className="text-xl sm:text-3xl font-black tracking-tight">
-              Đấu Trường Toán Tư Duy Timo Lớp 1 🏅
+            <h1 className="text-sm sm:text-lg font-black tracking-tight leading-none">
+              Phòng Luyện Đề (Timo)
             </h1>
-            <p className="text-xs sm:text-sm font-medium text-amber-100 mt-1 max-w-xl">
-              Bộ đề chuẩn cấu trúc thi Timo vòng loại quốc gia: Tư duy logic, Số học, Lý thuyết số, Hình học và Tổ hợp.
+            <p className="text-[10px] text-amber-100 font-bold mt-0.5">
+              25 câu trắc nghiệm tư duy
             </p>
           </div>
+        </div>
 
-          {/* Mode Switch Button */}
-          <div className="flex items-center bg-black/20 p-1 rounded-2xl backdrop-blur-sm self-start md:self-auto">
-            <button
-              onClick={() => {
-                soundManager.playClick();
-                setExamMode('practice');
-                setIsSubmitted(false);
-              }}
-              className={`px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                examMode === 'practice'
-                  ? 'bg-white text-rose-600 shadow-md scale-105'
-                  : 'text-white hover:text-amber-200'
-              }`}
-            >
-              📖 Luyện Tập
-            </button>
-            <button
-              onClick={() => {
-                soundManager.playFanfare();
-                setExamMode('timed');
-                handleStartTimedExam();
-              }}
-              className={`px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 ${
-                examMode === 'timed'
-                  ? 'bg-amber-400 text-amber-950 shadow-md scale-105'
-                  : 'text-white hover:text-amber-200'
-              }`}
-            >
-              <Clock className="w-4 h-4" />
-              <span>Thi Thử Bấm Giờ</span>
-            </button>
-          </div>
+        {/* Mode Switch Button */}
+        <div className="flex items-center bg-black/20 p-0.5 rounded-xl backdrop-blur-xs flex-shrink-0">
+          <button
+            onClick={() => {
+              soundManager.playClick();
+              setExamMode('practice');
+              setIsSubmitted(false);
+            }}
+            className={`px-2 py-1 rounded-lg text-xs font-black transition-all ${
+              examMode === 'practice'
+                ? 'bg-white text-rose-600 shadow-xs'
+                : 'text-white'
+            }`}
+          >
+            Luyện Tập
+          </button>
+          <button
+            onClick={() => {
+              soundManager.playFanfare();
+              setExamMode('timed');
+              handleStartTimedExam();
+            }}
+            className={`px-2 py-1 rounded-lg text-xs font-black transition-all flex items-center gap-1 ${
+              examMode === 'timed'
+                ? 'bg-amber-400 text-amber-950 shadow-xs'
+                : 'text-white'
+            }`}
+          >
+            <Clock className="w-3 h-3" />
+            <span>Thi Thử</span>
+          </button>
         </div>
       </div>
 

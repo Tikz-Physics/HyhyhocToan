@@ -1,67 +1,59 @@
 import React from 'react';
-import { ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
+
+const SHORT_TITLES = {
+  counting_numbers_10: 'Đếm Số 0 - 10',
+  geometry_spatial: 'Hình Khối & Vị Trí',
+  add_sub_10: 'Cộng & Trừ Đến 10',
+  numbers_20: 'Số & Tính Đến 20',
+  numbers_100: 'Số Đến 100 & Chục',
+  measurement_cm: 'Đo Độ Dài (cm)',
+  add_sub_100: 'Cộng & Trừ Đến 100',
+  time_statistics: 'Đồng Hồ & Lịch',
+};
 
 export default function ZoneCard({ zone, onSelect, completedCount = 0 }) {
   const totalLevels = zone.basicLevels.length + zone.timoChallenges.length;
   const isCompleted = completedCount >= totalLevels;
+  const shortTitle = SHORT_TITLES[zone.id] || zone.title;
 
   return (
-    <div
+    <button
+      type="button"
       onClick={() => {
         soundManager.playPop();
         onSelect(zone.id);
       }}
-      className={`relative group bg-white rounded-3xl p-5 border-4 transition-all duration-300 cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-1.5 ${zone.borderColor}`}
+      className={`w-full bg-white hover:bg-amber-50/70 active:scale-98 rounded-2xl p-2 sm:p-3 border-2 transition-all flex items-center justify-between gap-2 text-left shadow-xs hover:shadow-md btn-kid-3d cursor-pointer ${
+        isCompleted ? 'border-emerald-400 bg-emerald-50/50' : zone.borderColor
+      }`}
     >
-      {/* Top Banner & Badge */}
-      <div className="flex items-center justify-between gap-2 mb-3">
-        <span className="text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-700">
-          {zone.badge}
-        </span>
-        <div className="flex items-center gap-1 bg-amber-50 border border-amber-300 px-2 py-0.5 rounded-full text-xs font-bold text-amber-800">
-          <span className="text-amber-500">⭐</span>
-          <span>{completedCount}/{totalLevels} bài</span>
-        </div>
-      </div>
-
-      {/* Main Icon & Title */}
-      <div className="flex items-center gap-4 my-2">
+      <div className="flex items-center gap-2.5 min-w-0">
         <div
-          className={`w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-inner bg-gradient-to-br ${zone.color} text-white group-hover:scale-110 group-hover:rotate-3 transition-transform`}
+          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center text-2xl sm:text-3xl shadow-xs bg-gradient-to-br ${zone.color} text-white flex-shrink-0`}
         >
           {zone.icon}
         </div>
-        <div className="flex-1">
-          <h3 className="font-extrabold text-lg text-slate-800 group-hover:text-amber-600 transition-colors">
-            {zone.title}
+        <div className="min-w-0">
+          <h3 className="font-black text-xs sm:text-sm text-slate-800 truncate">
+            {shortTitle}
           </h3>
-          <p className="text-xs font-semibold text-slate-500 line-clamp-2 mt-0.5">
-            {zone.description}
-          </p>
+          <div className="flex items-center gap-1 mt-0.5">
+            <span className="text-[11px] font-extrabold text-amber-600">
+              ⭐ {completedCount}/{totalLevels}
+            </span>
+            {isCompleted && (
+              <span className="text-[9px] font-black text-emerald-700 bg-emerald-100 px-1 py-0.2 rounded">
+                Đã xong
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Timo Integration Highlight Tag */}
-      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold">
-        <div className="flex items-center gap-1.5 text-blue-700 bg-blue-50 px-2.5 py-1 rounded-xl border border-blue-200">
-          <Sparkles className="w-3.5 h-3.5 text-blue-500 animate-wiggle" />
-          <span>Có {zone.timoCount} bài Tư Duy Timo</span>
-        </div>
-
-        <span className="flex items-center gap-1 text-amber-600 group-hover:text-amber-700 font-extrabold cursor-pointer">
-          <span>Vào chơi</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </span>
-      </div>
-
-      {/* Completed Stamp */}
-      {isCompleted && (
-        <div className="absolute top-2 right-2 flex items-center gap-1 bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow">
-          <CheckCircle2 className="w-3 h-3" />
-          <span>Hoàn thành!</span>
-        </div>
-      )}
-    </div>
+      <span className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-slate-400 font-black text-xs flex-shrink-0">
+        ➜
+      </span>
+    </button>
   );
 }
