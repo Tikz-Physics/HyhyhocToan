@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { soundManager } from '../utils/soundManager';
+import { getAssetUrl } from '../utils/assetHelper';
 import { Check } from 'lucide-react';
 
 const getTimeOfDayInfo = (h) => {
@@ -955,7 +956,7 @@ export default function InteractiveCanvas({
       {level.image && (
         <div className="my-3 p-3 bg-white border-2 border-slate-200 rounded-2xl shadow-sm flex justify-center">
           <img
-            src={level.image}
+            src={getAssetUrl(level.image)}
             alt="Hình minh họa bài tập"
             className="max-h-52 object-contain rounded-xl"
           />

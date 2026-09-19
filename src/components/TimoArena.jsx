@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { TIMO_SECTIONS, TIMO_EXAM_2025 } from '../data/timoQuestions';
 import { soundManager } from '../utils/soundManager';
+import { getAssetUrl } from '../utils/assetHelper';
 import FloatingPetCompanion from './FloatingPetCompanion';
 import { getPetStage } from '../data/petData';
 
@@ -370,7 +371,7 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
           {currentQ.image && (
             <div className="my-4 p-3 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl flex justify-center">
               <img
-                src={currentQ.image}
+                src={getAssetUrl(currentQ.image)}
                 alt="Hình đề thi Timo"
                 className="max-h-60 object-contain rounded-xl shadow-sm bg-white p-2"
               />
@@ -420,7 +421,7 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
                     <span className="text-xl">✨</span>
                     {opt.image && (
                       <img
-                        src={opt.image}
+                        src={getAssetUrl(opt.image)}
                         alt={opt.text}
                         className="h-10 sm:h-12 w-auto object-contain bg-white rounded-lg border border-slate-200 p-1 shadow-sm"
                       />

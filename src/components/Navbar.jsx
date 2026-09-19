@@ -46,14 +46,14 @@ export default function Navbar({
             <div>
               <div className="flex items-center gap-1">
                 <span className="font-extrabold text-base sm:text-xl text-amber-950 tracking-tight whitespace-nowrap">
-                  Toán Lớp 1
+                  HyhyhocToan
                 </span>
                 <span className="bg-rose-500 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full uppercase tracking-wider animate-pulse">
-                  + Timo
+                  Lớp 1 + Timo
                 </span>
               </div>
               <p className="text-[10px] sm:text-[11px] font-semibold text-amber-900 hidden xs:block">
-                Học trực quan & Tư duy 🎈
+                Bé Học Toán Trực Quan & Tư Duy 🎈
               </p>
             </div>
           </div>
