@@ -968,18 +968,27 @@ export default function InteractiveCanvas({
           <QuestionIllustration level={level} />
         )}
 
-      {/* 10. THẺ CHỌN ĐÁP ÁN TRỰC QUAN (RÕ RÀNG VỚI NHÃN A, B, C, D) */}
+      {/* 10. THẺ CHỌN ĐÁP ÁN TRỰC QUAN (RÕ RÀNG VỚI NHÃN A, B, C, D & KHÔNG BỊ TRÀN CHỮ) */}
       {!hasDirectGame && level.options && level.options.length > 0 && (() => {
         const isNumeric = level.options.every((opt) => String(opt).length <= 4);
+        const hasLongText = level.options.some((opt) => String(opt).length > 8);
         const count = level.options.length;
+
         let gridCols = 'grid-cols-2 max-w-sm';
-        if (count === 3) {
-          // 3 đáp án: 3 cột thẳng hàng cân đối, tuyệt đối không bị 2 trên 1 dưới
-          gridCols = 'grid-cols-3 max-w-md';
-        } else if (count === 4) {
-          gridCols = isNumeric ? 'grid-cols-2 sm:grid-cols-4 max-w-md' : 'grid-cols-2 max-w-md';
-        } else if (count === 2) {
-          gridCols = 'grid-cols-2 max-w-xs';
+        if (isNumeric) {
+          if (count === 3) gridCols = 'grid-cols-3 max-w-sm';
+          else if (count === 4) gridCols = 'grid-cols-2 sm:grid-cols-4 max-w-md';
+          else if (count === 2) gridCols = 'grid-cols-2 max-w-xs';
+        } else if (hasLongText) {
+          // Phương án có chữ dài: 1 cột trên mobile cho thoáng chữ, 3 cột trên tablet/desktop
+          if (count === 3) gridCols = 'grid-cols-1 sm:grid-cols-3 max-w-2xl';
+          else if (count === 4) gridCols = 'grid-cols-1 sm:grid-cols-2 max-w-xl';
+          else if (count === 2) gridCols = 'grid-cols-1 sm:grid-cols-2 max-w-md';
+        } else {
+          // Chữ ngắn (5-8 ký tự)
+          if (count === 3) gridCols = 'grid-cols-3 max-w-md';
+          else if (count === 4) gridCols = 'grid-cols-2 max-w-md';
+          else if (count === 2) gridCols = 'grid-cols-2 max-w-xs';
         }
 
         const letterBadges = ['A', 'B', 'C', 'D'];
@@ -1013,13 +1022,13 @@ export default function InteractiveCanvas({
                     key={i}
                     type="button"
                     onClick={() => handleOptionCardTouch(opt, i)}
-                    className={`rounded-2xl font-black transition-all flex items-center justify-between gap-1.5 p-2 sm:p-2.5 btn-kid-3d cursor-pointer ${
-                      isNumeric ? 'text-lg sm:text-2xl h-12 sm:h-14' : 'text-xs sm:text-sm h-12 sm:h-14'
+                    className={`rounded-2xl font-black transition-all flex items-center justify-between gap-2 p-2.5 sm:p-3 min-h-[54px] sm:min-h-[60px] h-auto btn-kid-3d cursor-pointer ${
+                      isNumeric ? 'text-lg sm:text-2xl' : 'text-xs sm:text-sm'
                     } ${style}`}
                   >
                     {/* Nhãn chữ cái phương án A, B, C, D */}
                     <span
-                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center flex-shrink-0 shadow-2xs transition-colors ${
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center flex-shrink-0 shadow-2xs transition-colors self-center ${
                         isSuccess && isChosen
                           ? 'bg-white text-emerald-700'
                           : isWrong
@@ -1031,15 +1040,15 @@ export default function InteractiveCanvas({
                     </span>
 
                     {/* Nội dung đáp án */}
-                    <span className="flex-1 text-center font-black leading-snug break-words px-1">
+                    <span className="flex-1 text-center font-black leading-snug break-words px-1.5 py-0.5">
                       {opt}
                     </span>
 
                     {/* Icon kiểm tra khi chọn đúng */}
                     {isSuccess && isChosen ? (
-                      <Check className="w-5 h-5 text-white animate-pop flex-shrink-0 ml-0.5" />
+                      <Check className="w-5 h-5 text-white animate-pop flex-shrink-0 ml-1 self-center" />
                     ) : (
-                      <span className="w-4 flex-shrink-0" />
+                      <span className="w-5 flex-shrink-0" />
                     )}
                   </button>
                 );

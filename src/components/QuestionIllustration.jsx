@@ -57,30 +57,26 @@ export default function QuestionIllustration({ level }) {
 
   const id = level.id;
 
-  // 1. GEOMETRY: Circle, Square, Triangle (Cohesive Scene - No button-like cards)
+  // 1. GEOMETRY: Circle, Square, Triangle (Cohesive Scene matching question)
   if (id === 'geo1') {
     return (
       <div className="flex flex-col items-center my-2 p-3 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border-2 border-amber-200 shadow-2xs max-w-md mx-auto">
-        <div className="flex items-center justify-center gap-3 sm:gap-4 mb-2">
-          <div className="flex flex-col items-center">
+        <div className="flex items-center justify-around w-full max-w-xs mb-2">
+          <div className="flex flex-col items-center p-2 bg-white/90 rounded-xl border border-amber-200 shadow-2xs">
             <span className="text-3xl animate-bounce-slow">⚽</span>
-            <span className="text-[10px] font-bold text-slate-600">Quả bóng</span>
+            <span className="text-[11px] font-bold text-slate-700 mt-1">Quả bóng đá</span>
           </div>
-          <div className="flex flex-col items-center">
-            <span className="text-3xl animate-bounce-slow">🛞</span>
-            <span className="text-[10px] font-bold text-slate-600">Bánh xe</span>
+          <div className="flex flex-col items-center p-2 bg-white/90 rounded-xl border border-amber-200 shadow-2xs">
+            <span className="text-3xl">🎁</span>
+            <span className="text-[11px] font-bold text-slate-700 mt-1">Hộp quà vuông</span>
           </div>
-          <div className="flex flex-col items-center">
-            <span className="text-3xl animate-bounce-slow">⏰</span>
-            <span className="text-[10px] font-bold text-slate-600">Đồng hồ</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-3xl animate-bounce-slow">🪙</span>
-            <span className="text-[10px] font-bold text-slate-600">Đồng xu</span>
+          <div className="flex flex-col items-center p-2 bg-white/90 rounded-xl border border-amber-200 shadow-2xs">
+            <span className="text-3xl">🔺</span>
+            <span className="text-[11px] font-bold text-slate-700 mt-1">Biển báo</span>
           </div>
         </div>
         <div className="text-xs font-black text-amber-900 bg-amber-100/90 px-3 py-1 rounded-xl border border-amber-300 shadow-2xs text-center">
-          ✨ Các đồ vật trên đều cong tròn đều và lăn tròn vo được!
+          🔍 Bé hãy quan sát 3 đồ vật này và tìm đồ vật có dạng Hình Tròn nhé!
         </div>
       </div>
     );
@@ -131,11 +127,11 @@ export default function QuestionIllustration({ level }) {
   // 4. GEOMETRY: Milk Carton 3D Box
   if (id === 'geo5') {
     return (
-      <div className="flex items-center justify-center gap-4 my-2 p-2.5 bg-sky-50 rounded-2xl border-2 border-sky-200 shadow-2xs max-w-sm mx-auto">
+      <div className="flex items-center justify-center gap-4 my-2 p-3 bg-sky-50 rounded-2xl border-2 border-sky-200 shadow-2xs max-w-sm mx-auto">
         <div className="text-5xl animate-bounce-slow">🧃</div>
         <div className="text-left">
-          <div className="text-xs sm:text-sm font-black text-sky-950">Hộp sữa tươi dinh dưỡng</div>
-          <div className="text-[11px] font-bold text-sky-800">Các mặt của hộp sữa là hình chữ nhật</div>
+          <div className="text-xs sm:text-sm font-black text-sky-950">Hộp sữa tươi thơm ngon</div>
+          <div className="text-[11px] font-bold text-sky-800">Đồ vật quen thuộc bé uống hàng ngày</div>
         </div>
       </div>
     );

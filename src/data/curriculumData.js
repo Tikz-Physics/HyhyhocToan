@@ -142,10 +142,10 @@ export const CURRICULUM_ZONES = [
       {
         id: 'geo1',
         title: 'Bé nhận biết hình tròn',
-        question: 'Hình nào dưới đây là HÌNH TRÒN 🟡?',
-        options: ['Hình tròn 🟡', 'Hình vuông 🟦', 'Hình tam giác 🔺'],
-        correctAnswer: 'Hình tròn 🟡',
-        hint: 'Hình tròn cong tròn đều, có thể lăn được như quả bóng hay bánh xe!',
+        question: 'Đồ vật nào dưới đây có dạng HÌNH TRÒN 🟡?',
+        options: ['Quả bóng đá ⚽', 'Hộp quà vuông 🎁', 'Biển báo tam giác 🔺'],
+        correctAnswer: 'Quả bóng đá ⚽',
+        hint: 'Quả bóng cong tròn đều, có thể lăn tròn vo bon bon trên cỏ!',
       },
       {
         id: 'geo2',
