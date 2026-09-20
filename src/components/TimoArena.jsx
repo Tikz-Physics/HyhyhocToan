@@ -12,14 +12,24 @@ import {
   BookOpen,
   Target,
   Minimize2,
+  Shuffle,
+  Layers,
+  Award,
 } from 'lucide-react';
-import { TIMO_SECTIONS, TIMO_EXAM_2025 } from '../data/timoQuestions';
+import {
+  TIMO_SECTIONS,
+  TIMO_EXAMS,
+  TIMO_EXAM_SET_1,
+  generateRandomTimoExam,
+} from '../data/timoQuestions';
 import { soundManager } from '../utils/soundManager';
 import { getAssetUrl } from '../utils/assetHelper';
 import FloatingPetCompanion from './FloatingPetCompanion';
 import { getPetStage } from '../data/petData';
 
 export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [] }) {
+  const [selectedExamId, setSelectedExamId] = useState('exam_1');
+  const [activeExamQuestions, setActiveExamQuestions] = useState(TIMO_EXAM_SET_1);
   const [selectedSection, setSelectedSection] = useState('all');
   const [examMode, setExamMode] = useState('practice'); // 'practice' (luyện tập tự do) or 'timed' (thi thử bấm giờ)
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -34,13 +44,54 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
 
   const currentPet = getPetStage(completedTasks.length);
 
+  // Switch exam set
+  const handleSelectExam = (examId) => {
+    soundManager.playPop();
+    setSelectedExamId(examId);
+    setSelectedSection('all');
+    setCurrentIndex(0);
+    setUserAnswers({});
+    setShowExplanation({});
+    setIsSubmitted(false);
+    setLastAnswerStatus('idle');
+    setTimeLeft(40 * 60);
+    setTimerActive(false);
+    if (timerRef.current) clearInterval(timerRef.current);
+
+    if (examId === 'exam_random') {
+      setActiveExamQuestions(generateRandomTimoExam());
+    } else {
+      const found = TIMO_EXAMS.find((e) => e.id === examId);
+      if (found && found.questions) {
+        setActiveExamQuestions(found.questions);
+      }
+    }
+  };
+
+  // Regenerate fresh random exam
+  const handleRegenerateRandomExam = () => {
+    soundManager.playFanfare();
+    confetti({ particleCount: 35, spread: 60, origin: { y: 0.6 } });
+    setSelectedSection('all');
+    setCurrentIndex(0);
+    setUserAnswers({});
+    setShowExplanation({});
+    setIsSubmitted(false);
+    setLastAnswerStatus('idle');
+    setTimeLeft(40 * 60);
+    setTimerActive(false);
+    if (timerRef.current) clearInterval(timerRef.current);
+    setActiveExamQuestions(generateRandomTimoExam());
+  };
+
   // Filter questions based on selected section
-  const filteredQuestions = TIMO_EXAM_2025.filter((q) => {
+  const filteredQuestions = activeExamQuestions.filter((q) => {
     if (selectedSection === 'all') return true;
     return q.section === selectedSection;
   });
 
   const currentQ = filteredQuestions[currentIndex] || filteredQuestions[0];
+  const currentExamInfo = TIMO_EXAMS.find((e) => e.id === selectedExamId) || TIMO_EXAMS[0];
 
   const handleSubmitExam = useCallback(() => {
     clearInterval(timerRef.current);
@@ -157,15 +208,15 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
   return (
     <div className="max-w-2xl mx-auto p-1.5 sm:p-3 pb-20">
       {/* Title & Mode Switch - Compact Bar */}
-      <div className="bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 rounded-2xl p-2.5 sm:p-3 text-white shadow-sm mb-2 flex items-center justify-between gap-2">
+      <div className="bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 rounded-2xl p-2.5 sm:p-3 text-white shadow-sm mb-3 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="text-2xl">🏆</span>
           <div>
             <h1 className="text-sm sm:text-lg font-black tracking-tight leading-none">
-              Phòng Luyện Đề (Timo)
+              Đấu Trường TIMO Toán Tư Duy
             </h1>
             <p className="text-[10px] text-amber-100 font-bold mt-0.5">
-              25 câu trắc nghiệm tư duy
+              100+ câu hỏi chuẩn quốc tế 5 chuyên đề
             </p>
           </div>
         </div>
@@ -204,26 +255,103 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
         </div>
       </div>
 
-      {/* Sections Filter Bar */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-4 scrollbar-none">
-        {TIMO_SECTIONS.map((sec) => (
-          <button
-            key={sec.id}
-            onClick={() => {
-              soundManager.playPop();
-              setSelectedSection(sec.id);
-              setCurrentIndex(0);
-            }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl text-xs sm:text-sm font-black whitespace-nowrap transition-all btn-kid-3d ${
-              selectedSection === sec.id
-                ? 'bg-amber-400 text-amber-950 ring-2 ring-amber-500 shadow-md scale-105'
-                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
-            }`}
-          >
-            <span>{sec.icon}</span>
-            <span>{sec.name}</span>
-          </button>
-        ))}
+      {/* Exam Selector Bar */}
+      <div className="bg-white rounded-2xl border-2 border-amber-300 p-2.5 sm:p-3 mb-3 shadow-xs">
+        <div className="flex items-center justify-between gap-1 mb-2 px-0.5">
+          <div className="flex items-center gap-1.5 text-xs font-black text-slate-800">
+            <Layers className="w-4 h-4 text-amber-500" />
+            <span>CHỌN BỘ ĐỀ THI:</span>
+          </div>
+          {selectedExamId === 'exam_random' && (
+            <button
+              onClick={handleRegenerateRandomExam}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-rose-500 to-amber-500 text-white text-[11px] font-black shadow-xs hover:scale-105 transition-all btn-kid-3d"
+              title="Đổi bộ 25 câu hỏi ngẫu nhiên mới"
+            >
+              <Shuffle className="w-3 h-3 animate-spin-slow" />
+              <span>Đổi Đề Khác 🎲</span>
+            </button>
+          )}
+        </div>
+
+        {/* 5 Exam Buttons */}
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
+          {TIMO_EXAMS.map((exam) => {
+            const isSelected = selectedExamId === exam.id;
+            return (
+              <button
+                key={exam.id}
+                onClick={() => handleSelectExam(exam.id)}
+                className={`flex flex-col items-center justify-center p-2 rounded-xl text-center transition-all btn-kid-3d relative overflow-hidden ${
+                  isSelected
+                    ? 'bg-gradient-to-br from-amber-400 to-orange-400 text-amber-950 ring-2 ring-amber-500 shadow-md scale-[1.02]'
+                    : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200'
+                }`}
+              >
+                <div className="flex items-center gap-1 mb-0.5">
+                  <span className="text-xs font-black truncate">{exam.name.split(':')[0]}</span>
+                  <span
+                    className={`text-[9px] font-black px-1.5 py-0.5 rounded-full ${
+                      isSelected ? 'bg-black/20 text-white' : 'bg-amber-100 text-amber-800'
+                    }`}
+                  >
+                    {exam.badge}
+                  </span>
+                </div>
+                <span className="text-[10px] font-bold opacity-85 truncate max-w-full">
+                  {exam.id === 'exam_random' ? 'Vô hạn 25 câu' : '25 câu chuẩn'}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Selected Exam Tagline */}
+        <div className="mt-2 pt-2 border-t border-amber-100 flex flex-wrap items-center justify-between text-[11px] px-1 text-slate-600 font-semibold gap-1">
+          <span className="truncate">
+            <strong className="text-amber-900 font-bold">{currentExamInfo.name}:</strong>{' '}
+            {currentExamInfo.desc}
+          </span>
+          <span className="text-rose-600 font-black whitespace-nowrap">
+            25 câu • 100 điểm
+          </span>
+        </div>
+      </div>
+
+      {/* Sections Filter Bar with Counts */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-4 scrollbar-none">
+        {TIMO_SECTIONS.map((sec) => {
+          const count =
+            sec.id === 'all'
+              ? activeExamQuestions.length
+              : activeExamQuestions.filter((q) => q.section === sec.id).length;
+          const isSelected = selectedSection === sec.id;
+          return (
+            <button
+              key={sec.id}
+              onClick={() => {
+                soundManager.playPop();
+                setSelectedSection(sec.id);
+                setCurrentIndex(0);
+              }}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-2xl text-xs sm:text-sm font-black whitespace-nowrap transition-all btn-kid-3d ${
+                isSelected
+                  ? 'bg-amber-400 text-amber-950 ring-2 ring-amber-500 shadow-md scale-105'
+                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+              }`}
+            >
+              <span>{sec.icon}</span>
+              <span>{sec.name}</span>
+              <span
+                className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                  isSelected ? 'bg-black/20 text-white' : 'bg-slate-100 text-slate-500'
+                }`}
+              >
+                {count}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Timed Mode Banner (if in timed exam mode) */}
@@ -295,6 +423,15 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
+            {selectedExamId === 'exam_random' && (
+              <button
+                onClick={handleRegenerateRandomExam}
+                className="flex items-center gap-1.5 bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl shadow-md text-xs sm:text-base btn-kid-3d"
+              >
+                <Shuffle className="w-4 h-4" />
+                <span>Thử Đề Ngẫu Nhiên Khác 🎲</span>
+              </button>
+            )}
             <button
               onClick={() => {
                 soundManager.playPop();
