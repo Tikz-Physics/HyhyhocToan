@@ -782,6 +782,128 @@ export default function QuestionIllustration({ level }) {
     );
   }
 
+  // 34. SO SÁNH: c9 (4 táo đỏ vs 6 cam vàng)
+  if (id === 'c9') {
+    return (
+      <div className="flex flex-col items-center my-2 p-3 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border-2 border-amber-200 shadow-2xs max-w-sm mx-auto">
+        <div className="flex items-center justify-around w-full">
+          <div className="flex flex-col items-center bg-white p-2 rounded-xl border border-rose-200">
+            <span className="text-2xl">🍎🍎🍎🍎</span>
+            <span className="text-xs font-black text-rose-800 mt-1">4 quả táo đỏ</span>
+          </div>
+          <span className="text-sm font-black text-amber-700">so với</span>
+          <div className="flex flex-col items-center bg-white p-2 rounded-xl border border-orange-200">
+            <span className="text-2xl">🍊🍊🍊🍊🍊🍊</span>
+            <span className="text-xs font-black text-orange-800 mt-1">6 quả cam vàng</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 35. HÌNH VUÔNG: geo6 (Hình vuông 4 cạnh bằng nhau)
+  if (id === 'geo6') {
+    return (
+      <div className="flex flex-col items-center my-2 p-3 bg-amber-50 rounded-2xl border-2 border-amber-200 shadow-2xs max-w-sm mx-auto">
+        <div className="w-24 h-24 bg-gradient-to-br from-amber-400 to-orange-400 rounded-lg border-3 border-amber-600 shadow-md flex items-center justify-center text-white font-black text-xs relative">
+          <span>4 cạnh bằng nhau</span>
+        </div>
+        <span className="text-xs font-black text-amber-900 mt-2">🟧 Hình vuông có 4 cạnh dài bằng nhau</span>
+      </div>
+    );
+  }
+
+  // 36. KHỐI LẬP PHƯƠNG: geo7 (Viên xúc xắc đồ chơi)
+  if (id === 'geo7') {
+    return (
+      <div className="flex flex-col items-center my-2 p-3 bg-purple-50 rounded-2xl border-2 border-purple-200 shadow-2xs max-w-sm mx-auto">
+        <div className="text-5xl animate-bounce-slow">🎲</div>
+        <span className="text-xs font-black text-purple-900 mt-1.5">Viên xúc xắc có 6 mặt đều là các hình vuông bằng nhau!</span>
+      </div>
+    );
+  }
+
+  // 37. VỊ TRÍ: geo8 (Chim bồ câu trên mái nhà)
+  if (id === 'geo8') {
+    return (
+      <div className="flex flex-col items-center my-2 p-3 bg-sky-50 rounded-2xl border-2 border-sky-200 shadow-2xs max-w-sm mx-auto">
+        <div className="text-3xl animate-bounce-slow">🕊️</div>
+        <span className="text-xs font-bold text-sky-800">Chim bồ câu (Ở TRÊN)</span>
+        <div className="text-4xl mt-1">🏠</div>
+        <span className="text-xs font-bold text-slate-700">Mái nhà</span>
+      </div>
+    );
+  }
+
+  // 38. VỊ TRÍ: geo9 (Thỏ và Rùa chạy thi)
+  if (id === 'geo9') {
+    return (
+      <div className="flex items-center justify-center gap-6 my-2 p-3 bg-emerald-50 rounded-2xl border-2 border-emerald-200 shadow-2xs max-w-sm mx-auto">
+        <div className="flex flex-col items-center bg-white p-2 rounded-xl border border-emerald-300">
+          <span className="text-3xl">🐰</span>
+          <span className="text-xs font-black text-emerald-800">Thỏ (Ở ĐẰNG TRƯỚC)</span>
+        </div>
+        <span className="text-xl">🏃💨</span>
+        <div className="flex flex-col items-center bg-white p-2 rounded-xl border border-slate-200">
+          <span className="text-3xl">🐢</span>
+          <span className="text-xs font-bold text-slate-700">Rùa (Ở ĐẰNG SAU)</span>
+        </div>
+      </div>
+    );
+  }
+
+  // 39. TÍNH: as6 (4 + 5 = ?)
+  if (id === 'as6') {
+    return (
+      <div className="flex items-center justify-center gap-3 my-2 p-2.5 bg-amber-50 rounded-2xl border-2 border-amber-200 shadow-2xs max-w-sm mx-auto">
+        <div className="flex items-center gap-1 bg-white p-1.5 rounded-xl border">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <QueTinhLe key={i} color="blue" />
+          ))}
+          <span className="text-xs font-black text-blue-700 ml-1">4 que</span>
+        </div>
+        <span className="text-lg font-black text-amber-600">➕</span>
+        <div className="flex items-center gap-1 bg-white p-1.5 rounded-xl border">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <QueTinhLe key={i} color="red" />
+          ))}
+          <span className="text-xs font-black text-rose-700 ml-1">5 que</span>
+        </div>
+      </div>
+    );
+  }
+
+  // 40. TÍNH: as7 (10 - 6 = ?)
+  if (id === 'as7') {
+    return (
+      <div className="flex items-center justify-center gap-3 my-2 p-2.5 bg-rose-50 rounded-2xl border-2 border-rose-200 shadow-2xs max-w-sm mx-auto">
+        <div className="flex items-center gap-1 bg-white p-1.5 rounded-xl border">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <QueTinhLe key={i} color={i < 6 ? 'red' : 'green'} isCrossed={i < 6} />
+          ))}
+        </div>
+        <span className="text-xs font-black text-rose-800">Bớt đi 6 que ❌</span>
+      </div>
+    );
+  }
+
+  // 41. BÓNG BAY: as100_11 (48 - 16 = ?)
+  if (id === 'as100_11') {
+    return (
+      <div className="flex items-center justify-around my-2 p-2.5 bg-amber-50 rounded-2xl border-2 border-amber-200 shadow-2xs max-w-sm mx-auto">
+        <div className="flex flex-col items-center bg-white p-2 rounded-xl border">
+          <span className="text-2xl">🎈🎈🎈</span>
+          <span className="text-xs font-black text-slate-800">Có 48 quả</span>
+        </div>
+        <span className="text-base font-black text-rose-600">➖ Đã bán 16 🎈</span>
+        <div className="flex flex-col items-center bg-white p-2 rounded-xl border border-dashed border-blue-400">
+          <span className="text-2xl">❓</span>
+          <span className="text-xs font-black text-blue-800">Còn lại [ ? ]</span>
+        </div>
+      </div>
+    );
+  }
+
   // Default generic math card for any other level
   return (
     <div className="my-1.5 p-2 bg-gradient-to-r from-amber-50/80 to-orange-50/80 rounded-2xl border border-amber-200 shadow-2xs flex items-center justify-center gap-2 max-w-sm mx-auto">

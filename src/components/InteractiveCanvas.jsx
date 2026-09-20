@@ -86,16 +86,28 @@ export default function InteractiveCanvas({
     const target = level.targetNumber ?? level.correctNumber ?? level.correctAnswer;
     if (target !== undefined) {
       if (String(choice).trim() === String(target).trim()) return true;
-      if (Number(choice) === Number(target)) return true;
+      if (
+        !isNaN(Number(choice)) &&
+        !isNaN(Number(target)) &&
+        Number(choice) === Number(target)
+      ) {
+        return true;
+      }
+      const letters = ['A', 'B', 'C', 'D'];
+      if (optIndex !== -1 && letters[optIndex] === String(target).trim()) return true;
     }
 
     return false;
   };
 
-  const triggerSuccess = () => {
+  const triggerSuccess = (val = null) => {
     if (isSuccess) return;
     setIsSuccess(true);
     setWrongOption(null);
+    if (val !== null) {
+      setUserValue(String(val));
+      setSelectedOption(val);
+    }
     if (onAnswerStatus) onAnswerStatus('correct');
     soundManager.playCorrect();
     confetti({
@@ -211,6 +223,27 @@ export default function InteractiveCanvas({
     setUserValue(String(opt));
 
     if (evaluateAnswer(opt, idx)) {
+      // If visual_add, drop all apples into basket
+      if (level.type === 'visual_add') {
+        const allApples = [];
+        for (let i = 0; i < (level.a || 0); i++) allApples.push(`a_${i}`);
+        for (let i = 0; i < (level.b || 0); i++) allApples.push(`b_${i}`);
+        setApplesInBasket(allApples);
+      }
+      // If visual_sub, pop all target balloons
+      if (level.type === 'visual_sub') {
+        const pops = new Set();
+        for (let i = 0; i < (level.b || 2); i++) pops.add(i);
+        setPoppedBalloons(pops);
+      }
+      // If crocodile comparison, orient crocodile
+      if (opt === '>' || (level.symbol === '>' && opt.includes('>'))) {
+        setCrocDirection('left');
+      } else if (opt === '<' || (level.symbol === '<' && opt.includes('<'))) {
+        setCrocDirection('right');
+      } else if (opt === '=' || (level.symbol === '=' && opt.includes('='))) {
+        setCrocDirection('equal');
+      }
       triggerSuccess(opt);
     } else {
       triggerError(opt);
@@ -295,25 +328,6 @@ export default function InteractiveCanvas({
               >
                 {item === '?' ? userValue || '?' : item}
               </div>
-            ))}
-          </div>
-
-          <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
-            {level.options.map((opt, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => handleSelectTrainCarriage(opt, i)}
-                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl font-black text-base sm:text-lg shadow-xs border-2 btn-kid-3d ${
-                  selectedOption === opt
-                    ? isSuccess
-                      ? 'bg-emerald-500 text-white border-emerald-600'
-                      : 'bg-rose-500 text-white border-rose-600'
-                    : 'bg-amber-400 hover:bg-amber-500 text-amber-950 border-amber-500'
-                }`}
-              >
-                {opt}
-              </button>
             ))}
           </div>
         </div>
@@ -969,7 +983,7 @@ export default function InteractiveCanvas({
         )}
 
       {/* 10. THẺ CHỌN ĐÁP ÁN TRỰC QUAN (RÕ RÀNG VỚI NHÃN A, B, C, D & KHÔNG BỊ TRÀN CHỮ) */}
-      {!hasDirectGame && level.options && level.options.length > 0 && (() => {
+      {level.options && level.options.length > 0 && (() => {
         const isNumeric = level.options.every((opt) => String(opt).length <= 4);
         const hasLongText = level.options.some((opt) => String(opt).length > 8);
         const count = level.options.length;
