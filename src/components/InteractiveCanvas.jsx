@@ -510,48 +510,128 @@ export default function InteractiveCanvas({
             <span>📏 Đo độ dài bằng thước kẻ xăng-ti-mét (cm)</span>
           </div>
 
-          <div className="w-full bg-white p-5 rounded-3xl border-3 border-slate-200 shadow-md flex flex-col items-center">
-            {/* Vật thể đặt trên thước */}
-            <div className="w-full relative h-16 flex items-center px-6">
-              <div
-                className="h-10 bg-gradient-to-r from-amber-400 to-orange-500 rounded-lg shadow-md flex items-center justify-between px-3 text-white font-bold text-xs"
-                style={{ width: `${(level.lengthCm / 15) * 100}%`, minWidth: '52px' }}
-              >
-                <span className="truncate">{level.item || 'Bút chì ✏️'}</span>
-                <span>✨</span>
-              </div>
+          <div className="w-full bg-white p-4 sm:p-6 rounded-3xl border-3 border-slate-200 shadow-md flex flex-col items-center">
+            {/* Thanh thông báo chuẩn vị trí đo */}
+            <div className="w-full flex items-center justify-between text-[11px] sm:text-xs font-black text-slate-600 mb-3 px-1">
+              <span className="flex items-center gap-1.5 text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-xl border border-emerald-300 shadow-2xs">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Đầu vật đặt đúng: <strong className="text-emerald-900 underline decoration-2">Vạch 0 cm</strong></span>
+              </span>
+              <span className="text-amber-900 bg-amber-50 px-2.5 py-1 rounded-xl border border-amber-300 shadow-2xs hidden xs:inline">
+                Độ dài = Vạch ở đuôi vật
+              </span>
             </div>
 
-            {/* Cây thước kẻ chia vạch cm */}
-            <div className="w-full bg-yellow-300 border-3 border-yellow-500 rounded-xl shadow-inner relative h-16 px-6 flex items-start select-none">
-              {Array.from({ length: 16 }).map((_, cm) => {
-                const isMatch = isSuccess && cm === level.lengthCm;
-                return (
+            {/* Khung chứa vật thể và thước kẻ cùng hệ tọa độ */}
+            <div className="w-full bg-slate-50/70 p-3 sm:p-4 rounded-2xl border border-slate-200 flex flex-col items-center gap-2">
+              {/* 1. HÀNG VẬT THỂ ĐƯỢC ĐO */}
+              <div className="w-full relative px-6 sm:px-8">
+                <div className="relative w-full h-14 sm:h-16 flex items-center">
+                  {/* Đường dóng thẳng đứng tại Vạch 0 cm (Start Line) */}
+                  <div className="absolute -top-3 bottom-0 left-0 w-0.5 bg-emerald-500 z-30">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full whitespace-nowrap shadow-xs flex items-center gap-0.5">
+                      <span>📍 Vạch 0</span>
+                    </div>
+                  </div>
+
+                  {/* Bản thân vật thể được đo */}
                   <div
-                    key={cm}
-                    className="flex-1 flex flex-col items-center relative"
-                    style={{ minWidth: '18px' }}
+                    className="absolute top-1/2 -translate-y-1/2 left-0 h-10 sm:h-12 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 rounded-lg shadow-md border-2 border-amber-600/50 flex items-center justify-between px-2.5 text-white font-black text-xs sm:text-sm transition-all overflow-hidden z-20"
+                    style={{ width: `${(level.lengthCm / 15) * 100}%` }}
                   >
-                    <div
-                      className={`w-0.5 ${
-                        cm % 5 === 0 ? 'h-6 bg-slate-900' : 'h-3.5 bg-slate-700'
-                      }`}
-                    />
-                    <span
-                      className={`text-[10px] font-black mt-1 ${
-                        isMatch ? 'text-rose-700 font-extrabold scale-125' : 'text-slate-800'
-                      }`}
-                    >
-                      {cm}
+                    <span className="truncate flex items-center gap-1 select-none">
+                      <span>{level.item || 'Bút chì ✏️'}</span>
                     </span>
-                    {isMatch && (
-                      <div className="absolute -top-16 w-0.5 h-16 border-r-2 border-dashed border-rose-500 pointer-events-none" />
+                    {level.lengthCm >= 4 && (
+                      <span className="text-[10px] text-amber-100 flex-shrink-0 select-none bg-black/15 px-1 rounded">
+                        {level.lengthCm} cm
+                      </span>
                     )}
                   </div>
-                );
-              })}
-              <div className="absolute right-2 bottom-1 text-[10px] font-black text-amber-900">
-                cm
+
+                  {/* Đường dóng thẳng đứng tại điểm cuối của vật thể (End Line) */}
+                  <div
+                    className="absolute -top-3 bottom-0 w-0.5 z-30 transition-all pointer-events-none"
+                    style={{ left: `${(level.lengthCm / 15) * 100}%` }}
+                  >
+                    <div
+                      className={`w-full h-full ${
+                        isSuccess ? 'bg-rose-500 shadow-sm' : 'border-r-2 border-dashed border-rose-400/80'
+                      }`}
+                    />
+                    {isSuccess && (
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-rose-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full whitespace-nowrap shadow-xs animate-bounce">
+                        <span>{level.lengthCm} cm</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. CÂY THƯỚC KẺ HỌC SINH CHIA VẠCH CM */}
+              <div className="w-full bg-gradient-to-b from-amber-100 via-yellow-200 to-amber-300 border-2 sm:border-3 border-amber-500 rounded-xl shadow-inner relative h-16 sm:h-18 px-6 sm:px-8 select-none">
+                <div className="relative w-full h-full">
+                  {/* Đường dóng nối dài từ vật xuống vạch 0 trên thước */}
+                  <div className="absolute top-0 bottom-0 left-0 w-0.5 bg-emerald-500/70 z-20 pointer-events-none" />
+
+                  {/* Đường dóng nối dài từ đuôi vật xuống vạch tương ứng */}
+                  <div
+                    className="absolute top-0 bottom-0 w-0.5 border-r border-dashed border-rose-400 z-20 pointer-events-none"
+                    style={{ left: `${(level.lengthCm / 15) * 100}%` }}
+                  />
+
+                  {/* 16 Vạch chia từ 0 đến 15 cm */}
+                  {Array.from({ length: 16 }).map((_, cm) => {
+                    const pct = (cm / 15) * 100;
+                    const isTarget = isSuccess && cm === level.lengthCm;
+                    const isZero = cm === 0;
+
+                    return (
+                      <React.Fragment key={cm}>
+                        {/* Vạch chia cm chính */}
+                        <div
+                          className={`absolute top-0 -translate-x-1/2 transition-colors ${
+                            isZero
+                              ? 'w-1 h-7 sm:h-8 bg-emerald-700 z-10'
+                              : isTarget
+                              ? 'w-1 h-7 sm:h-8 bg-rose-600 z-10'
+                              : cm % 5 === 0
+                              ? 'w-0.5 h-6 bg-slate-950'
+                              : 'w-0.5 h-4 bg-slate-800'
+                          }`}
+                          style={{ left: `${pct}%` }}
+                        />
+
+                        {/* Số cm */}
+                        <span
+                          className={`absolute top-6 sm:top-7 -translate-x-1/2 font-black transition-all ${
+                            isTarget
+                              ? 'text-rose-700 text-sm sm:text-base scale-125 font-extrabold animate-bounce'
+                              : isZero
+                              ? 'text-emerald-800 text-xs sm:text-sm font-extrabold'
+                              : 'text-slate-800 text-[10px] sm:text-xs'
+                          }`}
+                          style={{ left: `${pct}%` }}
+                        >
+                          {cm}
+                        </span>
+
+                        {/* Vạch phụ nửa cm (0.5 cm) */}
+                        {cm < 15 && (
+                          <div
+                            className="absolute top-0 -translate-x-1/2 w-0.5 h-2.5 bg-slate-600/70"
+                            style={{ left: `${((cm + 0.5) / 15) * 100}%` }}
+                          />
+                        )}
+                      </React.Fragment>
+                    );
+                  })}
+
+                  {/* Đơn vị đo cm ở góc phải */}
+                  <div className="absolute right-1.5 bottom-1 text-[11px] font-black text-amber-950 bg-amber-300/80 px-1 rounded shadow-2xs">
+                    cm
+                  </div>
+                </div>
               </div>
             </div>
           </div>

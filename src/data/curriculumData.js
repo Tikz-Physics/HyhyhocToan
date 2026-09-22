@@ -800,7 +800,7 @@ export const CURRICULUM_ZONES = [
         lengthCm: 8,
         targetNumber: 8,
         options: [6, 7, 8, 9],
-        hint: 'Đầu bút chì đặt ở vạch 0 cm, bé hãy nhìn xem đuôi bút chì chỉ vào vạch số mấy nhé!',
+        hint: 'Đầu bút chì đặt đúng ở vạch 0 cm, bé hãy nhìn xem đầu nhọn của bút chì chỉ vào vạch số mấy nhé!',
       },
       {
         id: 'cm2',
@@ -811,7 +811,7 @@ export const CURRICULUM_ZONES = [
         lengthCm: 4,
         targetNumber: 4,
         options: [3, 4, 5, 6],
-        hint: 'Bé hãy quan sát xem vạch số ở đuôi cục tẩy chỉ vào số mấy trên thước kẻ nhé!',
+        hint: 'Đầu cục tẩy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đuôi cục tẩy chỉ vào vạch số mấy trên thước kẻ nhé!',
       },
       {
         id: 'cm3',
@@ -822,7 +822,7 @@ export const CURRICULUM_ZONES = [
         lengthCm: 12,
         targetNumber: 12,
         options: [10, 11, 12, 13],
-        hint: 'Bé hãy nhìn vạch số ở đuôi chiếc thìa trên thước kẻ nhé!',
+        hint: 'Đầu chiếc thìa đặt đúng ở vạch 0 cm, bé hãy nhìn vạch số ở đuôi chiếc thìa trên thước kẻ nhé!',
       },
       {
         id: 'cm4',
@@ -849,7 +849,7 @@ export const CURRICULUM_ZONES = [
         lengthCm: 3,
         targetNumber: 3,
         options: [2, 3, 4, 5],
-        hint: 'Kẹp giấy đặt từ vạch 0 cm đến vạch 3 cm trên thước kẻ.',
+        hint: 'Đầu kẹp giấy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đầu kia của kẹp giấy chỉ vào vạch số mấy nhé!',
       },
       {
         id: 'cm7',
@@ -860,7 +860,7 @@ export const CURRICULUM_ZONES = [
         lengthCm: 14,
         targetNumber: 14,
         options: [12, 13, 14, 15],
-        hint: 'Bé quan sát vạch số ở phần cuối của chiếc bàn chải trên thước nhé!',
+        hint: 'Đầu bàn chải đặt đúng ở vạch 0 cm, bé quan sát vạch số ở phần đuôi cán bàn chải trên thước nhé!',
       },
       {
         id: 'cm8',
