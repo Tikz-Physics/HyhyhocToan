@@ -17,11 +17,28 @@ import {
   loadActiveAccountId,
   saveActiveAccountId,
 } from './utils/accountStorage';
+import UpdateModal from './components/UpdateModal';
+import UpdateFloatingBanner from './components/UpdateFloatingBanner';
+import { onUpdateAvailable, checkForAppUpdate } from './utils/updateManager';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('map'); // 'map', 'zone', 'timo_arena', 'trophies', 'parents'
   const [selectedZoneId, setSelectedZoneId] = useState(CURRICULUM_ZONES[0]?.id || 'counting_numbers_10');
   const [selectedSemester, setSelectedSemester] = useState('all'); // 'all', 1, 2
+
+  // Update management state
+  const [updateInfo, setUpdateInfo] = useState(null);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+
+  useEffect(() => {
+    const unsub = onUpdateAvailable((info) => {
+      setUpdateInfo(info);
+    });
+    checkForAppUpdate().then((res) => {
+      if (res?.hasUpdate) setUpdateInfo(res);
+    });
+    return unsub;
+  }, []);
 
   // Multi-account profile management with 100% persistent synchronous storage
   const [accounts, setAccounts] = useState(() => loadAccounts());
@@ -253,6 +270,8 @@ export default function App() {
         onOpenAccountModal={() => setIsAccountModalOpen(true)}
         selectedGrade={selectedGrade}
         onSelectGrade={handleSelectGrade}
+        onOpenUpdateModal={() => setIsUpdateModalOpen(true)}
+        updateInfo={updateInfo}
       />
 
       {/* Main Content Areas */}
@@ -448,6 +467,8 @@ export default function App() {
             onOpenAccountModal={() => setIsAccountModalOpen(true)}
             selectedGrade={selectedGrade}
             onSelectGrade={handleSelectGrade}
+            onOpenUpdateModal={() => setIsUpdateModalOpen(true)}
+            updateInfo={updateInfo}
           />
         )}
       </main>
@@ -461,6 +482,19 @@ export default function App() {
         onSwitchAccount={handleSwitchAccount}
         onCreateAccount={handleCreateAccount}
         onDeleteAccount={handleDeleteAccount}
+      />
+
+      {/* App Update & Install Modal */}
+      <UpdateModal
+        isOpen={isUpdateModalOpen}
+        onClose={() => setIsUpdateModalOpen(false)}
+        updateInfo={updateInfo}
+      />
+
+      {/* Persistent Floating Update Banner */}
+      <UpdateFloatingBanner
+        updateInfo={updateInfo}
+        onOpenDetails={() => setIsUpdateModalOpen(true)}
       />
 
       {/* Compact Desktop-only footer */}

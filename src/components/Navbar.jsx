@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Volume2, VolumeX, Mic, MicOff, Trophy, Home, Award, Users, ChevronDown } from 'lucide-react';
+import { Volume2, VolumeX, Mic, MicOff, Trophy, Home, Award, Users, ChevronDown, RefreshCw } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
 import { GRADE_CONFIGS } from '../data/curriculumData';
 
@@ -15,6 +15,8 @@ export default function Navbar({
   onOpenAccountModal,
   selectedGrade = 1,
   onSelectGrade,
+  onOpenUpdateModal,
+  updateInfo,
 }) {
   const [isGradeMenuOpen, setIsGradeMenuOpen] = useState(false);
   const gradeMenuRef = useRef(null);
@@ -261,6 +263,33 @@ export default function Navbar({
                   <MicOff className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400" />
                   <span className="hidden md:inline">Tắt giọng</span>
                 </>
+              )}
+            </button>
+
+            {/* Nút 3: Cập nhật App & Tải về máy */}
+            <button
+              type="button"
+              onClick={() => {
+                soundManager.playPop();
+                if (onOpenUpdateModal) onOpenUpdateModal();
+              }}
+              title="Cập nhật ứng dụng & Tải về máy"
+              className={`relative flex items-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs ${
+                updateInfo?.hasUpdate
+                  ? 'bg-rose-500 hover:bg-rose-600 text-white border-rose-600 animate-bounce'
+                  : 'bg-white hover:bg-amber-100/80 border-amber-400 text-amber-950'
+              }`}
+            >
+              <RefreshCw
+                className={`w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-600 ${
+                  updateInfo?.hasUpdate ? 'text-white animate-spin' : ''
+                }`}
+              />
+              <span className="hidden md:inline">
+                {updateInfo?.hasUpdate ? 'Có bản mới!' : 'Cập nhật'}
+              </span>
+              {updateInfo?.hasUpdate && (
+                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-rose-500 rounded-full ring-2 ring-white" />
               )}
             </button>
           </div>

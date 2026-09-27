@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { BarChart3, Lightbulb, RotateCcw } from 'lucide-react';
+import { BarChart3, Lightbulb, RotateCcw, RefreshCw, Smartphone } from 'lucide-react';
 import { getCurriculumZones, GRADE_CONFIGS } from '../data/curriculumData';
+import { CURRENT_APP_VERSION } from '../utils/updateManager';
 
 export default function ParentPortal({
   stars,
@@ -12,6 +13,8 @@ export default function ParentPortal({
   onOpenAccountModal,
   selectedGrade = 1,
   onSelectGrade,
+  onOpenUpdateModal,
+  updateInfo,
 }) {
   const [isConfirmingReset, setIsConfirmingReset] = useState(false);
   const currentZones = getCurriculumZones(selectedGrade);
@@ -186,6 +189,46 @@ export default function ParentPortal({
             })}
           </div>
         )}
+      </div>
+
+      {/* App Installation & Auto-Update Section */}
+      <div className="bg-white rounded-3xl border-4 border-amber-300 p-4 sm:p-6 shadow-md">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-2xl bg-amber-100 border-2 border-amber-300 flex items-center justify-center text-2xl shadow-xs flex-shrink-0 animate-bounce-slow">
+              📲
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-base sm:text-lg font-black text-slate-800">
+                  Cài Đặt & Cập Nhật Tự Động
+                </h2>
+                <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black px-2 py-0.5 rounded-full">
+                  v{CURRENT_APP_VERSION}
+                </span>
+                {updateInfo?.hasUpdate && (
+                  <span className="bg-rose-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-pulse">
+                    Có bản mới
+                  </span>
+                )}
+              </div>
+              <p className="text-xs font-semibold text-slate-500 mt-0.5">
+                Tải ứng dụng về màn hình chính điện thoại hoặc cập nhật các đề toán mới nhất từ máy chủ
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              if (onOpenUpdateModal) onOpenUpdateModal();
+            }}
+            className="px-4 py-2.5 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 text-amber-950 font-black text-xs sm:text-sm rounded-xl shadow-sm btn-kid-3d cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap self-start sm:self-auto active:scale-95 transition-all"
+          >
+            <RefreshCw className="w-4 h-4 text-amber-950" />
+            <span>Kiểm Tra & Cập Nhật App</span>
+          </button>
+        </div>
       </div>
 
       {/* Progress Breakdown across Zones */}
