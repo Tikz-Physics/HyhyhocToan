@@ -3,7 +3,7 @@
 
 const STORAGE_ROOM_KEY = 'hyhy_sync_room_code';
 const STORAGE_LEADERBOARD_CACHE = 'hyhy_cloud_leaderboard_cache';
-const DEFAULT_ROOM = 'HYHY_VIP_CHAMPIONS';
+const DEFAULT_ROOM = 'HYHY_VIP_CHAMPIONS_2026';
 
 // Kênh BroadcastChannel đồng bộ tức thì giữa các tab/cửa sổ trên cùng máy
 let broadcastChannel = null;
@@ -17,7 +17,12 @@ try {
 
 export function getSyncRoomCode() {
   try {
-    return localStorage.getItem(STORAGE_ROOM_KEY) || DEFAULT_ROOM;
+    const val = localStorage.getItem(STORAGE_ROOM_KEY);
+    if (!val || val === 'HYHY_VIP_CHAMPIONS') {
+      localStorage.setItem(STORAGE_ROOM_KEY, DEFAULT_ROOM);
+      return DEFAULT_ROOM;
+    }
+    return val;
   } catch {
     return DEFAULT_ROOM;
   }
@@ -29,6 +34,18 @@ export function setSyncRoomCode(code) {
     localStorage.setItem(STORAGE_ROOM_KEY, cleanCode);
   } catch {}
   return cleanCode;
+}
+
+export async function wipeCloudRoomData(targetRoom = null) {
+  const room = targetRoom || getSyncRoomCode();
+  try {
+    setCachedLeaderboard([]);
+    await fetch(`/api/sync?room=${encodeURIComponent(room)}`, {
+      method: 'DELETE',
+    });
+  } catch (e) {
+    console.warn('Lỗi khi xóa bảng vàng đám mây:', e);
+  }
 }
 
 // Lưu trữ bộ nhớ đệm bảng xếp hạng

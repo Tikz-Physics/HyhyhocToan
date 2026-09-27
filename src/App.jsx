@@ -16,11 +16,12 @@ import {
   saveAccounts,
   loadActiveAccountId,
   saveActiveAccountId,
+  wipeAllAccountsAndReset,
 } from './utils/accountStorage';
 import UpdateModal from './components/UpdateModal';
 import UpdateFloatingBanner from './components/UpdateFloatingBanner';
 import { onUpdateAvailable, checkForAppUpdate } from './utils/updateManager';
-import { syncAccountToCloud, onCloudSyncEvent } from './utils/cloudSync';
+import { syncAccountToCloud, onCloudSyncEvent, wipeCloudRoomData } from './utils/cloudSync';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('map'); // 'map', 'zone', 'timo_arena', 'trophies', 'parents'
@@ -48,7 +49,7 @@ export default function App() {
     return loadActiveAccountId(initial);
   });
 
-  const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
+  const [isAccountModalOpen, setIsAccountModalOpen] = useState(() => accounts.length === 0);
 
   // Independent Audio States: Sound Effects (Loa) & Teacher Voice Reading (Mic)
   const [soundOn, setSoundOn] = useState(() => soundManager.soundEnabled);
@@ -58,14 +59,18 @@ export default function App() {
   const currentAccount =
     accounts.find((a) => a.id === currentAccountId) ||
     accounts[0] || {
-      id: 'default_child',
-      name: 'Bé Yêu 🎈',
+      id: 'student_onboarding',
+      name: 'Bé Học Mới',
       avatar: '🦁',
+      pin: '1234',
+      grade: 1,
       stars: 10,
       completedTasks: [],
       userMedals: [],
       unlockedPets: ['dino'],
       activePet: 'dino',
+      redeemedRewards: [],
+      usedRewardHistory: [],
     };
 
   const stars = currentAccount.stars ?? 10;
@@ -82,7 +87,7 @@ export default function App() {
     if (currentAccount?.grade) {
       setSelectedGrade(currentAccount.grade);
     }
-  }, [currentAccountId]);
+  }, [currentAccountId, currentAccount?.grade]);
 
   const handleSelectGrade = (newGrade) => {
     setSelectedGrade(newGrade);
@@ -98,21 +103,24 @@ export default function App() {
   }, [accounts]);
 
   useEffect(() => {
-    saveActiveAccountId(currentAccountId);
+    if (currentAccountId) {
+      saveActiveAccountId(currentAccountId);
+    }
   }, [currentAccountId]);
 
   // Tự động đẩy tiến trình tài khoản hiện tại lên Đám Mây để thi đua giữa các máy
   useEffect(() => {
-    if (currentAccount && currentAccount.id) {
+    if (currentAccount && currentAccount.id && accounts.length > 0) {
       syncAccountToCloud(currentAccount);
     }
   }, [
-    currentAccount.stars,
-    currentAccount.completedTasks?.length,
-    currentAccount.userMedals?.length,
-    currentAccount.grade,
-    currentAccount.name,
-    currentAccount.avatar,
+    currentAccount?.stars,
+    currentAccount?.completedTasks?.length,
+    currentAccount?.userMedals?.length,
+    currentAccount?.grade,
+    currentAccount?.name,
+    currentAccount?.avatar,
+    accounts.length,
   ]);
 
   // Lắng nghe sự kiện đồng bộ từ các cửa sổ / tab khác
@@ -239,12 +247,13 @@ export default function App() {
   const handleCreateAccount = (accData) => {
     const newId = accData.id || `acc_${Date.now()}`;
     const cleanPin = String(accData.pin || '1234').replace(/\D/g, '').slice(0, 4) || '1234';
+    const targetGrade = Number(accData.grade || selectedGrade || 1);
     const newAcc = {
       id: newId,
       name: accData.name,
       avatar: accData.avatar || '🦁',
       pin: cleanPin,
-      grade: accData.grade || selectedGrade || 1,
+      grade: targetGrade,
       stars: accData.stars ?? 10,
       completedTasks: accData.completedTasks || [],
       userMedals: accData.userMedals || [],
@@ -257,9 +266,19 @@ export default function App() {
     const nextAccounts = [...accounts.filter((a) => a.id !== newId), newAcc];
     setAccounts(nextAccounts);
     setCurrentAccountId(newId);
+    setSelectedGrade(targetGrade);
     saveAccounts(nextAccounts);
     saveActiveAccountId(newId);
     setIsAccountModalOpen(false);
+  };
+
+  const handleWipeAllAccounts = async () => {
+    wipeAllAccountsAndReset();
+    await wipeCloudRoomData();
+    setAccounts([]);
+    setCurrentAccountId(null);
+    setIsAccountModalOpen(true);
+    soundManager.playPop();
   };
 
   const handleUpdateAccountPin = (accountId, newPin) => {
@@ -536,6 +555,7 @@ export default function App() {
             currentAccount={currentAccount}
             onOpenAccountModal={() => setIsAccountModalOpen(true)}
             onUpdateAccountPin={handleUpdateAccountPin}
+            onWipeAllAccounts={handleWipeAllAccounts}
             selectedGrade={selectedGrade}
             onSelectGrade={handleSelectGrade}
             onOpenUpdateModal={() => setIsUpdateModalOpen(true)}
@@ -546,8 +566,10 @@ export default function App() {
 
       {/* Account Switcher & Creator Modal */}
       <AccountModal
-        isOpen={isAccountModalOpen}
-        onClose={() => setIsAccountModalOpen(false)}
+        isOpen={isAccountModalOpen || accounts.length === 0}
+        onClose={() => {
+          if (accounts.length > 0) setIsAccountModalOpen(false);
+        }}
         accounts={accounts}
         currentAccountId={currentAccountId}
         onSwitchAccount={handleSwitchAccount}
@@ -555,6 +577,7 @@ export default function App() {
         onDeleteAccount={handleDeleteAccount}
         onBulkImportAccounts={handleBulkImportAccounts}
         onUpdateAccountPin={handleUpdateAccountPin}
+        onWipeAllAccounts={handleWipeAllAccounts}
       />
 
       {/* App Update & Install Modal */}

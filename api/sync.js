@@ -18,7 +18,17 @@ export default async function handler(req, res) {
     return;
   }
 
-  const room = (req.query.room || (req.body && req.body.room) || 'HYHY_VIP_CHAMPIONS').toUpperCase();
+  const room = (req.query.room || (req.body && req.body.room) || 'HYHY_VIP_CHAMPIONS_2026').toUpperCase();
+
+  if (req.method === 'DELETE') {
+    inMemoryStore[room] = [];
+    return res.status(200).json({
+      success: true,
+      message: `Đã làm sạch dữ liệu phòng ${room}`,
+      room,
+      students: [],
+    });
+  }
 
   if (req.method === 'GET') {
     const data = inMemoryStore[room] || [];

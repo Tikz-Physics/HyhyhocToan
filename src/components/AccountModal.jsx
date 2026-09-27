@@ -46,11 +46,14 @@ export default function AccountModal({
   onDeleteAccount,
   onBulkImportAccounts,
   onUpdateAccountPin,
+  onWipeAllAccounts,
 }) {
+  const isMandatory = !accounts || accounts.length === 0;
   const [activeTab, setActiveTab] = useState('local'); // 'local' | 'leaderboard' | 'transfer'
-  const [isCreating, setIsCreating] = useState(false);
+  const [isCreating, setIsCreating] = useState(() => isMandatory);
   const [newName, setNewName] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState('🦁');
+  const [newGrade, setNewGrade] = useState(1);
   const [newPin, setNewPin] = useState('1234');
   const [showNewPin, setShowNewPin] = useState(false);
 
@@ -230,20 +233,28 @@ export default function AccountModal({
   const handleCreateSubmit = (e) => {
     e.preventDefault();
     const trimmed = newName.trim();
-    if (!trimmed) return;
+    if (!trimmed) {
+      alert('Vui lòng nhập tên của bé để tiếp tục!');
+      return;
+    }
 
-    const cleanPin = newPin.trim() ? newPin.trim().replace(/\D/g, '').padEnd(4, '0').slice(0, 4) : '1234';
+    const cleanPin = newPin.trim().replace(/\D/g, '');
+    if (cleanPin.length !== 4) {
+      alert('Mật mã bảo vệ phải gồm đúng 4 chữ số (Ví dụ: 1234)!');
+      return;
+    }
 
     soundManager.playFanfare();
     confetti({
-      particleCount: 50,
-      spread: 60,
+      particleCount: 60,
+      spread: 70,
       origin: { y: 0.6 },
     });
 
     onCreateAccount({
       name: trimmed,
       avatar: selectedAvatar,
+      grade: newGrade,
       pin: cleanPin,
     });
 
@@ -539,94 +550,100 @@ export default function AccountModal({
         <div className="flex items-center justify-between border-b pb-3 mb-3">
           <div className="flex items-center gap-2.5">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-400 text-white flex items-center justify-center text-xl shadow-sm">
-              🏆
+              {isMandatory ? '🎒' : '🏆'}
             </div>
             <div>
               <h3 className="text-base sm:text-xl font-black text-slate-800 leading-tight">
-                Tài Khoản & Bảng Vàng Thi Đua
+                {isMandatory ? 'Khởi Tạo Tài Khoản Bé Học Mới 🎉' : 'Tài Khoản & Bảng Vàng Thi Đua'}
               </h3>
               <p className="text-[11px] sm:text-xs font-bold text-slate-500">
-                Đồng bộ liên máy • Thi đua giữa các bé
+                {isMandatory
+                  ? 'Bảo mật với Mã PIN 4 số • Điền thông tin bé để bắt đầu'
+                  : 'Đồng bộ liên máy • Thi đua giữa các bé'}
               </p>
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => {
-              soundManager.playPop();
-              onClose();
-            }}
-            className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center cursor-pointer transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          {!isMandatory && (
+            <button
+              type="button"
+              onClick={() => {
+                soundManager.playPop();
+                onClose();
+              }}
+              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center cursor-pointer transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
         </div>
 
-        {/* Tab Switcher: Local Accounts vs Cloud Leaderboard vs Chuyển Máy */}
-        <div className="flex items-center gap-1.5 p-1 bg-amber-50 rounded-2xl border border-amber-200 mb-3.5">
-          <button
-            type="button"
-            onClick={() => {
-              soundManager.playClick();
-              setActiveTab('local');
-            }}
-            className={`flex-1 py-1.5 px-2 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-1.5 ${
-              activeTab === 'local'
-                ? 'bg-amber-400 text-amber-950 shadow-xs'
-                : 'text-slate-600 hover:text-slate-800'
-            }`}
-          >
-            <Users className="w-4 h-4" />
-            <span>Máy Này ({accounts.length})</span>
-          </button>
+        {/* Tab Switcher: Only show when not mandatory onboarding */}
+        {!isMandatory && (
+          <div className="flex items-center gap-1.5 p-1 bg-amber-50 rounded-2xl border border-amber-200 mb-3.5">
+            <button
+              type="button"
+              onClick={() => {
+                soundManager.playClick();
+                setActiveTab('local');
+              }}
+              className={`flex-1 py-1.5 px-2 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-1.5 ${
+                activeTab === 'local'
+                  ? 'bg-amber-400 text-amber-950 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-800'
+              }`}
+            >
+              <Users className="w-4 h-4" />
+              <span>Máy Này ({accounts.length})</span>
+            </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              soundManager.playFanfare();
-              setActiveTab('leaderboard');
-              loadLeaderboardData();
-            }}
-            className={`flex-1 py-1.5 px-2 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-1.5 ${
-              activeTab === 'leaderboard'
-                ? 'bg-gradient-to-r from-rose-500 to-amber-500 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-800'
-            }`}
-          >
-            <Trophy className="w-4 h-4 text-yellow-300 animate-bounce" />
-            <span>Thi Đua Liên Máy 🔥</span>
-          </button>
+            <button
+              type="button"
+              onClick={() => {
+                soundManager.playFanfare();
+                setActiveTab('leaderboard');
+                loadLeaderboardData();
+              }}
+              className={`flex-1 py-1.5 px-2 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-1.5 ${
+                activeTab === 'leaderboard'
+                  ? 'bg-gradient-to-r from-rose-500 to-amber-500 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-800'
+              }`}
+            >
+              <Trophy className="w-4 h-4 text-yellow-300 animate-bounce" />
+              <span>Thi Đua Liên Máy 🔥</span>
+            </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              soundManager.playClick();
-              setActiveTab('transfer');
-            }}
-            className={`py-1.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1 ${
-              activeTab === 'transfer'
-                ? 'bg-white text-indigo-900 shadow-xs font-black'
-                : 'text-slate-500 hover:text-slate-700'
-            }`}
-            title="Chuyển dữ liệu sang máy khác"
-          >
-            <Share2 className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Chuyển Máy</span>
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={() => {
+                soundManager.playClick();
+                setActiveTab('transfer');
+              }}
+              className={`py-1.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1 ${
+                activeTab === 'transfer'
+                  ? 'bg-white text-indigo-900 shadow-xs font-black'
+                  : 'text-slate-500 hover:text-slate-700'
+              }`}
+              title="Chuyển dữ liệu sang máy khác"
+            >
+              <Share2 className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Chuyển Máy</span>
+            </button>
+          </div>
+        )}
 
         {/* Sync notification banner if any */}
-        {syncStatusMsg && (
+        {syncStatusMsg && !isMandatory && (
           <div className="mb-3 p-2 bg-emerald-100 border border-emerald-300 rounded-xl text-xs font-bold text-emerald-900 text-center animate-pop">
             🎉 {syncStatusMsg}
           </div>
         )}
 
-        {/* TAB 1: LOCAL ACCOUNTS */}
-        {activeTab === 'local' && (
+        {/* TAB 1: LOCAL ACCOUNTS OR MANDATORY ONBOARDING */}
+        {(activeTab === 'local' || isMandatory) && (
           <>
-            {!isCreating && (
+            {!isCreating && !isMandatory && (
               <div className="space-y-3">
                 <div className="text-xs font-black uppercase tracking-wider text-slate-400 mb-1 flex items-center justify-between">
                   <span>Danh sách bạn học trên máy</span>
@@ -755,12 +772,42 @@ export default function AccountModal({
                   <Plus className="w-4 h-4 text-amber-600" />
                   <span>+ Tạo Thêm Tài Khoản Bé Mới</span>
                 </button>
+
+                {/* Option for Parents to Wipe All Local Accounts & Restart */}
+                <div className="pt-2 border-t border-slate-100 mt-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          '⚠️ XÁC NHẬN TỪ PHỤ HUYNH:\nBạn có chắc muốn XÓA TOÀN BỘ tài khoản trên thiết bị này và thiết lập lại từ đầu không?\n\nMọi tiến trình, sao và huân chương trên máy này sẽ được làm sạch.'
+                        )
+                      ) {
+                        if (onWipeAllAccounts) onWipeAllAccounts();
+                      }
+                    }}
+                    className="w-full py-2 text-[11px] font-bold text-rose-500 hover:text-rose-700 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Xóa toàn bộ tài khoản trên máy này & làm lại từ đầu</span>
+                  </button>
+                </div>
               </div>
             )}
 
             {/* Mode 2: Create New Account Form */}
-            {isCreating && (
+            {(isCreating || isMandatory) && (
               <form onSubmit={handleCreateSubmit} className="space-y-3.5">
+                {isMandatory && (
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 p-3 rounded-2xl text-xs font-bold text-blue-900 flex items-start gap-2.5">
+                    <span className="text-xl flex-shrink-0">🚀</span>
+                    <div>
+                      <strong className="block text-blue-950 font-black">Hệ Thống Đã Nâng Cấp Bảo Mật Mới!</strong>
+                      <span>Bé và Ba Mẹ vui lòng tạo hồ sơ và cài đặt Mật mã 4 chữ số (PIN) để học tập và thi đua an toàn.</span>
+                    </div>
+                  </div>
+                )}
+
                 <div>
                   <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-1">
                     Tên bé học:
@@ -776,6 +823,32 @@ export default function AccountModal({
                   />
                 </div>
 
+                {/* Grade selection */}
+                <div>
+                  <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-1">
+                    Chọn lớp học của bé:
+                  </label>
+                  <div className="grid grid-cols-5 gap-1.5">
+                    {[1, 2, 3, 4, 5].map((g) => (
+                      <button
+                        key={g}
+                        type="button"
+                        onClick={() => {
+                          soundManager.playPop();
+                          setNewGrade(g);
+                        }}
+                        className={`py-2 rounded-xl text-xs font-black border-2 transition-all cursor-pointer ${
+                          newGrade === g
+                            ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
+                            : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                        }`}
+                      >
+                        Lớp {g}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* 4-digit PIN setup */}
                 <div>
                   <div className="flex items-center justify-between mb-1">
@@ -783,7 +856,7 @@ export default function AccountModal({
                       Mật mã 4 chữ số (Mã PIN bảo vệ):
                     </label>
                     <span className="text-[11px] font-black text-amber-700 bg-amber-100 px-2 py-0.5 rounded-md">
-                      Mặc định: 1234
+                      Bắt buộc 4 số
                     </span>
                   </div>
                   <div className="relative">
@@ -794,7 +867,7 @@ export default function AccountModal({
                         const val = e.target.value.replace(/\D/g, '').slice(0, 4);
                         setNewPin(val);
                       }}
-                      placeholder="1234"
+                      placeholder="Nhập 4 chữ số (VD: 1234)"
                       maxLength={4}
                       inputMode="numeric"
                       className="w-full pl-3.5 pr-10 py-2.5 bg-slate-50 border-2 border-slate-300 focus:border-amber-500 rounded-2xl font-black text-base tracking-widest text-slate-800 outline-none transition-colors font-mono"
@@ -844,25 +917,29 @@ export default function AccountModal({
                 </div>
 
                 <div className="flex items-center gap-2 pt-1">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      soundManager.playPop();
-                      setIsCreating(false);
-                    }}
-                    className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs sm:text-sm"
-                  >
-                    Hủy bỏ
-                  </button>
+                  {!isMandatory && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        soundManager.playPop();
+                        setIsCreating(false);
+                      }}
+                      className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs sm:text-sm cursor-pointer"
+                    >
+                      Hủy bỏ
+                    </button>
+                  )}
 
                   <button
                     type="submit"
-                    disabled={!newName.trim()}
-                    className={`flex-1 py-2.5 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-amber-950 font-black rounded-2xl text-xs sm:text-sm shadow-md btn-kid-3d ${
-                      !newName.trim() ? 'opacity-50 cursor-not-allowed' : ''
+                    disabled={!newName.trim() || newPin.replace(/\D/g, '').length !== 4}
+                    className={`${
+                      isMandatory ? 'w-full py-3.5 text-sm sm:text-base' : 'flex-1 py-2.5 text-xs sm:text-sm'
+                    } bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 hover:from-amber-500 hover:to-orange-500 text-amber-950 font-black rounded-2xl shadow-md btn-kid-3d cursor-pointer ${
+                      !newName.trim() || newPin.replace(/\D/g, '').length !== 4 ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
                   >
-                    Tạo Tài Khoản 🎉
+                    {isMandatory ? 'Tạo Tài Khoản & Bắt Đầu Học Ngay 🚀' : 'Tạo Tài Khoản 🎉'}
                   </button>
                 </div>
               </form>

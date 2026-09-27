@@ -13,6 +13,7 @@ export default function ParentPortal({
   currentAccount,
   onOpenAccountModal,
   onUpdateAccountPin,
+  onWipeAllAccounts,
   selectedGrade = 1,
   onSelectGrade,
   onOpenUpdateModal,
@@ -463,21 +464,38 @@ export default function ParentPortal({
         </div>
       </div>
 
-      {/* Reset Progress Option */}
-      <div className="flex justify-end pt-2">
+      {/* Reset & Wipe Options for Parents */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200">
+        <button
+          type="button"
+          onClick={() => {
+            if (
+              window.confirm(
+                '⚠️ XÁC NHẬN TỪ PHỤ HUYNH:\nBạn có chắc chắn muốn XÓA TOÀN BỘ tài khoản trên thiết bị này và thiết lập lại từ đầu không?\n\nToàn bộ dữ liệu sẽ được làm sạch để phụ huynh lập tài khoản mới kèm Mật mã 4 số.'
+              )
+            ) {
+              if (onWipeAllAccounts) onWipeAllAccounts();
+            }
+          }}
+          className="flex items-center gap-1.5 text-xs font-bold text-rose-500 hover:text-rose-700 transition-colors py-2 px-3 rounded-xl hover:bg-rose-50 cursor-pointer"
+        >
+          <span>🗑️</span>
+          <span>Xóa toàn bộ tài khoản máy này & Làm lại từ đầu</span>
+        </button>
+
         {!isConfirmingReset ? (
           <button
             type="button"
             onClick={() => setIsConfirmingReset(true)}
-            className="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-rose-600 transition-colors py-2 px-3 rounded-xl hover:bg-rose-50"
+            className="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-rose-600 transition-colors py-2 px-3 rounded-xl hover:bg-rose-50 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>Đặt lại tiến trình học tập</span>
+            <span>Đặt lại tiến trình học của bé này</span>
           </button>
         ) : (
           <div className="flex items-center gap-2 bg-rose-50 border border-rose-200 p-2 rounded-2xl animate-pop">
             <span className="text-xs font-bold text-rose-800">
-              Đặt lại toàn bộ sao và huy chương?
+              Đặt lại toàn bộ sao và huy chương của {currentAccount?.name}?
             </span>
             <button
               type="button"

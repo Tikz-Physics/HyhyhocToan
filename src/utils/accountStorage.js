@@ -3,16 +3,41 @@ const STORAGE_KEY_ACCOUNTS = 'hyhyhoctoan_accounts';
 const STORAGE_KEY_ACTIVE_ID = 'hyhyhoctoan_active_account_id';
 const LEGACY_KEY_ACCOUNTS = 'toan_lop1_accounts';
 const LEGACY_KEY_ACTIVE_ID = 'toan_lop1_current_account_id';
+const SYSTEM_RESET_KEY = 'hyhy_system_reset_v3_pin_mandatory_2026';
+
+export function wipeAllAccountsAndReset() {
+  try {
+    localStorage.removeItem(STORAGE_KEY_ACCOUNTS);
+    localStorage.removeItem(STORAGE_KEY_ACTIVE_ID);
+    localStorage.removeItem(LEGACY_KEY_ACCOUNTS);
+    localStorage.removeItem(LEGACY_KEY_ACTIVE_ID);
+    localStorage.removeItem('toan_lop1_stars');
+    localStorage.removeItem('toan_lop1_completed');
+    localStorage.removeItem('toan_lop1_medals');
+    localStorage.removeItem('hyhy_cloud_leaderboard_cache');
+    localStorage.setItem(SYSTEM_RESET_KEY, 'v3_pin_2026');
+  } catch (e) {
+    console.error('Lỗi khi xóa tài khoản:', e);
+  }
+}
 
 export function loadAccounts() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY_ACCOUNTS) || localStorage.getItem(LEGACY_KEY_ACCOUNTS);
+    // 1. Kiểm tra xem thiết bị đã được chuyển đổi sang cơ chế mới chưa
+    const isReset = localStorage.getItem(SYSTEM_RESET_KEY);
+    if (!isReset) {
+      // Xóa toàn bộ tài khoản cũ trên thiết bị này để yêu cầu lập tài khoản mới
+      wipeAllAccountsAndReset();
+      return [];
+    }
+
+    const raw = localStorage.getItem(STORAGE_KEY_ACCOUNTS);
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
         return parsed.map((acc) => ({
           ...acc,
-          pin: acc.pin || '1234',
+          pin: acc.pin ? String(acc.pin).slice(0, 4) : '1234',
         }));
       }
     }
@@ -20,41 +45,8 @@ export function loadAccounts() {
     console.error('Lỗi khi đọc tài khoản:', err);
   }
 
-  // Khôi phục từ dữ liệu cũ nếu có
-  let existingStars = 10;
-  try {
-    const s = localStorage.getItem('toan_lop1_stars');
-    if (s !== null) existingStars = Number(s);
-  } catch {}
-
-  let existingTasks = [];
-  try {
-    const t = localStorage.getItem('toan_lop1_completed');
-    if (t) existingTasks = JSON.parse(t);
-  } catch {}
-
-  let existingMedals = [];
-  try {
-    const m = localStorage.getItem('toan_lop1_medals');
-    if (m) existingMedals = JSON.parse(m);
-  } catch {}
-
-  const defaultAccount = {
-    id: 'default_child',
-    name: 'Bé Yêu 🎈',
-    avatar: '🦁',
-    pin: '1234',
-    stars: existingStars,
-    completedTasks: existingTasks,
-    userMedals: existingMedals,
-    unlockedPets: ['dino'],
-    activePet: 'dino',
-    redeemedRewards: [],
-    createdAt: Date.now(),
-  };
-
-  saveAccounts([defaultAccount]);
-  return [defaultAccount];
+  // Không tự ý tạo tài khoản ảo 'Bé Yêu' nữa, trả về mảng rỗng để yêu cầu người dùng lập tài khoản mới
+  return [];
 }
 
 export function loadActiveAccountId(accounts) {
@@ -66,7 +58,7 @@ export function loadActiveAccountId(accounts) {
   } catch (err) {
     console.error('Lỗi khi đọc active ID:', err);
   }
-  return accounts[0]?.id || 'default_child';
+  return accounts[0]?.id || null;
 }
 
 export function saveAccounts(accounts) {
