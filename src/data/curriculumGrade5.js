@@ -1,5 +1,5 @@
 // Dữ liệu chương trình Toán Lớp 5 chuẩn CTGDPT 2018
-// Bao phủ 8 Chủ đề kiến thức trọng tâm & Thử thách Tư duy Timo chuẩn Quốc tế
+// Đầy đủ 8 Chủ đề kiến thức trọng tâm & Thử thách Tư duy Timo chuẩn Quốc tế
 
 export const CURRICULUM_GRADE_5 = [
   {
@@ -26,7 +26,8 @@ export const CURRICULUM_GRADE_5 = [
           "Gồm tử số và mẫu số"
         ],
         "correctAnswer": "Gồm phần nguyên (85) và phần thập phân (24), ngăn cách bởi dấu phẩy",
-        "hint": "Mỗi số thập phân gồm hai phần: phần nguyên (đứng trước dấu phẩy) và phần thập phân (đứng sau dấu phẩy)."
+        "hint": "Mỗi số thập phân gồm hai phần: phần nguyên (đứng trước dấu phẩy) và phần thập phân (đứng sau dấu phẩy).",
+        "explanation": "Mỗi số thập phân gồm hai phần: phần nguyên (đứng trước dấu phẩy) và phần thập phân (đứng sau dấu phẩy). Vì vậy, kết quả đúng là Gồm phần nguyên (85) và phần thập phân (24), ngăn cách bởi dấu phẩy."
       },
       {
         "id": "g5_l1_2",
@@ -39,7 +40,8 @@ export const CURRICULUM_GRADE_5 = [
           "Hàng đơn vị"
         ],
         "correctAnswer": "Hàng phần trăm",
-        "hint": "Sau dấu phẩy: chữ số đầu tiên (4) là hàng phần mười, chữ số thứ hai (5) là hàng phần trăm, chữ số thứ ba (8) là hàng phần nghìn."
+        "hint": "Sau dấu phẩy: chữ số đầu tiên (4) là hàng phần mười, chữ số thứ hai (5) là hàng phần trăm, chữ số thứ ba (8) là hàng phần nghìn.",
+        "explanation": "Sau dấu phẩy: chữ số đầu tiên (4) là hàng phần mười, chữ số thứ hai (5) là hàng phần trăm, chữ số thứ ba (8) là hàng phần nghìn. Vì vậy, kết quả đúng là Hàng phần trăm."
       },
       {
         "id": "g5_l1_3",
@@ -52,7 +54,8 @@ export const CURRICULUM_GRADE_5 = [
           "75,0"
         ],
         "correctAnswer": "0,75",
-        "hint": "75 chia cho 100 ta lùi dấu phẩy sang trái 2 chữ số được 0,75."
+        "hint": "75 chia cho 100 ta lùi dấu phẩy sang trái 2 chữ số được 0,75.",
+        "explanation": "75 chia cho 100 ta lùi dấu phẩy sang trái 2 chữ số được 0,75. Vì vậy, kết quả đúng là 0,75."
       },
       {
         "id": "g5_l1_4",
@@ -65,7 +68,8 @@ export const CURRICULUM_GRADE_5 = [
           "3,04"
         ],
         "correctAnswer": "3,4",
-        "hint": "Phần nguyên là 3, 4/10 là 4 phần mười, viết là 3,4."
+        "hint": "Phần nguyên là 3, 4/10 là 4 phần mười, viết là 3,4.",
+        "explanation": "Phần nguyên là 3, 4/10 là 4 phần mười, viết là 3,4. Vì vậy, kết quả đúng là 3,4."
       },
       {
         "id": "g5_l1_5",
@@ -77,7 +81,8 @@ export const CURRICULUM_GRADE_5 = [
           "="
         ],
         "correctAnswer": ">",
-        "hint": "Phần nguyên bằng nhau (4). Hàng phần mười bằng nhau (5). So sánh hàng phần trăm: 2 > 1 nên 4,52 > 4,519."
+        "hint": "Phần nguyên bằng nhau (4). Hàng phần mười bằng nhau (5). So sánh hàng phần trăm: 2 > 1 nên 4,52 > 4,519.",
+        "explanation": "Phần nguyên bằng nhau (4). Hàng phần mười bằng nhau (5). So sánh hàng phần trăm: 2 > 1 nên 4,52 > 4,519. Vì vậy, kết quả đúng là >."
       },
       {
         "id": "g5_l1_6",
@@ -90,7 +95,8 @@ export const CURRICULUM_GRADE_5 = [
           "Trở thành số tự nhiên"
         ],
         "correctAnswer": "Giá trị của nó không thay đổi",
-        "hint": "Ví dụ: 0,5 = 0,50 = 0,500. Viết thêm hoặc bỏ bớt chữ số 0 ở tận cùng bên phải phần thập phân thì giá trị không đổi."
+        "hint": "Ví dụ: 0,5 = 0,50 = 0,500. Viết thêm hoặc bỏ bớt chữ số 0 ở tận cùng bên phải phần thập phân thì giá trị không đổi.",
+        "explanation": "Ví dụ: 0,5 = 0,50 = 0,500. Viết thêm hoặc bỏ bớt chữ số 0 ở tận cùng bên phải phần thập phân thì giá trị không đổi. Do đó, đáp án chính xác là Giá trị của nó không thay đổi."
       },
       {
         "id": "g5_l1_7",
@@ -103,7 +109,8 @@ export const CURRICULUM_GRADE_5 = [
           "0,45 ; 0,25 ; 0,3 ; 1,2"
         ],
         "correctAnswer": "0,25 ; 0,3 ; 0,45 ; 1,2",
-        "hint": "0,25 < 0,30 < 0,45 < 1,20."
+        "hint": "0,25 < 0,30 < 0,45 < 1,20.",
+        "explanation": "0,25 < 0,30 < 0,45 < 1,20. Vì vậy, kết quả đúng là 0,25 ; 0,3 ; 0,45 ; 1,2."
       },
       {
         "id": "g5_l1_8",
@@ -116,7 +123,8 @@ export const CURRICULUM_GRADE_5 = [
           "0,56 m"
         ],
         "correctAnswer": "5,6 m",
-        "hint": "6 dm = 6/10 m = 0,6 m. Vậy 5 m 6 dm = 5,6 m."
+        "hint": "6 dm = 6/10 m = 0,6 m. Vậy 5 m 6 dm = 5,6 m.",
+        "explanation": "6 dm = 6/10 m = 0,6 m. Vậy 5 m 6 dm = 5,6 m. Do đó, đáp án chính xác là 5,6 m."
       }
     ],
     "timoChallenges": [
@@ -131,7 +139,8 @@ export const CURRICULUM_GRADE_5 = [
           "Vô số"
         ],
         "correctAnswer": "6 số",
-        "hint": "Các số có 1 chữ số ở phần thập phân: 3,6 ; 3,7 ; 3,8 ; 3,9 ; 4,0 ; 4,1. Có tất cả 6 số."
+        "hint": "Các số có 1 chữ số ở phần thập phân: 3,6 ; 3,7 ; 3,8 ; 3,9 ; 4,0 ; 4,1. Có tất cả 6 số.",
+        "explanation": "Các số có 1 chữ số ở phần thập phân: 3,6 ; 3,7 ; 3,8 ; 3,9 ; 4,0 ; 4,1. Có tất cả 6 số. Vì vậy, kết quả đúng là 6 số."
       },
       {
         "id": "g5_t1_2",
@@ -144,7 +153,8 @@ export const CURRICULUM_GRADE_5 = [
           "Không có"
         ],
         "correctAnswer": "x = 3",
-        "hint": "Số tự nhiên duy nhất nằm giữa 2,75 và 3,99 là số 3."
+        "hint": "Số tự nhiên duy nhất nằm giữa 2,75 và 3,99 là số 3.",
+        "explanation": "Số tự nhiên duy nhất nằm giữa 2,75 và 3,99 là số 3. Vì vậy, kết quả đúng là x = 3."
       },
       {
         "id": "g5_t1_3",
@@ -157,7 +167,8 @@ export const CURRICULUM_GRADE_5 = [
           "Không đổi"
         ],
         "correctAnswer": "Tăng lên gấp 10 lần",
-        "hint": "Chuyển dấu phẩy sang phải 1 chữ số tương đương nhân số đó với 10, nên số đó tăng lên 10 lần."
+        "hint": "Chuyển dấu phẩy sang phải 1 chữ số tương đương nhân số đó với 10, nên số đó tăng lên 10 lần.",
+        "explanation": "Chuyển dấu phẩy sang phải 1 chữ số tương đương nhân số đó với 10, nên số đó tăng lên 10 lần. Vì vậy, kết quả đúng là Tăng lên gấp 10 lần."
       }
     ]
   },
@@ -185,7 +196,8 @@ export const CURRICULUM_GRADE_5 = [
           "88,28"
         ],
         "correctAnswer": "78,28",
-        "hint": "Đặt tính thẳng cột các hàng và dấu phẩy: 45,78 + 32,50 = 78,28."
+        "hint": "Đặt tính thẳng cột các hàng và dấu phẩy: 45,78 + 32,50 = 78,28.",
+        "explanation": "Đặt tính thẳng cột các hàng và dấu phẩy: 45,78 + 32,50 = 78,28. Do đó, đáp án chính xác là 78,28."
       },
       {
         "id": "g5_l2_2",
@@ -198,7 +210,8 @@ export const CURRICULUM_GRADE_5 = [
           "64,73"
         ],
         "correctAnswer": "54,73",
-        "hint": "Viết thêm chữ số 0: 80,40 - 25,67 = 54,73."
+        "hint": "Viết thêm chữ số 0: 80,40 - 25,67 = 54,73.",
+        "explanation": "Viết thêm chữ số 0: 80,40 - 25,67 = 54,73. Do đó, đáp án chính xác là 54,73."
       },
       {
         "id": "g5_l2_3",
@@ -211,7 +224,8 @@ export const CURRICULUM_GRADE_5 = [
           "6,2"
         ],
         "correctAnswer": "62",
-        "hint": "124 x 5 = 620, lùi 1 chữ số thập phân được 62,0 hay 62."
+        "hint": "124 x 5 = 620, lùi 1 chữ số thập phân được 62,0 hay 62.",
+        "explanation": "124 x 5 = 620, lùi 1 chữ số thập phân được 62,0 hay 62. Do đó, đáp án chính xác là 62."
       },
       {
         "id": "g5_l2_4",
@@ -224,7 +238,8 @@ export const CURRICULUM_GRADE_5 = [
           "0,01"
         ],
         "correctAnswer": "1",
-        "hint": "25 x 4 = 100, cả hai thừa số có tổng cộng 2 chữ số thập phân nên lùi 2 hàng: 1,00 = 1."
+        "hint": "25 x 4 = 100, cả hai thừa số có tổng cộng 2 chữ số thập phân nên lùi 2 hàng: 1,00 = 1.",
+        "explanation": "25 x 4 = 100, cả hai thừa số có tổng cộng 2 chữ số thập phân nên lùi 2 hàng: 1,00 = 1. Do đó, đáp án chính xác là 1."
       },
       {
         "id": "g5_l2_5",
@@ -237,7 +252,8 @@ export const CURRICULUM_GRADE_5 = [
           "3,4"
         ],
         "correctAnswer": "3,6",
-        "hint": "21 : 6 = 3 (dư 3), đặt dấu phẩy vào thương, hạ 6 được 36 : 6 = 6. Kết quả là 3,6."
+        "hint": "21 : 6 = 3 (dư 3), đặt dấu phẩy vào thương, hạ 6 được 36 : 6 = 6. Kết quả là 3,6.",
+        "explanation": "21 : 6 = 3 (dư 3), đặt dấu phẩy vào thương, hạ 6 được 36 : 6 = 6. Kết quả là 3,6. Do đó, đáp án chính xác là 3,6."
       },
       {
         "id": "g5_l2_6",
@@ -250,7 +266,8 @@ export const CURRICULUM_GRADE_5 = [
           "0,3"
         ],
         "correctAnswer": "30",
-        "hint": "Bỏ dấu phẩy ở 1,5 và thêm chữ số 0 vào 45: 450 : 15 = 30."
+        "hint": "Bỏ dấu phẩy ở 1,5 và thêm chữ số 0 vào 45: 450 : 15 = 30.",
+        "explanation": "Bỏ dấu phẩy ở 1,5 và thêm chữ số 0 vào 45: 450 : 15 = 30. Do đó, đáp án chính xác là 30."
       },
       {
         "id": "g5_l2_7",
@@ -263,7 +280,8 @@ export const CURRICULUM_GRADE_5 = [
           "45,8"
         ],
         "correctAnswer": "4,58",
-        "hint": "Nhân một số với 0,1 bằng chia số đó cho 10, chỉ việc dịch dấu phẩy sang trái 1 chữ số: 4,58."
+        "hint": "Nhân một số với 0,1 bằng chia số đó cho 10, chỉ việc dịch dấu phẩy sang trái 1 chữ số: 4,58.",
+        "explanation": "Nhân một số với 0,1 bằng chia số đó cho 10, chỉ việc dịch dấu phẩy sang trái 1 chữ số: 4,58. Vì vậy, kết quả đúng là 4,58."
       },
       {
         "id": "g5_l2_8",
@@ -276,7 +294,8 @@ export const CURRICULUM_GRADE_5 = [
           "37,5"
         ],
         "correctAnswer": "37",
-        "hint": "Đặt 3,7 làm thừa số chung: 3,7 x (6,5 + 3,5) = 3,7 x 10 = 37."
+        "hint": "Đặt 3,7 làm thừa số chung: 3,7 x (6,5 + 3,5) = 3,7 x 10 = 37.",
+        "explanation": "Đặt 3,7 làm thừa số chung: 3,7 x (6,5 + 3,5) = 3,7 x 10 = 37. Do đó, đáp án chính xác là 37."
       }
     ],
     "timoChallenges": [
@@ -291,7 +310,8 @@ export const CURRICULUM_GRADE_5 = [
           "3,15"
         ],
         "correctAnswer": "3,5",
-        "hint": "Số mới gấp 10 lần số cũ. Hiệu số phần: 10 - 1 = 9 phần. Số ban đầu: 31,5 : 9 = 3,5."
+        "hint": "Số mới gấp 10 lần số cũ. Hiệu số phần: 10 - 1 = 9 phần. Số ban đầu: 31,5 : 9 = 3,5.",
+        "explanation": "Số mới gấp 10 lần số cũ. Hiệu số phần: 10 - 1 = 9 phần. Số ban đầu: 31,5 : 9 = 3,5. Do đó, đáp án chính xác là 3,5."
       },
       {
         "id": "g5_t2_2",
@@ -304,7 +324,8 @@ export const CURRICULUM_GRADE_5 = [
           "15"
         ],
         "correctAnswer": "10",
-        "hint": "Số thập phân bị tăng gấp 10 lần. Hiệu: 235 - 32,5 = 202,5 ứng với 9 lần số thập phân. Số thập phân = 202,5 : 9 = 22,5. Số tự nhiên: 32,5 - 22,5 = 10."
+        "hint": "Số thập phân bị tăng gấp 10 lần. Hiệu: 235 - 32,5 = 202,5 ứng với 9 lần số thập phân. Số thập phân = 202,5 : 9 = 22,5. Số tự nhiên: 32,5 - 22,5 = 10.",
+        "explanation": "Số thập phân bị tăng gấp 10 lần. Hiệu: 235 - 32,5 = 202,5 ứng với 9 lần số thập phân. Số thập phân = 202,5 : 9 = 22,5. Số tự nhiên: 32,5 - 22,5 = 10. Do đó, đáp án chính xác là 10."
       },
       {
         "id": "g5_t2_3",
@@ -317,7 +338,8 @@ export const CURRICULUM_GRADE_5 = [
           "4,8"
         ],
         "correctAnswer": "4,5",
-        "hint": "(0,1 + 0,9) + (0,2 + 0,8) + (0,3 + 0,7) + (0,4 + 0,6) + 0,5 = 1 x 4 + 0,5 = 4,5."
+        "hint": "(0,1 + 0,9) + (0,2 + 0,8) + (0,3 + 0,7) + (0,4 + 0,6) + 0,5 = 1 x 4 + 0,5 = 4,5.",
+        "explanation": "(0,1 + 0,9) + (0,2 + 0,8) + (0,3 + 0,7) + (0,4 + 0,6) + 0,5 = 1 x 4 + 0,5 = 4,5. Do đó, đáp án chính xác là 4,5."
       }
     ]
   },
@@ -345,7 +367,8 @@ export const CURRICULUM_GRADE_5 = [
           "25%"
         ],
         "correctAnswer": "75%",
-        "hint": "3 : 4 = 0,75 = 75%."
+        "hint": "3 : 4 = 0,75 = 75%.",
+        "explanation": "3 : 4 = 0,75 = 75%. Do đó, đáp án chính xác là 75%."
       },
       {
         "id": "g5_l3_2",
@@ -358,7 +381,8 @@ export const CURRICULUM_GRADE_5 = [
           "50%"
         ],
         "correctAnswer": "60%",
-        "hint": "24 : 40 = 0,6 = 60%."
+        "hint": "24 : 40 = 0,6 = 60%.",
+        "explanation": "24 : 40 = 0,6 = 60%. Do đó, đáp án chính xác là 60%."
       },
       {
         "id": "g5_l3_3",
@@ -371,7 +395,8 @@ export const CURRICULUM_GRADE_5 = [
           "25 kg"
         ],
         "correctAnswer": "50 kg",
-        "hint": "Lấy 250 x 20 : 100 = 50 kg."
+        "hint": "Lấy 250 x 20 : 100 = 50 kg.",
+        "explanation": "Lấy 250 x 20 : 100 = 50 kg. Do đó, đáp án chính xác là 50 kg."
       },
       {
         "id": "g5_l3_4",
@@ -384,7 +409,8 @@ export const CURRICULUM_GRADE_5 = [
           "200 m2"
         ],
         "correctAnswer": "250 m2",
-        "hint": "Diện tích cả mảnh đất: 75 : 30 x 100 = 250 m2."
+        "hint": "Diện tích cả mảnh đất: 75 : 30 x 100 = 250 m2.",
+        "explanation": "Diện tích cả mảnh đất: 75 : 30 x 100 = 250 m2. Do đó, đáp án chính xác là 250 m2."
       },
       {
         "id": "g5_l3_5",
@@ -397,7 +423,8 @@ export const CURRICULUM_GRADE_5 = [
           "70 000 đồng"
         ],
         "correctAnswer": "60 000 đồng",
-        "hint": "Số tiền giảm: 400 000 x 15 : 100 = 60 000 đồng."
+        "hint": "Số tiền giảm: 400 000 x 15 : 100 = 60 000 đồng.",
+        "explanation": "Số tiền giảm: 400 000 x 15 : 100 = 60 000 đồng. Do đó, đáp án chính xác là 60 000 đồng."
       },
       {
         "id": "g5_l3_6",
@@ -410,7 +437,8 @@ export const CURRICULUM_GRADE_5 = [
           "320 000 đồng"
         ],
         "correctAnswer": "340 000 đồng",
-        "hint": "400 000 - 60 000 = 340 000 đồng."
+        "hint": "400 000 - 60 000 = 340 000 đồng.",
+        "explanation": "400 000 - 60 000 = 340 000 đồng. Do đó, đáp án chính xác là 340 000 đồng."
       },
       {
         "id": "g5_l3_7",
@@ -423,7 +451,8 @@ export const CURRICULUM_GRADE_5 = [
           "2 500 000 đồng"
         ],
         "correctAnswer": "250 000 đồng",
-        "hint": "50 000 000 x 0,5 : 100 = 250 000 đồng."
+        "hint": "50 000 000 x 0,5 : 100 = 250 000 đồng.",
+        "explanation": "50 000 000 x 0,5 : 100 = 250 000 đồng. Do đó, đáp án chính xác là 250 000 đồng."
       },
       {
         "id": "g5_l3_8",
@@ -436,7 +465,8 @@ export const CURRICULUM_GRADE_5 = [
           "120%"
         ],
         "correctAnswer": "110%",
-        "hint": "550 : 500 = 1,1 = 110% (vượt mức 10%)."
+        "hint": "550 : 500 = 1,1 = 110% (vượt mức 10%).",
+        "explanation": "550 : 500 = 1,1 = 110% (vượt mức 10%). Do đó, đáp án chính xác là 110%."
       }
     ],
     "timoChallenges": [
@@ -451,7 +481,8 @@ export const CURRICULUM_GRADE_5 = [
           "11%"
         ],
         "correctAnswer": "21%",
-        "hint": "Cạnh mới = 110% = 1,1. Diện tích mới = 1,1 x 1,1 = 1,21 = 121%. Tăng thêm: 121% - 100% = 21%."
+        "hint": "Cạnh mới = 110% = 1,1. Diện tích mới = 1,1 x 1,1 = 1,21 = 121%. Tăng thêm: 121% - 100% = 21%.",
+        "explanation": "Cạnh mới = 110% = 1,1. Diện tích mới = 1,1 x 1,1 = 1,21 = 121%. Tăng thêm: 121% - 100% = 21%. Do đó, đáp án chính xác là 21%."
       },
       {
         "id": "g5_t3_2",
@@ -464,7 +495,8 @@ export const CURRICULUM_GRADE_5 = [
           "Tăng 2%"
         ],
         "correctAnswer": "Giảm 1%",
-        "hint": "Giá sau giảm: 100% - 10% = 90%. Giá sau tăng: 90% x 110% = 99%. So với ban đầu bị giảm: 100% - 99% = 1%."
+        "hint": "Giá sau giảm: 100% - 10% = 90%. Giá sau tăng: 90% x 110% = 99%. So với ban đầu bị giảm: 100% - 99% = 1%.",
+        "explanation": "Giá sau giảm: 100% - 10% = 90%. Giá sau tăng: 90% x 110% = 99%. So với ban đầu bị giảm: 100% - 99% = 1%. Do đó, đáp án chính xác là Giảm 1%."
       },
       {
         "id": "g5_t3_3",
@@ -477,7 +509,8 @@ export const CURRICULUM_GRADE_5 = [
           "4%"
         ],
         "correctAnswer": "5%",
-        "hint": "10 : 200 = 0,05 = 5%."
+        "hint": "10 : 200 = 0,05 = 5%.",
+        "explanation": "10 : 200 = 0,05 = 5%. Do đó, đáp án chính xác là 5%."
       }
     ]
   },
@@ -505,7 +538,8 @@ export const CURRICULUM_GRADE_5 = [
           "Lấy 3 cạnh cộng lại"
         ],
         "correctAnswer": "Lấy độ dài đáy nhân với chiều cao (cùng đơn vị đo) rồi chia cho 2",
-        "hint": "Công thức: S = (a x h) : 2."
+        "hint": "Công thức: S = (a x h) : 2.",
+        "explanation": "Công thức: S = (a x h) : 2. Do đó, đáp án chính xác là Lấy độ dài đáy nhân với chiều cao (cùng đơn vị đo) rồi chia cho 2."
       },
       {
         "id": "g5_l4_2",
@@ -518,7 +552,8 @@ export const CURRICULUM_GRADE_5 = [
           "22 cm2"
         ],
         "correctAnswer": "56 cm2",
-        "hint": "S = (14 x 8) : 2 = 112 : 2 = 56 cm2."
+        "hint": "S = (14 x 8) : 2 = 112 : 2 = 56 cm2.",
+        "explanation": "S = (14 x 8) : 2 = 112 : 2 = 56 cm2. Do đó, đáp án chính xác là 56 cm2."
       },
       {
         "id": "g5_l4_3",
@@ -531,7 +566,8 @@ export const CURRICULUM_GRADE_5 = [
           "28 cm2"
         ],
         "correctAnswer": "24 cm2",
-        "hint": "Diện tích tam giác vuông bằng tích hai cạnh góc vuông chia cho 2: (6 x 8) : 2 = 24 cm2."
+        "hint": "Diện tích tam giác vuông bằng tích hai cạnh góc vuông chia cho 2: (6 x 8) : 2 = 24 cm2.",
+        "explanation": "Diện tích tam giác vuông bằng tích hai cạnh góc vuông chia cho 2: (6 x 8) : 2 = 24 cm2. Do đó, đáp án chính xác là 24 cm2."
       },
       {
         "id": "g5_l4_4",
@@ -544,7 +580,8 @@ export const CURRICULUM_GRADE_5 = [
           "Có 4 góc vuông"
         ],
         "correctAnswer": "Có một cặp cạnh đối diện song song",
-        "hint": "Hai cạnh song song của hình thang được gọi là hai đáy (đáy lớn và đáy bé)."
+        "hint": "Hai cạnh song song của hình thang được gọi là hai đáy (đáy lớn và đáy bé).",
+        "explanation": "Hai cạnh song song của hình thang được gọi là hai đáy (đáy lớn và đáy bé). Vì vậy, kết quả đúng là Có một cặp cạnh đối diện song song."
       },
       {
         "id": "g5_l4_5",
@@ -557,7 +594,8 @@ export const CURRICULUM_GRADE_5 = [
           "Đáy bé cộng đáy lớn rồi nhân chiều cao"
         ],
         "correctAnswer": "Tổng độ dài hai đáy nhân với chiều cao (cùng đơn vị) rồi chia cho 2",
-        "hint": "Công thức: S = [(a + b) x h] : 2."
+        "hint": "Công thức: S = [(a + b) x h] : 2.",
+        "explanation": "Công thức: S = [(a + b) x h] : 2. Do đó, đáp án chính xác là Tổng độ dài hai đáy nhân với chiều cao (cùng đơn vị) rồi chia cho 2."
       },
       {
         "id": "g5_l4_6",
@@ -570,7 +608,8 @@ export const CURRICULUM_GRADE_5 = [
           "240 m2"
         ],
         "correctAnswer": "160 m2",
-        "hint": "S = [(20 + 12) x 10] : 2 = (32 x 10) : 2 = 160 m2."
+        "hint": "S = [(20 + 12) x 10] : 2 = (32 x 10) : 2 = 160 m2.",
+        "explanation": "S = [(20 + 12) x 10] : 2 = (32 x 10) : 2 = 160 m2. Do đó, đáp án chính xác là 160 m2."
       },
       {
         "id": "g5_l4_7",
@@ -583,7 +622,8 @@ export const CURRICULUM_GRADE_5 = [
           "8 cm"
         ],
         "correctAnswer": "9 cm",
-        "hint": "h = (S x 2) : a = (45 x 2) : 10 = 90 : 10 = 9 cm."
+        "hint": "h = (S x 2) : a = (45 x 2) : 10 = 90 : 10 = 9 cm.",
+        "explanation": "h = (S x 2) : a = (45 x 2) : 10 = 90 : 10 = 9 cm. Do đó, đáp án chính xác là 9 cm."
       },
       {
         "id": "g5_l4_8",
@@ -596,7 +636,8 @@ export const CURRICULUM_GRADE_5 = [
           "Hình bình hành"
         ],
         "correctAnswer": "Hình thang vuông",
-        "hint": "Cạnh bên vuông góc với hai đáy chính là chiều cao của hình thang vuông."
+        "hint": "Cạnh bên vuông góc với hai đáy chính là chiều cao của hình thang vuông.",
+        "explanation": "Cạnh bên vuông góc với hai đáy chính là chiều cao của hình thang vuông. Vì vậy, kết quả đúng là Hình thang vuông."
       }
     ],
     "timoChallenges": [
@@ -611,7 +652,8 @@ export const CURRICULUM_GRADE_5 = [
           "Bằng nhau"
         ],
         "correctAnswer": "3 lần",
-        "hint": "Vì diện tích tỉ lệ thuận với độ dài đáy khi cùng chiều cao nên đáy gấp 3 lần thì diện tích cũng gấp 3 lần."
+        "hint": "Vì diện tích tỉ lệ thuận với độ dài đáy khi cùng chiều cao nên đáy gấp 3 lần thì diện tích cũng gấp 3 lần.",
+        "explanation": "Vì diện tích tỉ lệ thuận với độ dài đáy khi cùng chiều cao nên đáy gấp 3 lần thì diện tích cũng gấp 3 lần. Vì vậy, kết quả đúng là 3 lần."
       },
       {
         "id": "g5_t4_2",
@@ -624,7 +666,8 @@ export const CURRICULUM_GRADE_5 = [
           "120 cm2"
         ],
         "correctAnswer": "60 cm2",
-        "hint": "Chiều cao của tam giác: h = (20 x 2) : 4 = 10 cm. Diện tích ban đầu: (12 x 10) : 2 = 60 cm2."
+        "hint": "Chiều cao của tam giác: h = (20 x 2) : 4 = 10 cm. Diện tích ban đầu: (12 x 10) : 2 = 60 cm2.",
+        "explanation": "Chiều cao của tam giác: h = (20 x 2) : 4 = 10 cm. Diện tích ban đầu: (12 x 10) : 2 = 60 cm2. Do đó, đáp án chính xác là 60 cm2."
       },
       {
         "id": "g5_t4_3",
@@ -637,7 +680,8 @@ export const CURRICULUM_GRADE_5 = [
           "16 cm2"
         ],
         "correctAnswer": "12 cm2",
-        "hint": "Chiều cao hình thang: h = (48 x 2) : (6 + 10) = 96 : 16 = 6 cm. Đáy của hình tam giác là: 10 - 6 = 4 cm. Diện tích tam giác: (4 x 6) : 2 = 12 cm2."
+        "hint": "Chiều cao hình thang: h = (48 x 2) : (6 + 10) = 96 : 16 = 6 cm. Đáy của hình tam giác là: 10 - 6 = 4 cm. Diện tích tam giác: (4 x 6) : 2 = 12 cm2.",
+        "explanation": "Chiều cao hình thang: h = (48 x 2) : (6 + 10) = 96 : 16 = 6 cm. Đáy của hình tam giác là: 10 - 6 = 4 cm. Diện tích tam giác: (4 x 6) : 2 = 12 cm2. Do đó, đáp án chính xác là 12 cm2."
       }
     ]
   },
@@ -665,7 +709,8 @@ export const CURRICULUM_GRADE_5 = [
           "C = (r + 2) x 3,14"
         ],
         "correctAnswer": "C = r x 2 x 3,14",
-        "hint": "Chu vi C = d x 3,14 hoặc C = r x 2 x 3,14 (với số pi xấp xỉ 3,14)."
+        "hint": "Chu vi C = d x 3,14 hoặc C = r x 2 x 3,14 (với số pi xấp xỉ 3,14).",
+        "explanation": "Chu vi C = d x 3,14 hoặc C = r x 2 x 3,14 (với số pi xấp xỉ 3,14). Do đó, đáp án chính xác là C = r x 2 x 3,14."
       },
       {
         "id": "g5_l5_2",
@@ -678,7 +723,8 @@ export const CURRICULUM_GRADE_5 = [
           "15,7 cm"
         ],
         "correctAnswer": "31,4 cm",
-        "hint": "C = 10 x 3,14 = 31,4 cm."
+        "hint": "C = 10 x 3,14 = 31,4 cm.",
+        "explanation": "C = 10 x 3,14 = 31,4 cm. Do đó, đáp án chính xác là 31,4 cm."
       },
       {
         "id": "g5_l5_3",
@@ -691,7 +737,8 @@ export const CURRICULUM_GRADE_5 = [
           "S = r x r x 2"
         ],
         "correctAnswer": "S = r x r x 3,14",
-        "hint": "Diện tích bằng bán kính nhân với bán kính rồi nhân với 3,14: S = r x r x 3,14."
+        "hint": "Diện tích bằng bán kính nhân với bán kính rồi nhân với 3,14: S = r x r x 3,14.",
+        "explanation": "Diện tích bằng bán kính nhân với bán kính rồi nhân với 3,14: S = r x r x 3,14. Do đó, đáp án chính xác là S = r x r x 3,14."
       },
       {
         "id": "g5_l5_4",
@@ -704,7 +751,8 @@ export const CURRICULUM_GRADE_5 = [
           "16 cm2"
         ],
         "correctAnswer": "12,56 cm2",
-        "hint": "S = 2 x 2 x 3,14 = 4 x 3,14 = 12,56 cm2."
+        "hint": "S = 2 x 2 x 3,14 = 4 x 3,14 = 12,56 cm2.",
+        "explanation": "S = 2 x 2 x 3,14 = 4 x 3,14 = 12,56 cm2. Do đó, đáp án chính xác là 12,56 cm2."
       },
       {
         "id": "g5_l5_5",
@@ -717,7 +765,8 @@ export const CURRICULUM_GRADE_5 = [
           "2,5 m"
         ],
         "correctAnswer": "2,041 m",
-        "hint": "Khi bánh xe lăn 1 vòng, quãng đường đi được chính bằng chu vi bánh xe: C = 0,65 x 3,14 = 2,041 m."
+        "hint": "Khi bánh xe lăn 1 vòng, quãng đường đi được chính bằng chu vi bánh xe: C = 0,65 x 3,14 = 2,041 m.",
+        "explanation": "Khi bánh xe lăn 1 vòng, quãng đường đi được chính bằng chu vi bánh xe: C = 0,65 x 3,14 = 2,041 m. Do đó, đáp án chính xác là 2,041 m."
       },
       {
         "id": "g5_l5_6",
@@ -730,7 +779,8 @@ export const CURRICULUM_GRADE_5 = [
           "2 cm"
         ],
         "correctAnswer": "3 cm",
-        "hint": "r = C : 2 : 3,14 = 18,84 : 6,28 = 3 cm."
+        "hint": "r = C : 2 : 3,14 = 18,84 : 6,28 = 3 cm.",
+        "explanation": "r = C : 2 : 3,14 = 18,84 : 6,28 = 3 cm. Do đó, đáp án chính xác là 3 cm."
       },
       {
         "id": "g5_l5_7",
@@ -743,7 +793,8 @@ export const CURRICULUM_GRADE_5 = [
           "6 lần"
         ],
         "correctAnswer": "4 lần",
-        "hint": "S = r x r x 3,14. Khi r tăng 2 lần: S_mới = 2r x 2r x 3,14 = 4 x S_cũ. Vậy diện tích tăng 4 lần."
+        "hint": "S = r x r x 3,14. Khi r tăng 2 lần: S_mới = 2r x 2r x 3,14 = 4 x S_cũ. Vậy diện tích tăng 4 lần.",
+        "explanation": "S = r x r x 3,14. Khi r tăng 2 lần: S_mới = 2r x 2r x 3,14 = 4 x S_cũ. Vậy diện tích tăng 4 lần. Do đó, đáp án chính xác là 4 lần."
       },
       {
         "id": "g5_l5_8",
@@ -756,7 +807,8 @@ export const CURRICULUM_GRADE_5 = [
           "25 cm2"
         ],
         "correctAnswer": "30 cm2",
-        "hint": "Lấy diện tích hình tròn to trừ diện tích hình tròn bé: 50 - 20 = 30 cm2."
+        "hint": "Lấy diện tích hình tròn to trừ diện tích hình tròn bé: 50 - 20 = 30 cm2.",
+        "explanation": "Lấy diện tích hình tròn to trừ diện tích hình tròn bé: 50 - 20 = 30 cm2. Do đó, đáp án chính xác là 30 cm2."
       }
     ],
     "timoChallenges": [
@@ -771,7 +823,8 @@ export const CURRICULUM_GRADE_5 = [
           "25 cm2"
         ],
         "correctAnswer": "21,5 cm2",
-        "hint": "Diện tích hình vuông: 10 x 10 = 100 cm2. Bán kính hình tròn: 10 : 2 = 5 cm. Diện tích hình tròn: 5 x 5 x 3,14 = 78,5 cm2. Phần ngoài: 100 - 78,5 = 21,5 cm2."
+        "hint": "Diện tích hình vuông: 10 x 10 = 100 cm2. Bán kính hình tròn: 10 : 2 = 5 cm. Diện tích hình tròn: 5 x 5 x 3,14 = 78,5 cm2. Phần ngoài: 100 - 78,5 = 21,5 cm2.",
+        "explanation": "Diện tích hình vuông: 10 x 10 = 100 cm2. Bán kính hình tròn: 10 : 2 = 5 cm. Diện tích hình tròn: 5 x 5 x 3,14 = 78,5 cm2. Phần ngoài: 100 - 78,5 = 21,5 cm2. Do đó, đáp án chính xác là 21,5 cm2."
       },
       {
         "id": "g5_t5_2",
@@ -784,7 +837,8 @@ export const CURRICULUM_GRADE_5 = [
           "125 m"
         ],
         "correctAnswer": "157 m",
-        "hint": "Chu vi bánh xe: 0,25 x 2 x 3,14 = 1,57 m. Lăn 100 vòng: 1,57 x 100 = 157 m."
+        "hint": "Chu vi bánh xe: 0,25 x 2 x 3,14 = 1,57 m. Lăn 100 vòng: 1,57 x 100 = 157 m.",
+        "explanation": "Chu vi bánh xe: 0,25 x 2 x 3,14 = 1,57 m. Lăn 100 vòng: 1,57 x 100 = 157 m. Do đó, đáp án chính xác là 157 m."
       },
       {
         "id": "g5_t5_3",
@@ -797,7 +851,8 @@ export const CURRICULUM_GRADE_5 = [
           "4,5 lần"
         ],
         "correctAnswer": "3 lần",
-        "hint": "Diện tích gấp 9 lần => Bán kính gấp: căn bậc hai của 9 = 3 lần. Chu vi tỉ lệ thuận với bán kính nên cũng gấp 3 lần."
+        "hint": "Diện tích gấp 9 lần => Bán kính gấp: căn bậc hai của 9 = 3 lần. Chu vi tỉ lệ thuận với bán kính nên cũng gấp 3 lần.",
+        "explanation": "Diện tích gấp 9 lần => Bán kính gấp: căn bậc hai của 9 = 3 lần. Chu vi tỉ lệ thuận với bán kính nên cũng gấp 3 lần. Do đó, đáp án chính xác là 3 lần."
       }
     ]
   },
@@ -825,7 +880,8 @@ export const CURRICULUM_GRADE_5 = [
           "1000 lít"
         ],
         "correctAnswer": "1 lít",
-        "hint": "1 dm3 chính bằng đúng 1 lít nước (1 dm3 = 1 l = 1000 cm3)."
+        "hint": "1 dm3 chính bằng đúng 1 lít nước (1 dm3 = 1 l = 1000 cm3).",
+        "explanation": "1 dm3 chính bằng đúng 1 lít nước (1 dm3 = 1 l = 1000 cm3). Do đó, đáp án chính xác là 1 lít."
       },
       {
         "id": "g5_l6_2",
@@ -838,7 +894,8 @@ export const CURRICULUM_GRADE_5 = [
           "10 000 dm3"
         ],
         "correctAnswer": "1000 dm3",
-        "hint": "Trong bảng đơn vị đo thể tích, mỗi đơn vị gấp 1000 lần đơn vị bé hơn liền sau nó: 1 m3 = 1000 dm3 = 1 000 000 cm3."
+        "hint": "Trong bảng đơn vị đo thể tích, mỗi đơn vị gấp 1000 lần đơn vị bé hơn liền sau nó: 1 m3 = 1000 dm3 = 1 000 000 cm3.",
+        "explanation": "Trong bảng đơn vị đo thể tích, mỗi đơn vị gấp 1000 lần đơn vị bé hơn liền sau nó: 1 m3 = 1000 dm3 = 1 000 000 cm3. Do đó, đáp án chính xác là 1000 dm3."
       },
       {
         "id": "g5_l6_3",
@@ -851,7 +908,8 @@ export const CURRICULUM_GRADE_5 = [
           "V = (a + b + c) x 2"
         ],
         "correctAnswer": "V = a x b x c",
-        "hint": "Thể tích hình hộp chữ nhật bằng chiều dài nhân chiều rộng nhân chiều cao: V = a x b x c."
+        "hint": "Thể tích hình hộp chữ nhật bằng chiều dài nhân chiều rộng nhân chiều cao: V = a x b x c.",
+        "explanation": "Thể tích hình hộp chữ nhật bằng chiều dài nhân chiều rộng nhân chiều cao: V = a x b x c. Do đó, đáp án chính xác là V = a x b x c."
       },
       {
         "id": "g5_l6_4",
@@ -864,7 +922,8 @@ export const CURRICULUM_GRADE_5 = [
           "240 cm2"
         ],
         "correctAnswer": "240 cm3",
-        "hint": "V = 8 x 5 x 6 = 240 cm3."
+        "hint": "V = 8 x 5 x 6 = 240 cm3.",
+        "explanation": "V = 8 x 5 x 6 = 240 cm3. Do đó, đáp án chính xác là 240 cm3."
       },
       {
         "id": "g5_l6_5",
@@ -877,7 +936,8 @@ export const CURRICULUM_GRADE_5 = [
           "150 cm2"
         ],
         "correctAnswer": "125 cm3",
-        "hint": "Thể tích hình lập phương V = a x a x a = 5 x 5 x 5 = 125 cm3."
+        "hint": "Thể tích hình lập phương V = a x a x a = 5 x 5 x 5 = 125 cm3.",
+        "explanation": "Thể tích hình lập phương V = a x a x a = 5 x 5 x 5 = 125 cm3. Do đó, đáp án chính xác là 125 cm3."
       },
       {
         "id": "g5_l6_6",
@@ -890,7 +950,8 @@ export const CURRICULUM_GRADE_5 = [
           "16 cm2"
         ],
         "correctAnswer": "96 cm2",
-        "hint": "Hình lập phương có 6 mặt bằng nhau. Diện tích toàn phần = (cạnh x cạnh) x 6 = (4 x 4) x 6 = 16 x 6 = 96 cm2."
+        "hint": "Hình lập phương có 6 mặt bằng nhau. Diện tích toàn phần = (cạnh x cạnh) x 6 = (4 x 4) x 6 = 16 x 6 = 96 cm2.",
+        "explanation": "Hình lập phương có 6 mặt bằng nhau. Diện tích toàn phần = (cạnh x cạnh) x 6 = (4 x 4) x 6 = 16 x 6 = 96 cm2. Do đó, đáp án chính xác là 96 cm2."
       },
       {
         "id": "g5_l6_7",
@@ -903,7 +964,8 @@ export const CURRICULUM_GRADE_5 = [
           "240 lít"
         ],
         "correctAnswer": "120 lít",
-        "hint": "V = 60 x 40 x 50 = 120 000 cm3 = 120 dm3 = 120 lít."
+        "hint": "V = 60 x 40 x 50 = 120 000 cm3 = 120 dm3 = 120 lít.",
+        "explanation": "V = 60 x 40 x 50 = 120 000 cm3 = 120 dm3 = 120 lít. Do đó, đáp án chính xác là 120 lít."
       },
       {
         "id": "g5_l6_8",
@@ -916,7 +978,8 @@ export const CURRICULUM_GRADE_5 = [
           "4 mặt, 4 đỉnh, 6 cạnh"
         ],
         "correctAnswer": "6 mặt, 8 đỉnh, 12 cạnh",
-        "hint": "Hình hộp chữ nhật và hình lập phương đều có đúng 6 mặt, 8 đỉnh và 12 cạnh."
+        "hint": "Hình hộp chữ nhật và hình lập phương đều có đúng 6 mặt, 8 đỉnh và 12 cạnh.",
+        "explanation": "Hình hộp chữ nhật và hình lập phương đều có đúng 6 mặt, 8 đỉnh và 12 cạnh. Vì vậy, kết quả đúng là 6 mặt, 8 đỉnh, 12 cạnh."
       }
     ],
     "timoChallenges": [
@@ -931,7 +994,8 @@ export const CURRICULUM_GRADE_5 = [
           "0 khối"
         ],
         "correctAnswer": "1 khối",
-        "hint": "Khối nhỏ ở chính giữa tâm khối lớn không bị sơn mặt nào: (3 - 2) x (3 - 2) x (3 - 2) = 1 x 1 x 1 = 1 khối."
+        "hint": "Khối nhỏ ở chính giữa tâm khối lớn không bị sơn mặt nào: (3 - 2) x (3 - 2) x (3 - 2) = 1 x 1 x 1 = 1 khối.",
+        "explanation": "Khối nhỏ ở chính giữa tâm khối lớn không bị sơn mặt nào: (3 - 2) x (3 - 2) x (3 - 2) = 1 x 1 x 1 = 1 khối. Do đó, đáp án chính xác là 1 khối."
       },
       {
         "id": "g5_t6_2",
@@ -944,7 +1008,8 @@ export const CURRICULUM_GRADE_5 = [
           "300 cm3"
         ],
         "correctAnswer": "1200 cm3",
-        "hint": "Thể tích hòn non bộ chính bằng thể tích phần nước dâng lên: 20 x 15 x 4 = 1200 cm3."
+        "hint": "Thể tích hòn non bộ chính bằng thể tích phần nước dâng lên: 20 x 15 x 4 = 1200 cm3.",
+        "explanation": "Thể tích hòn non bộ chính bằng thể tích phần nước dâng lên: 20 x 15 x 4 = 1200 cm3. Do đó, đáp án chính xác là 1200 cm3."
       },
       {
         "id": "g5_t6_3",
@@ -957,7 +1022,8 @@ export const CURRICULUM_GRADE_5 = [
           "18 lần"
         ],
         "correctAnswer": "27 lần",
-        "hint": "V = (3a) x (3a) x (3a) = 27 x (a x a x a). Thể tích tăng 27 lần."
+        "hint": "V = (3a) x (3a) x (3a) = 27 x (a x a x a). Thể tích tăng 27 lần.",
+        "explanation": "V = (3a) x (3a) x (3a) = 27 x (a x a x a). Thể tích tăng 27 lần. Do đó, đáp án chính xác là 27 lần."
       }
     ]
   },
@@ -985,7 +1051,8 @@ export const CURRICULUM_GRADE_5 = [
           "Lấy quãng đường cộng thời gian"
         ],
         "correctAnswer": "Lấy quãng đường chia cho thời gian: v = s : t",
-        "hint": "Vận tốc là quãng đường đi được trong 1 đơn vị thời gian: v = s : t."
+        "hint": "Vận tốc là quãng đường đi được trong 1 đơn vị thời gian: v = s : t.",
+        "explanation": "Vận tốc là quãng đường đi được trong 1 đơn vị thời gian: v = s : t. Do đó, đáp án chính xác là Lấy quãng đường chia cho thời gian: v = s : t."
       },
       {
         "id": "g5_l7_2",
@@ -998,7 +1065,8 @@ export const CURRICULUM_GRADE_5 = [
           "45 km/giờ"
         ],
         "correctAnswer": "48 km/giờ",
-        "hint": "v = 120 : 2,5 = 48 km/giờ."
+        "hint": "v = 120 : 2,5 = 48 km/giờ.",
+        "explanation": "v = 120 : 2,5 = 48 km/giờ. Do đó, đáp án chính xác là 48 km/giờ."
       },
       {
         "id": "g5_l7_3",
@@ -1011,7 +1079,8 @@ export const CURRICULUM_GRADE_5 = [
           "14 km"
         ],
         "correctAnswer": "126 km",
-        "hint": "Quãng đường s = v x t = 42 x 3 = 126 km."
+        "hint": "Quãng đường s = v x t = 42 x 3 = 126 km.",
+        "explanation": "Quãng đường s = v x t = 42 x 3 = 126 km. Do đó, đáp án chính xác là 126 km."
       },
       {
         "id": "g5_l7_4",
@@ -1024,7 +1093,8 @@ export const CURRICULUM_GRADE_5 = [
           "75 phút"
         ],
         "correctAnswer": "3 giờ",
-        "hint": "Thời gian t = s : v = 15 : 5 = 3 giờ."
+        "hint": "Thời gian t = s : v = 15 : 5 = 3 giờ.",
+        "explanation": "Thời gian t = s : v = 15 : 5 = 3 giờ. Do đó, đáp án chính xác là 3 giờ."
       },
       {
         "id": "g5_l7_5",
@@ -1037,7 +1107,8 @@ export const CURRICULUM_GRADE_5 = [
           "60 m/s"
         ],
         "correctAnswer": "10 m/s",
-        "hint": "36 km = 36 000 m; 1 giờ = 3600 giây. Vận tốc: 36 000 : 3600 = 10 m/s (quy tắc: chia cho 3,6)."
+        "hint": "36 km = 36 000 m; 1 giờ = 3600 giây. Vận tốc: 36 000 : 3600 = 10 m/s (quy tắc: chia cho 3,6).",
+        "explanation": "36 km = 36 000 m; 1 giờ = 3600 giây. Vận tốc: 36 000 : 3600 = 10 m/s (quy tắc: chia cho 3,6). Do đó, đáp án chính xác là 10 m/s."
       },
       {
         "id": "g5_l7_6",
@@ -1050,7 +1121,8 @@ export const CURRICULUM_GRADE_5 = [
           "2,5 giờ"
         ],
         "correctAnswer": "2 giờ",
-        "hint": "Tổng vận tốc hai xe: 50 + 40 = 90 km/h. Thời gian gặp nhau: t = s : (v1 + v2) = 180 : 90 = 2 giờ."
+        "hint": "Tổng vận tốc hai xe: 50 + 40 = 90 km/h. Thời gian gặp nhau: t = s : (v1 + v2) = 180 : 90 = 2 giờ.",
+        "explanation": "Tổng vận tốc hai xe: 50 + 40 = 90 km/h. Thời gian gặp nhau: t = s : (v1 + v2) = 180 : 90 = 2 giờ. Do đó, đáp án chính xác là 2 giờ."
       },
       {
         "id": "g5_l7_7",
@@ -1063,7 +1135,8 @@ export const CURRICULUM_GRADE_5 = [
           "1 giờ"
         ],
         "correctAnswer": "2 giờ",
-        "hint": "Hiệu vận tốc: 60 - 45 = 15 km/h. Thời gian đuổi kịp: t = khoảng cách : hiệu vận tốc = 30 : 15 = 2 giờ."
+        "hint": "Hiệu vận tốc: 60 - 45 = 15 km/h. Thời gian đuổi kịp: t = khoảng cách : hiệu vận tốc = 30 : 15 = 2 giờ.",
+        "explanation": "Hiệu vận tốc: 60 - 45 = 15 km/h. Thời gian đuổi kịp: t = khoảng cách : hiệu vận tốc = 30 : 15 = 2 giờ. Do đó, đáp án chính xác là 2 giờ."
       },
       {
         "id": "g5_l7_8",
@@ -1076,7 +1149,8 @@ export const CURRICULUM_GRADE_5 = [
           "21 km/h"
         ],
         "correctAnswer": "18 km/h",
-        "hint": "Vận tốc xuôi dòng = Vận tốc thực + Vận tốc dòng nước = 15 + 3 = 18 km/h. (Ngược dòng = 15 - 3 = 12 km/h)."
+        "hint": "Vận tốc xuôi dòng = Vận tốc thực + Vận tốc dòng nước = 15 + 3 = 18 km/h. (Ngược dòng = 15 - 3 = 12 km/h).",
+        "explanation": "Vận tốc xuôi dòng = Vận tốc thực + Vận tốc dòng nước = 15 + 3 = 18 km/h. (Ngược dòng = 15 - 3 = 12 km/h). Do đó, đáp án chính xác là 18 km/h."
       }
     ],
     "timoChallenges": [
@@ -1091,7 +1165,8 @@ export const CURRICULUM_GRADE_5 = [
           "30 giây"
         ],
         "correctAnswer": "60 giây (1 phút)",
-        "hint": "Đổi: 36 km/h = 10 m/s. Quãng đường đoàn tàu phải đi = Độ dài tàu + Độ dài cầu = 150 + 450 = 600 m. Thời gian: 600 : 10 = 60 giây = 1 phút."
+        "hint": "Đổi: 36 km/h = 10 m/s. Quãng đường đoàn tàu phải đi = Độ dài tàu + Độ dài cầu = 150 + 450 = 600 m. Thời gian: 600 : 10 = 60 giây = 1 phút.",
+        "explanation": "Đổi: 36 km/h = 10 m/s. Quãng đường đoàn tàu phải đi = Độ dài tàu + Độ dài cầu = 150 + 450 = 600 m. Thời gian: 600 : 10 = 60 giây = 1 phút. Do đó, đáp án chính xác là 60 giây (1 phút)."
       },
       {
         "id": "g5_t7_2",
@@ -1104,7 +1179,8 @@ export const CURRICULUM_GRADE_5 = [
           "20 km"
         ],
         "correctAnswer": "15 km",
-        "hint": "Thời gian hai người gặp nhau: 12 : (4 + 4) = 1,5 giờ. Quãng đường chú chó chạy trong 1,5 giờ: 10 x 1,5 = 15 km."
+        "hint": "Thời gian hai người gặp nhau: 12 : (4 + 4) = 1,5 giờ. Quãng đường chú chó chạy trong 1,5 giờ: 10 x 1,5 = 15 km.",
+        "explanation": "Thời gian hai người gặp nhau: 12 : (4 + 4) = 1,5 giờ. Quãng đường chú chó chạy trong 1,5 giờ: 10 x 1,5 = 15 km. Do đó, đáp án chính xác là 15 km."
       },
       {
         "id": "g5_t7_3",
@@ -1117,7 +1193,8 @@ export const CURRICULUM_GRADE_5 = [
           "18 km/h"
         ],
         "correctAnswer": "15 km/h",
-        "hint": "Vận tốc trung bình = Tổng quãng đường chia cho Tổng thời gian: (2 x s) / (s/12 + s/20) = 2 / (8/60) = 2 x 60 / 8 = 15 km/h (không phải lấy 12 + 20 chia 2)."
+        "hint": "Vận tốc trung bình = Tổng quãng đường chia cho Tổng thời gian: (2 x s) / (s/12 + s/20) = 2 / (8/60) = 2 x 60 / 8 = 15 km/h (không phải lấy 12 + 20 chia 2).",
+        "explanation": "Vận tốc trung bình = Tổng quãng đường chia cho Tổng thời gian: (2 x s) / (s/12 + s/20) = 2 / (8/60) = 2 x 60 / 8 = 15 km/h (không phải lấy 12 + 20 chia 2). Do đó, đáp án chính xác là 15 km/h."
       }
     ]
   },
@@ -1145,7 +1222,8 @@ export const CURRICULUM_GRADE_5 = [
           "6 giờ 15 phút"
         ],
         "correctAnswer": "6 giờ 5 phút",
-        "hint": "3 giờ + 2 giờ = 5 giờ; 25 phút + 40 phút = 65 phút = 1 giờ 5 phút. Tổng là 6 giờ 5 phút."
+        "hint": "3 giờ + 2 giờ = 5 giờ; 25 phút + 40 phút = 65 phút = 1 giờ 5 phút. Tổng là 6 giờ 5 phút.",
+        "explanation": "3 giờ + 2 giờ = 5 giờ; 25 phút + 40 phút = 65 phút = 1 giờ 5 phút. Tổng là 6 giờ 5 phút. Do đó, đáp án chính xác là 6 giờ 5 phút."
       },
       {
         "id": "g5_l8_2",
@@ -1158,7 +1236,8 @@ export const CURRICULUM_GRADE_5 = [
           "2 giờ 50 phút"
         ],
         "correctAnswer": "2 giờ 40 phút",
-        "hint": "Đổi: 4 giờ 15 phút = 3 giờ 75 phút. Lấy 3 giờ 75 phút - 1 giờ 35 phút = 2 giờ 40 phút."
+        "hint": "Đổi: 4 giờ 15 phút = 3 giờ 75 phút. Lấy 3 giờ 75 phút - 1 giờ 35 phút = 2 giờ 40 phút.",
+        "explanation": "Đổi: 4 giờ 15 phút = 3 giờ 75 phút. Lấy 3 giờ 75 phút - 1 giờ 35 phút = 2 giờ 40 phút. Do đó, đáp án chính xác là 2 giờ 40 phút."
       },
       {
         "id": "g5_l8_3",
@@ -1171,7 +1250,8 @@ export const CURRICULUM_GRADE_5 = [
           "6 giờ"
         ],
         "correctAnswer": "5 giờ",
-        "hint": "1 giờ x 4 = 4 giờ; 15 phút x 4 = 60 phút = 1 giờ. Tổng = 4 + 1 = 5 giờ."
+        "hint": "1 giờ x 4 = 4 giờ; 15 phút x 4 = 60 phút = 1 giờ. Tổng = 4 + 1 = 5 giờ.",
+        "explanation": "1 giờ x 4 = 4 giờ; 15 phút x 4 = 60 phút = 1 giờ. Tổng = 4 + 1 = 5 giờ. Do đó, đáp án chính xác là 5 giờ."
       },
       {
         "id": "g5_l8_4",
@@ -1184,7 +1264,8 @@ export const CURRICULUM_GRADE_5 = [
           "2 giờ 45 phút"
         ],
         "correctAnswer": "2 giờ 30 phút",
-        "hint": "7 giờ : 3 = 2 giờ (dư 1 giờ = 60 phút). 60 + 30 = 90 phút : 3 = 30 phút. Kết quả là 2 giờ 30 phút."
+        "hint": "7 giờ : 3 = 2 giờ (dư 1 giờ = 60 phút). 60 + 30 = 90 phút : 3 = 30 phút. Kết quả là 2 giờ 30 phút.",
+        "explanation": "7 giờ : 3 = 2 giờ (dư 1 giờ = 60 phút). 60 + 30 = 90 phút : 3 = 30 phút. Kết quả là 2 giờ 30 phút. Do đó, đáp án chính xác là 2 giờ 30 phút."
       },
       {
         "id": "g5_l8_5",
@@ -1197,7 +1278,8 @@ export const CURRICULUM_GRADE_5 = [
           "120 phút"
         ],
         "correctAnswer": "150 phút",
-        "hint": "2,5 x 60 = 150 phút (hoặc 2 giờ = 120 phút, 0,5 giờ = 30 phút; 120 + 30 = 150 phút)."
+        "hint": "2,5 x 60 = 150 phút (hoặc 2 giờ = 120 phút, 0,5 giờ = 30 phút; 120 + 30 = 150 phút).",
+        "explanation": "2,5 x 60 = 150 phút (hoặc 2 giờ = 120 phút, 0,5 giờ = 30 phút; 120 + 30 = 150 phút). Do đó, đáp án chính xác là 150 phút."
       },
       {
         "id": "g5_l8_6",
@@ -1210,7 +1292,8 @@ export const CURRICULUM_GRADE_5 = [
           "8 giờ 45 phút"
         ],
         "correctAnswer": "7 giờ 15 phút",
-        "hint": "11 giờ - 3 giờ 45 phút = 10 giờ 60 phút - 3 giờ 45 phút = 7 giờ 15 phút."
+        "hint": "11 giờ - 3 giờ 45 phút = 10 giờ 60 phút - 3 giờ 45 phút = 7 giờ 15 phút.",
+        "explanation": "11 giờ - 3 giờ 45 phút = 10 giờ 60 phút - 3 giờ 45 phút = 7 giờ 15 phút. Do đó, đáp án chính xác là 7 giờ 15 phút."
       },
       {
         "id": "g5_l8_7",
@@ -1223,7 +1306,8 @@ export const CURRICULUM_GRADE_5 = [
           "5/6"
         ],
         "correctAnswer": "5",
-        "hint": "1/2 + 1/3 = 5/6. Lấy 5/6 x 6 = 5."
+        "hint": "1/2 + 1/3 = 5/6. Lấy 5/6 x 6 = 5.",
+        "explanation": "1/2 + 1/3 = 5/6. Lấy 5/6 x 6 = 5. Do đó, đáp án chính xác là 5."
       },
       {
         "id": "g5_l8_8",
@@ -1236,7 +1320,8 @@ export const CURRICULUM_GRADE_5 = [
           "12,4"
         ],
         "correctAnswer": "11,55",
-        "hint": "Tổng số phần = 1 + 3 = 4 phần. Số bé = 15,4 : 4 = 3,85. Số lớn = 3,85 x 3 = 11,55."
+        "hint": "Tổng số phần = 1 + 3 = 4 phần. Số bé = 15,4 : 4 = 3,85. Số lớn = 3,85 x 3 = 11,55.",
+        "explanation": "Tổng số phần = 1 + 3 = 4 phần. Số bé = 15,4 : 4 = 3,85. Số lớn = 3,85 x 3 = 11,55. Do đó, đáp án chính xác là 11,55."
       }
     ],
     "timoChallenges": [
@@ -1251,7 +1336,8 @@ export const CURRICULUM_GRADE_5 = [
           "1 giờ 10 phút"
         ],
         "correctAnswer": "1 giờ 5 phút 27 giây (1 và 1/11 giờ)",
-        "hint": "Trong 1 giờ kim phút đi 1 vòng (12 khoảng), kim giờ đi 1 khoảng. Hiệu vận tốc là 11/12 vòng/giờ. Thời gian = 1 : (11/12) = 12/11 giờ = 1 và 1/11 giờ ≈ 1 giờ 5 phút 27 giây."
+        "hint": "Trong 1 giờ kim phút đi 1 vòng (12 khoảng), kim giờ đi 1 khoảng. Hiệu vận tốc là 11/12 vòng/giờ. Thời gian = 1 : (11/12) = 12/11 giờ = 1 và 1/11 giờ ≈ 1 giờ 5 phút 27 giây.",
+        "explanation": "Trong 1 giờ kim phút đi 1 vòng (12 khoảng), kim giờ đi 1 khoảng. Hiệu vận tốc là 11/12 vòng/giờ. Thời gian = 1 : (11/12) = 12/11 giờ = 1 và 1/11 giờ ≈ 1 giờ 5 phút 27 giây. Do đó, đáp án chính xác là 1 giờ 5 phút 27 giây (1 và 1/11 giờ)."
       },
       {
         "id": "g5_t8_2",
@@ -1264,7 +1350,8 @@ export const CURRICULUM_GRADE_5 = [
           "3 giờ"
         ],
         "correctAnswer": "2,4 giờ (2 giờ 24 phút)",
-        "hint": "Trong 1 giờ: Bác An làm 1/4 công việc, Bác Bình làm 1/6 công việc. Cùng làm trong 1 giờ: 1/4 + 1/6 = 5/12 công việc. Thời gian xong = 1 : 5/12 = 12/5 giờ = 2,4 giờ = 2 giờ 24 phút."
+        "hint": "Trong 1 giờ: Bác An làm 1/4 công việc, Bác Bình làm 1/6 công việc. Cùng làm trong 1 giờ: 1/4 + 1/6 = 5/12 công việc. Thời gian xong = 1 : 5/12 = 12/5 giờ = 2,4 giờ = 2 giờ 24 phút.",
+        "explanation": "Trong 1 giờ: Bác An làm 1/4 công việc, Bác Bình làm 1/6 công việc. Cùng làm trong 1 giờ: 1/4 + 1/6 = 5/12 công việc. Thời gian xong = 1 : 5/12 = 12/5 giờ = 2,4 giờ = 2 giờ 24 phút. Do đó, đáp án chính xác là 2,4 giờ (2 giờ 24 phút)."
       },
       {
         "id": "g5_t8_3",
@@ -1277,7 +1364,8 @@ export const CURRICULUM_GRADE_5 = [
           "125"
         ],
         "correctAnswer": "250",
-        "hint": "Viết thêm chữ số 2 vào trước số có 3 chữ số nghĩa là cộng thêm 2000 đơn vị: 2abc = 2000 + abc = 9 x abc => 8 x abc = 2000 => abc = 2000 : 8 = 250."
+        "hint": "Viết thêm chữ số 2 vào trước số có 3 chữ số nghĩa là cộng thêm 2000 đơn vị: 2abc = 2000 + abc = 9 x abc => 8 x abc = 2000 => abc = 2000 : 8 = 250.",
+        "explanation": "Viết thêm chữ số 2 vào trước số có 3 chữ số nghĩa là cộng thêm 2000 đơn vị: 2abc = 2000 + abc = 9 x abc => 8 x abc = 2000 => abc = 2000 : 8 = 250. Do đó, đáp án chính xác là 250."
       }
     ]
   }

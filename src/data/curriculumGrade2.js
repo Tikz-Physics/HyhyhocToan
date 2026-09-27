@@ -26,7 +26,8 @@ export const CURRICULUM_GRADE_2 = [
           "543"
         ],
         "correctAnswer": "345",
-        "hint": "Viết số theo thứ tự từ hàng trăm, hàng chục đến hàng đơn vị: 3 trăm, 4 chục, 5 đơn vị viết là 345."
+        "hint": "Viết số theo thứ tự từ hàng trăm, hàng chục đến hàng đơn vị: 3 trăm, 4 chục, 5 đơn vị viết là 345.",
+        "explanation": "Viết số theo thứ tự từ hàng trăm, hàng chục đến hàng đơn vị: 3 trăm, 4 chục, 5 đơn vị viết là 345. Vì vậy, kết quả đúng là 345."
       },
       {
         "id": "g2_l1_2",
@@ -39,7 +40,8 @@ export const CURRICULUM_GRADE_2 = [
           "2 trăm, 8 chục, 6 đơn vị"
         ],
         "correctAnswer": "6 trăm, 8 chục, 2 đơn vị",
-        "hint": "Chữ số 6 ở hàng trăm, chữ số 8 ở hàng chục, chữ số 2 ở hàng đơn vị."
+        "hint": "Chữ số 6 ở hàng trăm, chữ số 8 ở hàng chục, chữ số 2 ở hàng đơn vị.",
+        "explanation": "Chữ số 6 ở hàng trăm, chữ số 8 ở hàng chục, chữ số 2 ở hàng đơn vị. Vì vậy, kết quả đúng là 6 trăm, 8 chục, 2 đơn vị."
       },
       {
         "id": "g2_l1_3",
@@ -52,7 +54,8 @@ export const CURRICULUM_GRADE_2 = [
           "300"
         ],
         "correctAnswer": "500",
-        "hint": "Các số tròn trăm cách nhau 100 đơn vị: 100, 200, 300, 400, 500,..."
+        "hint": "Các số tròn trăm cách nhau 100 đơn vị: 100, 200, 300, 400, 500,...",
+        "explanation": "Các số tròn trăm cách nhau 100 đơn vị: 100, 200, 300, 400, 500,... Vì vậy, kết quả đúng là 500."
       },
       {
         "id": "g2_l1_4",
@@ -64,7 +67,8 @@ export const CURRICULUM_GRADE_2 = [
           "="
         ],
         "correctAnswer": "<",
-        "hint": "Hai số cùng có chữ số hàng trăm là 5. So sánh hàng chục: 7 < 8 nên 578 < 587."
+        "hint": "Hai số cùng có chữ số hàng trăm là 5. So sánh hàng chục: 7 < 8 nên 578 < 587.",
+        "explanation": "Hai số cùng có chữ số hàng trăm là 5. So sánh hàng chục: 7 < 8 nên 578 < 587. Vì vậy, kết quả đúng là <."
       },
       {
         "id": "g2_l1_5",
@@ -77,7 +81,8 @@ export const CURRICULUM_GRADE_2 = [
           "260"
         ],
         "correctAnswer": "249",
-        "hint": "Muốn tìm số liền trước của một số, ta lấy số đó bớt đi 1 đơn vị: 250 - 1 = 249."
+        "hint": "Muốn tìm số liền trước của một số, ta lấy số đó bớt đi 1 đơn vị: 250 - 1 = 249.",
+        "explanation": "Muốn tìm số liền trước của một số, ta lấy số đó bớt đi 1 đơn vị: 250 - 1 = 249. Do đó, đáp án chính xác là 249."
       },
       {
         "id": "g2_l1_6",
@@ -90,7 +95,8 @@ export const CURRICULUM_GRADE_2 = [
           "897"
         ],
         "correctAnswer": "987",
-        "hint": "Hàng trăm chọn chữ số lớn nhất là 9, hàng chục chọn chữ số khác 9 lớn nhất là 8, hàng đơn vị chọn 7."
+        "hint": "Hàng trăm chọn chữ số lớn nhất là 9, hàng chục chọn chữ số khác 9 lớn nhất là 8, hàng đơn vị chọn 7.",
+        "explanation": "Hàng trăm chọn chữ số lớn nhất là 9, hàng chục chọn chữ số khác 9 lớn nhất là 8, hàng đơn vị chọn 7. Vì vậy, kết quả đúng là 987."
       },
       {
         "id": "g2_l1_7",
@@ -103,7 +109,8 @@ export const CURRICULUM_GRADE_2 = [
           "7 + 9"
         ],
         "correctAnswer": "700 + 9",
-        "hint": "Số 709 gồm 7 trăm, 0 chục và 9 đơn vị, nên 709 = 700 + 9."
+        "hint": "Số 709 gồm 7 trăm, 0 chục và 9 đơn vị, nên 709 = 700 + 9.",
+        "explanation": "Số 709 gồm 7 trăm, 0 chục và 9 đơn vị, nên 709 = 700 + 9. Do đó, đáp án chính xác là 700 + 9."
       },
       {
         "id": "g2_l1_8",
@@ -116,7 +123,8 @@ export const CURRICULUM_GRADE_2 = [
           "125, 340, 215, 501"
         ],
         "correctAnswer": "125, 215, 340, 501",
-        "hint": "So sánh chữ số hàng trăm để xếp từ bé đến lớn: 1 < 2 < 3 < 5."
+        "hint": "So sánh chữ số hàng trăm để xếp từ bé đến lớn: 1 < 2 < 3 < 5.",
+        "explanation": "So sánh chữ số hàng trăm để xếp từ bé đến lớn: 1 < 2 < 3 < 5. Vì vậy, kết quả đúng là 125, 215, 340, 501."
       }
     ],
     "timoChallenges": [
@@ -131,7 +139,8 @@ export const CURRICULUM_GRADE_2 = [
           "841"
         ],
         "correctAnswer": "481",
-        "hint": "Hàng trăm là 4. Chữ số hàng chục gấp đôi: 4 x 2 = 8. Hàng đơn vị là 1. Vậy số đó là 481."
+        "hint": "Hàng trăm là 4. Chữ số hàng chục gấp đôi: 4 x 2 = 8. Hàng đơn vị là 1. Vậy số đó là 481.",
+        "explanation": "Hàng trăm là 4. Chữ số hàng chục gấp đôi: 4 x 2 = 8. Hàng đơn vị là 1. Vậy số đó là 481. Do đó, đáp án chính xác là 481."
       },
       {
         "id": "g2_t1_2",
@@ -144,7 +153,8 @@ export const CURRICULUM_GRADE_2 = [
           "135"
         ],
         "correctAnswer": "125",
-        "hint": "Mỗi số trong dãy đều tăng thêm 5 đơn vị: 120 + 5 = 125."
+        "hint": "Mỗi số trong dãy đều tăng thêm 5 đơn vị: 120 + 5 = 125.",
+        "explanation": "Mỗi số trong dãy đều tăng thêm 5 đơn vị: 120 + 5 = 125. Do đó, đáp án chính xác là 125."
       },
       {
         "id": "g2_t1_3",
@@ -157,7 +167,8 @@ export const CURRICULUM_GRADE_2 = [
           "30"
         ],
         "correctAnswer": "31",
-        "hint": "Từ 1 đến 9 có 9 số có 1 chữ số (9 chữ số). Từ 10 đến 20 có 11 số có 2 chữ số (11 x 2 = 22 chữ số). Tổng: 9 + 22 = 31 chữ số."
+        "hint": "Từ 1 đến 9 có 9 số có 1 chữ số (9 chữ số). Từ 10 đến 20 có 11 số có 2 chữ số (11 x 2 = 22 chữ số). Tổng: 9 + 22 = 31 chữ số.",
+        "explanation": "Từ 1 đến 9 có 9 số có 1 chữ số (9 chữ số). Từ 10 đến 20 có 11 số có 2 chữ số (11 x 2 = 22 chữ số). Tổng: 9 + 22 = 31 chữ số. Do đó, đáp án chính xác là 31."
       }
     ]
   },
@@ -185,7 +196,8 @@ export const CURRICULUM_GRADE_2 = [
           "35"
         ],
         "correctAnswer": "45",
-        "hint": "7 cộng 8 bằng 15, viết 5 nhớ 1. 3 thêm 1 bằng 4. Kết quả là 45."
+        "hint": "7 cộng 8 bằng 15, viết 5 nhớ 1. 3 thêm 1 bằng 4. Kết quả là 45.",
+        "explanation": "7 cộng 8 bằng 15, viết 5 nhớ 1. 3 thêm 1 bằng 4. Kết quả là 45. Vì vậy, kết quả đúng là 45."
       },
       {
         "id": "g2_l2_2",
@@ -198,7 +210,8 @@ export const CURRICULUM_GRADE_2 = [
           "94"
         ],
         "correctAnswer": "84",
-        "hint": "8 + 6 = 14, viết 4 nhớ 1. 4 + 3 = 7, thêm 1 bằng 8. Kết quả là 84."
+        "hint": "8 + 6 = 14, viết 4 nhớ 1. 4 + 3 = 7, thêm 1 bằng 8. Kết quả là 84.",
+        "explanation": "8 + 6 = 14, viết 4 nhớ 1. 4 + 3 = 7, thêm 1 bằng 8. Kết quả là 84. Do đó, đáp án chính xác là 84."
       },
       {
         "id": "g2_l2_3",
@@ -211,7 +224,8 @@ export const CURRICULUM_GRADE_2 = [
           "64"
         ],
         "correctAnswer": "54",
-        "hint": "3 không trừ được 9, lấy 13 trừ 9 bằng 4, viết 4 nhớ 1. 6 trừ 1 bằng 5. Kết quả là 54."
+        "hint": "3 không trừ được 9, lấy 13 trừ 9 bằng 4, viết 4 nhớ 1. 6 trừ 1 bằng 5. Kết quả là 54.",
+        "explanation": "3 không trừ được 9, lấy 13 trừ 9 bằng 4, viết 4 nhớ 1. 6 trừ 1 bằng 5. Kết quả là 54. Vì vậy, kết quả đúng là 54."
       },
       {
         "id": "g2_l2_4",
@@ -224,7 +238,8 @@ export const CURRICULUM_GRADE_2 = [
           "43"
         ],
         "correctAnswer": "35",
-        "hint": "12 trừ 7 bằng 5, viết 5 nhớ 1. 4 thêm 1 bằng 5, 8 trừ 5 bằng 3. Kết quả là 35."
+        "hint": "12 trừ 7 bằng 5, viết 5 nhớ 1. 4 thêm 1 bằng 5, 8 trừ 5 bằng 3. Kết quả là 35.",
+        "explanation": "12 trừ 7 bằng 5, viết 5 nhớ 1. 4 thêm 1 bằng 5, 8 trừ 5 bằng 3. Kết quả là 35. Vì vậy, kết quả đúng là 35."
       },
       {
         "id": "g2_l2_5",
@@ -237,7 +252,8 @@ export const CURRICULUM_GRADE_2 = [
           "38 bông hoa"
         ],
         "correctAnswer": "37 bông hoa",
-        "hint": "Muốn tìm số hoa của Lan, ta lấy số hoa của Mai cộng thêm 9: 28 + 9 = 37 bông hoa."
+        "hint": "Muốn tìm số hoa của Lan, ta lấy số hoa của Mai cộng thêm 9: 28 + 9 = 37 bông hoa.",
+        "explanation": "Muốn tìm số hoa của Lan, ta lấy số hoa của Mai cộng thêm 9: 28 + 9 = 37 bông hoa. Do đó, đáp án chính xác là 37 bông hoa."
       },
       {
         "id": "g2_l2_6",
@@ -250,7 +266,8 @@ export const CURRICULUM_GRADE_2 = [
           "83 con"
         ],
         "correctAnswer": "47 con",
-        "hint": "Đàn gà ít hơn nên ta làm phép trừ: 65 - 18 = 47 con."
+        "hint": "Đàn gà ít hơn nên ta làm phép trừ: 65 - 18 = 47 con.",
+        "explanation": "Đàn gà ít hơn nên ta làm phép trừ: 65 - 18 = 47 con. Do đó, đáp án chính xác là 47 con."
       },
       {
         "id": "g2_l2_7",
@@ -263,7 +280,8 @@ export const CURRICULUM_GRADE_2 = [
           "103"
         ],
         "correctAnswer": "45",
-        "hint": "Muốn tìm số hạng chưa biết, ta lấy tổng trừ đi số hạng đã biết: 74 - 29 = 45."
+        "hint": "Muốn tìm số hạng chưa biết, ta lấy tổng trừ đi số hạng đã biết: 74 - 29 = 45.",
+        "explanation": "Muốn tìm số hạng chưa biết, ta lấy tổng trừ đi số hạng đã biết: 74 - 29 = 45. Do đó, đáp án chính xác là 45."
       },
       {
         "id": "g2_l2_8",
@@ -276,7 +294,8 @@ export const CURRICULUM_GRADE_2 = [
           "83"
         ],
         "correctAnswer": "73",
-        "hint": "Thực hiện từ trái sang phải: 100 - 45 = 55, sau đó 55 + 18 = 73."
+        "hint": "Thực hiện từ trái sang phải: 100 - 45 = 55, sau đó 55 + 18 = 73.",
+        "explanation": "Thực hiện từ trái sang phải: 100 - 45 = 55, sau đó 55 + 18 = 73. Do đó, đáp án chính xác là 73."
       }
     ],
     "timoChallenges": [
@@ -291,7 +310,8 @@ export const CURRICULUM_GRADE_2 = [
           "6"
         ],
         "correctAnswer": "7",
-        "hint": "🐶 + 🐶 = 16 nên mỗi chú cún 🐶 = 8. Vì 8 + 🐱 = 15 nên chú mèo 🐱 = 15 - 8 = 7."
+        "hint": "🐶 + 🐶 = 16 nên mỗi chú cún 🐶 = 8. Vì 8 + 🐱 = 15 nên chú mèo 🐱 = 15 - 8 = 7.",
+        "explanation": "🐶 + 🐶 = 16 nên mỗi chú cún 🐶 = 8. Vì 8 + 🐱 = 15 nên chú mèo 🐱 = 15 - 8 = 7. Do đó, đáp án chính xác là 7."
       },
       {
         "id": "g2_t2_2",
@@ -304,7 +324,8 @@ export const CURRICULUM_GRADE_2 = [
           "6 viên"
         ],
         "correctAnswer": "4 viên",
-        "hint": "Bình nhiều hơn An: 24 - 16 = 8 viên. Để bằng nhau, Bình chia đôi số kẹo nhiều hơn: 8 : 2 = 4 viên kẹo."
+        "hint": "Bình nhiều hơn An: 24 - 16 = 8 viên. Để bằng nhau, Bình chia đôi số kẹo nhiều hơn: 8 : 2 = 4 viên kẹo.",
+        "explanation": "Bình nhiều hơn An: 24 - 16 = 8 viên. Để bằng nhau, Bình chia đôi số kẹo nhiều hơn: 8 : 2 = 4 viên kẹo. Do đó, đáp án chính xác là 4 viên."
       },
       {
         "id": "g2_t2_3",
@@ -317,7 +338,8 @@ export const CURRICULUM_GRADE_2 = [
           "330"
         ],
         "correctAnswer": "320",
-        "hint": "Ghép cặp tròn trăm: (11 + 89) = 100, (22 + 88) = 110, (33 + 77) = 110. Tổng = 100 + 110 + 110 = 320."
+        "hint": "Ghép cặp tròn trăm: (11 + 89) = 100, (22 + 88) = 110, (33 + 77) = 110. Tổng = 100 + 110 + 110 = 320.",
+        "explanation": "Ghép cặp tròn trăm: (11 + 89) = 100, (22 + 88) = 110, (33 + 77) = 110. Tổng = 100 + 110 + 110 = 320. Do đó, đáp án chính xác là 320."
       }
     ]
   },
@@ -345,7 +367,8 @@ export const CURRICULUM_GRADE_2 = [
           "Nằm trên hai đường thẳng song song"
         ],
         "correctAnswer": "Cùng nằm trên một đường thẳng",
-        "hint": "Ba điểm cùng nằm trên một đường thẳng thì ba điểm đó thẳng hàng."
+        "hint": "Ba điểm cùng nằm trên một đường thẳng thì ba điểm đó thẳng hàng.",
+        "explanation": "Ba điểm cùng nằm trên một đường thẳng thì ba điểm đó thẳng hàng. Vì vậy, kết quả đúng là Cùng nằm trên một đường thẳng."
       },
       {
         "id": "g2_l3_2",
@@ -358,7 +381,8 @@ export const CURRICULUM_GRADE_2 = [
           "29 cm"
         ],
         "correctAnswer": "39 cm",
-        "hint": "Độ dài đường gấp khúc bằng tổng độ dài các đoạn thẳng của nó: 15 + 24 = 39 cm."
+        "hint": "Độ dài đường gấp khúc bằng tổng độ dài các đoạn thẳng của nó: 15 + 24 = 39 cm.",
+        "explanation": "Độ dài đường gấp khúc bằng tổng độ dài các đoạn thẳng của nó: 15 + 24 = 39 cm. Do đó, đáp án chính xác là 39 cm."
       },
       {
         "id": "g2_l3_3",
@@ -371,7 +395,8 @@ export const CURRICULUM_GRADE_2 = [
           "60 cm"
         ],
         "correctAnswer": "55 cm",
-        "hint": "Cộng độ dài 3 đoạn thẳng: 12 + 18 + 25 = 30 + 25 = 55 cm."
+        "hint": "Cộng độ dài 3 đoạn thẳng: 12 + 18 + 25 = 30 + 25 = 55 cm.",
+        "explanation": "Cộng độ dài 3 đoạn thẳng: 12 + 18 + 25 = 30 + 25 = 55 cm. Do đó, đáp án chính xác là 55 cm."
       },
       {
         "id": "g2_l3_4",
@@ -384,7 +409,8 @@ export const CURRICULUM_GRADE_2 = [
           "1 đoạn thẳng"
         ],
         "correctAnswer": "3 đoạn thẳng",
-        "hint": "Gồm có 3 đoạn thẳng: đoạn AC, đoạn CB và đoạn thẳng lớn AB."
+        "hint": "Gồm có 3 đoạn thẳng: đoạn AC, đoạn CB và đoạn thẳng lớn AB.",
+        "explanation": "Gồm có 3 đoạn thẳng: đoạn AC, đoạn CB và đoạn thẳng lớn AB. Vì vậy, kết quả đúng là 3 đoạn thẳng."
       },
       {
         "id": "g2_l3_5",
@@ -397,7 +423,8 @@ export const CURRICULUM_GRADE_2 = [
           "Vô số điểm"
         ],
         "correctAnswer": "1 điểm",
-        "hint": "Hai đoạn thẳng cắt nhau thì giao điểm chung của chúng là 1 điểm duy nhất."
+        "hint": "Hai đoạn thẳng cắt nhau thì giao điểm chung của chúng là 1 điểm duy nhất.",
+        "explanation": "Hai đoạn thẳng cắt nhau thì giao điểm chung của chúng là 1 điểm duy nhất. Vì vậy, kết quả đúng là 1 điểm."
       },
       {
         "id": "g2_l3_6",
@@ -410,7 +437,8 @@ export const CURRICULUM_GRADE_2 = [
           "Không so sánh được"
         ],
         "correctAnswer": "Đoạn thẳng AB dài hơn",
-        "hint": "Đổi: 4 dm = 40 cm. Vì 40 cm > 38 cm nên đoạn thẳng AB dài hơn đoạn thẳng CD."
+        "hint": "Đổi: 4 dm = 40 cm. Vì 40 cm > 38 cm nên đoạn thẳng AB dài hơn đoạn thẳng CD.",
+        "explanation": "Đổi: 4 dm = 40 cm. Vì 40 cm > 38 cm nên đoạn thẳng AB dài hơn đoạn thẳng CD. Do đó, đáp án chính xác là Đoạn thẳng AB dài hơn."
       },
       {
         "id": "g2_l3_7",
@@ -423,7 +451,8 @@ export const CURRICULUM_GRADE_2 = [
           "Hình vuông"
         ],
         "correctAnswer": "Hình tam giác",
-        "hint": "Đường gấp khúc khép kín gồm 3 đoạn thẳng chính là các cạnh của một hình tam giác."
+        "hint": "Đường gấp khúc khép kín gồm 3 đoạn thẳng chính là các cạnh của một hình tam giác.",
+        "explanation": "Đường gấp khúc khép kín gồm 3 đoạn thẳng chính là các cạnh của một hình tam giác. Vì vậy, kết quả đúng là Hình tam giác."
       },
       {
         "id": "g2_l3_8",
@@ -436,7 +465,8 @@ export const CURRICULUM_GRADE_2 = [
           "20 cm"
         ],
         "correctAnswer": "25 cm",
-        "hint": "Lấy tổng độ dài đường gấp khúc trừ đi đoạn AB: 60 - 35 = 25 cm."
+        "hint": "Lấy tổng độ dài đường gấp khúc trừ đi đoạn AB: 60 - 35 = 25 cm.",
+        "explanation": "Lấy tổng độ dài đường gấp khúc trừ đi đoạn AB: 60 - 35 = 25 cm. Do đó, đáp án chính xác là 25 cm."
       }
     ],
     "timoChallenges": [
@@ -451,7 +481,8 @@ export const CURRICULUM_GRADE_2 = [
           "5 đoạn thẳng"
         ],
         "correctAnswer": "10 đoạn thẳng",
-        "hint": "Số đoạn thẳng tạo bởi 5 điểm là: 4 + 3 + 2 + 1 = 10 đoạn thẳng."
+        "hint": "Số đoạn thẳng tạo bởi 5 điểm là: 4 + 3 + 2 + 1 = 10 đoạn thẳng.",
+        "explanation": "Số đoạn thẳng tạo bởi 5 điểm là: 4 + 3 + 2 + 1 = 10 đoạn thẳng. Do đó, đáp án chính xác là 10 đoạn thẳng."
       },
       {
         "id": "g2_t3_2",
@@ -464,7 +495,8 @@ export const CURRICULUM_GRADE_2 = [
           "3 cm"
         ],
         "correctAnswer": "4 cm",
-        "hint": "Cắt 4 nhát thì sợi dây chia thành: 4 + 1 = 5 đoạn bằng nhau. Mỗi đoạn dài: 20 : 5 = 4 cm."
+        "hint": "Cắt 4 nhát thì sợi dây chia thành: 4 + 1 = 5 đoạn bằng nhau. Mỗi đoạn dài: 20 : 5 = 4 cm.",
+        "explanation": "Cắt 4 nhát thì sợi dây chia thành: 4 + 1 = 5 đoạn bằng nhau. Mỗi đoạn dài: 20 : 5 = 4 cm. Do đó, đáp án chính xác là 4 cm."
       },
       {
         "id": "g2_t3_3",
@@ -477,7 +509,8 @@ export const CURRICULUM_GRADE_2 = [
           "21 m"
         ],
         "correctAnswer": "15 m",
-        "hint": "6 cây thì có 5 khoảng cách giữa các cây. Chiều dài con đường là: 5 x 3 = 15 mét."
+        "hint": "6 cây thì có 5 khoảng cách giữa các cây. Chiều dài con đường là: 5 x 3 = 15 mét.",
+        "explanation": "6 cây thì có 5 khoảng cách giữa các cây. Chiều dài con đường là: 5 x 3 = 15 mét. Do đó, đáp án chính xác là 15 m."
       }
     ]
   },
@@ -505,7 +538,8 @@ export const CURRICULUM_GRADE_2 = [
           "1000 cm"
         ],
         "correctAnswer": "10 cm",
-        "hint": "Ghi nhớ bảng đơn vị đo: 1 dm = 10 cm."
+        "hint": "Ghi nhớ bảng đơn vị đo: 1 dm = 10 cm.",
+        "explanation": "Ghi nhớ bảng đơn vị đo: 1 dm = 10 cm. Do đó, đáp án chính xác là 10 cm."
       },
       {
         "id": "g2_l4_2",
@@ -518,7 +552,8 @@ export const CURRICULUM_GRADE_2 = [
           "50 cm"
         ],
         "correctAnswer": "100 cm",
-        "hint": "1 m = 10 dm = 100 cm."
+        "hint": "1 m = 10 dm = 100 cm.",
+        "explanation": "1 m = 10 dm = 100 cm. Do đó, đáp án chính xác là 100 cm."
       },
       {
         "id": "g2_l4_3",
@@ -531,7 +566,8 @@ export const CURRICULUM_GRADE_2 = [
           "10000 m"
         ],
         "correctAnswer": "1000 m",
-        "hint": "1 km = 1000 m, dùng để đo khoảng cách giữa các thành phố."
+        "hint": "1 km = 1000 m, dùng để đo khoảng cách giữa các thành phố.",
+        "explanation": "1 km = 1000 m, dùng để đo khoảng cách giữa các thành phố. Do đó, đáp án chính xác là 1000 m."
       },
       {
         "id": "g2_l4_4",
@@ -544,7 +580,8 @@ export const CURRICULUM_GRADE_2 = [
           "21 lít"
         ],
         "correctAnswer": "9 lít",
-        "hint": "Lấy số dầu ban đầu trừ đi số dầu đã rót ra: 15 - 6 = 9 lít."
+        "hint": "Lấy số dầu ban đầu trừ đi số dầu đã rót ra: 15 - 6 = 9 lít.",
+        "explanation": "Lấy số dầu ban đầu trừ đi số dầu đã rót ra: 15 - 6 = 9 lít. Do đó, đáp án chính xác là 9 lít."
       },
       {
         "id": "g2_l4_5",
@@ -557,7 +594,8 @@ export const CURRICULUM_GRADE_2 = [
           "63 kg"
         ],
         "correctAnswer": "53 kg",
-        "hint": "Cộng khối lượng hai bao gạo: 35 + 18 = 53 kg."
+        "hint": "Cộng khối lượng hai bao gạo: 35 + 18 = 53 kg.",
+        "explanation": "Cộng khối lượng hai bao gạo: 35 + 18 = 53 kg. Do đó, đáp án chính xác là 53 kg."
       },
       {
         "id": "g2_l4_6",
@@ -569,7 +607,8 @@ export const CURRICULUM_GRADE_2 = [
           "="
         ],
         "correctAnswer": "<",
-        "hint": "Đổi: 3 m 5 cm = 305 cm. So sánh 305 cm < 350 cm."
+        "hint": "Đổi: 3 m 5 cm = 305 cm. So sánh 305 cm < 350 cm.",
+        "explanation": "Đổi: 3 m 5 cm = 305 cm. So sánh 305 cm < 350 cm. Do đó, đáp án chính xác là <."
       },
       {
         "id": "g2_l4_7",
@@ -582,7 +621,8 @@ export const CURRICULUM_GRADE_2 = [
           "4 kg"
         ],
         "correctAnswer": "5 kg",
-        "hint": "Đĩa cân thăng bằng nghĩa là khối lượng hai bên bằng nhau: 2 kg + 3 kg = 5 kg."
+        "hint": "Đĩa cân thăng bằng nghĩa là khối lượng hai bên bằng nhau: 2 kg + 3 kg = 5 kg.",
+        "explanation": "Đĩa cân thăng bằng nghĩa là khối lượng hai bên bằng nhau: 2 kg + 3 kg = 5 kg. Do đó, đáp án chính xác là 5 kg."
       },
       {
         "id": "g2_l4_8",
@@ -595,7 +635,8 @@ export const CURRICULUM_GRADE_2 = [
           "1 km"
         ],
         "correctAnswer": "5 km",
-        "hint": "Tổng chiều dài quãng đường: 2 km + 3 km = 5 km."
+        "hint": "Tổng chiều dài quãng đường: 2 km + 3 km = 5 km.",
+        "explanation": "Tổng chiều dài quãng đường: 2 km + 3 km = 5 km. Do đó, đáp án chính xác là 5 km."
       }
     ],
     "timoChallenges": [
@@ -610,7 +651,8 @@ export const CURRICULUM_GRADE_2 = [
           "Múc đầy ca 3 lít 2 lần"
         ],
         "correctAnswer": "Múc đầy ca 5 lít rồi rót sang ca 3 lít cho đầy",
-        "hint": "Rót đầy ca 5 lít, sau đó đổ từ ca 5 lít sang ca 3 lít cho đến khi ca 3 lít đầy. Lượng nước còn lại trong ca 5 lít chính là: 5 - 3 = 2 lít."
+        "hint": "Rót đầy ca 5 lít, sau đó đổ từ ca 5 lít sang ca 3 lít cho đến khi ca 3 lít đầy. Lượng nước còn lại trong ca 5 lít chính là: 5 - 3 = 2 lít.",
+        "explanation": "Rót đầy ca 5 lít, sau đó đổ từ ca 5 lít sang ca 3 lít cho đến khi ca 3 lít đầy. Lượng nước còn lại trong ca 5 lít chính là: 5 - 3 = 2 lít. Do đó, đáp án chính xác là Múc đầy ca 5 lít rồi rót sang ca 3 lít cho đầy."
       },
       {
         "id": "g2_t4_2",
@@ -623,7 +665,8 @@ export const CURRICULUM_GRADE_2 = [
           "8 con bồ câu"
         ],
         "correctAnswer": "10 con bồ câu",
-        "hint": "1 con thỏ = 2 con bồ câu. Vậy 5 con thỏ = 5 x 2 = 10 con bồ câu. Do đó 1 con lợn nặng bằng 10 con bồ câu."
+        "hint": "1 con thỏ = 2 con bồ câu. Vậy 5 con thỏ = 5 x 2 = 10 con bồ câu. Do đó 1 con lợn nặng bằng 10 con bồ câu.",
+        "explanation": "1 con thỏ = 2 con bồ câu. Vậy 5 con thỏ = 5 x 2 = 10 con bồ câu. Do đó 1 con lợn nặng bằng 10 con bồ câu. Do đó, đáp án chính xác là 10 con bồ câu."
       },
       {
         "id": "g2_t4_3",
@@ -636,7 +679,8 @@ export const CURRICULUM_GRADE_2 = [
           "4 kg"
         ],
         "correctAnswer": "2 kg",
-        "hint": "Một nửa số dầu nặng là: 20 - 11 = 9 kg. Toàn bộ số dầu nặng là: 9 x 2 = 18 kg. Vỏ thùng nặng: 20 - 18 = 2 kg."
+        "hint": "Một nửa số dầu nặng là: 20 - 11 = 9 kg. Toàn bộ số dầu nặng là: 9 x 2 = 18 kg. Vỏ thùng nặng: 20 - 18 = 2 kg.",
+        "explanation": "Một nửa số dầu nặng là: 20 - 11 = 9 kg. Toàn bộ số dầu nặng là: 9 x 2 = 18 kg. Vỏ thùng nặng: 20 - 18 = 2 kg. Do đó, đáp án chính xác là 2 kg."
       }
     ]
   },
@@ -664,7 +708,8 @@ export const CURRICULUM_GRADE_2 = [
           "5 + 4"
         ],
         "correctAnswer": "5 x 4",
-        "hint": "Số 5 được lấy 4 lần nên ta viết là: 5 x 4."
+        "hint": "Số 5 được lấy 4 lần nên ta viết là: 5 x 4.",
+        "explanation": "Số 5 được lấy 4 lần nên ta viết là: 5 x 4. Vì vậy, kết quả đúng là 5 x 4."
       },
       {
         "id": "g2_l5_2",
@@ -677,7 +722,8 @@ export const CURRICULUM_GRADE_2 = [
           "18"
         ],
         "correctAnswer": "14",
-        "hint": "2 nhân 7 bằng 14 (hoặc 2 + 2 + 2 + 2 + 2 + 2 + 2 = 14)."
+        "hint": "2 nhân 7 bằng 14 (hoặc 2 + 2 + 2 + 2 + 2 + 2 + 2 = 14).",
+        "explanation": "2 nhân 7 bằng 14 (hoặc 2 + 2 + 2 + 2 + 2 + 2 + 2 = 14). Do đó, đáp án chính xác là 14."
       },
       {
         "id": "g2_l5_3",
@@ -690,7 +736,8 @@ export const CURRICULUM_GRADE_2 = [
           "30"
         ],
         "correctAnswer": "40",
-        "hint": "5 x 8 = 40. Các tích trong bảng nhân 5 luôn có tận cùng là 0 hoặc 5."
+        "hint": "5 x 8 = 40. Các tích trong bảng nhân 5 luôn có tận cùng là 0 hoặc 5.",
+        "explanation": "5 x 8 = 40. Các tích trong bảng nhân 5 luôn có tận cùng là 0 hoặc 5. Do đó, đáp án chính xác là 40."
       },
       {
         "id": "g2_l5_4",
@@ -703,7 +750,8 @@ export const CURRICULUM_GRADE_2 = [
           "14 cái chân"
         ],
         "correctAnswer": "18 cái chân",
-        "hint": "Mỗi con vịt có 2 chân, 9 con vịt có: 2 x 9 = 18 cái chân."
+        "hint": "Mỗi con vịt có 2 chân, 9 con vịt có: 2 x 9 = 18 cái chân.",
+        "explanation": "Mỗi con vịt có 2 chân, 9 con vịt có: 2 x 9 = 18 cái chân. Do đó, đáp án chính xác là 18 cái chân."
       },
       {
         "id": "g2_l5_5",
@@ -716,7 +764,8 @@ export const CURRICULUM_GRADE_2 = [
           "20 ngón tay"
         ],
         "correctAnswer": "30 ngón tay",
-        "hint": "Phép tính: 5 x 6 = 30 ngón tay."
+        "hint": "Phép tính: 5 x 6 = 30 ngón tay.",
+        "explanation": "Phép tính: 5 x 6 = 30 ngón tay. Do đó, đáp án chính xác là 30 ngón tay."
       },
       {
         "id": "g2_l5_6",
@@ -729,7 +778,8 @@ export const CURRICULUM_GRADE_2 = [
           "Không bằng nhau"
         ],
         "correctAnswer": "Bằng nhau (đều bằng 10)",
-        "hint": "Khi đổi chỗ các thừa số trong một tích thì tích không thay đổi: 2 x 5 = 5 x 2 = 10."
+        "hint": "Khi đổi chỗ các thừa số trong một tích thì tích không thay đổi: 2 x 5 = 5 x 2 = 10.",
+        "explanation": "Khi đổi chỗ các thừa số trong một tích thì tích không thay đổi: 2 x 5 = 5 x 2 = 10. Do đó, đáp án chính xác là Bằng nhau (đều bằng 10)."
       },
       {
         "id": "g2_l5_7",
@@ -742,7 +792,8 @@ export const CURRICULUM_GRADE_2 = [
           "Hiệu"
         ],
         "correctAnswer": "Tích",
-        "hint": "Trong phép nhân: Thừa số x Thừa số = Tích. Vậy 30 là tích."
+        "hint": "Trong phép nhân: Thừa số x Thừa số = Tích. Vậy 30 là tích.",
+        "explanation": "Trong phép nhân: Thừa số x Thừa số = Tích. Vậy 30 là tích. Do đó, đáp án chính xác là Tích."
       },
       {
         "id": "g2_l5_8",
@@ -755,7 +806,8 @@ export const CURRICULUM_GRADE_2 = [
           "34"
         ],
         "correctAnswer": "30",
-        "hint": "Thực hiện phép nhân trước: 2 x 8 = 16, sau đó lấy 16 + 14 = 30."
+        "hint": "Thực hiện phép nhân trước: 2 x 8 = 16, sau đó lấy 16 + 14 = 30.",
+        "explanation": "Thực hiện phép nhân trước: 2 x 8 = 16, sau đó lấy 16 + 14 = 30. Do đó, đáp án chính xác là 30."
       }
     ],
     "timoChallenges": [
@@ -770,7 +822,8 @@ export const CURRICULUM_GRADE_2 = [
           "18 bánh xe"
         ],
         "correctAnswer": "22 bánh xe",
-        "hint": "4 ô tô có: 4 x 4 = 16 bánh. 3 xe máy có: 2 x 3 = 6 bánh. Tổng cộng: 16 + 6 = 22 bánh xe."
+        "hint": "4 ô tô có: 4 x 4 = 16 bánh. 3 xe máy có: 2 x 3 = 6 bánh. Tổng cộng: 16 + 6 = 22 bánh xe.",
+        "explanation": "4 ô tô có: 4 x 4 = 16 bánh. 3 xe máy có: 2 x 3 = 6 bánh. Tổng cộng: 16 + 6 = 22 bánh xe. Do đó, đáp án chính xác là 22 bánh xe."
       },
       {
         "id": "g2_t5_2",
@@ -783,7 +836,8 @@ export const CURRICULUM_GRADE_2 = [
           "4 con"
         ],
         "correctAnswer": "8 con",
-        "hint": "Sau 1 phút: 1 x 2 = 2 con. Sau 2 phút: 2 x 2 = 4 con. Sau 3 phút: 4 x 2 = 8 con."
+        "hint": "Sau 1 phút: 1 x 2 = 2 con. Sau 2 phút: 2 x 2 = 4 con. Sau 3 phút: 4 x 2 = 8 con.",
+        "explanation": "Sau 1 phút: 1 x 2 = 2 con. Sau 2 phút: 2 x 2 = 4 con. Sau 3 phút: 4 x 2 = 8 con. Do đó, đáp án chính xác là 8 con."
       },
       {
         "id": "g2_t5_3",
@@ -796,7 +850,8 @@ export const CURRICULUM_GRADE_2 = [
           "25"
         ],
         "correctAnswer": "35",
-        "hint": "Tích của hai số ở hai góc dưới là: 5 x 7 = 35."
+        "hint": "Tích của hai số ở hai góc dưới là: 5 x 7 = 35.",
+        "explanation": "Tích của hai số ở hai góc dưới là: 5 x 7 = 35. Do đó, đáp án chính xác là 35."
       }
     ]
   },
@@ -824,7 +879,8 @@ export const CURRICULUM_GRADE_2 = [
           "10"
         ],
         "correctAnswer": "9",
-        "hint": "Vì 2 x 9 = 18 nên 18 : 2 = 9."
+        "hint": "Vì 2 x 9 = 18 nên 18 : 2 = 9.",
+        "explanation": "Vì 2 x 9 = 18 nên 18 : 2 = 9. Do đó, đáp án chính xác là 9."
       },
       {
         "id": "g2_l6_2",
@@ -837,7 +893,8 @@ export const CURRICULUM_GRADE_2 = [
           "5"
         ],
         "correctAnswer": "7",
-        "hint": "Vì 5 x 7 = 35 nên 35 : 5 = 7."
+        "hint": "Vì 5 x 7 = 35 nên 35 : 5 = 7.",
+        "explanation": "Vì 5 x 7 = 35 nên 35 : 5 = 7. Do đó, đáp án chính xác là 7."
       },
       {
         "id": "g2_l6_3",
@@ -850,7 +907,8 @@ export const CURRICULUM_GRADE_2 = [
           "1/5 hình tròn"
         ],
         "correctAnswer": "1/2 hình tròn",
-        "hint": "Chia làm 2 phần bằng nhau, lấy 1 phần gọi là một phần hai, viết là 1/2."
+        "hint": "Chia làm 2 phần bằng nhau, lấy 1 phần gọi là một phần hai, viết là 1/2.",
+        "explanation": "Chia làm 2 phần bằng nhau, lấy 1 phần gọi là một phần hai, viết là 1/2. Vì vậy, kết quả đúng là 1/2 hình tròn."
       },
       {
         "id": "g2_l6_4",
@@ -863,7 +921,8 @@ export const CURRICULUM_GRADE_2 = [
           "6 cái kẹo"
         ],
         "correctAnswer": "4 cái kẹo",
-        "hint": "Mỗi bạn nhận được một phần năm số kẹo: 20 : 5 = 4 cái kẹo."
+        "hint": "Mỗi bạn nhận được một phần năm số kẹo: 20 : 5 = 4 cái kẹo.",
+        "explanation": "Mỗi bạn nhận được một phần năm số kẹo: 20 : 5 = 4 cái kẹo. Do đó, đáp án chính xác là 4 cái kẹo."
       },
       {
         "id": "g2_l6_5",
@@ -876,7 +935,8 @@ export const CURRICULUM_GRADE_2 = [
           "10 chiếc"
         ],
         "correctAnswer": "8 chiếc",
-        "hint": "Muốn tìm một phần hai của 16, ta lấy 16 chia cho 2: 16 : 2 = 8 chiếc bút chì."
+        "hint": "Muốn tìm một phần hai của 16, ta lấy 16 chia cho 2: 16 : 2 = 8 chiếc bút chì.",
+        "explanation": "Muốn tìm một phần hai của 16, ta lấy 16 chia cho 2: 16 : 2 = 8 chiếc bút chì. Do đó, đáp án chính xác là 8 chiếc."
       },
       {
         "id": "g2_l6_6",
@@ -889,7 +949,8 @@ export const CURRICULUM_GRADE_2 = [
           "Số dư"
         ],
         "correctAnswer": "Số bị chia",
-        "hint": "Trong phép chia: Số bị chia : Số chia = Thương. Số đứng đầu tiên là số bị chia."
+        "hint": "Trong phép chia: Số bị chia : Số chia = Thương. Số đứng đầu tiên là số bị chia.",
+        "explanation": "Trong phép chia: Số bị chia : Số chia = Thương. Số đứng đầu tiên là số bị chia. Do đó, đáp án chính xác là Số bị chia."
       },
       {
         "id": "g2_l6_7",
@@ -902,7 +963,8 @@ export const CURRICULUM_GRADE_2 = [
           "5 quả"
         ],
         "correctAnswer": "7 quả",
-        "hint": "Phép chia: 14 : 2 = 7 quả táo."
+        "hint": "Phép chia: 14 : 2 = 7 quả táo.",
+        "explanation": "Phép chia: 14 : 2 = 7 quả táo. Do đó, đáp án chính xác là 7 quả."
       },
       {
         "id": "g2_l6_8",
@@ -915,7 +977,8 @@ export const CURRICULUM_GRADE_2 = [
           "14"
         ],
         "correctAnswer": "16",
-        "hint": "Muốn tìm số bị chia, ta lấy thương nhân với số chia: 8 x 2 = 16."
+        "hint": "Muốn tìm số bị chia, ta lấy thương nhân với số chia: 8 x 2 = 16.",
+        "explanation": "Muốn tìm số bị chia, ta lấy thương nhân với số chia: 8 x 2 = 16. Do đó, đáp án chính xác là 16."
       }
     ],
     "timoChallenges": [
@@ -930,7 +993,8 @@ export const CURRICULUM_GRADE_2 = [
           "Mỗi bạn 2 quyển, thừa 7 quyển"
         ],
         "correctAnswer": "Mỗi bạn 3 quyển, thừa 2 quyển",
-        "hint": "17 : 5 = 3 (dư 2), vì 5 x 3 = 15 và 17 - 15 = 2."
+        "hint": "17 : 5 = 3 (dư 2), vì 5 x 3 = 15 và 17 - 15 = 2.",
+        "explanation": "17 : 5 = 3 (dư 2), vì 5 x 3 = 15 và 17 - 15 = 2. Do đó, đáp án chính xác là Mỗi bạn 3 quyển, thừa 2 quyển."
       },
       {
         "id": "g2_t6_2",
@@ -943,7 +1007,8 @@ export const CURRICULUM_GRADE_2 = [
           "18 phút"
         ],
         "correctAnswer": "12 phút",
-        "hint": "Để cưa thành 5 đoạn thì chỉ cần cưa: 5 - 1 = 4 lần. Thời gian: 4 x 3 = 12 phút."
+        "hint": "Để cưa thành 5 đoạn thì chỉ cần cưa: 5 - 1 = 4 lần. Thời gian: 4 x 3 = 12 phút.",
+        "explanation": "Để cưa thành 5 đoạn thì chỉ cần cưa: 5 - 1 = 4 lần. Thời gian: 4 x 3 = 12 phút. Do đó, đáp án chính xác là 12 phút."
       },
       {
         "id": "g2_t6_3",
@@ -956,7 +1021,8 @@ export const CURRICULUM_GRADE_2 = [
           "26"
         ],
         "correctAnswer": "34",
-        "hint": "Số bị chia = Thương x Số chia + Số dư = 6 x 5 + 4 = 30 + 4 = 34."
+        "hint": "Số bị chia = Thương x Số chia + Số dư = 6 x 5 + 4 = 30 + 4 = 34.",
+        "explanation": "Số bị chia = Thương x Số chia + Số dư = 6 x 5 + 4 = 30 + 4 = 34. Do đó, đáp án chính xác là 34."
       }
     ]
   },
@@ -984,7 +1050,8 @@ export const CURRICULUM_GRADE_2 = [
           "Cái nón lá"
         ],
         "correctAnswer": "Lon nước ngọt",
-        "hint": "Lon nước ngọt, hộp sữa bột lon tròn, cây giò lụa tròn dài có dạng khối trụ."
+        "hint": "Lon nước ngọt, hộp sữa bột lon tròn, cây giò lụa tròn dài có dạng khối trụ.",
+        "explanation": "Lon nước ngọt, hộp sữa bột lon tròn, cây giò lụa tròn dài có dạng khối trụ. Vì vậy, kết quả đúng là Lon nước ngọt."
       },
       {
         "id": "g2_l7_2",
@@ -997,7 +1064,8 @@ export const CURRICULUM_GRADE_2 = [
           "Cái bàn học"
         ],
         "correctAnswer": "Quả địa cầu",
-        "hint": "Quả địa cầu, quả bóng, viên bi là những vật có dạng khối cầu."
+        "hint": "Quả địa cầu, quả bóng, viên bi là những vật có dạng khối cầu.",
+        "explanation": "Quả địa cầu, quả bóng, viên bi là những vật có dạng khối cầu. Vì vậy, kết quả đúng là Quả địa cầu."
       },
       {
         "id": "g2_l7_3",
@@ -1010,7 +1078,8 @@ export const CURRICULUM_GRADE_2 = [
           "Chỉ đứng yên một chỗ"
         ],
         "correctAnswer": "Vừa trượt được vừa lăn được",
-        "hint": "Khối trụ khi đặt đứng thì trượt được (mặt phẳng tròn), khi đặt nằm ngang thì lăn được."
+        "hint": "Khối trụ khi đặt đứng thì trượt được (mặt phẳng tròn), khi đặt nằm ngang thì lăn được.",
+        "explanation": "Khối trụ khi đặt đứng thì trượt được (mặt phẳng tròn), khi đặt nằm ngang thì lăn được. Vì vậy, kết quả đúng là Vừa trượt được vừa lăn được."
       },
       {
         "id": "g2_l7_4",
@@ -1023,7 +1092,8 @@ export const CURRICULUM_GRADE_2 = [
           "4 cạnh và 3 đỉnh"
         ],
         "correctAnswer": "4 cạnh và 4 đỉnh",
-        "hint": "Tứ giác có nghĩa là hình gồm 4 đoạn thẳng khép kín, có 4 cạnh và 4 đỉnh."
+        "hint": "Tứ giác có nghĩa là hình gồm 4 đoạn thẳng khép kín, có 4 cạnh và 4 đỉnh.",
+        "explanation": "Tứ giác có nghĩa là hình gồm 4 đoạn thẳng khép kín, có 4 cạnh và 4 đỉnh. Vì vậy, kết quả đúng là 4 cạnh và 4 đỉnh."
       },
       {
         "id": "g2_l7_5",
@@ -1036,7 +1106,8 @@ export const CURRICULUM_GRADE_2 = [
           "Chỉ hình vuông là tứ giác"
         ],
         "correctAnswer": "Có, đều là hình tứ giác",
-        "hint": "Hình chữ nhật và hình vuông đều có 4 cạnh nên đều là các hình tứ giác đặc biệt."
+        "hint": "Hình chữ nhật và hình vuông đều có 4 cạnh nên đều là các hình tứ giác đặc biệt.",
+        "explanation": "Hình chữ nhật và hình vuông đều có 4 cạnh nên đều là các hình tứ giác đặc biệt. Vì vậy, kết quả đúng là Có, đều là hình tứ giác."
       },
       {
         "id": "g2_l7_6",
@@ -1049,7 +1120,8 @@ export const CURRICULUM_GRADE_2 = [
           "1 hình tứ giác"
         ],
         "correctAnswer": "3 hình tứ giác",
-        "hint": "Có 2 hình vuông nhỏ (hình đơn) và 1 hình chữ nhật to bên ngoài (hình ghép), tổng là 3 hình."
+        "hint": "Có 2 hình vuông nhỏ (hình đơn) và 1 hình chữ nhật to bên ngoài (hình ghép), tổng là 3 hình.",
+        "explanation": "Có 2 hình vuông nhỏ (hình đơn) và 1 hình chữ nhật to bên ngoài (hình ghép), tổng là 3 hình. Vì vậy, kết quả đúng là 3 hình tứ giác."
       },
       {
         "id": "g2_l7_7",
@@ -1062,7 +1134,8 @@ export const CURRICULUM_GRADE_2 = [
           "Có 6 mặt phẳng"
         ],
         "correctAnswer": "Không có mặt phẳng nào",
-        "hint": "Khối cầu có bề mặt cong khép kín hoàn toàn, không có bất kì mặt phẳng nào."
+        "hint": "Khối cầu có bề mặt cong khép kín hoàn toàn, không có bất kì mặt phẳng nào.",
+        "explanation": "Khối cầu có bề mặt cong khép kín hoàn toàn, không có bất kì mặt phẳng nào. Vì vậy, kết quả đúng là Không có mặt phẳng nào."
       },
       {
         "id": "g2_l7_8",
@@ -1075,7 +1148,8 @@ export const CURRICULUM_GRADE_2 = [
           "Khối hộp chữ nhật"
         ],
         "correctAnswer": "Khối trụ",
-        "hint": "Cuộn bìa chữ nhật tạo thân trụ và 2 hình tròn làm 2 đáy sẽ thành khối trụ."
+        "hint": "Cuộn bìa chữ nhật tạo thân trụ và 2 hình tròn làm 2 đáy sẽ thành khối trụ.",
+        "explanation": "Cuộn bìa chữ nhật tạo thân trụ và 2 hình tròn làm 2 đáy sẽ thành khối trụ. Vì vậy, kết quả đúng là Khối trụ."
       }
     ],
     "timoChallenges": [
@@ -1090,7 +1164,8 @@ export const CURRICULUM_GRADE_2 = [
           "8 khối"
         ],
         "correctAnswer": "5 khối",
-        "hint": "Tầng dưới có 4 khối + tầng trên có 1 khối = 5 khối lập phương."
+        "hint": "Tầng dưới có 4 khối + tầng trên có 1 khối = 5 khối lập phương.",
+        "explanation": "Tầng dưới có 4 khối + tầng trên có 1 khối = 5 khối lập phương. Do đó, đáp án chính xác là 5 khối."
       },
       {
         "id": "g2_t7_2",
@@ -1103,7 +1178,8 @@ export const CURRICULUM_GRADE_2 = [
           "10 hình tam giác"
         ],
         "correctAnswer": "5 hình tam giác",
-        "hint": "Mỗi cánh của ngôi sao nhô ra tạo thành 1 hình tam giác nhọn, có 5 cánh là 5 hình tam giác."
+        "hint": "Mỗi cánh của ngôi sao nhô ra tạo thành 1 hình tam giác nhọn, có 5 cánh là 5 hình tam giác.",
+        "explanation": "Mỗi cánh của ngôi sao nhô ra tạo thành 1 hình tam giác nhọn, có 5 cánh là 5 hình tam giác. Vì vậy, kết quả đúng là 5 hình tam giác."
       },
       {
         "id": "g2_t7_3",
@@ -1116,7 +1192,8 @@ export const CURRICULUM_GRADE_2 = [
           "6 góc"
         ],
         "correctAnswer": "5 góc",
-        "hint": "Khi cắt mất 1 góc, chỗ vết cắt xuất hiện thêm 2 góc mới, nên: 4 - 1 + 2 = 5 góc!"
+        "hint": "Khi cắt mất 1 góc, chỗ vết cắt xuất hiện thêm 2 góc mới, nên: 4 - 1 + 2 = 5 góc!",
+        "explanation": "Khi cắt mất 1 góc, chỗ vết cắt xuất hiện thêm 2 góc mới, nên: 4 - 1 + 2 = 5 góc! Do đó, đáp án chính xác là 5 góc."
       }
     ]
   },
@@ -1144,7 +1221,8 @@ export const CURRICULUM_GRADE_2 = [
           "8 giờ 30 phút"
         ],
         "correctAnswer": "8 giờ 15 phút",
-        "hint": "Kim dài chỉ số 3 tương ứng với 15 phút (3 x 5 = 15 phút). Đồng hồ chỉ 8 giờ 15 phút."
+        "hint": "Kim dài chỉ số 3 tương ứng với 15 phút (3 x 5 = 15 phút). Đồng hồ chỉ 8 giờ 15 phút.",
+        "explanation": "Kim dài chỉ số 3 tương ứng với 15 phút (3 x 5 = 15 phút). Đồng hồ chỉ 8 giờ 15 phút. Do đó, đáp án chính xác là 8 giờ 15 phút."
       },
       {
         "id": "g2_l8_2",
@@ -1157,7 +1235,8 @@ export const CURRICULUM_GRADE_2 = [
           "11 giờ 30 phút"
         ],
         "correctAnswer": "10 giờ 30 phút",
-        "hint": "Giờ rưỡi tương đương với 30 phút, nên 10 giờ rưỡi là 10 giờ 30 phút."
+        "hint": "Giờ rưỡi tương đương với 30 phút, nên 10 giờ rưỡi là 10 giờ 30 phút.",
+        "explanation": "Giờ rưỡi tương đương với 30 phút, nên 10 giờ rưỡi là 10 giờ 30 phút. Vì vậy, kết quả đúng là 10 giờ 30 phút."
       },
       {
         "id": "g2_l8_3",
@@ -1170,7 +1249,8 @@ export const CURRICULUM_GRADE_2 = [
           "8 ngày"
         ],
         "correctAnswer": "7 ngày",
-        "hint": "Một tuần có 7 ngày: Thứ Hai, Thứ Ba, Thứ Tư, Thứ Năm, Thứ Sáu, Thứ Bảy, Chủ Nhật."
+        "hint": "Một tuần có 7 ngày: Thứ Hai, Thứ Ba, Thứ Tư, Thứ Năm, Thứ Sáu, Thứ Bảy, Chủ Nhật.",
+        "explanation": "Một tuần có 7 ngày: Thứ Hai, Thứ Ba, Thứ Tư, Thứ Năm, Thứ Sáu, Thứ Bảy, Chủ Nhật. Vì vậy, kết quả đúng là 7 ngày."
       },
       {
         "id": "g2_l8_4",
@@ -1183,7 +1263,8 @@ export const CURRICULUM_GRADE_2 = [
           "Tháng 9"
         ],
         "correctAnswer": "Tháng 1",
-        "hint": "Tháng 1, 3, 5, 7, 8, 10, 12 có 31 ngày. Các tháng 4, 6, 9, 11 có 30 ngày. Tháng 2 có 28 hoặc 29 ngày."
+        "hint": "Tháng 1, 3, 5, 7, 8, 10, 12 có 31 ngày. Các tháng 4, 6, 9, 11 có 30 ngày. Tháng 2 có 28 hoặc 29 ngày.",
+        "explanation": "Tháng 1, 3, 5, 7, 8, 10, 12 có 31 ngày. Các tháng 4, 6, 9, 11 có 30 ngày. Tháng 2 có 28 hoặc 29 ngày. Vì vậy, kết quả đúng là Tháng 1."
       },
       {
         "id": "g2_l8_5",
@@ -1196,7 +1277,8 @@ export const CURRICULUM_GRADE_2 = [
           "4 giờ"
         ],
         "correctAnswer": "2 giờ",
-        "hint": "Thời gian kéo dài: 17 giờ - 15 giờ = 2 giờ."
+        "hint": "Thời gian kéo dài: 17 giờ - 15 giờ = 2 giờ.",
+        "explanation": "Thời gian kéo dài: 17 giờ - 15 giờ = 2 giờ. Do đó, đáp án chính xác là 2 giờ."
       },
       {
         "id": "g2_l8_6",
@@ -1209,7 +1291,8 @@ export const CURRICULUM_GRADE_2 = [
           "10 bông hoa"
         ],
         "correctAnswer": "8 bông hoa",
-        "hint": "Mỗi biểu tượng đại diện 2 bông hoa: 2 x 4 = 8 bông hoa."
+        "hint": "Mỗi biểu tượng đại diện 2 bông hoa: 2 x 4 = 8 bông hoa.",
+        "explanation": "Mỗi biểu tượng đại diện 2 bông hoa: 2 x 4 = 8 bông hoa. Do đó, đáp án chính xác là 8 bông hoa."
       },
       {
         "id": "g2_l8_7",
@@ -1222,7 +1305,8 @@ export const CURRICULUM_GRADE_2 = [
           "Thứ Hai"
         ],
         "correctAnswer": "Thứ Ba",
-        "hint": "Ngày mai là Thứ Năm thì hôm nay là Thứ Tư. Hôm qua lùi 1 ngày là Thứ Ba."
+        "hint": "Ngày mai là Thứ Năm thì hôm nay là Thứ Tư. Hôm qua lùi 1 ngày là Thứ Ba.",
+        "explanation": "Ngày mai là Thứ Năm thì hôm nay là Thứ Tư. Hôm qua lùi 1 ngày là Thứ Ba. Vì vậy, kết quả đúng là Thứ Ba."
       },
       {
         "id": "g2_l8_8",
@@ -1235,7 +1319,8 @@ export const CURRICULUM_GRADE_2 = [
           "21 giờ"
         ],
         "correctAnswer": "20 giờ",
-        "hint": "Giờ buổi chiều/tối lấy giờ đó cộng thêm 12: 8 + 12 = 20 giờ."
+        "hint": "Giờ buổi chiều/tối lấy giờ đó cộng thêm 12: 8 + 12 = 20 giờ.",
+        "explanation": "Giờ buổi chiều/tối lấy giờ đó cộng thêm 12: 8 + 12 = 20 giờ. Do đó, đáp án chính xác là 20 giờ."
       }
     ],
     "timoChallenges": [
@@ -1250,7 +1335,8 @@ export const CURRICULUM_GRADE_2 = [
           "Thứ Năm"
         ],
         "correctAnswer": "Thứ Ba",
-        "hint": "Khoảng cách giữa ngày 19 và ngày 5 là: 19 - 5 = 14 ngày. Vì 14 chia hết cho 7 (đúng 2 tuần) nên ngày 19 vẫn rơi vào Thứ Ba."
+        "hint": "Khoảng cách giữa ngày 19 và ngày 5 là: 19 - 5 = 14 ngày. Vì 14 chia hết cho 7 (đúng 2 tuần) nên ngày 19 vẫn rơi vào Thứ Ba.",
+        "explanation": "Khoảng cách giữa ngày 19 và ngày 5 là: 19 - 5 = 14 ngày. Vì 14 chia hết cho 7 (đúng 2 tuần) nên ngày 19 vẫn rơi vào Thứ Ba. Do đó, đáp án chính xác là Thứ Ba."
       },
       {
         "id": "g2_t8_2",
@@ -1263,7 +1349,8 @@ export const CURRICULUM_GRADE_2 = [
           "12 giờ 8 phút"
         ],
         "correctAnswer": "11 giờ 52 phút",
-        "hint": "Từ 8 giờ đến 12 giờ là 4 tiếng. Sau 4 tiếng đồng hồ chậm: 4 x 2 = 8 phút. Vậy đồng hồ chỉ: 12 giờ bớt 8 phút = 11 giờ 52 phút."
+        "hint": "Từ 8 giờ đến 12 giờ là 4 tiếng. Sau 4 tiếng đồng hồ chậm: 4 x 2 = 8 phút. Vậy đồng hồ chỉ: 12 giờ bớt 8 phút = 11 giờ 52 phút.",
+        "explanation": "Từ 8 giờ đến 12 giờ là 4 tiếng. Sau 4 tiếng đồng hồ chậm: 4 x 2 = 8 phút. Vậy đồng hồ chỉ: 12 giờ bớt 8 phút = 11 giờ 52 phút. Do đó, đáp án chính xác là 11 giờ 52 phút."
       },
       {
         "id": "g2_t8_3",
@@ -1276,7 +1363,8 @@ export const CURRICULUM_GRADE_2 = [
           "Ngày 1 tháng 4"
         ],
         "correctAnswer": "Ngày 1 tháng 5",
-        "hint": "Tháng 4 có 30 ngày. Ngày cuối cùng của tháng 4 là 30 tháng 4. Ngày liền sau đó chính là ngày 1 tháng 5."
+        "hint": "Tháng 4 có 30 ngày. Ngày cuối cùng của tháng 4 là 30 tháng 4. Ngày liền sau đó chính là ngày 1 tháng 5.",
+        "explanation": "Tháng 4 có 30 ngày. Ngày cuối cùng của tháng 4 là 30 tháng 4. Ngày liền sau đó chính là ngày 1 tháng 5. Vì vậy, kết quả đúng là Ngày 1 tháng 5."
       }
     ]
   }

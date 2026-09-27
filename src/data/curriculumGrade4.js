@@ -1,5 +1,5 @@
 // Dữ liệu chương trình Toán Lớp 4 chuẩn CTGDPT 2018
-// Bao phủ 8 Chủ đề kiến thức trọng tâm & Thử thách Tư duy Timo chuẩn Quốc tế
+// Đầy đủ 8 Chủ đề kiến thức trọng tâm & Thử thách Tư duy Timo chuẩn Quốc tế
 
 export const CURRICULUM_GRADE_4 = [
   {
@@ -26,7 +26,8 @@ export const CURRICULUM_GRADE_4 = [
           "Mười lăm nghìn hai trăm tám mươi"
         ],
         "correctAnswer": "Mười lăm triệu hai trăm tám mươi nghìn bốn trăm",
-        "hint": "Tách theo từng lớp 3 chữ số: Lớp triệu là 15, lớp nghìn là 280, lớp đơn vị là 400."
+        "hint": "Tách theo từng lớp 3 chữ số: Lớp triệu là 15, lớp nghìn là 280, lớp đơn vị là 400.",
+        "explanation": "Tách theo từng lớp 3 chữ số: Lớp triệu là 15, lớp nghìn là 280, lớp đơn vị là 400. Vì vậy, kết quả đúng là Mười lăm triệu hai trăm tám mươi nghìn bốn trăm."
       },
       {
         "id": "g4_l1_2",
@@ -39,7 +40,8 @@ export const CURRICULUM_GRADE_4 = [
           "Hàng chục nghìn, lớp nghìn"
         ],
         "correctAnswer": "Hàng chục triệu, lớp triệu",
-        "hint": "Lớp triệu gồm các chữ số: 4 (trăm triệu), 7 (chục triệu), 2 (triệu). Vậy 7 thuộc hàng chục triệu, lớp triệu."
+        "hint": "Lớp triệu gồm các chữ số: 4 (trăm triệu), 7 (chục triệu), 2 (triệu). Vậy 7 thuộc hàng chục triệu, lớp triệu.",
+        "explanation": "Lớp triệu gồm các chữ số: 4 (trăm triệu), 7 (chục triệu), 2 (triệu). Vậy 7 thuộc hàng chục triệu, lớp triệu. Vì vậy, kết quả đúng là Hàng chục triệu, lớp triệu."
       },
       {
         "id": "g4_l1_3",
@@ -52,7 +54,8 @@ export const CURRICULUM_GRADE_4 = [
           "800"
         ],
         "correctAnswer": "800 000",
-        "hint": "Chữ số 8 đứng ở hàng trăm nghìn nên có giá trị là 800 000."
+        "hint": "Chữ số 8 đứng ở hàng trăm nghìn nên có giá trị là 800 000.",
+        "explanation": "Chữ số 8 đứng ở hàng trăm nghìn nên có giá trị là 800 000. Vì vậy, kết quả đúng là 800 000."
       },
       {
         "id": "g4_l1_4",
@@ -65,7 +68,8 @@ export const CURRICULUM_GRADE_4 = [
           "-1"
         ],
         "correctAnswer": "0",
-        "hint": "Dãy số tự nhiên bắt đầu từ số 0: 0, 1, 2, 3, 4,... Không có số tự nhiên lớn nhất."
+        "hint": "Dãy số tự nhiên bắt đầu từ số 0: 0, 1, 2, 3, 4,... Không có số tự nhiên lớn nhất.",
+        "explanation": "Dãy số tự nhiên bắt đầu từ số 0: 0, 1, 2, 3, 4,... Không có số tự nhiên lớn nhất. Vì vậy, kết quả đúng là 0."
       },
       {
         "id": "g4_l1_5",
@@ -77,7 +81,8 @@ export const CURRICULUM_GRADE_4 = [
           "="
         ],
         "correctAnswer": "<",
-        "hint": "Số 9 999 999 có 7 chữ số, số 10 000 000 có 8 chữ số. Số nào có ít chữ số hơn thì bé hơn."
+        "hint": "Số 9 999 999 có 7 chữ số, số 10 000 000 có 8 chữ số. Số nào có ít chữ số hơn thì bé hơn.",
+        "explanation": "Số 9 999 999 có 7 chữ số, số 10 000 000 có 8 chữ số. Số nào có ít chữ số hơn thì bé hơn. Vì vậy, kết quả đúng là <."
       },
       {
         "id": "g4_l1_6",
@@ -90,7 +95,8 @@ export const CURRICULUM_GRADE_4 = [
           "4 000 000"
         ],
         "correctAnswer": "3 500 000",
-        "hint": "Chữ số hàng chục nghìn là 8 (>= 5) nên ta làm tròn tăng lên: 3 500 000."
+        "hint": "Chữ số hàng chục nghìn là 8 (>= 5) nên ta làm tròn tăng lên: 3 500 000.",
+        "explanation": "Chữ số hàng chục nghìn là 8 (>= 5) nên ta làm tròn tăng lên: 3 500 000. Do đó, đáp án chính xác là 3 500 000."
       },
       {
         "id": "g4_l1_7",
@@ -103,7 +109,8 @@ export const CURRICULUM_GRADE_4 = [
           "9 876 541"
         ],
         "correctAnswer": "1 245 678",
-        "hint": "Số chẵn có chữ số tận cùng là 0, 2, 4, 6, 8. Số 1 245 678 có chữ số tận cùng là 8 nên là số chẵn."
+        "hint": "Số chẵn có chữ số tận cùng là 0, 2, 4, 6, 8. Số 1 245 678 có chữ số tận cùng là 8 nên là số chẵn.",
+        "explanation": "Số chẵn có chữ số tận cùng là 0, 2, 4, 6, 8. Số 1 245 678 có chữ số tận cùng là 8 nên là số chẵn. Vì vậy, kết quả đúng là 1 245 678."
       },
       {
         "id": "g4_l1_8",
@@ -116,7 +123,8 @@ export const CURRICULUM_GRADE_4 = [
           "6 450 002"
         ],
         "correctAnswer": "6 040 502",
-        "hint": "Hàng triệu là 6, hàng chục nghìn là 4, hàng trăm là 5, hàng đơn vị là 2 => 6 040 502."
+        "hint": "Hàng triệu là 6, hàng chục nghìn là 4, hàng trăm là 5, hàng đơn vị là 2 => 6 040 502.",
+        "explanation": "Hàng triệu là 6, hàng chục nghìn là 4, hàng trăm là 5, hàng đơn vị là 2 => 6 040 502. Do đó, đáp án chính xác là 6 040 502."
       }
     ],
     "timoChallenges": [
@@ -131,7 +139,8 @@ export const CURRICULUM_GRADE_4 = [
           "16 số"
         ],
         "correctAnswer": "18 số",
-        "hint": "Hàng trăm có 3 cách chọn (khác 0). Hàng chục có 3 cách chọn. Hàng đơn vị có 2 cách chọn. Số các số lập được là: 3 x 3 x 2 = 18 số."
+        "hint": "Hàng trăm có 3 cách chọn (khác 0). Hàng chục có 3 cách chọn. Hàng đơn vị có 2 cách chọn. Số các số lập được là: 3 x 3 x 2 = 18 số.",
+        "explanation": "Hàng trăm có 3 cách chọn (khác 0). Hàng chục có 3 cách chọn. Hàng đơn vị có 2 cách chọn. Số các số lập được là: 3 x 3 x 2 = 18 số. Do đó, đáp án chính xác là 18 số."
       },
       {
         "id": "g4_t1_2",
@@ -144,7 +153,8 @@ export const CURRICULUM_GRADE_4 = [
           "0"
         ],
         "correctAnswer": "2",
-        "hint": "Từ 1 đến 9 có 9 chữ số. Tiếp theo là các số có 2 chữ số: 10 (chữ số thứ 10, 11), 11 (thứ 12, 13), 12 (thứ 14, 15). Chữ số thứ 15 là 2."
+        "hint": "Từ 1 đến 9 có 9 chữ số. Tiếp theo là các số có 2 chữ số: 10 (chữ số thứ 10, 11), 11 (thứ 12, 13), 12 (thứ 14, 15). Chữ số thứ 15 là 2.",
+        "explanation": "Từ 1 đến 9 có 9 chữ số. Tiếp theo là các số có 2 chữ số: 10 (chữ số thứ 10, 11), 11 (thứ 12, 13), 12 (thứ 14, 15). Chữ số thứ 15 là 2. Vì vậy, kết quả đúng là 2."
       },
       {
         "id": "g4_t1_3",
@@ -157,7 +167,8 @@ export const CURRICULUM_GRADE_4 = [
           "7 số"
         ],
         "correctAnswer": "6 số",
-        "hint": "Các bộ ba chữ số có tổng bằng 3: (3,0,0) -> 300 (1 số); (2,1,0) -> 210, 201, 120, 102 (4 số); (1,1,1) -> 111 (1 số). Tổng cộng: 1 + 4 + 1 = 6 số."
+        "hint": "Các bộ ba chữ số có tổng bằng 3: (3,0,0) -> 300 (1 số); (2,1,0) -> 210, 201, 120, 102 (4 số); (1,1,1) -> 111 (1 số). Tổng cộng: 1 + 4 + 1 = 6 số.",
+        "explanation": "Các bộ ba chữ số có tổng bằng 3: (3,0,0) -> 300 (1 số); (2,1,0) -> 210, 201, 120, 102 (4 số); (1,1,1) -> 111 (1 số). Tổng cộng: 1 + 4 + 1 = 6 số. Do đó, đáp án chính xác là 6 số."
       }
     ]
   },
@@ -185,7 +196,8 @@ export const CURRICULUM_GRADE_4 = [
           "3650"
         ],
         "correctAnswer": "3550",
-        "hint": "142 x 5 = 710; 142 x 20 = 2840. Tổng 710 + 2840 = 3550."
+        "hint": "142 x 5 = 710; 142 x 20 = 2840. Tổng 710 + 2840 = 3550.",
+        "explanation": "142 x 5 = 710; 142 x 20 = 2840. Tổng 710 + 2840 = 3550. Do đó, đáp án chính xác là 3550."
       },
       {
         "id": "g4_l2_2",
@@ -198,7 +210,8 @@ export const CURRICULUM_GRADE_4 = [
           "130"
         ],
         "correctAnswer": "135",
-        "hint": "48 : 36 = 1 (dư 12), hạ 6 được 126 : 36 = 3 (dư 18), hạ 0 được 180 : 36 = 5. Kết quả là 135."
+        "hint": "48 : 36 = 1 (dư 12), hạ 6 được 126 : 36 = 3 (dư 18), hạ 0 được 180 : 36 = 5. Kết quả là 135.",
+        "explanation": "48 : 36 = 1 (dư 12), hạ 6 được 126 : 36 = 3 (dư 18), hạ 0 được 180 : 36 = 5. Kết quả là 135. Do đó, đáp án chính xác là 135."
       },
       {
         "id": "g4_l2_3",
@@ -211,7 +224,8 @@ export const CURRICULUM_GRADE_4 = [
           "1350"
         ],
         "correctAnswer": "1378",
-        "hint": "Gộp (125 + 875) = 1000, sau đó lấy 1000 + 378 = 1378."
+        "hint": "Gộp (125 + 875) = 1000, sau đó lấy 1000 + 378 = 1378.",
+        "explanation": "Gộp (125 + 875) = 1000, sau đó lấy 1000 + 378 = 1378. Do đó, đáp án chính xác là 1378."
       },
       {
         "id": "g4_l2_4",
@@ -224,7 +238,8 @@ export const CURRICULUM_GRADE_4 = [
           "4000"
         ],
         "correctAnswer": "3800",
-        "hint": "Đặt thừa số chung: 38 x (45 + 55) = 38 x 100 = 3800."
+        "hint": "Đặt thừa số chung: 38 x (45 + 55) = 38 x 100 = 3800.",
+        "explanation": "Đặt thừa số chung: 38 x (45 + 55) = 38 x 100 = 3800. Do đó, đáp án chính xác là 3800."
       },
       {
         "id": "g4_l2_5",
@@ -237,7 +252,8 @@ export const CURRICULUM_GRADE_4 = [
           "50"
         ],
         "correctAnswer": "40",
-        "hint": "TBC = Tổng các số chia cho số các số hạng: (24 + 36 + 60) : 3 = 120 : 3 = 40."
+        "hint": "TBC = Tổng các số chia cho số các số hạng: (24 + 36 + 60) : 3 = 120 : 3 = 40.",
+        "explanation": "TBC = Tổng các số chia cho số các số hạng: (24 + 36 + 60) : 3 = 120 : 3 = 40. Do đó, đáp án chính xác là 40."
       },
       {
         "id": "g4_l2_6",
@@ -250,7 +266,8 @@ export const CURRICULUM_GRADE_4 = [
           "400 kg"
         ],
         "correctAnswer": "200 kg",
-        "hint": "(150 + 250) : 2 = 400 : 2 = 200 kg gạo."
+        "hint": "(150 + 250) : 2 = 400 : 2 = 200 kg gạo.",
+        "explanation": "(150 + 250) : 2 = 400 : 2 = 200 kg gạo. Do đó, đáp án chính xác là 200 kg."
       },
       {
         "id": "g4_l2_7",
@@ -263,7 +280,8 @@ export const CURRICULUM_GRADE_4 = [
           "485"
         ],
         "correctAnswer": "495",
-        "hint": "Lấy 4 + 5 = 9 rồi viết chữ số 9 vào giữa hai chữ số 4 và 5 được 495."
+        "hint": "Lấy 4 + 5 = 9 rồi viết chữ số 9 vào giữa hai chữ số 4 và 5 được 495.",
+        "explanation": "Lấy 4 + 5 = 9 rồi viết chữ số 9 vào giữa hai chữ số 4 và 5 được 495. Do đó, đáp án chính xác là 495."
       },
       {
         "id": "g4_l2_8",
@@ -276,7 +294,8 @@ export const CURRICULUM_GRADE_4 = [
           "550"
         ],
         "correctAnswer": "600",
-        "hint": "x = 40 x 15 = 600."
+        "hint": "x = 40 x 15 = 600.",
+        "explanation": "x = 40 x 15 = 600. Do đó, đáp án chính xác là 600."
       }
     ],
     "timoChallenges": [
@@ -291,7 +310,8 @@ export const CURRICULUM_GRADE_4 = [
           "4000"
         ],
         "correctAnswer": "3998",
-        "hint": "Đặt 1999 ra ngoài: 1999 x (2001 - 1999) = 1999 x 2 = 3998."
+        "hint": "Đặt 1999 ra ngoài: 1999 x (2001 - 1999) = 1999 x 2 = 3998.",
+        "explanation": "Đặt 1999 ra ngoài: 1999 x (2001 - 1999) = 1999 x 2 = 3998. Do đó, đáp án chính xác là 3998."
       },
       {
         "id": "g4_t2_2",
@@ -304,7 +324,8 @@ export const CURRICULUM_GRADE_4 = [
           "16 tuổi"
         ],
         "correctAnswer": "14 tuổi",
-        "hint": "Tổng tuổi của 4 bạn: 4 x 10 = 40 tuổi. Tổng tuổi cả 5 người: 40 + 30 = 70 tuổi. TBC mới: 70 : 5 = 14 tuổi."
+        "hint": "Tổng tuổi của 4 bạn: 4 x 10 = 40 tuổi. Tổng tuổi cả 5 người: 40 + 30 = 70 tuổi. TBC mới: 70 : 5 = 14 tuổi.",
+        "explanation": "Tổng tuổi của 4 bạn: 4 x 10 = 40 tuổi. Tổng tuổi cả 5 người: 40 + 30 = 70 tuổi. TBC mới: 70 : 5 = 14 tuổi. Do đó, đáp án chính xác là 14 tuổi."
       },
       {
         "id": "g4_t2_3",
@@ -317,7 +338,8 @@ export const CURRICULUM_GRADE_4 = [
           "42"
         ],
         "correctAnswer": "48",
-        "hint": "Số chia là 7 nên số dư lớn nhất là 6. Thương cũng bằng 6. Số cần tìm là: 6 x 7 + 6 = 48."
+        "hint": "Số chia là 7 nên số dư lớn nhất là 6. Thương cũng bằng 6. Số cần tìm là: 6 x 7 + 6 = 48.",
+        "explanation": "Số chia là 7 nên số dư lớn nhất là 6. Thương cũng bằng 6. Số cần tìm là: 6 x 7 + 6 = 48. Do đó, đáp án chính xác là 48."
       }
     ]
   },
@@ -345,7 +367,8 @@ export const CURRICULUM_GRADE_4 = [
           "4 góc vuông"
         ],
         "correctAnswer": "2 góc vuông (180 độ)",
-        "hint": "Góc bẹt có hai cạnh nằm trên một đường thẳng, số đo bằng 180 độ = 2 góc vuông."
+        "hint": "Góc bẹt có hai cạnh nằm trên một đường thẳng, số đo bằng 180 độ = 2 góc vuông.",
+        "explanation": "Góc bẹt có hai cạnh nằm trên một đường thẳng, số đo bằng 180 độ = 2 góc vuông. Do đó, đáp án chính xác là 2 góc vuông (180 độ)."
       },
       {
         "id": "g4_l3_2",
@@ -358,7 +381,8 @@ export const CURRICULUM_GRADE_4 = [
           "Bằng 2 góc vuông"
         ],
         "correctAnswer": "Lớn hơn góc vuông và bé hơn góc bẹt",
-        "hint": "Thứ tự độ lớn của các góc: Góc nhọn < Góc vuông < Góc tù < Góc bẹt."
+        "hint": "Thứ tự độ lớn của các góc: Góc nhọn < Góc vuông < Góc tù < Góc bẹt.",
+        "explanation": "Thứ tự độ lớn của các góc: Góc nhọn < Góc vuông < Góc tù < Góc bẹt. Vì vậy, kết quả đúng là Lớn hơn góc vuông và bé hơn góc bẹt."
       },
       {
         "id": "g4_l3_3",
@@ -371,7 +395,8 @@ export const CURRICULUM_GRADE_4 = [
           "3 góc vuông"
         ],
         "correctAnswer": "4 góc vuông",
-        "hint": "Hai đường thẳng vuông góc cắt nhau tạo thành 4 góc vuông xung quanh điểm giao nhau."
+        "hint": "Hai đường thẳng vuông góc cắt nhau tạo thành 4 góc vuông xung quanh điểm giao nhau.",
+        "explanation": "Hai đường thẳng vuông góc cắt nhau tạo thành 4 góc vuông xung quanh điểm giao nhau. Vì vậy, kết quả đúng là 4 góc vuông."
       },
       {
         "id": "g4_l3_4",
@@ -384,7 +409,8 @@ export const CURRICULUM_GRADE_4 = [
           "Trùng khít lên nhau"
         ],
         "correctAnswer": "Không bao giờ cắt nhau",
-        "hint": "Hai đường thẳng song song dù kéo dài mãi mãi về hai phía cũng không bao giờ có điểm chung."
+        "hint": "Hai đường thẳng song song dù kéo dài mãi mãi về hai phía cũng không bao giờ có điểm chung.",
+        "explanation": "Hai đường thẳng song song dù kéo dài mãi mãi về hai phía cũng không bao giờ có điểm chung. Vì vậy, kết quả đúng là Không bao giờ cắt nhau."
       },
       {
         "id": "g4_l3_5",
@@ -397,7 +423,8 @@ export const CURRICULUM_GRADE_4 = [
           "0 cặp"
         ],
         "correctAnswer": "2 cặp cạnh song song",
-        "hint": "Hai chiều dài song song với nhau (1 cặp), hai chiều rộng song song với nhau (1 cặp), tổng là 2 cặp."
+        "hint": "Hai chiều dài song song với nhau (1 cặp), hai chiều rộng song song với nhau (1 cặp), tổng là 2 cặp.",
+        "explanation": "Hai chiều dài song song với nhau (1 cặp), hai chiều rộng song song với nhau (1 cặp), tổng là 2 cặp. Vì vậy, kết quả đúng là 2 cặp cạnh song song."
       },
       {
         "id": "g4_l3_6",
@@ -410,7 +437,8 @@ export const CURRICULUM_GRADE_4 = [
           "Góc bẹt"
         ],
         "correctAnswer": "Góc nhọn",
-        "hint": "Góc bé hơn 90 độ là góc nhọn (45 độ < 90 độ)."
+        "hint": "Góc bé hơn 90 độ là góc nhọn (45 độ < 90 độ).",
+        "explanation": "Góc bé hơn 90 độ là góc nhọn (45 độ < 90 độ). Vì vậy, kết quả đúng là Góc nhọn."
       },
       {
         "id": "g4_l3_7",
@@ -423,7 +451,8 @@ export const CURRICULUM_GRADE_4 = [
           "Góc nhọn"
         ],
         "correctAnswer": "Góc bẹt",
-        "hint": "Kim dài chỉ số 12, kim ngắn chỉ số 6, tạo thành một đường thẳng (góc bẹt 180 độ)."
+        "hint": "Kim dài chỉ số 12, kim ngắn chỉ số 6, tạo thành một đường thẳng (góc bẹt 180 độ).",
+        "explanation": "Kim dài chỉ số 12, kim ngắn chỉ số 6, tạo thành một đường thẳng (góc bẹt 180 độ). Vì vậy, kết quả đúng là Góc bẹt."
       },
       {
         "id": "g4_l3_8",
@@ -436,7 +465,8 @@ export const CURRICULUM_GRADE_4 = [
           "Cạnh bên"
         ],
         "correctAnswer": "Đường cao",
-        "hint": "Đoạn thẳng vuông góc kẻ từ đỉnh xuống đáy chính là đường cao của hình tam giác."
+        "hint": "Đoạn thẳng vuông góc kẻ từ đỉnh xuống đáy chính là đường cao của hình tam giác.",
+        "explanation": "Đoạn thẳng vuông góc kẻ từ đỉnh xuống đáy chính là đường cao của hình tam giác. Vì vậy, kết quả đúng là Đường cao."
       }
     ],
     "timoChallenges": [
@@ -451,7 +481,8 @@ export const CURRICULUM_GRADE_4 = [
           "12 góc"
         ],
         "correctAnswer": "6 góc",
-        "hint": "Số góc tạo bởi 4 tia chung gốc là: (4 x 3) : 2 = 6 góc."
+        "hint": "Số góc tạo bởi 4 tia chung gốc là: (4 x 3) : 2 = 6 góc.",
+        "explanation": "Số góc tạo bởi 4 tia chung gốc là: (4 x 3) : 2 = 6 góc. Do đó, đáp án chính xác là 6 góc."
       },
       {
         "id": "g4_t3_2",
@@ -464,7 +495,8 @@ export const CURRICULUM_GRADE_4 = [
           "100 độ"
         ],
         "correctAnswer": "120 độ",
-        "hint": "Mỗi khoảng cách giữa hai số trên đồng hồ là 30 độ (360 : 12 = 30 độ). Lúc 4 giờ có 4 khoảng: 4 x 30 = 120 độ."
+        "hint": "Mỗi khoảng cách giữa hai số trên đồng hồ là 30 độ (360 : 12 = 30 độ). Lúc 4 giờ có 4 khoảng: 4 x 30 = 120 độ.",
+        "explanation": "Mỗi khoảng cách giữa hai số trên đồng hồ là 30 độ (360 : 12 = 30 độ). Lúc 4 giờ có 4 khoảng: 4 x 30 = 120 độ. Do đó, đáp án chính xác là 120 độ."
       },
       {
         "id": "g4_t3_3",
@@ -477,7 +509,8 @@ export const CURRICULUM_GRADE_4 = [
           "15 hình"
         ],
         "correctAnswer": "18 hình",
-        "hint": "Chọn 2 đường nằm ngang: (3 x 2) / 2 = 3 cách. Chọn 2 đường thẳng đứng: (4 x 3) / 2 = 6 cách. Số hình bình hành = 3 x 6 = 18 hình."
+        "hint": "Chọn 2 đường nằm ngang: (3 x 2) / 2 = 3 cách. Chọn 2 đường thẳng đứng: (4 x 3) / 2 = 6 cách. Số hình bình hành = 3 x 6 = 18 hình.",
+        "explanation": "Chọn 2 đường nằm ngang: (3 x 2) / 2 = 3 cách. Chọn 2 đường thẳng đứng: (4 x 3) / 2 = 6 cách. Số hình bình hành = 3 x 6 = 18 hình. Do đó, đáp án chính xác là 18 hình."
       }
     ]
   },
@@ -505,7 +538,8 @@ export const CURRICULUM_GRADE_4 = [
           "10 kg"
         ],
         "correctAnswer": "1000 kg",
-        "hint": "1 tấn = 10 tạ = 100 yến = 1000 kg."
+        "hint": "1 tấn = 10 tạ = 100 yến = 1000 kg.",
+        "explanation": "1 tấn = 10 tạ = 100 yến = 1000 kg. Do đó, đáp án chính xác là 1000 kg."
       },
       {
         "id": "g4_l4_2",
@@ -518,7 +552,8 @@ export const CURRICULUM_GRADE_4 = [
           "50 kg"
         ],
         "correctAnswer": "100 kg",
-        "hint": "1 tạ = 10 yến = 100 kg."
+        "hint": "1 tạ = 10 yến = 100 kg.",
+        "explanation": "1 tạ = 10 yến = 100 kg. Do đó, đáp án chính xác là 100 kg."
       },
       {
         "id": "g4_l4_3",
@@ -531,7 +566,8 @@ export const CURRICULUM_GRADE_4 = [
           "10 000 dm2"
         ],
         "correctAnswer": "100 dm2",
-        "hint": "Trong bảng đơn vị đo diện tích, mỗi đơn vị gấp 100 lần đơn vị liền sau nó: 1 m2 = 100 dm2."
+        "hint": "Trong bảng đơn vị đo diện tích, mỗi đơn vị gấp 100 lần đơn vị liền sau nó: 1 m2 = 100 dm2.",
+        "explanation": "Trong bảng đơn vị đo diện tích, mỗi đơn vị gấp 100 lần đơn vị liền sau nó: 1 m2 = 100 dm2. Do đó, đáp án chính xác là 100 dm2."
       },
       {
         "id": "g4_l4_4",
@@ -544,7 +580,8 @@ export const CURRICULUM_GRADE_4 = [
           "100 000 cm2"
         ],
         "correctAnswer": "10 000 cm2",
-        "hint": "1 m2 = 100 dm2 = 10 000 cm2."
+        "hint": "1 m2 = 100 dm2 = 10 000 cm2.",
+        "explanation": "1 m2 = 100 dm2 = 10 000 cm2. Do đó, đáp án chính xác là 10 000 cm2."
       },
       {
         "id": "g4_l4_5",
@@ -557,7 +594,8 @@ export const CURRICULUM_GRADE_4 = [
           "3005 kg"
         ],
         "correctAnswer": "3050 kg",
-        "hint": "3 tấn = 3000 kg. Cộng thêm 50 kg = 3050 kg."
+        "hint": "3 tấn = 3000 kg. Cộng thêm 50 kg = 3050 kg.",
+        "explanation": "3 tấn = 3000 kg. Cộng thêm 50 kg = 3050 kg. Do đó, đáp án chính xác là 3050 kg."
       },
       {
         "id": "g4_l4_6",
@@ -570,7 +608,8 @@ export const CURRICULUM_GRADE_4 = [
           "56 m2"
         ],
         "correctAnswer": "48 m2",
-        "hint": "Diện tích = dài x rộng = 8 x 6 = 48 m2."
+        "hint": "Diện tích = dài x rộng = 8 x 6 = 48 m2.",
+        "explanation": "Diện tích = dài x rộng = 8 x 6 = 48 m2. Do đó, đáp án chính xác là 48 m2."
       },
       {
         "id": "g4_l4_7",
@@ -583,7 +622,8 @@ export const CURRICULUM_GRADE_4 = [
           "120 giây"
         ],
         "correctAnswer": "3600 giây",
-        "hint": "1 giờ = 60 phút, mỗi phút = 60 giây. Vậy 1 giờ = 60 x 60 = 3600 giây."
+        "hint": "1 giờ = 60 phút, mỗi phút = 60 giây. Vậy 1 giờ = 60 x 60 = 3600 giây.",
+        "explanation": "1 giờ = 60 phút, mỗi phút = 60 giây. Vậy 1 giờ = 60 x 60 = 3600 giây. Do đó, đáp án chính xác là 3600 giây."
       },
       {
         "id": "g4_l4_8",
@@ -596,7 +636,8 @@ export const CURRICULUM_GRADE_4 = [
           "Thế kỉ XIX (19)"
         ],
         "correctAnswer": "Thế kỉ XXI (21)",
-        "hint": "Từ năm 2001 đến hết năm 2100 thuộc thế kỉ 21 (XXI)."
+        "hint": "Từ năm 2001 đến hết năm 2100 thuộc thế kỉ 21 (XXI).",
+        "explanation": "Từ năm 2001 đến hết năm 2100 thuộc thế kỉ 21 (XXI). Vì vậy, kết quả đúng là Thế kỉ XXI (21)."
       }
     ],
     "timoChallenges": [
@@ -611,7 +652,8 @@ export const CURRICULUM_GRADE_4 = [
           "200 viên"
         ],
         "correctAnswer": "150 viên",
-        "hint": "Đổi: 24 m2 = 240 000 cm2. Diện tích 1 viên gạch: 40 x 40 = 1600 cm2. Số gạch cần dùng: 240 000 : 1600 = 150 viên gạch."
+        "hint": "Đổi: 24 m2 = 240 000 cm2. Diện tích 1 viên gạch: 40 x 40 = 1600 cm2. Số gạch cần dùng: 240 000 : 1600 = 150 viên gạch.",
+        "explanation": "Đổi: 24 m2 = 240 000 cm2. Diện tích 1 viên gạch: 40 x 40 = 1600 cm2. Số gạch cần dùng: 240 000 : 1600 = 150 viên gạch. Do đó, đáp án chính xác là 150 viên."
       },
       {
         "id": "g4_t4_2",
@@ -624,7 +666,8 @@ export const CURRICULUM_GRADE_4 = [
           "200 kg"
         ],
         "correctAnswer": "700 kg",
-        "hint": "Đổi: 3 tấn = 3000 kg; 15 tạ = 1500 kg. Hàng đã có: 1500 + 800 = 2300 kg. Có thể chở thêm: 3000 - 2300 = 700 kg."
+        "hint": "Đổi: 3 tấn = 3000 kg; 15 tạ = 1500 kg. Hàng đã có: 1500 + 800 = 2300 kg. Có thể chở thêm: 3000 - 2300 = 700 kg.",
+        "explanation": "Đổi: 3 tấn = 3000 kg; 15 tạ = 1500 kg. Hàng đã có: 1500 + 800 = 2300 kg. Có thể chở thêm: 3000 - 2300 = 700 kg. Do đó, đáp án chính xác là 700 kg."
       },
       {
         "id": "g4_t4_3",
@@ -637,7 +680,8 @@ export const CURRICULUM_GRADE_4 = [
           "53 tuần và dư 0 ngày"
         ],
         "correctAnswer": "52 tuần và dư 2 ngày",
-        "hint": "366 : 7 = 52 (dư 2), vì 52 x 7 = 364 và 366 - 364 = 2 ngày."
+        "hint": "366 : 7 = 52 (dư 2), vì 52 x 7 = 364 và 366 - 364 = 2 ngày.",
+        "explanation": "366 : 7 = 52 (dư 2), vì 52 x 7 = 364 và 366 - 364 = 2 ngày. Do đó, đáp án chính xác là 52 tuần và dư 2 ngày."
       }
     ]
   },
@@ -665,7 +709,8 @@ export const CURRICULUM_GRADE_4 = [
           "3 là số chia, 7 là số bị chia"
         ],
         "correctAnswer": "3 là tử số, 7 là mẫu số",
-        "hint": "Số viết trên gạch ngang là tử số, số viết dưới gạch ngang là mẫu số (mẫu số luôn khác 0)."
+        "hint": "Số viết trên gạch ngang là tử số, số viết dưới gạch ngang là mẫu số (mẫu số luôn khác 0).",
+        "explanation": "Số viết trên gạch ngang là tử số, số viết dưới gạch ngang là mẫu số (mẫu số luôn khác 0). Vì vậy, kết quả đúng là 3 là tử số, 7 là mẫu số."
       },
       {
         "id": "g4_l5_2",
@@ -678,7 +723,8 @@ export const CURRICULUM_GRADE_4 = [
           "2/3"
         ],
         "correctAnswer": "3/4",
-        "hint": "Chia cả tử số và mẫu số cho 6 (ước chung lớn nhất): (18 : 6) / (24 : 6) = 3/4."
+        "hint": "Chia cả tử số và mẫu số cho 6 (ước chung lớn nhất): (18 : 6) / (24 : 6) = 3/4.",
+        "explanation": "Chia cả tử số và mẫu số cho 6 (ước chung lớn nhất): (18 : 6) / (24 : 6) = 3/4. Do đó, đáp án chính xác là 3/4."
       },
       {
         "id": "g4_l5_3",
@@ -691,7 +737,8 @@ export const CURRICULUM_GRADE_4 = [
           "8"
         ],
         "correctAnswer": "12",
-        "hint": "12 vừa chia hết cho 4 (12:4=3) vừa chia hết cho 6 (12:6=2)."
+        "hint": "12 vừa chia hết cho 4 (12:4=3) vừa chia hết cho 6 (12:6=2).",
+        "explanation": "12 vừa chia hết cho 4 (12:4=3) vừa chia hết cho 6 (12:6=2). Do đó, đáp án chính xác là 12."
       },
       {
         "id": "g4_l5_4",
@@ -703,7 +750,8 @@ export const CURRICULUM_GRADE_4 = [
           "="
         ],
         "correctAnswer": "<",
-        "hint": "Hai phân số có cùng mẫu số dương, phân số nào có tử số bé hơn thì bé hơn: 5 < 7 nên 5/9 < 7/9."
+        "hint": "Hai phân số có cùng mẫu số dương, phân số nào có tử số bé hơn thì bé hơn: 5 < 7 nên 5/9 < 7/9.",
+        "explanation": "Hai phân số có cùng mẫu số dương, phân số nào có tử số bé hơn thì bé hơn: 5 < 7 nên 5/9 < 7/9. Vì vậy, kết quả đúng là <."
       },
       {
         "id": "g4_l5_5",
@@ -716,7 +764,8 @@ export const CURRICULUM_GRADE_4 = [
           "3/4"
         ],
         "correctAnswer": "8/5",
-        "hint": "Phân số có tử số lớn hơn mẫu số (8 > 5) thì phân số đó lớn hơn 1."
+        "hint": "Phân số có tử số lớn hơn mẫu số (8 > 5) thì phân số đó lớn hơn 1.",
+        "explanation": "Phân số có tử số lớn hơn mẫu số (8 > 5) thì phân số đó lớn hơn 1. Vì vậy, kết quả đúng là 8/5."
       },
       {
         "id": "g4_l5_6",
@@ -729,7 +778,8 @@ export const CURRICULUM_GRADE_4 = [
           "12"
         ],
         "correctAnswer": "8",
-        "hint": "Mẫu số nhân với 4 (5 x 4 = 20) thì tử số cũng nhân với 4: 2 x 4 = 8."
+        "hint": "Mẫu số nhân với 4 (5 x 4 = 20) thì tử số cũng nhân với 4: 2 x 4 = 8.",
+        "explanation": "Mẫu số nhân với 4 (5 x 4 = 20) thì tử số cũng nhân với 4: 2 x 4 = 8. Do đó, đáp án chính xác là 8."
       },
       {
         "id": "g4_l5_7",
@@ -741,7 +791,8 @@ export const CURRICULUM_GRADE_4 = [
           "="
         ],
         "correctAnswer": ">",
-        "hint": "Hai phân số có cùng tử số, phân số nào có mẫu số bé hơn thì phân số đó lớn hơn: 5 < 8 nên 3/5 > 3/8."
+        "hint": "Hai phân số có cùng tử số, phân số nào có mẫu số bé hơn thì phân số đó lớn hơn: 5 < 8 nên 3/5 > 3/8.",
+        "explanation": "Hai phân số có cùng tử số, phân số nào có mẫu số bé hơn thì phân số đó lớn hơn: 5 < 8 nên 3/5 > 3/8. Vì vậy, kết quả đúng là >."
       },
       {
         "id": "g4_l5_8",
@@ -754,7 +805,8 @@ export const CURRICULUM_GRADE_4 = [
           "1/8"
         ],
         "correctAnswer": "3/8",
-        "hint": "Số ô chưa tô màu: 8 - 5 = 3 ô. Phân số chỉ phần chưa tô màu là 3/8."
+        "hint": "Số ô chưa tô màu: 8 - 5 = 3 ô. Phân số chỉ phần chưa tô màu là 3/8.",
+        "explanation": "Số ô chưa tô màu: 8 - 5 = 3 ô. Phân số chỉ phần chưa tô màu là 3/8. Do đó, đáp án chính xác là 3/8."
       }
     ],
     "timoChallenges": [
@@ -769,7 +821,8 @@ export const CURRICULUM_GRADE_4 = [
           "5/15"
         ],
         "correctAnswer": "4/15",
-        "hint": "Quy đồng mẫu số 15: 1/5 = 3/15 và 1/3 = 5/15. Phân số nằm giữa 3/15 và 5/15 là 4/15."
+        "hint": "Quy đồng mẫu số 15: 1/5 = 3/15 và 1/3 = 5/15. Phân số nằm giữa 3/15 và 5/15 là 4/15.",
+        "explanation": "Quy đồng mẫu số 15: 1/5 = 3/15 và 1/3 = 5/15. Phân số nằm giữa 3/15 và 5/15 là 4/15. Do đó, đáp án chính xác là 4/15."
       },
       {
         "id": "g4_t5_2",
@@ -782,7 +835,8 @@ export const CURRICULUM_GRADE_4 = [
           "20"
         ],
         "correctAnswer": "15",
-        "hint": "Tử số mới là: 2 + 6 = 8 (gấp 4 lần tử số cũ). Mẫu số mới phải là: 5 x 4 = 20. Vậy phải cộng thêm vào mẫu số: 20 - 5 = 15."
+        "hint": "Tử số mới là: 2 + 6 = 8 (gấp 4 lần tử số cũ). Mẫu số mới phải là: 5 x 4 = 20. Vậy phải cộng thêm vào mẫu số: 20 - 5 = 15.",
+        "explanation": "Tử số mới là: 2 + 6 = 8 (gấp 4 lần tử số cũ). Mẫu số mới phải là: 5 x 4 = 20. Vậy phải cộng thêm vào mẫu số: 20 - 5 = 15. Do đó, đáp án chính xác là 15."
       },
       {
         "id": "g4_t5_3",
@@ -795,7 +849,8 @@ export const CURRICULUM_GRADE_4 = [
           "Không so sánh được"
         ],
         "correctAnswer": "2025/2026 lớn hơn",
-        "hint": "Phần bù đến 1 là: 1/2025 và 1/2026. Vì 1/2026 < 1/2025 nên 2025/2026 lớn hơn."
+        "hint": "Phần bù đến 1 là: 1/2025 và 1/2026. Vì 1/2026 < 1/2025 nên 2025/2026 lớn hơn.",
+        "explanation": "Phần bù đến 1 là: 1/2025 và 1/2026. Vì 1/2026 < 1/2025 nên 2025/2026 lớn hơn. Vì vậy, kết quả đúng là 2025/2026 lớn hơn."
       }
     ]
   },
@@ -823,7 +878,8 @@ export const CURRICULUM_GRADE_4 = [
           "6/8"
         ],
         "correctAnswer": "5/8",
-        "hint": "Muốn cộng hai phân số cùng mẫu số, ta cộng hai tử số và giữ nguyên mẫu số: (3 + 2)/8 = 5/8."
+        "hint": "Muốn cộng hai phân số cùng mẫu số, ta cộng hai tử số và giữ nguyên mẫu số: (3 + 2)/8 = 5/8.",
+        "explanation": "Muốn cộng hai phân số cùng mẫu số, ta cộng hai tử số và giữ nguyên mẫu số: (3 + 2)/8 = 5/8. Do đó, đáp án chính xác là 5/8."
       },
       {
         "id": "g4_l6_2",
@@ -836,7 +892,8 @@ export const CURRICULUM_GRADE_4 = [
           "1/9"
         ],
         "correctAnswer": "1/2 (hay 3/6)",
-        "hint": "Quy đồng mẫu: 1/3 = 2/6. Lấy 2/6 + 1/6 = 3/6 = 1/2."
+        "hint": "Quy đồng mẫu: 1/3 = 2/6. Lấy 2/6 + 1/6 = 3/6 = 1/2.",
+        "explanation": "Quy đồng mẫu: 1/3 = 2/6. Lấy 2/6 + 1/6 = 3/6 = 1/2. Do đó, đáp án chính xác là 1/2 (hay 3/6)."
       },
       {
         "id": "g4_l6_3",
@@ -849,7 +906,8 @@ export const CURRICULUM_GRADE_4 = [
           "1/6"
         ],
         "correctAnswer": "1/3 (hay 2/6)",
-        "hint": "Quy đồng 1/2 = 3/6. Lấy 5/6 - 3/6 = 2/6 = 1/3."
+        "hint": "Quy đồng 1/2 = 3/6. Lấy 5/6 - 3/6 = 2/6 = 1/3.",
+        "explanation": "Quy đồng 1/2 = 3/6. Lấy 5/6 - 3/6 = 2/6 = 1/3. Do đó, đáp án chính xác là 1/3 (hay 2/6)."
       },
       {
         "id": "g4_l6_4",
@@ -862,7 +920,8 @@ export const CURRICULUM_GRADE_4 = [
           "6/8"
         ],
         "correctAnswer": "8/15",
-        "hint": "Lấy tử số nhân với tử số, mẫu số nhân với mẫu số: (2 x 4) / (3 x 5) = 8/15."
+        "hint": "Lấy tử số nhân với tử số, mẫu số nhân với mẫu số: (2 x 4) / (3 x 5) = 8/15.",
+        "explanation": "Lấy tử số nhân với tử số, mẫu số nhân với mẫu số: (2 x 4) / (3 x 5) = 8/15. Do đó, đáp án chính xác là 8/15."
       },
       {
         "id": "g4_l6_5",
@@ -875,7 +934,8 @@ export const CURRICULUM_GRADE_4 = [
           "14/15"
         ],
         "correctAnswer": "15/14",
-        "hint": "Lấy phân số thứ nhất nhân với phân số thứ hai đảo ngược: 3/7 x 5/2 = 15/14."
+        "hint": "Lấy phân số thứ nhất nhân với phân số thứ hai đảo ngược: 3/7 x 5/2 = 15/14.",
+        "explanation": "Lấy phân số thứ nhất nhân với phân số thứ hai đảo ngược: 3/7 x 5/2 = 15/14. Do đó, đáp án chính xác là 15/14."
       },
       {
         "id": "g4_l6_6",
@@ -888,7 +948,8 @@ export const CURRICULUM_GRADE_4 = [
           "30 kg"
         ],
         "correctAnswer": "27 kg",
-        "hint": "Muốn tìm phân số của một số, ta lấy số đó nhân với phân số: 36 x 3/4 = (36 : 4) x 3 = 27 kg."
+        "hint": "Muốn tìm phân số của một số, ta lấy số đó nhân với phân số: 36 x 3/4 = (36 : 4) x 3 = 27 kg.",
+        "explanation": "Muốn tìm phân số của một số, ta lấy số đó nhân với phân số: 36 x 3/4 = (36 : 4) x 3 = 27 kg. Do đó, đáp án chính xác là 27 kg."
       },
       {
         "id": "g4_l6_7",
@@ -901,7 +962,8 @@ export const CURRICULUM_GRADE_4 = [
           "15/2"
         ],
         "correctAnswer": "3/2 (hay 15/10)",
-        "hint": "5 x 3/10 = 15/10, rút gọn chia cả tử và mẫu cho 5 được 3/2."
+        "hint": "5 x 3/10 = 15/10, rút gọn chia cả tử và mẫu cho 5 được 3/2.",
+        "explanation": "5 x 3/10 = 15/10, rút gọn chia cả tử và mẫu cho 5 được 3/2. Do đó, đáp án chính xác là 3/2 (hay 15/10)."
       },
       {
         "id": "g4_l6_8",
@@ -914,7 +976,8 @@ export const CURRICULUM_GRADE_4 = [
           "25 học sinh"
         ],
         "correctAnswer": "21 học sinh",
-        "hint": "Số học sinh nữ: 35 x 3/5 = (35 : 5) x 3 = 21 học sinh."
+        "hint": "Số học sinh nữ: 35 x 3/5 = (35 : 5) x 3 = 21 học sinh.",
+        "explanation": "Số học sinh nữ: 35 x 3/5 = (35 : 5) x 3 = 21 học sinh. Do đó, đáp án chính xác là 21 học sinh."
       }
     ],
     "timoChallenges": [
@@ -929,7 +992,8 @@ export const CURRICULUM_GRADE_4 = [
           "8/9"
         ],
         "correctAnswer": "9/10",
-        "hint": "Tách từng số hạng: 1 - 1/2 + 1/2 - 1/3 + ... + 1/9 - 1/10 = 1 - 1/10 = 9/10."
+        "hint": "Tách từng số hạng: 1 - 1/2 + 1/2 - 1/3 + ... + 1/9 - 1/10 = 1 - 1/10 = 9/10.",
+        "explanation": "Tách từng số hạng: 1 - 1/2 + 1/2 - 1/3 + ... + 1/9 - 1/10 = 1 - 1/10 = 9/10. Do đó, đáp án chính xác là 9/10."
       },
       {
         "id": "g4_t6_2",
@@ -942,7 +1006,8 @@ export const CURRICULUM_GRADE_4 = [
           "14 tuổi"
         ],
         "correctAnswer": "12 tuổi",
-        "hint": "Tuổi của Lan là: 8 : 2/3 = 8 x 3/2 = 12 tuổi."
+        "hint": "Tuổi của Lan là: 8 : 2/3 = 8 x 3/2 = 12 tuổi.",
+        "explanation": "Tuổi của Lan là: 8 : 2/3 = 8 x 3/2 = 12 tuổi. Do đó, đáp án chính xác là 12 tuổi."
       },
       {
         "id": "g4_t6_3",
@@ -955,7 +1020,8 @@ export const CURRICULUM_GRADE_4 = [
           "2/100"
         ],
         "correctAnswer": "1/100",
-        "hint": "Ta có: 1/2 x 2/3 x 3/4 x ... x 99/100. Rút gọn chéo các thừa số giống nhau ở tử và mẫu, còn lại 1/100."
+        "hint": "Ta có: 1/2 x 2/3 x 3/4 x ... x 99/100. Rút gọn chéo các thừa số giống nhau ở tử và mẫu, còn lại 1/100.",
+        "explanation": "Ta có: 1/2 x 2/3 x 3/4 x ... x 99/100. Rút gọn chéo các thừa số giống nhau ở tử và mẫu, còn lại 1/100. Vì vậy, kết quả đúng là 1/100."
       }
     ]
   },
@@ -983,7 +1049,8 @@ export const CURRICULUM_GRADE_4 = [
           "Có hai đường chéo bằng nhau"
         ],
         "correctAnswer": "Có hai cặp cạnh đối diện song song và bằng nhau",
-        "hint": "Hình bình hành có 2 cặp cạnh đối diện song song và có độ dài bằng nhau."
+        "hint": "Hình bình hành có 2 cặp cạnh đối diện song song và có độ dài bằng nhau.",
+        "explanation": "Hình bình hành có 2 cặp cạnh đối diện song song và có độ dài bằng nhau. Vì vậy, kết quả đúng là Có hai cặp cạnh đối diện song song và bằng nhau."
       },
       {
         "id": "g4_l7_2",
@@ -996,7 +1063,8 @@ export const CURRICULUM_GRADE_4 = [
           "S = a x a"
         ],
         "correctAnswer": "S = a x h (độ dài đáy nhân chiều cao)",
-        "hint": "Diện tích hình bình hành bằng độ dài đáy nhân với chiều cao (cùng một đơn vị đo): S = a x h."
+        "hint": "Diện tích hình bình hành bằng độ dài đáy nhân với chiều cao (cùng một đơn vị đo): S = a x h.",
+        "explanation": "Diện tích hình bình hành bằng độ dài đáy nhân với chiều cao (cùng một đơn vị đo): S = a x h. Do đó, đáp án chính xác là S = a x h (độ dài đáy nhân chiều cao)."
       },
       {
         "id": "g4_l7_3",
@@ -1009,7 +1077,8 @@ export const CURRICULUM_GRADE_4 = [
           "96 cm2"
         ],
         "correctAnswer": "84 cm2",
-        "hint": "S = 12 x 7 = 84 cm2."
+        "hint": "S = 12 x 7 = 84 cm2.",
+        "explanation": "S = 12 x 7 = 84 cm2. Do đó, đáp án chính xác là 84 cm2."
       },
       {
         "id": "g4_l7_4",
@@ -1022,7 +1091,8 @@ export const CURRICULUM_GRADE_4 = [
           "Không cắt nhau"
         ],
         "correctAnswer": "Vuông góc với nhau và cắt nhau tại trung điểm của mỗi đường",
-        "hint": "Hình thoi có 4 cạnh bằng nhau, 2 đường chéo vuông góc với nhau và cắt nhau tại trung điểm của mỗi đường."
+        "hint": "Hình thoi có 4 cạnh bằng nhau, 2 đường chéo vuông góc với nhau và cắt nhau tại trung điểm của mỗi đường.",
+        "explanation": "Hình thoi có 4 cạnh bằng nhau, 2 đường chéo vuông góc với nhau và cắt nhau tại trung điểm của mỗi đường. Vì vậy, kết quả đúng là Vuông góc với nhau và cắt nhau tại trung điểm của mỗi đường."
       },
       {
         "id": "g4_l7_5",
@@ -1035,7 +1105,8 @@ export const CURRICULUM_GRADE_4 = [
           "S = (m + n) x 2"
         ],
         "correctAnswer": "S = (m x n) : 2",
-        "hint": "Diện tích hình thoi bằng tích độ dài hai đường chéo chia cho 2 (cùng đơn vị đo)."
+        "hint": "Diện tích hình thoi bằng tích độ dài hai đường chéo chia cho 2 (cùng đơn vị đo).",
+        "explanation": "Diện tích hình thoi bằng tích độ dài hai đường chéo chia cho 2 (cùng đơn vị đo). Vì vậy, kết quả đúng là S = (m x n) : 2."
       },
       {
         "id": "g4_l7_6",
@@ -1048,7 +1119,8 @@ export const CURRICULUM_GRADE_4 = [
           "28 dm2"
         ],
         "correctAnswer": "24 dm2",
-        "hint": "S = (8 x 6) : 2 = 48 : 2 = 24 dm2."
+        "hint": "S = (8 x 6) : 2 = 48 : 2 = 24 dm2.",
+        "explanation": "S = (8 x 6) : 2 = 48 : 2 = 24 dm2. Do đó, đáp án chính xác là 24 dm2."
       },
       {
         "id": "g4_l7_7",
@@ -1061,7 +1133,8 @@ export const CURRICULUM_GRADE_4 = [
           "27 cm"
         ],
         "correctAnswer": "36 cm",
-        "hint": "Vì hình thoi có 4 cạnh bằng nhau nên chu vi P = cạnh x 4 = 9 x 4 = 36 cm."
+        "hint": "Vì hình thoi có 4 cạnh bằng nhau nên chu vi P = cạnh x 4 = 9 x 4 = 36 cm.",
+        "explanation": "Vì hình thoi có 4 cạnh bằng nhau nên chu vi P = cạnh x 4 = 9 x 4 = 36 cm. Do đó, đáp án chính xác là 36 cm."
       },
       {
         "id": "g4_l7_8",
@@ -1074,7 +1147,8 @@ export const CURRICULUM_GRADE_4 = [
           "6 cm"
         ],
         "correctAnswer": "8 cm",
-        "hint": "Chiều cao = Diện tích chia cho độ dài đáy: 72 : 9 = 8 cm."
+        "hint": "Chiều cao = Diện tích chia cho độ dài đáy: 72 : 9 = 8 cm.",
+        "explanation": "Chiều cao = Diện tích chia cho độ dài đáy: 72 : 9 = 8 cm. Do đó, đáp án chính xác là 8 cm."
       }
     ],
     "timoChallenges": [
@@ -1089,7 +1163,8 @@ export const CURRICULUM_GRADE_4 = [
           "20 cm2"
         ],
         "correctAnswer": "24 cm2",
-        "hint": "Diện tích 1 tam giác vuông: (3 x 4) : 2 = 6 cm2. Hình thoi gồm 4 tam giác: 6 x 4 = 24 cm2."
+        "hint": "Diện tích 1 tam giác vuông: (3 x 4) : 2 = 6 cm2. Hình thoi gồm 4 tam giác: 6 x 4 = 24 cm2.",
+        "explanation": "Diện tích 1 tam giác vuông: (3 x 4) : 2 = 6 cm2. Hình thoi gồm 4 tam giác: 6 x 4 = 24 cm2. Do đó, đáp án chính xác là 24 cm2."
       },
       {
         "id": "g4_t7_2",
@@ -1102,7 +1177,8 @@ export const CURRICULUM_GRADE_4 = [
           "6 lần"
         ],
         "correctAnswer": "4 lần",
-        "hint": "S_mới = (2m x 2n) : 2 = 4 x [(m x n) : 2] = 4 x S_cũ. Vậy diện tích tăng lên gấp 4 lần."
+        "hint": "S_mới = (2m x 2n) : 2 = 4 x [(m x n) : 2] = 4 x S_cũ. Vậy diện tích tăng lên gấp 4 lần.",
+        "explanation": "S_mới = (2m x 2n) : 2 = 4 x [(m x n) : 2] = 4 x S_cũ. Vậy diện tích tăng lên gấp 4 lần. Do đó, đáp án chính xác là 4 lần."
       },
       {
         "id": "g4_t7_3",
@@ -1115,7 +1191,8 @@ export const CURRICULUM_GRADE_4 = [
           "5 hình tam giác"
         ],
         "correctAnswer": "3 hình tam giác",
-        "hint": "Hình bình hành bị chia bởi đường chéo thành 2 tam giác, cộng với 1 tam giác ban đầu bên cạnh = 3 hình tam giác."
+        "hint": "Hình bình hành bị chia bởi đường chéo thành 2 tam giác, cộng với 1 tam giác ban đầu bên cạnh = 3 hình tam giác.",
+        "explanation": "Hình bình hành bị chia bởi đường chéo thành 2 tam giác, cộng với 1 tam giác ban đầu bên cạnh = 3 hình tam giác. Do đó, đáp án chính xác là 3 hình tam giác."
       }
     ]
   },
@@ -1143,7 +1220,8 @@ export const CURRICULUM_GRADE_4 = [
           "Số lớn = Tổng x 2 - Hiệu"
         ],
         "correctAnswer": "Số lớn = (Tổng + Hiệu) : 2",
-        "hint": "Ghi nhớ công thức kinh điển: Số lớn = (Tổng + Hiệu) : 2; Số bé = (Tổng - Hiệu) : 2."
+        "hint": "Ghi nhớ công thức kinh điển: Số lớn = (Tổng + Hiệu) : 2; Số bé = (Tổng - Hiệu) : 2.",
+        "explanation": "Ghi nhớ công thức kinh điển: Số lớn = (Tổng + Hiệu) : 2; Số bé = (Tổng - Hiệu) : 2. Do đó, đáp án chính xác là Số lớn = (Tổng + Hiệu) : 2."
       },
       {
         "id": "g4_l8_2",
@@ -1156,7 +1234,8 @@ export const CURRICULUM_GRADE_4 = [
           "24 cái kẹo"
         ],
         "correctAnswer": "30 cái kẹo",
-        "hint": "Mai là số lớn: (48 + 12) : 2 = 60 : 2 = 30 cái kẹo. (Lan có: 30 - 12 = 18 cái kẹo)."
+        "hint": "Mai là số lớn: (48 + 12) : 2 = 60 : 2 = 30 cái kẹo. (Lan có: 30 - 12 = 18 cái kẹo).",
+        "explanation": "Mai là số lớn: (48 + 12) : 2 = 60 : 2 = 30 cái kẹo. (Lan có: 30 - 12 = 18 cái kẹo). Do đó, đáp án chính xác là 30 cái kẹo."
       },
       {
         "id": "g4_l8_3",
@@ -1169,7 +1248,8 @@ export const CURRICULUM_GRADE_4 = [
           "5 phần"
         ],
         "correctAnswer": "4 phần",
-        "hint": "Số bé chiếm 1 phần, số lớn chiếm 3 phần. Tổng số phần bằng nhau: 1 + 3 = 4 phần."
+        "hint": "Số bé chiếm 1 phần, số lớn chiếm 3 phần. Tổng số phần bằng nhau: 1 + 3 = 4 phần.",
+        "explanation": "Số bé chiếm 1 phần, số lớn chiếm 3 phần. Tổng số phần bằng nhau: 1 + 3 = 4 phần. Do đó, đáp án chính xác là 4 phần."
       },
       {
         "id": "g4_l8_4",
@@ -1182,7 +1262,8 @@ export const CURRICULUM_GRADE_4 = [
           "25"
         ],
         "correctAnswer": "27",
-        "hint": "Tổng số phần: 2 + 3 = 5 phần. Giá trị 1 phần: 45 : 5 = 9. Số lớn: 9 x 3 = 27 (số bé là 9 x 2 = 18)."
+        "hint": "Tổng số phần: 2 + 3 = 5 phần. Giá trị 1 phần: 45 : 5 = 9. Số lớn: 9 x 3 = 27 (số bé là 9 x 2 = 18).",
+        "explanation": "Tổng số phần: 2 + 3 = 5 phần. Giá trị 1 phần: 45 : 5 = 9. Số lớn: 9 x 3 = 27 (số bé là 9 x 2 = 18). Do đó, đáp án chính xác là 27."
       },
       {
         "id": "g4_l8_5",
@@ -1195,7 +1276,8 @@ export const CURRICULUM_GRADE_4 = [
           "2 phần"
         ],
         "correctAnswer": "3 phần",
-        "hint": "Số lớn 4 phần, số bé 1 phần. Hiệu số phần: 4 - 1 = 3 phần."
+        "hint": "Số lớn 4 phần, số bé 1 phần. Hiệu số phần: 4 - 1 = 3 phần.",
+        "explanation": "Số lớn 4 phần, số bé 1 phần. Hiệu số phần: 4 - 1 = 3 phần. Do đó, đáp án chính xác là 3 phần."
       },
       {
         "id": "g4_l8_6",
@@ -1208,7 +1290,8 @@ export const CURRICULUM_GRADE_4 = [
           "8 tuổi"
         ],
         "correctAnswer": "7 tuổi",
-        "hint": "Hiệu số phần: 5 - 1 = 4 phần. Tuổi con = 28 : 4 x 1 = 7 tuổi (tuổi bố là 35 tuổi)."
+        "hint": "Hiệu số phần: 5 - 1 = 4 phần. Tuổi con = 28 : 4 x 1 = 7 tuổi (tuổi bố là 35 tuổi).",
+        "explanation": "Hiệu số phần: 5 - 1 = 4 phần. Tuổi con = 28 : 4 x 1 = 7 tuổi (tuổi bố là 35 tuổi). Do đó, đáp án chính xác là 7 tuổi."
       },
       {
         "id": "g4_l8_7",
@@ -1221,7 +1304,8 @@ export const CURRICULUM_GRADE_4 = [
           "60 m"
         ],
         "correctAnswer": "45 m",
-        "hint": "Nửa chu vi (tổng dài và rộng) = 120 : 2 = 60 m. Tổng số phần: 1 + 3 = 4 phần. Chiều dài = 60 : 4 x 3 = 45 m."
+        "hint": "Nửa chu vi (tổng dài và rộng) = 120 : 2 = 60 m. Tổng số phần: 1 + 3 = 4 phần. Chiều dài = 60 : 4 x 3 = 45 m.",
+        "explanation": "Nửa chu vi (tổng dài và rộng) = 120 : 2 = 60 m. Tổng số phần: 1 + 3 = 4 phần. Chiều dài = 60 : 4 x 3 = 45 m. Do đó, đáp án chính xác là 45 m."
       },
       {
         "id": "g4_l8_8",
@@ -1234,7 +1318,8 @@ export const CURRICULUM_GRADE_4 = [
           "6 tuổi"
         ],
         "correctAnswer": "8 tuổi",
-        "hint": "Mẹ sinh con năm 26 tuổi nghĩa là mẹ hơn con 26 tuổi (Hiệu = 26). Tuổi con là số bé = (42 - 26) : 2 = 16 : 2 = 8 tuổi."
+        "hint": "Mẹ sinh con năm 26 tuổi nghĩa là mẹ hơn con 26 tuổi (Hiệu = 26). Tuổi con là số bé = (42 - 26) : 2 = 16 : 2 = 8 tuổi.",
+        "explanation": "Mẹ sinh con năm 26 tuổi nghĩa là mẹ hơn con 26 tuổi (Hiệu = 26). Tuổi con là số bé = (42 - 26) : 2 = 16 : 2 = 8 tuổi. Do đó, đáp án chính xác là 8 tuổi."
       }
     ],
     "timoChallenges": [
@@ -1249,7 +1334,8 @@ export const CURRICULUM_GRADE_4 = [
           "75 cuốn"
         ],
         "correctAnswer": "70 cuốn",
-        "hint": "Sau khi chuyển: Ngăn trên = (120 - 10) : 2 = 55 cuốn. Ban đầu ngăn trên có: 55 + 15 = 70 cuốn."
+        "hint": "Sau khi chuyển: Ngăn trên = (120 - 10) : 2 = 55 cuốn. Ban đầu ngăn trên có: 55 + 15 = 70 cuốn.",
+        "explanation": "Sau khi chuyển: Ngăn trên = (120 - 10) : 2 = 55 cuốn. Ban đầu ngăn trên có: 55 + 15 = 70 cuốn. Do đó, đáp án chính xác là 70 cuốn."
       },
       {
         "id": "g4_t8_2",
@@ -1262,7 +1348,8 @@ export const CURRICULUM_GRADE_4 = [
           "Sau 6 năm"
         ],
         "correctAnswer": "Sau 5 năm (khi con 12 tuổi, bố 36 tuổi)",
-        "hint": "Hiệu số tuổi không đổi = 24. Khi tuổi con = 1/3 tuổi bố: Hiệu số phần = 2 phần. Tuổi con lúc đó = 24 : 2 = 12 tuổi."
+        "hint": "Hiệu số tuổi không đổi = 24. Khi tuổi con = 1/3 tuổi bố: Hiệu số phần = 2 phần. Tuổi con lúc đó = 24 : 2 = 12 tuổi.",
+        "explanation": "Hiệu số tuổi không đổi = 24. Khi tuổi con = 1/3 tuổi bố: Hiệu số phần = 2 phần. Tuổi con lúc đó = 24 : 2 = 12 tuổi. Do đó, đáp án chính xác là Sau 5 năm (khi con 12 tuổi, bố 36 tuổi)."
       },
       {
         "id": "g4_t8_3",
@@ -1275,7 +1362,8 @@ export const CURRICULUM_GRADE_4 = [
           "50 con gà"
         ],
         "correctAnswer": "40 con gà",
-        "hint": "Bán 10 gà, thêm 10 vịt thì bằng nhau nghĩa là gà hơn vịt: 10 + 10 = 20 con. Gà gấp đôi vịt nên gà hơn vịt đúng 1 lần số vịt. Vậy vịt = 20 con, gà = 40 con."
+        "hint": "Bán 10 gà, thêm 10 vịt thì bằng nhau nghĩa là gà hơn vịt: 10 + 10 = 20 con. Gà gấp đôi vịt nên gà hơn vịt đúng 1 lần số vịt. Vậy vịt = 20 con, gà = 40 con.",
+        "explanation": "Bán 10 gà, thêm 10 vịt thì bằng nhau nghĩa là gà hơn vịt: 10 + 10 = 20 con. Gà gấp đôi vịt nên gà hơn vịt đúng 1 lần số vịt. Vậy vịt = 20 con, gà = 40 con. Do đó, đáp án chính xác là 40 con gà."
       }
     ]
   }

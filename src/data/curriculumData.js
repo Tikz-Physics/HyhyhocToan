@@ -1,11 +1,11 @@
 // Tổng hợp dữ liệu chương trình Toán Tiểu Học từ Lớp 1 đến Lớp 5 chuẩn CTGDPT 2018
 // Đầy đủ 2 Học kì cho mỗi khối lớp kèm Thử thách Tư duy Timo chuẩn Quốc tế
 
-import { CURRICULUM_GRADE_1, BADGES_DATA } from './curriculumGrade1';
-import { CURRICULUM_GRADE_2 } from './curriculumGrade2';
-import { CURRICULUM_GRADE_3 } from './curriculumGrade3';
-import { CURRICULUM_GRADE_4 } from './curriculumGrade4';
-import { CURRICULUM_GRADE_5 } from './curriculumGrade5';
+import { CURRICULUM_GRADE_1, BADGES_DATA } from './curriculumGrade1.js';
+import { CURRICULUM_GRADE_2 } from './curriculumGrade2.js';
+import { CURRICULUM_GRADE_3 } from './curriculumGrade3.js';
+import { CURRICULUM_GRADE_4 } from './curriculumGrade4.js';
+import { CURRICULUM_GRADE_5 } from './curriculumGrade5.js';
 
 export { BADGES_DATA };
 

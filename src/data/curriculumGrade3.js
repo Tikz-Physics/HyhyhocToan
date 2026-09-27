@@ -1,5 +1,5 @@
 // Dữ liệu chương trình Toán Lớp 3 chuẩn CTGDPT 2018
-// Bao phủ 8 Chủ đề kiến thức trọng tâm & Thử thách Tư duy Timo chuẩn Quốc tế
+// Đầy đủ 8 Chủ đề kiến thức trọng tâm & Thử thách Tư duy Timo chuẩn Quốc tế
 
 export const CURRICULUM_GRADE_3 = [
   {
@@ -26,7 +26,8 @@ export const CURRICULUM_GRADE_3 = [
           "63"
         ],
         "correctAnswer": "56",
-        "hint": "7 nhân 8 bằng 56 trong bảng nhân 7."
+        "hint": "7 nhân 8 bằng 56 trong bảng nhân 7.",
+        "explanation": "7 nhân 8 bằng 56 trong bảng nhân 7. Vì vậy, kết quả đúng là 56."
       },
       {
         "id": "g3_l1_2",
@@ -39,7 +40,8 @@ export const CURRICULUM_GRADE_3 = [
           "6"
         ],
         "correctAnswer": "8",
-        "hint": "Vì 9 x 8 = 72 nên 72 : 9 = 8."
+        "hint": "Vì 9 x 8 = 72 nên 72 : 9 = 8.",
+        "explanation": "Vì 9 x 8 = 72 nên 72 : 9 = 8. Do đó, đáp án chính xác là 8."
       },
       {
         "id": "g3_l1_3",
@@ -52,7 +54,8 @@ export const CURRICULUM_GRADE_3 = [
           "30 cm"
         ],
         "correctAnswer": "24 cm",
-        "hint": "Muốn gấp một số lên nhiều lần, ta lấy số đó nhân với số lần: 6 x 4 = 24 cm."
+        "hint": "Muốn gấp một số lên nhiều lần, ta lấy số đó nhân với số lần: 6 x 4 = 24 cm.",
+        "explanation": "Muốn gấp một số lên nhiều lần, ta lấy số đó nhân với số lần: 6 x 4 = 24 cm. Do đó, đáp án chính xác là 24 cm."
       },
       {
         "id": "g3_l1_4",
@@ -65,7 +68,8 @@ export const CURRICULUM_GRADE_3 = [
           "7 kg"
         ],
         "correctAnswer": "9 kg",
-        "hint": "Muốn giảm một số đi nhiều lần, ta lấy số đó chia cho số lần: 45 : 5 = 9 kg."
+        "hint": "Muốn giảm một số đi nhiều lần, ta lấy số đó chia cho số lần: 45 : 5 = 9 kg.",
+        "explanation": "Muốn giảm một số đi nhiều lần, ta lấy số đó chia cho số lần: 45 : 5 = 9 kg. Do đó, đáp án chính xác là 9 kg."
       },
       {
         "id": "g3_l1_5",
@@ -78,7 +82,8 @@ export const CURRICULUM_GRADE_3 = [
           "5 lần"
         ],
         "correctAnswer": "6 lần",
-        "hint": "Muốn biết số lớn gấp mấy lần số bé, ta lấy số lớn chia cho số bé: 36 : 6 = 6 lần."
+        "hint": "Muốn biết số lớn gấp mấy lần số bé, ta lấy số lớn chia cho số bé: 36 : 6 = 6 lần.",
+        "explanation": "Muốn biết số lớn gấp mấy lần số bé, ta lấy số lớn chia cho số bé: 36 : 6 = 6 lần. Do đó, đáp án chính xác là 6 lần."
       },
       {
         "id": "g3_l1_6",
@@ -91,7 +96,8 @@ export const CURRICULUM_GRADE_3 = [
           "45"
         ],
         "correctAnswer": "43",
-        "hint": "Thực hiện nhân chia trước, cộng trừ sau: 42 : 6 = 7; 18 x 2 = 36. Lấy 7 + 36 = 43."
+        "hint": "Thực hiện nhân chia trước, cộng trừ sau: 42 : 6 = 7; 18 x 2 = 36. Lấy 7 + 36 = 43.",
+        "explanation": "Thực hiện nhân chia trước, cộng trừ sau: 42 : 6 = 7; 18 x 2 = 36. Lấy 7 + 36 = 43. Do đó, đáp án chính xác là 43."
       },
       {
         "id": "g3_l1_7",
@@ -104,7 +110,8 @@ export const CURRICULUM_GRADE_3 = [
           "6"
         ],
         "correctAnswer": "7",
-        "hint": "Số dư luôn luôn nhỏ hơn số chia. Với số chia là 8 thì số dư lớn nhất là 7."
+        "hint": "Số dư luôn luôn nhỏ hơn số chia. Với số chia là 8 thì số dư lớn nhất là 7.",
+        "explanation": "Số dư luôn luôn nhỏ hơn số chia. Với số chia là 8 thì số dư lớn nhất là 7. Vì vậy, kết quả đúng là 7."
       },
       {
         "id": "g3_l1_8",
@@ -117,7 +124,8 @@ export const CURRICULUM_GRADE_3 = [
           "364"
         ],
         "correctAnswer": "372",
-        "hint": "3 x 4 = 12 viết 2 nhớ 1; 3 x 2 = 6 thêm 1 là 7; 3 x 1 = 3. Kết quả là 372."
+        "hint": "3 x 4 = 12 viết 2 nhớ 1; 3 x 2 = 6 thêm 1 là 7; 3 x 1 = 3. Kết quả là 372.",
+        "explanation": "3 x 4 = 12 viết 2 nhớ 1; 3 x 2 = 6 thêm 1 là 7; 3 x 1 = 3. Kết quả là 372. Do đó, đáp án chính xác là 372."
       }
     ],
     "timoChallenges": [
@@ -132,7 +140,8 @@ export const CURRICULUM_GRADE_3 = [
           "3 con chó"
         ],
         "correctAnswer": "4 con chó",
-        "hint": "Nếu cả 10 con đều là gà thì có 10 x 2 = 20 chân. Số chân thiếu: 28 - 20 = 8 chân. Mỗi con chó hơn gà: 4 - 2 = 2 chân. Số chó: 8 : 2 = 4 con."
+        "hint": "Nếu cả 10 con đều là gà thì có 10 x 2 = 20 chân. Số chân thiếu: 28 - 20 = 8 chân. Mỗi con chó hơn gà: 4 - 2 = 2 chân. Số chó: 8 : 2 = 4 con.",
+        "explanation": "Nếu cả 10 con đều là gà thì có 10 x 2 = 20 chân. Số chân thiếu: 28 - 20 = 8 chân. Mỗi con chó hơn gà: 4 - 2 = 2 chân. Số chó: 8 : 2 = 4 con. Do đó, đáp án chính xác là 4 con chó."
       },
       {
         "id": "g3_t1_2",
@@ -145,7 +154,8 @@ export const CURRICULUM_GRADE_3 = [
           "20 cây"
         ],
         "correctAnswer": "18 cây",
-        "hint": "Một bên đường có: (40 : 5) + 1 = 9 cây. Cả hai bên đường có: 9 x 2 = 18 cây."
+        "hint": "Một bên đường có: (40 : 5) + 1 = 9 cây. Cả hai bên đường có: 9 x 2 = 18 cây.",
+        "explanation": "Một bên đường có: (40 : 5) + 1 = 9 cây. Cả hai bên đường có: 9 x 2 = 18 cây. Do đó, đáp án chính xác là 18 cây."
       },
       {
         "id": "g3_t1_3",
@@ -158,7 +168,8 @@ export const CURRICULUM_GRADE_3 = [
           "9"
         ],
         "correctAnswer": "5",
-        "hint": "Tích các số lẻ liên tiếp có chứa thừa số 5 luôn có chữ số tận cùng là 5."
+        "hint": "Tích các số lẻ liên tiếp có chứa thừa số 5 luôn có chữ số tận cùng là 5.",
+        "explanation": "Tích các số lẻ liên tiếp có chứa thừa số 5 luôn có chữ số tận cùng là 5. Vì vậy, kết quả đúng là 5."
       }
     ]
   },
@@ -186,7 +197,8 @@ export const CURRICULUM_GRADE_3 = [
           "Cân đồng hồ"
         ],
         "correctAnswer": "Thước ê-ke",
-        "hint": "Thước ê-ke có một góc vuông chuẩn, dùng để đặt vào kiểm tra góc."
+        "hint": "Thước ê-ke có một góc vuông chuẩn, dùng để đặt vào kiểm tra góc.",
+        "explanation": "Thước ê-ke có một góc vuông chuẩn, dùng để đặt vào kiểm tra góc. Vì vậy, kết quả đúng là Thước ê-ke."
       },
       {
         "id": "g3_l2_2",
@@ -199,7 +211,8 @@ export const CURRICULUM_GRADE_3 = [
           "Góc vuông"
         ],
         "correctAnswer": "Góc nhọn",
-        "hint": "Góc nhọn có độ mở bé hơn góc vuông. Góc tù có độ mở lớn hơn góc vuông."
+        "hint": "Góc nhọn có độ mở bé hơn góc vuông. Góc tù có độ mở lớn hơn góc vuông.",
+        "explanation": "Góc nhọn có độ mở bé hơn góc vuông. Góc tù có độ mở lớn hơn góc vuông. Vì vậy, kết quả đúng là Góc nhọn."
       },
       {
         "id": "g3_l2_3",
@@ -212,7 +225,8 @@ export const CURRICULUM_GRADE_3 = [
           "0 góc vuông"
         ],
         "correctAnswer": "4 góc vuông",
-        "hint": "Hình chữ nhật có 4 đỉnh và tại mỗi đỉnh đều là một góc vuông."
+        "hint": "Hình chữ nhật có 4 đỉnh và tại mỗi đỉnh đều là một góc vuông.",
+        "explanation": "Hình chữ nhật có 4 đỉnh và tại mỗi đỉnh đều là một góc vuông. Vì vậy, kết quả đúng là 4 góc vuông."
       },
       {
         "id": "g3_l2_4",
@@ -225,7 +239,8 @@ export const CURRICULUM_GRADE_3 = [
           "Bằng một nửa bán kính"
         ],
         "correctAnswer": "Gấp 2 lần bán kính",
-        "hint": "Đường kính đi qua tâm và dài gấp 2 lần bán kính: d = 2 x r."
+        "hint": "Đường kính đi qua tâm và dài gấp 2 lần bán kính: d = 2 x r.",
+        "explanation": "Đường kính đi qua tâm và dài gấp 2 lần bán kính: d = 2 x r. Do đó, đáp án chính xác là Gấp 2 lần bán kính."
       },
       {
         "id": "g3_l2_5",
@@ -238,7 +253,8 @@ export const CURRICULUM_GRADE_3 = [
           "16 cm"
         ],
         "correctAnswer": "8 cm",
-        "hint": "Bán kính bằng đường kính chia cho 2: 16 : 2 = 8 cm."
+        "hint": "Bán kính bằng đường kính chia cho 2: 16 : 2 = 8 cm.",
+        "explanation": "Bán kính bằng đường kính chia cho 2: 16 : 2 = 8 cm. Do đó, đáp án chính xác là 8 cm."
       },
       {
         "id": "g3_l2_6",
@@ -251,7 +267,8 @@ export const CURRICULUM_GRADE_3 = [
           "Đầu mút của đoạn thẳng AB"
         ],
         "correctAnswer": "Trung điểm của đoạn thẳng AB",
-        "hint": "Tâm O nằm chính giữa đoạn thẳng nối hai điểm đối diện trên đường tròn, nên O là trung điểm của AB."
+        "hint": "Tâm O nằm chính giữa đoạn thẳng nối hai điểm đối diện trên đường tròn, nên O là trung điểm của AB.",
+        "explanation": "Tâm O nằm chính giữa đoạn thẳng nối hai điểm đối diện trên đường tròn, nên O là trung điểm của AB. Vì vậy, kết quả đúng là Trung điểm của đoạn thẳng AB."
       },
       {
         "id": "g3_l2_7",
@@ -264,7 +281,8 @@ export const CURRICULUM_GRADE_3 = [
           "0 góc vuông"
         ],
         "correctAnswer": "1 góc vuông",
-        "hint": "Tam giác vuông có đúng 1 góc vuông và 2 góc nhọn."
+        "hint": "Tam giác vuông có đúng 1 góc vuông và 2 góc nhọn.",
+        "explanation": "Tam giác vuông có đúng 1 góc vuông và 2 góc nhọn. Vì vậy, kết quả đúng là 1 góc vuông."
       },
       {
         "id": "g3_l2_8",
@@ -277,7 +295,8 @@ export const CURRICULUM_GRADE_3 = [
           "Kéo"
         ],
         "correctAnswer": "Com-pa",
-        "hint": "Com-pa có 1 chân kim cắm vào tâm và 1 đầu bút chì để quay vẽ vòng tròn."
+        "hint": "Com-pa có 1 chân kim cắm vào tâm và 1 đầu bút chì để quay vẽ vòng tròn.",
+        "explanation": "Com-pa có 1 chân kim cắm vào tâm và 1 đầu bút chì để quay vẽ vòng tròn. Vì vậy, kết quả đúng là Com-pa."
       }
     ],
     "timoChallenges": [
@@ -292,7 +311,8 @@ export const CURRICULUM_GRADE_3 = [
           "Góc bẹt"
         ],
         "correctAnswer": "Góc vuông",
-        "hint": "Lúc 3 giờ, kim dài chỉ số 12 và kim ngắn chỉ số 3, hai kim vuông góc với nhau tạo thành góc 90 độ (góc vuông)."
+        "hint": "Lúc 3 giờ, kim dài chỉ số 12 và kim ngắn chỉ số 3, hai kim vuông góc với nhau tạo thành góc 90 độ (góc vuông).",
+        "explanation": "Lúc 3 giờ, kim dài chỉ số 12 và kim ngắn chỉ số 3, hai kim vuông góc với nhau tạo thành góc 90 độ (góc vuông). Vì vậy, kết quả đúng là Góc vuông."
       },
       {
         "id": "g3_t2_2",
@@ -305,7 +325,8 @@ export const CURRICULUM_GRADE_3 = [
           "10 hình tam giác"
         ],
         "correctAnswer": "8 hình tam giác",
-        "hint": "Có 4 tam giác nhỏ đơn lẻ + 4 tam giác to tạo bởi 2 tam giác nhỏ gộp lại = 8 hình tam giác."
+        "hint": "Có 4 tam giác nhỏ đơn lẻ + 4 tam giác to tạo bởi 2 tam giác nhỏ gộp lại = 8 hình tam giác.",
+        "explanation": "Có 4 tam giác nhỏ đơn lẻ + 4 tam giác to tạo bởi 2 tam giác nhỏ gộp lại = 8 hình tam giác. Do đó, đáp án chính xác là 8 hình tam giác."
       },
       {
         "id": "g3_t2_3",
@@ -318,7 +339,8 @@ export const CURRICULUM_GRADE_3 = [
           "5 đoạn thẳng"
         ],
         "correctAnswer": "6 đoạn thẳng",
-        "hint": "Số đoạn thẳng nối 4 điểm là: (4 x 3) : 2 = 6 đoạn thẳng."
+        "hint": "Số đoạn thẳng nối 4 điểm là: (4 x 3) : 2 = 6 đoạn thẳng.",
+        "explanation": "Số đoạn thẳng nối 4 điểm là: (4 x 3) : 2 = 6 đoạn thẳng. Do đó, đáp án chính xác là 6 đoạn thẳng."
       }
     ]
   },
@@ -346,7 +368,8 @@ export const CURRICULUM_GRADE_3 = [
           "3507"
         ],
         "correctAnswer": "5307",
-        "hint": "Viết lần lượt từ hàng nghìn đến hàng đơn vị: 5 nghìn, 3 trăm, 0 chục, 7 đơn vị viết là 5307."
+        "hint": "Viết lần lượt từ hàng nghìn đến hàng đơn vị: 5 nghìn, 3 trăm, 0 chục, 7 đơn vị viết là 5307.",
+        "explanation": "Viết lần lượt từ hàng nghìn đến hàng đơn vị: 5 nghìn, 3 trăm, 0 chục, 7 đơn vị viết là 5307. Vì vậy, kết quả đúng là 5307."
       },
       {
         "id": "g3_l3_2",
@@ -359,7 +382,8 @@ export const CURRICULUM_GRADE_3 = [
           "10 001"
         ],
         "correctAnswer": "10 000",
-        "hint": "9999 + 1 = 10 000 (mười nghìn hay một vạn)."
+        "hint": "9999 + 1 = 10 000 (mười nghìn hay một vạn).",
+        "explanation": "9999 + 1 = 10 000 (mười nghìn hay một vạn). Do đó, đáp án chính xác là 10 000."
       },
       {
         "id": "g3_l3_3",
@@ -372,7 +396,8 @@ export const CURRICULUM_GRADE_3 = [
           "6791"
         ],
         "correctAnswer": "6793",
-        "hint": "Cộng từ phải sang trái: 5+8=13 viết 3 nhớ 1; 2+6=8 thêm 1=9; 3+4=7; 4+2=6. Kết quả là 6793."
+        "hint": "Cộng từ phải sang trái: 5+8=13 viết 3 nhớ 1; 2+6=8 thêm 1=9; 3+4=7; 4+2=6. Kết quả là 6793.",
+        "explanation": "Cộng từ phải sang trái: 5+8=13 viết 3 nhớ 1; 2+6=8 thêm 1=9; 3+4=7; 4+2=6. Kết quả là 6793. Do đó, đáp án chính xác là 6793."
       },
       {
         "id": "g3_l3_4",
@@ -385,7 +410,8 @@ export const CURRICULUM_GRADE_3 = [
           "4245"
         ],
         "correctAnswer": "4255",
-        "hint": "Đặt tính thẳng cột và trừ cẩn thận từ hàng đơn vị sang hàng nghìn: 7540 - 3285 = 4255."
+        "hint": "Đặt tính thẳng cột và trừ cẩn thận từ hàng đơn vị sang hàng nghìn: 7540 - 3285 = 4255.",
+        "explanation": "Đặt tính thẳng cột và trừ cẩn thận từ hàng đơn vị sang hàng nghìn: 7540 - 3285 = 4255. Do đó, đáp án chính xác là 4255."
       },
       {
         "id": "g3_l3_5",
@@ -398,7 +424,8 @@ export const CURRICULUM_GRADE_3 = [
           "4870"
         ],
         "correctAnswer": "4900",
-        "hint": "Chữ số hàng chục là 7 (>= 5) nên ta làm tròn lên thành 4900."
+        "hint": "Chữ số hàng chục là 7 (>= 5) nên ta làm tròn lên thành 4900.",
+        "explanation": "Chữ số hàng chục là 7 (>= 5) nên ta làm tròn lên thành 4900. Do đó, đáp án chính xác là 4900."
       },
       {
         "id": "g3_l3_6",
@@ -411,7 +438,8 @@ export const CURRICULUM_GRADE_3 = [
           "8520"
         ],
         "correctAnswer": "8420",
-        "hint": "4 x 5 = 20 viết 0 nhớ 2; 4 x 0 = 0 thêm 2 = 2; 4 x 1 = 4; 4 x 2 = 8. Kết quả là 8420."
+        "hint": "4 x 5 = 20 viết 0 nhớ 2; 4 x 0 = 0 thêm 2 = 2; 4 x 1 = 4; 4 x 2 = 8. Kết quả là 8420.",
+        "explanation": "4 x 5 = 20 viết 0 nhớ 2; 4 x 0 = 0 thêm 2 = 2; 4 x 1 = 4; 4 x 2 = 8. Kết quả là 8420. Do đó, đáp án chính xác là 8420."
       },
       {
         "id": "g3_l3_7",
@@ -424,7 +452,8 @@ export const CURRICULUM_GRADE_3 = [
           "8100"
         ],
         "correctAnswer": "810",
-        "hint": "64 : 8 = 8; 8 : 8 = 1; 0 : 8 = 0. Kết quả là 810."
+        "hint": "64 : 8 = 8; 8 : 8 = 1; 0 : 8 = 0. Kết quả là 810.",
+        "explanation": "64 : 8 = 8; 8 : 8 = 1; 0 : 8 = 0. Kết quả là 810. Do đó, đáp án chính xác là 810."
       },
       {
         "id": "g3_l3_8",
@@ -437,7 +466,8 @@ export const CURRICULUM_GRADE_3 = [
           "6700"
         ],
         "correctAnswer": "5700",
-        "hint": "Muốn tìm số bị trừ, ta lấy hiệu cộng với số trừ: 4200 + 1500 = 5700."
+        "hint": "Muốn tìm số bị trừ, ta lấy hiệu cộng với số trừ: 4200 + 1500 = 5700.",
+        "explanation": "Muốn tìm số bị trừ, ta lấy hiệu cộng với số trừ: 4200 + 1500 = 5700. Do đó, đáp án chính xác là 5700."
       }
     ],
     "timoChallenges": [
@@ -452,7 +482,8 @@ export const CURRICULUM_GRADE_3 = [
           "10 999"
         ],
         "correctAnswer": "10 899",
-        "hint": "Số lớn nhất có 4 chữ số khác nhau là 9876. Số bé nhất là 1023. Tổng: 9876 + 1023 = 10 899."
+        "hint": "Số lớn nhất có 4 chữ số khác nhau là 9876. Số bé nhất là 1023. Tổng: 9876 + 1023 = 10 899.",
+        "explanation": "Số lớn nhất có 4 chữ số khác nhau là 9876. Số bé nhất là 1023. Tổng: 9876 + 1023 = 10 899. Do đó, đáp án chính xác là 10 899."
       },
       {
         "id": "g3_t3_2",
@@ -465,7 +496,8 @@ export const CURRICULUM_GRADE_3 = [
           "415"
         ],
         "correctAnswer": "445",
-        "hint": "Xóa chữ số 5 tận cùng tức là số đó giảm đi 10 lần và 5 đơn vị. Số mới là: (401 - 5) : 9 = 44. Vậy số ban đầu là 445."
+        "hint": "Xóa chữ số 5 tận cùng tức là số đó giảm đi 10 lần và 5 đơn vị. Số mới là: (401 - 5) : 9 = 44. Vậy số ban đầu là 445.",
+        "explanation": "Xóa chữ số 5 tận cùng tức là số đó giảm đi 10 lần và 5 đơn vị. Số mới là: (401 - 5) : 9 = 44. Vậy số ban đầu là 445. Do đó, đáp án chính xác là 445."
       },
       {
         "id": "g3_t3_3",
@@ -478,7 +510,8 @@ export const CURRICULUM_GRADE_3 = [
           "A = 8, B = 7"
         ],
         "correctAnswer": "A = 8, B = 6",
-        "hint": "AB + BA = 11 x (A + B) = 154 => A + B = 14. Kết hợp A - B = 2 ta tìm được A = 8 và B = 6."
+        "hint": "AB + BA = 11 x (A + B) = 154 => A + B = 14. Kết hợp A - B = 2 ta tìm được A = 8 và B = 6.",
+        "explanation": "AB + BA = 11 x (A + B) = 154 => A + B = 14. Kết hợp A - B = 2 ta tìm được A = 8 và B = 6. Do đó, đáp án chính xác là A = 8, B = 6."
       }
     ]
   },
@@ -506,7 +539,8 @@ export const CURRICULUM_GRADE_3 = [
           "1000 mm"
         ],
         "correctAnswer": "10 mm",
-        "hint": "Trên thước kẻ thông thường, mỗi vạch nhỏ nhất tương ứng 1 mm, 1 cm gồm 10 vạch nhỏ đó."
+        "hint": "Trên thước kẻ thông thường, mỗi vạch nhỏ nhất tương ứng 1 mm, 1 cm gồm 10 vạch nhỏ đó.",
+        "explanation": "Trên thước kẻ thông thường, mỗi vạch nhỏ nhất tương ứng 1 mm, 1 cm gồm 10 vạch nhỏ đó. Vì vậy, kết quả đúng là 10 mm."
       },
       {
         "id": "g3_l4_2",
@@ -519,7 +553,8 @@ export const CURRICULUM_GRADE_3 = [
           "500 g"
         ],
         "correctAnswer": "1000 g",
-        "hint": "Ghi nhớ đơn vị đo khối lượng: 1 kg = 1000 g."
+        "hint": "Ghi nhớ đơn vị đo khối lượng: 1 kg = 1000 g.",
+        "explanation": "Ghi nhớ đơn vị đo khối lượng: 1 kg = 1000 g. Do đó, đáp án chính xác là 1000 g."
       },
       {
         "id": "g3_l4_3",
@@ -532,7 +567,8 @@ export const CURRICULUM_GRADE_3 = [
           "500 ml"
         ],
         "correctAnswer": "1000 ml",
-        "hint": "Dung tích 1 chai nước 1 lít tương đương 1000 ml."
+        "hint": "Dung tích 1 chai nước 1 lít tương đương 1000 ml.",
+        "explanation": "Dung tích 1 chai nước 1 lít tương đương 1000 ml. Vì vậy, kết quả đúng là 1000 ml."
       },
       {
         "id": "g3_l4_4",
@@ -545,7 +581,8 @@ export const CURRICULUM_GRADE_3 = [
           "10 độ C"
         ],
         "correctAnswer": "0 độ C",
-        "hint": "Nước tinh khiết đóng băng ở 0 độ C và sôi ở 100 độ C."
+        "hint": "Nước tinh khiết đóng băng ở 0 độ C và sôi ở 100 độ C.",
+        "explanation": "Nước tinh khiết đóng băng ở 0 độ C và sôi ở 100 độ C. Vì vậy, kết quả đúng là 0 độ C."
       },
       {
         "id": "g3_l4_5",
@@ -558,7 +595,8 @@ export const CURRICULUM_GRADE_3 = [
           "650 g"
         ],
         "correctAnswer": "700 g",
-        "hint": "Cộng khối lượng hai gói: 250 + 450 = 700 g."
+        "hint": "Cộng khối lượng hai gói: 250 + 450 = 700 g.",
+        "explanation": "Cộng khối lượng hai gói: 250 + 450 = 700 g. Do đó, đáp án chính xác là 700 g."
       },
       {
         "id": "g3_l4_6",
@@ -571,7 +609,8 @@ export const CURRICULUM_GRADE_3 = [
           "600 ml"
         ],
         "correctAnswer": "650 ml",
-        "hint": "Lấy lượng nước ban đầu trừ đi lượng đã uống: 1000 - 350 = 650 ml."
+        "hint": "Lấy lượng nước ban đầu trừ đi lượng đã uống: 1000 - 350 = 650 ml.",
+        "explanation": "Lấy lượng nước ban đầu trừ đi lượng đã uống: 1000 - 350 = 650 ml. Do đó, đáp án chính xác là 650 ml."
       },
       {
         "id": "g3_l4_7",
@@ -584,7 +623,8 @@ export const CURRICULUM_GRADE_3 = [
           "2005 g"
         ],
         "correctAnswer": "2500 g",
-        "hint": "2 kg = 2000 g, cộng thêm 500 g là 2500 g."
+        "hint": "2 kg = 2000 g, cộng thêm 500 g là 2500 g.",
+        "explanation": "2 kg = 2000 g, cộng thêm 500 g là 2500 g. Do đó, đáp án chính xác là 2500 g."
       },
       {
         "id": "g3_l4_8",
@@ -597,7 +637,8 @@ export const CURRICULUM_GRADE_3 = [
           "40 cm"
         ],
         "correctAnswer": "40 mm",
-        "hint": "Phép nhân: 8 x 5 = 40 mm (tương đương 4 cm)."
+        "hint": "Phép nhân: 8 x 5 = 40 mm (tương đương 4 cm).",
+        "explanation": "Phép nhân: 8 x 5 = 40 mm (tương đương 4 cm). Do đó, đáp án chính xác là 40 mm."
       }
     ],
     "timoChallenges": [
@@ -612,7 +653,8 @@ export const CURRICULUM_GRADE_3 = [
           "3000 g"
         ],
         "correctAnswer": "2500 g",
-        "hint": "Bài toán Tổng - Hiệu: Quả dưa hấu là số lớn = (Tổng + Hiệu) : 2 = (3500 + 1500) : 2 = 2500 g."
+        "hint": "Bài toán Tổng - Hiệu: Quả dưa hấu là số lớn = (Tổng + Hiệu) : 2 = (3500 + 1500) : 2 = 2500 g.",
+        "explanation": "Bài toán Tổng - Hiệu: Quả dưa hấu là số lớn = (Tổng + Hiệu) : 2 = (3500 + 1500) : 2 = 2500 g. Do đó, đáp án chính xác là 2500 g."
       },
       {
         "id": "g3_t4_2",
@@ -625,7 +667,8 @@ export const CURRICULUM_GRADE_3 = [
           "4 lần"
         ],
         "correctAnswer": "6 lần",
-        "hint": "5 lần cốc đầy mới được: 150 x 5 = 750 ml (< 800 ml). Phải rót lần thứ 6 thì lượng nước mới vượt qua 800 ml."
+        "hint": "5 lần cốc đầy mới được: 150 x 5 = 750 ml (< 800 ml). Phải rót lần thứ 6 thì lượng nước mới vượt qua 800 ml.",
+        "explanation": "5 lần cốc đầy mới được: 150 x 5 = 750 ml (< 800 ml). Phải rót lần thứ 6 thì lượng nước mới vượt qua 800 ml. Do đó, đáp án chính xác là 6 lần."
       },
       {
         "id": "g3_t4_3",
@@ -638,7 +681,8 @@ export const CURRICULUM_GRADE_3 = [
           "38 cm"
         ],
         "correctAnswer": "37 cm",
-        "hint": "Tổng chiều dài hai dải băng: 20 + 20 = 40 cm. Trừ đi phần dán đè lên nhau 3 cm: 40 - 3 = 37 cm."
+        "hint": "Tổng chiều dài hai dải băng: 20 + 20 = 40 cm. Trừ đi phần dán đè lên nhau 3 cm: 40 - 3 = 37 cm.",
+        "explanation": "Tổng chiều dài hai dải băng: 20 + 20 = 40 cm. Trừ đi phần dán đè lên nhau 3 cm: 40 - 3 = 37 cm. Do đó, đáp án chính xác là 37 cm."
       }
     ]
   },
@@ -666,7 +710,8 @@ export const CURRICULUM_GRADE_3 = [
           "Tám mươi năm nghìn bốn trăm mười hai"
         ],
         "correctAnswer": "Tám mươi lăm nghìn bốn trăm mười hai",
-        "hint": "Tách theo lớp nghìn và lớp đơn vị: 85 nghìn, 412 đơn vị."
+        "hint": "Tách theo lớp nghìn và lớp đơn vị: 85 nghìn, 412 đơn vị.",
+        "explanation": "Tách theo lớp nghìn và lớp đơn vị: 85 nghìn, 412 đơn vị. Vì vậy, kết quả đúng là Tám mươi lăm nghìn bốn trăm mười hai."
       },
       {
         "id": "g3_l5_2",
@@ -679,7 +724,8 @@ export const CURRICULUM_GRADE_3 = [
           "99 990"
         ],
         "correctAnswer": "99 999",
-        "hint": "Số lớn nhất có 5 chữ số gồm toàn các chữ số 9: 99 999."
+        "hint": "Số lớn nhất có 5 chữ số gồm toàn các chữ số 9: 99 999.",
+        "explanation": "Số lớn nhất có 5 chữ số gồm toàn các chữ số 9: 99 999. Vì vậy, kết quả đúng là 99 999."
       },
       {
         "id": "g3_l5_3",
@@ -692,7 +738,8 @@ export const CURRICULUM_GRADE_3 = [
           "46 770"
         ],
         "correctAnswer": "47 770",
-        "hint": "Đặt tính thẳng hàng: 32 450 + 15 320 = 47 770."
+        "hint": "Đặt tính thẳng hàng: 32 450 + 15 320 = 47 770.",
+        "explanation": "Đặt tính thẳng hàng: 32 450 + 15 320 = 47 770. Do đó, đáp án chính xác là 47 770."
       },
       {
         "id": "g3_l5_4",
@@ -705,7 +752,8 @@ export const CURRICULUM_GRADE_3 = [
           "44 380"
         ],
         "correctAnswer": "44 320",
-        "hint": "68 500 - 24 180 = 44 320."
+        "hint": "68 500 - 24 180 = 44 320.",
+        "explanation": "68 500 - 24 180 = 44 320. Do đó, đáp án chính xác là 44 320."
       },
       {
         "id": "g3_l5_5",
@@ -718,7 +766,8 @@ export const CURRICULUM_GRADE_3 = [
           "36 000"
         ],
         "correctAnswer": "36 900",
-        "hint": "12 300 x 3 = 36 900."
+        "hint": "12 300 x 3 = 36 900.",
+        "explanation": "12 300 x 3 = 36 900. Do đó, đáp án chính xác là 36 900."
       },
       {
         "id": "g3_l5_6",
@@ -731,7 +780,8 @@ export const CURRICULUM_GRADE_3 = [
           "8060"
         ],
         "correctAnswer": "8100",
-        "hint": "48 : 6 = 8, 6 : 6 = 1, 00 : 6 = 00 => 8100."
+        "hint": "48 : 6 = 8, 6 : 6 = 1, 00 : 6 = 00 => 8100.",
+        "explanation": "48 : 6 = 8, 6 : 6 = 1, 00 : 6 = 00 => 8100. Do đó, đáp án chính xác là 8100."
       },
       {
         "id": "g3_l5_7",
@@ -744,7 +794,8 @@ export const CURRICULUM_GRADE_3 = [
           "30 000"
         ],
         "correctAnswer": "35 000",
-        "hint": "Chữ số hàng trăm là 6 (>= 5) nên ta làm tròn tăng lên thành 35 000."
+        "hint": "Chữ số hàng trăm là 6 (>= 5) nên ta làm tròn tăng lên thành 35 000.",
+        "explanation": "Chữ số hàng trăm là 6 (>= 5) nên ta làm tròn tăng lên thành 35 000. Do đó, đáp án chính xác là 35 000."
       },
       {
         "id": "g3_l5_8",
@@ -757,7 +808,8 @@ export const CURRICULUM_GRADE_3 = [
           "10 243"
         ],
         "correctAnswer": "10 234",
-        "hint": "Chữ số đầu tiên phải khác 0 nên chọn 1, sau đó chọn lần lượt các chữ số bé nhất còn lại: 0, 2, 3, 4 => 10 234."
+        "hint": "Chữ số đầu tiên phải khác 0 nên chọn 1, sau đó chọn lần lượt các chữ số bé nhất còn lại: 0, 2, 3, 4 => 10 234.",
+        "explanation": "Chữ số đầu tiên phải khác 0 nên chọn 1, sau đó chọn lần lượt các chữ số bé nhất còn lại: 0, 2, 3, 4 => 10 234. Do đó, đáp án chính xác là 10 234."
       }
     ],
     "timoChallenges": [
@@ -772,7 +824,8 @@ export const CURRICULUM_GRADE_3 = [
           "490"
         ],
         "correctAnswer": "450",
-        "hint": "Ghép cặp: (10 + 90) + (20 + 80) + (30 + 70) + (40 + 60) + 50 = 100 x 4 + 50 = 450."
+        "hint": "Ghép cặp: (10 + 90) + (20 + 80) + (30 + 70) + (40 + 60) + 50 = 100 x 4 + 50 = 450.",
+        "explanation": "Ghép cặp: (10 + 90) + (20 + 80) + (30 + 70) + (40 + 60) + 50 = 100 x 4 + 50 = 450. Do đó, đáp án chính xác là 450."
       },
       {
         "id": "g3_t5_2",
@@ -785,7 +838,8 @@ export const CURRICULUM_GRADE_3 = [
           "8722"
         ],
         "correctAnswer": "8721",
-        "hint": "Số chia là 7 nên số dư lớn nhất là 6. Số bị chia = 1245 x 7 + 6 = 8715 + 6 = 8721."
+        "hint": "Số chia là 7 nên số dư lớn nhất là 6. Số bị chia = 1245 x 7 + 6 = 8715 + 6 = 8721.",
+        "explanation": "Số chia là 7 nên số dư lớn nhất là 6. Số bị chia = 1245 x 7 + 6 = 8715 + 6 = 8721. Do đó, đáp án chính xác là 8721."
       },
       {
         "id": "g3_t5_3",
@@ -798,7 +852,8 @@ export const CURRICULUM_GRADE_3 = [
           "99"
         ],
         "correctAnswer": "111",
-        "hint": "Trang 1-9: 9 chữ số. Trang 10-60: (60 - 10 + 1) x 2 = 51 x 2 = 102 chữ số. Tổng: 9 + 102 = 111 chữ số."
+        "hint": "Trang 1-9: 9 chữ số. Trang 10-60: (60 - 10 + 1) x 2 = 51 x 2 = 102 chữ số. Tổng: 9 + 102 = 111 chữ số.",
+        "explanation": "Trang 1-9: 9 chữ số. Trang 10-60: (60 - 10 + 1) x 2 = 51 x 2 = 102 chữ số. Tổng: 9 + 102 = 111 chữ số. Do đó, đáp án chính xác là 111."
       }
     ]
   },
@@ -826,7 +881,8 @@ export const CURRICULUM_GRADE_3 = [
           "Lấy độ dài một cạnh nhân với 4"
         ],
         "correctAnswer": "Lấy chiều dài cộng chiều rộng (cùng đơn vị đo) rồi nhân với 2",
-        "hint": "Công thức: P = (dài + rộng) x 2."
+        "hint": "Công thức: P = (dài + rộng) x 2.",
+        "explanation": "Công thức: P = (dài + rộng) x 2. Do đó, đáp án chính xác là Lấy chiều dài cộng chiều rộng (cùng đơn vị đo) rồi nhân với 2."
       },
       {
         "id": "g3_l6_2",
@@ -839,7 +895,8 @@ export const CURRICULUM_GRADE_3 = [
           "28 cm"
         ],
         "correctAnswer": "26 cm",
-        "hint": "P = (8 + 5) x 2 = 13 x 2 = 26 cm."
+        "hint": "P = (8 + 5) x 2 = 13 x 2 = 26 cm.",
+        "explanation": "P = (8 + 5) x 2 = 13 x 2 = 26 cm. Do đó, đáp án chính xác là 26 cm."
       },
       {
         "id": "g3_l6_3",
@@ -852,7 +909,8 @@ export const CURRICULUM_GRADE_3 = [
           "13 cm2"
         ],
         "correctAnswer": "36 cm2",
-        "hint": "S = dài x rộng = 9 x 4 = 36 cm2 (xăng-ti-mét vuông)."
+        "hint": "S = dài x rộng = 9 x 4 = 36 cm2 (xăng-ti-mét vuông).",
+        "explanation": "S = dài x rộng = 9 x 4 = 36 cm2 (xăng-ti-mét vuông). Do đó, đáp án chính xác là 36 cm2."
       },
       {
         "id": "g3_l6_4",
@@ -865,7 +923,8 @@ export const CURRICULUM_GRADE_3 = [
           "18 cm"
         ],
         "correctAnswer": "24 cm",
-        "hint": "Chu vi hình vuông bằng độ dài cạnh nhân với 4: 6 x 4 = 24 cm."
+        "hint": "Chu vi hình vuông bằng độ dài cạnh nhân với 4: 6 x 4 = 24 cm.",
+        "explanation": "Chu vi hình vuông bằng độ dài cạnh nhân với 4: 6 x 4 = 24 cm. Do đó, đáp án chính xác là 24 cm."
       },
       {
         "id": "g3_l6_5",
@@ -878,7 +937,8 @@ export const CURRICULUM_GRADE_3 = [
           "14 cm2"
         ],
         "correctAnswer": "49 cm2",
-        "hint": "Diện tích hình vuông bằng cạnh nhân với chính nó: 7 x 7 = 49 cm2."
+        "hint": "Diện tích hình vuông bằng cạnh nhân với chính nó: 7 x 7 = 49 cm2.",
+        "explanation": "Diện tích hình vuông bằng cạnh nhân với chính nó: 7 x 7 = 49 cm2. Do đó, đáp án chính xác là 49 cm2."
       },
       {
         "id": "g3_l6_6",
@@ -891,7 +951,8 @@ export const CURRICULUM_GRADE_3 = [
           "64 m"
         ],
         "correctAnswer": "8 m",
-        "hint": "Cạnh hình vuông bằng chu vi chia cho 4: 32 : 4 = 8 m."
+        "hint": "Cạnh hình vuông bằng chu vi chia cho 4: 32 : 4 = 8 m.",
+        "explanation": "Cạnh hình vuông bằng chu vi chia cho 4: 32 : 4 = 8 m. Do đó, đáp án chính xác là 8 m."
       },
       {
         "id": "g3_l6_7",
@@ -904,7 +965,8 @@ export const CURRICULUM_GRADE_3 = [
           "5 cm"
         ],
         "correctAnswer": "6 cm",
-        "hint": "Chiều rộng = Diện tích chia cho chiều dài: 48 : 8 = 6 cm."
+        "hint": "Chiều rộng = Diện tích chia cho chiều dài: 48 : 8 = 6 cm.",
+        "explanation": "Chiều rộng = Diện tích chia cho chiều dài: 48 : 8 = 6 cm. Do đó, đáp án chính xác là 6 cm."
       },
       {
         "id": "g3_l6_8",
@@ -917,7 +979,8 @@ export const CURRICULUM_GRADE_3 = [
           "36 cm2"
         ],
         "correctAnswer": "32 cm2",
-        "hint": "Diện tích mỗi hình vuông: 4 x 4 = 16 cm2. Hai hình ghép lại: 16 x 2 = 32 cm2."
+        "hint": "Diện tích mỗi hình vuông: 4 x 4 = 16 cm2. Hai hình ghép lại: 16 x 2 = 32 cm2.",
+        "explanation": "Diện tích mỗi hình vuông: 4 x 4 = 16 cm2. Hai hình ghép lại: 16 x 2 = 32 cm2. Do đó, đáp án chính xác là 32 cm2."
       }
     ],
     "timoChallenges": [
@@ -932,7 +995,8 @@ export const CURRICULUM_GRADE_3 = [
           "12 lần"
         ],
         "correctAnswer": "9 lần",
-        "hint": "Diện tích mới = (cạnh x 3) x (cạnh x 3) = (cạnh x cạnh) x 9. Vậy diện tích tăng 9 lần."
+        "hint": "Diện tích mới = (cạnh x 3) x (cạnh x 3) = (cạnh x cạnh) x 9. Vậy diện tích tăng 9 lần.",
+        "explanation": "Diện tích mới = (cạnh x 3) x (cạnh x 3) = (cạnh x cạnh) x 9. Vậy diện tích tăng 9 lần. Do đó, đáp án chính xác là 9 lần."
       },
       {
         "id": "g3_t6_2",
@@ -945,7 +1009,8 @@ export const CURRICULUM_GRADE_3 = [
           "216 cm2"
         ],
         "correctAnswer": "72 cm2",
-        "hint": "Hình vuông lớn nhất có cạnh bằng chiều rộng là 12 cm. Diện tích tờ giấy: 18 x 12 = 216 cm2. Diện tích hình vuông: 12 x 12 = 144 cm2. Phần còn lại: 216 - 144 = 72 cm2."
+        "hint": "Hình vuông lớn nhất có cạnh bằng chiều rộng là 12 cm. Diện tích tờ giấy: 18 x 12 = 216 cm2. Diện tích hình vuông: 12 x 12 = 144 cm2. Phần còn lại: 216 - 144 = 72 cm2.",
+        "explanation": "Hình vuông lớn nhất có cạnh bằng chiều rộng là 12 cm. Diện tích tờ giấy: 18 x 12 = 216 cm2. Diện tích hình vuông: 12 x 12 = 144 cm2. Phần còn lại: 216 - 144 = 72 cm2. Do đó, đáp án chính xác là 72 cm2."
       },
       {
         "id": "g3_t6_3",
@@ -958,7 +1023,8 @@ export const CURRICULUM_GRADE_3 = [
           "35 cm"
         ],
         "correctAnswer": "40 cm",
-        "hint": "Hình chữ L gồm 8 cạnh ngoài của các hình vuông (mỗi cạnh 5 cm). Chu vi = 8 x 5 = 40 cm."
+        "hint": "Hình chữ L gồm 8 cạnh ngoài của các hình vuông (mỗi cạnh 5 cm). Chu vi = 8 x 5 = 40 cm.",
+        "explanation": "Hình chữ L gồm 8 cạnh ngoài của các hình vuông (mỗi cạnh 5 cm). Chu vi = 8 x 5 = 40 cm. Do đó, đáp án chính xác là 40 cm."
       }
     ]
   },
@@ -986,7 +1052,8 @@ export const CURRICULUM_GRADE_3 = [
           "10 000 đồng"
         ],
         "correctAnswer": "100 000 đồng",
-        "hint": "100 000 đồng là số có 6 chữ số, lớn nhất trong 4 phương án."
+        "hint": "100 000 đồng là số có 6 chữ số, lớn nhất trong 4 phương án.",
+        "explanation": "100 000 đồng là số có 6 chữ số, lớn nhất trong 4 phương án. Vì vậy, kết quả đúng là 100 000 đồng."
       },
       {
         "id": "g3_l7_2",
@@ -999,7 +1066,8 @@ export const CURRICULUM_GRADE_3 = [
           "10 tờ"
         ],
         "correctAnswer": "5 tờ",
-        "hint": "10 000 : 2 000 = 5 tờ."
+        "hint": "10 000 : 2 000 = 5 tờ.",
+        "explanation": "10 000 : 2 000 = 5 tờ. Do đó, đáp án chính xác là 5 tờ."
       },
       {
         "id": "g3_l7_3",
@@ -1012,7 +1080,8 @@ export const CURRICULUM_GRADE_3 = [
           "60 000 đồng"
         ],
         "correctAnswer": "50 000 đồng",
-        "hint": "20 000 x 2 + 10 000 = 40 000 + 10 000 = 50 000 đồng."
+        "hint": "20 000 x 2 + 10 000 = 40 000 + 10 000 = 50 000 đồng.",
+        "explanation": "20 000 x 2 + 10 000 = 40 000 + 10 000 = 50 000 đồng. Do đó, đáp án chính xác là 50 000 đồng."
       },
       {
         "id": "g3_l7_4",
@@ -1025,7 +1094,8 @@ export const CURRICULUM_GRADE_3 = [
           "6 000 đồng"
         ],
         "correctAnswer": "4 000 đồng",
-        "hint": "Số tiền thừa nhận lại: 10 000 - 6 000 = 4 000 đồng."
+        "hint": "Số tiền thừa nhận lại: 10 000 - 6 000 = 4 000 đồng.",
+        "explanation": "Số tiền thừa nhận lại: 10 000 - 6 000 = 4 000 đồng. Do đó, đáp án chính xác là 4 000 đồng."
       },
       {
         "id": "g3_l7_5",
@@ -1038,7 +1108,8 @@ export const CURRICULUM_GRADE_3 = [
           "24 000 đồng"
         ],
         "correctAnswer": "23 000 đồng",
-        "hint": "8 000 + 15 000 = 23 000 đồng."
+        "hint": "8 000 + 15 000 = 23 000 đồng.",
+        "explanation": "8 000 + 15 000 = 23 000 đồng. Do đó, đáp án chính xác là 23 000 đồng."
       },
       {
         "id": "g3_l7_6",
@@ -1051,7 +1122,8 @@ export const CURRICULUM_GRADE_3 = [
           "18 000 đồng"
         ],
         "correctAnswer": "20 000 đồng",
-        "hint": "5 000 x 4 = 20 000 đồng."
+        "hint": "5 000 x 4 = 20 000 đồng.",
+        "explanation": "5 000 x 4 = 20 000 đồng. Do đó, đáp án chính xác là 20 000 đồng."
       },
       {
         "id": "g3_l7_7",
@@ -1064,7 +1136,8 @@ export const CURRICULUM_GRADE_3 = [
           "45 000 đồng"
         ],
         "correctAnswer": "50 000 đồng",
-        "hint": "Lấy giá cặp sách trừ giá hộp bút: 85 000 - 35 000 = 50 000 đồng."
+        "hint": "Lấy giá cặp sách trừ giá hộp bút: 85 000 - 35 000 = 50 000 đồng.",
+        "explanation": "Lấy giá cặp sách trừ giá hộp bút: 85 000 - 35 000 = 50 000 đồng. Do đó, đáp án chính xác là 50 000 đồng."
       },
       {
         "id": "g3_l7_8",
@@ -1077,7 +1150,8 @@ export const CURRICULUM_GRADE_3 = [
           "16 000 đồng"
         ],
         "correctAnswer": "14 000 đồng",
-        "hint": "2 000 x 7 = 14 000 đồng."
+        "hint": "2 000 x 7 = 14 000 đồng.",
+        "explanation": "2 000 x 7 = 14 000 đồng. Do đó, đáp án chính xác là 14 000 đồng."
       }
     ],
     "timoChallenges": [
@@ -1092,7 +1166,8 @@ export const CURRICULUM_GRADE_3 = [
           "6 tờ"
         ],
         "correctAnswer": "4 tờ",
-        "hint": "Dùng: 2 tờ 10 000đ + 1 tờ 5 000đ + 1 tờ 2 000đ = 27 000đ. Tổng cộng 4 tờ tiền (ít nhất)."
+        "hint": "Dùng: 2 tờ 10 000đ + 1 tờ 5 000đ + 1 tờ 2 000đ = 27 000đ. Tổng cộng 4 tờ tiền (ít nhất).",
+        "explanation": "Dùng: 2 tờ 10 000đ + 1 tờ 5 000đ + 1 tờ 2 000đ = 27 000đ. Tổng cộng 4 tờ tiền (ít nhất). Do đó, đáp án chính xác là 4 tờ."
       },
       {
         "id": "g3_t7_2",
@@ -1105,7 +1180,8 @@ export const CURRICULUM_GRADE_3 = [
           "50 000 đồng"
         ],
         "correctAnswer": "60 000 đồng",
-        "hint": "Mua 3 được 4. Mua 6 được 8. Vậy chỉ cần mua và trả tiền cho 6 gói: 6 x 10 000 = 60 000 đồng."
+        "hint": "Mua 3 được 4. Mua 6 được 8. Vậy chỉ cần mua và trả tiền cho 6 gói: 6 x 10 000 = 60 000 đồng.",
+        "explanation": "Mua 3 được 4. Mua 6 được 8. Vậy chỉ cần mua và trả tiền cho 6 gói: 6 x 10 000 = 60 000 đồng. Do đó, đáp án chính xác là 60 000 đồng."
       },
       {
         "id": "g3_t7_3",
@@ -1118,7 +1194,8 @@ export const CURRICULUM_GRADE_3 = [
           "5 000 đồng"
         ],
         "correctAnswer": "3 000 đồng",
-        "hint": "Phần chênh lệch do 2 cục tẩy: 25 000 - 19 000 = 6 000 đồng. Giá 1 cục tẩy: 6 000 : 2 = 3 000 đồng."
+        "hint": "Phần chênh lệch do 2 cục tẩy: 25 000 - 19 000 = 6 000 đồng. Giá 1 cục tẩy: 6 000 : 2 = 3 000 đồng.",
+        "explanation": "Phần chênh lệch do 2 cục tẩy: 25 000 - 19 000 = 6 000 đồng. Giá 1 cục tẩy: 6 000 : 2 = 3 000 đồng. Do đó, đáp án chính xác là 3 000 đồng."
       }
     ]
   },
@@ -1146,7 +1223,8 @@ export const CURRICULUM_GRADE_3 = [
           "Tổ 3"
         ],
         "correctAnswer": "Tổ 2",
-        "hint": "Tổ 2 có 7 bạn, số lớn nhất trong 4 tổ."
+        "hint": "Tổ 2 có 7 bạn, số lớn nhất trong 4 tổ.",
+        "explanation": "Tổ 2 có 7 bạn, số lớn nhất trong 4 tổ. Vì vậy, kết quả đúng là Tổ 2."
       },
       {
         "id": "g3_l8_2",
@@ -1159,7 +1237,8 @@ export const CURRICULUM_GRADE_3 = [
           "21 bạn"
         ],
         "correctAnswer": "22 bạn",
-        "hint": "5 + 7 + 4 + 6 = 22 bạn."
+        "hint": "5 + 7 + 4 + 6 = 22 bạn.",
+        "explanation": "5 + 7 + 4 + 6 = 22 bạn. Do đó, đáp án chính xác là 22 bạn."
       },
       {
         "id": "g3_l8_3",
@@ -1172,7 +1251,8 @@ export const CURRICULUM_GRADE_3 = [
           "Chưa biết"
         ],
         "correctAnswer": "Chắc chắn xảy ra",
-        "hint": "Vì tất cả các viên bi trong hộp đều là màu đỏ nên chắc chắn bốc được bi đỏ."
+        "hint": "Vì tất cả các viên bi trong hộp đều là màu đỏ nên chắc chắn bốc được bi đỏ.",
+        "explanation": "Vì tất cả các viên bi trong hộp đều là màu đỏ nên chắc chắn bốc được bi đỏ. Vì vậy, kết quả đúng là Chắc chắn xảy ra."
       },
       {
         "id": "g3_l8_4",
@@ -1185,7 +1265,8 @@ export const CURRICULUM_GRADE_3 = [
           "Chắc chắn đúng"
         ],
         "correctAnswer": "Không thể xảy ra",
-        "hint": "Trong hộp không hề có bi vàng nào nên không thể bốc được bi vàng."
+        "hint": "Trong hộp không hề có bi vàng nào nên không thể bốc được bi vàng.",
+        "explanation": "Trong hộp không hề có bi vàng nào nên không thể bốc được bi vàng. Vì vậy, kết quả đúng là Không thể xảy ra."
       },
       {
         "id": "g3_l8_5",
@@ -1198,7 +1279,8 @@ export const CURRICULUM_GRADE_3 = [
           "Không bao giờ"
         ],
         "correctAnswer": "Có thể xảy ra",
-        "hint": "Mặt 5 chấm có thể xuất hiện hoặc không xuất hiện, tùy vào lần gieo."
+        "hint": "Mặt 5 chấm có thể xuất hiện hoặc không xuất hiện, tùy vào lần gieo.",
+        "explanation": "Mặt 5 chấm có thể xuất hiện hoặc không xuất hiện, tùy vào lần gieo. Vì vậy, kết quả đúng là Có thể xảy ra."
       },
       {
         "id": "g3_l8_6",
@@ -1211,7 +1293,8 @@ export const CURRICULUM_GRADE_3 = [
           "70 quyển"
         ],
         "correctAnswer": "60 quyển",
-        "hint": "180 - 120 = 60 quyển sách."
+        "hint": "180 - 120 = 60 quyển sách.",
+        "explanation": "180 - 120 = 60 quyển sách. Do đó, đáp án chính xác là 60 quyển."
       },
       {
         "id": "g3_l8_7",
@@ -1224,7 +1307,8 @@ export const CURRICULUM_GRADE_3 = [
           "4 khả năng"
         ],
         "correctAnswer": "2 khả năng (mặt Sấp hoặc mặt Ngửa)",
-        "hint": "Đồng xu có 2 mặt nên có 2 khả năng xuất hiện khi rơi xuống."
+        "hint": "Đồng xu có 2 mặt nên có 2 khả năng xuất hiện khi rơi xuống.",
+        "explanation": "Đồng xu có 2 mặt nên có 2 khả năng xuất hiện khi rơi xuống. Vì vậy, kết quả đúng là 2 khả năng (mặt Sấp hoặc mặt Ngửa)."
       },
       {
         "id": "g3_l8_8",
@@ -1237,7 +1321,8 @@ export const CURRICULUM_GRADE_3 = [
           "125 cây"
         ],
         "correctAnswer": "Cả 3 lớp trồng được 125 cây",
-        "hint": "Cả 3 lớp trồng được: 45 + 38 + 42 = 125 cây."
+        "hint": "Cả 3 lớp trồng được: 45 + 38 + 42 = 125 cây.",
+        "explanation": "Cả 3 lớp trồng được: 45 + 38 + 42 = 125 cây. Do đó, đáp án chính xác là Cả 3 lớp trồng được 125 cây."
       }
     ],
     "timoChallenges": [
@@ -1252,7 +1337,8 @@ export const CURRICULUM_GRADE_3 = [
           "2 viên bi"
         ],
         "correctAnswer": "5 viên bi",
-        "hint": "Trường hợp xấu nhất là bốc phải toàn bi xanh (4 viên bi xanh). Khi đó bốc thêm 1 viên nữa (viên thứ 5) thì chắc chắn là bi đỏ: 4 + 1 = 5 viên."
+        "hint": "Trường hợp xấu nhất là bốc phải toàn bi xanh (4 viên bi xanh). Khi đó bốc thêm 1 viên nữa (viên thứ 5) thì chắc chắn là bi đỏ: 4 + 1 = 5 viên.",
+        "explanation": "Trường hợp xấu nhất là bốc phải toàn bi xanh (4 viên bi xanh). Khi đó bốc thêm 1 viên nữa (viên thứ 5) thì chắc chắn là bi đỏ: 4 + 1 = 5 viên. Do đó, đáp án chính xác là 5 viên bi."
       },
       {
         "id": "g3_t8_2",
@@ -1265,7 +1351,8 @@ export const CURRICULUM_GRADE_3 = [
           "7 chiếc"
         ],
         "correctAnswer": "3 chiếc",
-        "hint": "Có 2 màu tất (trắng và đen). Bốc 3 chiếc thì theo nguyên lý Dirichlet chắc chắn có ít nhất 2 chiếc cùng màu."
+        "hint": "Có 2 màu tất (trắng và đen). Bốc 3 chiếc thì theo nguyên lý Dirichlet chắc chắn có ít nhất 2 chiếc cùng màu.",
+        "explanation": "Có 2 màu tất (trắng và đen). Bốc 3 chiếc thì theo nguyên lý Dirichlet chắc chắn có ít nhất 2 chiếc cùng màu. Vì vậy, kết quả đúng là 3 chiếc."
       },
       {
         "id": "g3_t8_3",
@@ -1278,7 +1365,8 @@ export const CURRICULUM_GRADE_3 = [
           "12 trận đấu"
         ],
         "correctAnswer": "6 trận đấu",
-        "hint": "Số trận đấu = (4 x 3) : 2 = 6 trận đấu."
+        "hint": "Số trận đấu = (4 x 3) : 2 = 6 trận đấu.",
+        "explanation": "Số trận đấu = (4 x 3) : 2 = 6 trận đấu. Do đó, đáp án chính xác là 6 trận đấu."
       }
     ]
   }

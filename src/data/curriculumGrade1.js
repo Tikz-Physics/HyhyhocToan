@@ -2,1261 +2,1988 @@
 // Bao phủ toàn diện 2 Học kì với 8 Chủ đề kiến thức & đan xen Thử thách Tư duy Timo chuẩn quốc tế
 
 export const CURRICULUM_ZONES = [
-  // ==========================================
-  // HỌC KÌ 1: NỀN TẢNG SỐ ĐẾN 20 & HÌNH KHỐI
-  // ==========================================
   {
-    id: 'counting_numbers_10',
-    semester: 1,
-    title: 'Nông Trại Số 0 - 10 & Tách Gộp',
-    badge: 'Học kì 1 - Chủ đề 1',
-    icon: '🐥',
-    color: 'from-amber-400 to-orange-500',
-    bgColor: 'bg-amber-100',
-    borderColor: 'border-amber-400',
-    description: 'Đếm các số 0-10, so sánh lớn bé, thứ tự số và sơ đồ Tách - Gộp số chuẩn SGK mới!',
-    timoCount: 3,
-    basicLevels: [
-      {
-        id: 'c1',
-        title: 'Bé đếm vịt con bơi lội',
-        question: 'Bé hãy đếm xem trong ao có bao nhiêu chú vịt con?',
-        itemIcon: '🦆',
-        count: 5,
-        targetNumber: 5,
-        correctAnswer: 5,
-        options: [3, 4, 5, 6],
-        hint: 'Bé hãy chỉ tay vào từng chú vịt trong ao và đếm từ 1 trở đi nhé!',
-      },
-      {
-        id: 'c2',
-        title: 'Vườn dâu tây đỏ mọng',
-        question: 'Có bao nhiêu quả dâu tây đỏ mọng trên cành?',
-        itemIcon: '🍓',
-        count: 8,
-        targetNumber: 8,
-        options: [6, 7, 8, 9],
-        hint: 'Bé hãy đếm lần lượt từng quả dâu tây từ trái sang phải nhé!',
-      },
-      {
-        id: 'c3',
-        title: 'Đoàn tàu sắc màu',
-        question: 'Toa tàu có dấu hỏi chấm (?) là số mấy?',
-        type: 'train',
-        sequence: [1, 2, 3, '?', 5],
-        options: [3, 4, 6],
-        correctNumber: 4,
-        hint: 'Các số đứng liền nhau tăng thêm 1 đơn vị: 2 rồi đến 3, sau đó là...',
-      },
-      {
-        id: 'c4',
-        title: 'Hộp kẹo mút ngọt ngào',
-        question: 'Bé hãy đếm xem trong hộp có bao nhiêu que kẹo mút?',
-        itemIcon: '🍭',
-        count: 10,
-        targetNumber: 10,
-        options: [8, 9, 10, 11],
-        hint: 'Bé hãy đếm thật cẩn thận từng hàng kẹo mút trong hộp nhé!',
-      },
-      {
-        id: 'c5',
-        title: 'Sơ đồ tách số (Số 5)',
-        question: 'Quan sát sơ đồ tách số: Số 5 gồm 3 và số mấy?',
-        type: 'number_bond',
-        total: 5,
-        partA: 3,
-        partB: 2,
-        missingPart: 'partB',
-        targetNumber: 2,
-        options: [1, 2, 3, 4],
-        hint: 'Bé hãy xòe 5 ngón tay, sau đó cụp bớt 3 ngón tay để xem còn lại mấy ngón nhé!',
-      },
-      {
-        id: 'c6',
-        title: 'Sơ đồ gộp số (Gộp 4 và 2)',
-        question: 'Quan sát sơ đồ gộp số: Gộp 4 và 2 ta được số mấy?',
-        type: 'number_bond',
-        total: 6,
-        partA: 4,
-        partB: 2,
-        missingPart: 'total',
-        targetNumber: 6,
-        options: [5, 6, 7, 8],
-        hint: 'Bé hãy lấy 4 rồi đếm thêm 2 bước nữa để tìm kết quả gộp nhé!',
-      },
-      {
-        id: 'c7',
-        title: 'Bé đếm củ cà rốt của thỏ con',
-        question: 'Bé hãy đếm xem trong vườn có bao nhiêu củ cà rốt 🥕?',
-        itemIcon: '🥕',
-        count: 7,
-        targetNumber: 7,
-        correctAnswer: 7,
-        options: [5, 6, 7, 8],
-        hint: 'Bé hãy đếm lần lượt từng củ cà rốt từ trái qua phải nhé!',
-      },
-      {
-        id: 'c8',
-        title: 'Tìm số liền trước',
-        question: 'Số liền trước của số 9 là số mấy?',
-        options: [7, 8, 9, 10],
-        correctAnswer: 8,
-        hint: 'Số liền trước là số đứng ngay trước số 9 khi đếm từ 1 đến 10.',
-      },
-      {
-        id: 'c9',
-        title: 'So sánh số lượng quả',
-        question: 'Có 4 quả táo đỏ 🍎 và 6 quả cam vàng 🍊. Loại quả nào nhiều hơn?',
-        options: ['Cam vàng nhiều hơn 🍊', 'Táo đỏ nhiều hơn 🍎', 'Hai loại bằng nhau'],
-        correctAnswer: 'Cam vàng nhiều hơn 🍊',
-        hint: 'Bé hãy so sánh xem 6 lớn hơn hay 4 lớn hơn nhé!',
-      },
-      {
-        id: 'c10',
-        title: 'Sơ đồ tách số (Số 8)',
-        question: 'Quan sát sơ đồ tách số: Số 8 gồm 5 và số mấy?',
-        type: 'number_bond',
-        total: 8,
-        partA: 5,
-        partB: 3,
-        missingPart: 'partB',
-        targetNumber: 3,
-        options: [2, 3, 4, 5],
-        hint: 'Bé hãy xòe 8 ngón tay, cụp bớt 5 ngón xem còn lại mấy ngón nhé!',
-      },
-      {
-        id: 'c11',
-        title: 'Sơ đồ gộp số (Gộp 3 và 4)',
-        question: 'Quan sát sơ đồ gộp số: Gộp 3 và 4 ta được số mấy?',
-        type: 'number_bond',
-        total: 7,
-        partA: 3,
-        partB: 4,
-        missingPart: 'total',
-        targetNumber: 7,
-        options: [6, 7, 8, 9],
-        hint: 'Bé hãy lấy 3 rồi đếm thêm 4 bước nữa: 3... 4, 5, 6, 7!',
-      },
-      {
-        id: 'c12',
-        title: 'Đoàn tàu đếm lùi',
-        question: 'Toa tàu có dấu hỏi chấm (?) là số mấy trong dãy đếm lùi?',
-        type: 'train',
-        sequence: [10, 9, 8, '?', 6],
-        options: [5, 7, 9],
-        correctNumber: 7,
-        hint: 'Dãy số đếm lùi bớt đi 1: 9, 8 rồi lùi xuống...',
-      },
-    ],
-    timoChallenges: [
-      {
-        id: 'tc1',
-        title: 'Timo: Quy luật đếm lá cây',
-        badge: 'Timo 2025',
-        question: 'Dựa vào quy luật dưới đây, hỏi có bao nhiêu chiếc lá trong nhóm tiếp theo?',
-        image: '/timo/p1_img2_31.png',
-        options: ['13 chiếc', '12 chiếc', '11 chiếc', '14 chiếc'],
-        correctIndex: 0,
-        hint: 'Bé hãy đếm số lá ở từng nhóm: Nhóm 1 có 5 lá, nhóm 2 có 7 lá, nhóm 3 có 9 lá, nhóm 4 có 11 lá.',
-        explanation: 'Quy luật: Mỗi nhóm sau nhiều hơn nhóm trước 2 chiếc lá: 5 (+2) -> 7 (+2) -> 9 (+2) -> 11 (+2) -> 13 chiếc lá! Đáp án là 13 chiếc.',
-      },
-      {
-        id: 'tc2',
-        title: 'Timo: Toa tàu tăng theo bước nhảy',
-        badge: 'Timo Logic',
-        question: 'Dãy số trên toa tàu: 3, 6, 9, 12, ( ? ). Số tiếp theo là số mấy?',
-        type: 'train',
-        sequence: [3, 6, 9, 12, '?'],
-        options: [13, 14, 15, 16],
-        correctIndex: 2,
-        hint: 'Mỗi toa tàu số sau bằng số trước cộng thêm 3!',
-        explanation: 'Quy luật cộng 3: 12 + 3 = 15. Đáp án là 15!',
-      },
-      {
-        id: 'tc3',
-        title: 'Timo: Đếm các số lớn hơn 40',
-        badge: 'Timo 2025',
-        question: 'Hỏi có bao nhiêu số lớn hơn 40 trong dãy số dưới đây?',
-        image: '/timo/p6_img2_84.jpeg',
-        options: ['4 số', '6 số', '8 số', '7 số'],
-        correctIndex: 2,
-        hint: 'Số lớn hơn 40 là các số từ 41 trở lên.',
-        explanation: 'Quan sát dãy số trên hình: có 8 số lớn hơn 40 gồm 95, 61, 70, 42, 47, 98, 56, 80! Đáp án là 8 số.',
-      },
-    ],
-  },
-
-  {
-    id: 'geometry_spatial',
-    semester: 1,
-    title: 'Lâu Đài Hình Khối & Không Gian',
-    badge: 'Học kì 1 - Chủ đề 2',
-    icon: '🔷',
-    color: 'from-purple-400 to-indigo-600',
-    bgColor: 'bg-purple-100',
-    borderColor: 'border-purple-400',
-    description: 'Nhận biết hình phẳng, khối lập phương, khối hộp chữ nhật và vị trí không gian!',
-    timoCount: 4,
-    basicLevels: [
-      {
-        id: 'geo1',
-        title: 'Bé nhận biết hình tròn',
-        question: 'Đồ vật nào dưới đây có dạng HÌNH TRÒN 🟡?',
-        options: ['Quả bóng đá ⚽', 'Hộp quà vuông 🎁', 'Biển báo tam giác 🔺'],
-        correctAnswer: 'Quả bóng đá ⚽',
-        hint: 'Hình tròn có đường viền cong tròn đều và có thể lăn tròn vo bon bon!',
-      },
-      {
-        id: 'geo2',
-        title: 'Đếm cạnh hình tam giác',
-        question: 'Hình tam giác 🔺 có bao nhiêu cạnh?',
-        options: ['3 cạnh', '4 cạnh', '5 cạnh'],
-        correctAnswer: '3 cạnh',
-        hint: 'Trong tiếng Hán Việt, "Tam" có nghĩa là mấy nhỉ? Bé hãy đếm số đoạn thẳng tạo nên hình nhé!',
-      },
-      {
-        id: 'geo3',
-        title: 'Nhận biết hình chữ nhật',
-        question: 'Đặc điểm nào đúng với HÌNH CHỮ NHẬT 🟩?',
-        options: ['2 cạnh dài và 2 cạnh ngắn', 'Có 3 cạnh nhọn', 'Cong tròn lăn được'],
-        correctAnswer: '2 cạnh dài và 2 cạnh ngắn',
-        hint: 'Bé hãy quan sát quyển vở hoặc chiếc điện thoại: các cạnh đối diện của chúng trông như thế nào?',
-      },
-      {
-        id: 'geo4',
-        title: 'Xác định vị trí: Trái hay Phải',
-        question: 'Chú gấu bông 🧸 đang đứng ở bên TRÁI hay bên PHẢI cây thông 🎄?',
-        type: 'spatial',
-        layout: 'bear_tree',
-        options: ['Bên TRÁI', 'Bên PHẢI'],
-        correctAnswer: 'Bên TRÁI',
-        hint: 'Bé hãy giơ hai bàn tay lên và so sánh vị trí của chú gấu với bên tay trái hay tay phải của bé nhé!',
-      },
-      {
-        id: 'geo5',
-        title: 'Khối lập phương & Khối hộp chữ nhật',
-        question: 'Hộp sữa tươi 🧃 mà bé uống hàng ngày có dạng khối hình gì?',
-        options: ['Khối hộp chữ nhật', 'Khối lập phương', 'Khối cầu tròn'],
-        correctAnswer: 'Khối hộp chữ nhật',
-        hint: 'Bé hãy quan sát các mặt xung quanh của hộp sữa xem chúng có dạng hình gì nhé!',
-      },
-      {
-        id: 'geo6',
-        title: 'Nhận biết hình vuông',
-        question: 'Đặc điểm nào đúng nhất với HÌNH VUÔNG 🟧?',
-        options: ['Có 4 cạnh dài bằng nhau', 'Có 3 cạnh nhọn', 'Có 2 cạnh dài và 2 cạnh ngắn'],
-        correctAnswer: 'Có 4 cạnh dài bằng nhau',
-        hint: 'Hình vuông có 4 cạnh thẳng và tất cả các cạnh đều bằng nhau chằn chặn!',
-      },
-      {
-        id: 'geo7',
-        title: 'Nhận biết khối lập phương',
-        question: 'Viên xúc xắc đồ chơi 🎲 có dạng khối hình gì?',
-        options: ['Khối lập phương', 'Khối cầu tròn', 'Khối hộp chữ nhật'],
-        correctAnswer: 'Khối lập phương',
-        hint: 'Viên xúc xắc có 6 mặt đều là các hình vuông bằng nhau!',
-      },
-      {
-        id: 'geo8',
-        title: 'Xác định vị trí: Trên hay Dưới',
-        question: 'Chú chim bồ câu 🕊️ đang đậu ở TRÊN hay ở DƯỚI mái nhà 🏠?',
-        options: ['Ở TRÊN mái nhà', 'Ở DƯỚI mái nhà'],
-        correctAnswer: 'Ở TRÊN mái nhà',
-        hint: 'Bé hãy nhìn hướng bay và vị trí chú chim so với nóc mái nhà nhé!',
-      },
-      {
-        id: 'geo9',
-        title: 'Xác định vị trí: Trước hay Sau',
-        question: 'Trong cuộc thi chạy, bạn Thỏ 🐰 đang chạy ở ĐẰNG TRƯỚC hay ĐẰNG SAU bạn Rùa 🐢?',
-        options: ['Ở ĐẰNG TRƯỚC', 'Ở ĐẰNG SAU'],
-        correctAnswer: 'Ở ĐẰNG TRƯỚC',
-        hint: 'Bạn Thỏ chạy nhanh hơn nên đang dẫn đầu ở vị trí phía trước.',
-      },
-      {
-        id: 'geo10',
-        title: 'Đếm hình vuông nhỏ',
-        question: 'Một khung cửa sổ có 4 ô kính vuông nhỏ. Hỏi có tất cả bao nhiêu ô kính vuông?',
-        options: [2, 3, 4, 5],
-        correctAnswer: 4,
-        hint: 'Bé hãy đếm lần lượt 4 ô kính trên khung cửa sổ nhé!',
-      },
-      {
-        id: 'geo11',
-        title: 'Nhận biết khối cầu',
-        question: 'Vật nào dưới đây có dạng KHỐI CẦU 🔮?',
-        options: ['Quả bóng đá ⚽', 'Hộp sữa tươi 🧃', 'Viên xúc xắc 🎲'],
-        correctAnswer: 'Quả bóng đá ⚽',
-        hint: 'Khối cầu hoàn toàn tròn và có thể lăn về mọi hướng.',
-      },
-    ],
-    timoChallenges: [
-      {
-        id: 'tgeo1',
-        title: 'Timo: Đếm tam giác lồng nhau',
-        badge: 'Timo 2025',
-        question: 'Có bao nhiêu hình tam giác trong hình vẽ dưới đây?',
-        image: '/timo/p4_img7_69.jpeg',
-        options: ['6 hình', '7 hình', '9 hình', '8 hình'],
-        correctIndex: 3,
-        hint: 'Đếm các hình tam giác nhỏ trước, sau đó ghép 2 hình nhỏ lại thành hình to hơn!',
-        explanation: 'Có 4 tam giác đơn + 3 tam giác ghép đôi + 1 tam giác lớn bao ngoài = 8 hình tam giác!',
-      },
-      {
-        id: 'tgeo2',
-        title: 'Timo: Đếm khối lập phương 3D xếp chồng',
-        badge: 'Timo 2025',
-        question: 'Jane ghép các hình lập phương. Hỏi cô ấy cần ít nhất bao nhiêu hình lập phương?',
-        image: '/timo/p5_img3_78.jpeg',
-        options: ['14 khối', '17 khối', '15 khối', '16 khối'],
-        correctIndex: 2,
-        hint: 'Khối ở tầng cao nhất không thể bay lơ lửng, chắc chắn phải có khối ở tầng dưới đỡ lấy nó!',
-        explanation: 'Đếm tổng cả các khối nhìn thấy và các khối ẩn đỡ bên dưới: cần ít nhất 15 khối lập phương!',
-      },
-      {
-        id: 'tgeo3',
-        title: 'Timo: Đếm số cạnh của hình đa giác',
-        badge: 'Timo 2025',
-        question: 'Hỏi hình vẽ dưới đây có tất cả bao nhiêu cạnh?',
-        image: '/timo/p5_img2_77.png',
-        options: ['13 cạnh', '12 cạnh', '10 cạnh', '11 cạnh'],
-        correctIndex: 1,
-        hint: 'Đếm lần lượt từng cạnh viền bao quanh hình theo chiều kim đồng hồ.',
-        explanation: 'Đếm cẩn thận từng cạnh xung quanh đa giác: có đúng 12 cạnh!',
-      },
-      {
-        id: 'tgeo4',
-        title: 'Timo: Đếm số hình tròn chùm quả',
-        badge: 'Timo 2025',
-        question: 'Có bao nhiêu hình tròn trong hình vẽ dưới đây?',
-        image: '/timo/p5_img4_79.jpeg',
-        options: ['6 hình', '5 hình', '8 hình', '7 hình'],
-        correctIndex: 3,
-        hint: 'Bé đếm các quả hình tròn trên cành cây (không đếm 2 chiếc lá nhé)!',
-        explanation: 'Có tất cả 7 hình tròn là các quả mọng trên cành cây!',
-      },
-    ],
-  },
-
-  {
-    id: 'add_sub_10',
-    semester: 1,
-    title: 'Cây Táo Phép Cộng & Trừ 10',
-    badge: 'Học kì 1 - Chủ đề 3',
-    icon: '🍎',
-    color: 'from-emerald-400 to-green-600',
-    bgColor: 'bg-emerald-100',
-    borderColor: 'border-emerald-400',
-    description: 'Hái táo thêm vào, bóp vỡ bóng bớt đi, phép tính với số 0 và giải toán có lời văn!',
-    timoCount: 3,
-    basicLevels: [
-      {
-        id: 'as1',
-        title: 'Thêm táo vào giỏ (Phép cộng)',
-        question: 'Trong giỏ có 3 quả táo đỏ. Bé hái thêm 2 quả táo xanh nữa. Hỏi trong giỏ có tất cả bao nhiêu quả táo?',
-        type: 'visual_add',
-        a: 3,
-        b: 2,
-        operator: '+',
-        iconA: '🍎',
-        iconB: '🍏',
-        options: [4, 5, 6, 7],
-        correctAnswer: 5,
-        hint: 'Bé lấy 3 quả táo đỏ gộp với 2 quả táo xanh: 3 + 2 = ?',
-      },
-      {
-        id: 'as2',
-        title: 'Bong bóng vỡ tan (Phép trừ)',
-        question: 'Bé có 6 quả bóng bay 🎈. Gió thổi làm vỡ mất 2 quả. Hỏi bé còn lại bao nhiêu quả bóng bay?',
-        type: 'visual_sub',
-        a: 6,
-        b: 2,
-        operator: '-',
-        iconA: '🎈',
-        options: [3, 4, 5, 8],
-        correctAnswer: 4,
-        hint: 'Có 6 quả, vỡ 2 quả tức là lấy 6 bớt đi 2: 6 - 2 = ?',
-      },
-      {
-        id: 'as3',
-        title: 'Phép tính với số 0',
-        question: 'Một số cộng với 0 thì bằng chính số đó: 7 + 0 = ?',
-        options: [0, 6, 7, 8],
-        correctAnswer: 7,
-        hint: 'Bất kì số nào cộng với 0 cũng bằng chính số đó bé nhé!',
-      },
-      {
-        id: 'as4',
-        title: 'Tìm số còn thiếu để được 10',
-        question: '6 + ? = 10. Số nào cần điền vào dấu hỏi chấm?',
-        type: 'equation',
-        options: [3, 4, 5, 2],
-        correctAnswer: 4,
-        hint: 'Bé hãy xòe 10 ngón tay rồi cụp bớt 6 ngón để tìm số ngón tay còn lại nhé!',
-      },
-      {
-        id: 'as5',
-        title: 'Những chú chim trên cành (Giải toán)',
-        question: 'Trên cành có 8 chú chim 🐦, 3 chú chim bay đi tìm mồi. Hỏi trên cành còn lại bao nhiêu chú chim?',
-        options: [4, 5, 6, 7],
-        correctAnswer: 5,
-        hint: 'Trên cành có 8 chú chim, 3 chú bay đi tức là làm phép trừ: 8 - 3 = ?',
-      },
-      {
-        id: 'as6',
-        title: 'Phép cộng trong phạm vi 10',
-        question: 'Tính nhẩm: 4 + 5 = ?',
-        options: [8, 9, 10, 7],
-        correctAnswer: 9,
-        hint: 'Bé hãy lấy 4 rồi đếm thêm 5 bước nữa nhé: 4... 5, 6, 7, 8, 9!',
-      },
-      {
-        id: 'as7',
-        title: 'Phép trừ trong phạm vi 10',
-        question: 'Tính nhẩm: 10 - 6 = ?',
-        options: [3, 4, 5, 6],
-        correctAnswer: 4,
-        hint: 'Bé hãy xòe 10 ngón tay rồi gập bớt 6 ngón tay lại xem còn mấy ngón nhé!',
-      },
-      {
-        id: 'as8',
-        title: 'Tìm số còn thiếu trong phép trừ',
-        question: 'Điền số thích hợp vào ô trống: 9 - ? = 5',
-        type: 'equation',
-        options: [3, 4, 5, 2],
-        correctAnswer: 4,
-        hint: 'Muốn biết 9 trừ mấy bằng 5, bé lấy 9 trừ đi 5 nhé: 9 - 5 = ?',
-      },
-      {
-        id: 'as9',
-        title: 'Phép cộng với số 0',
-        question: 'Tính nhẩm: 0 + 9 = ?',
-        options: [0, 8, 9, 10],
-        correctAnswer: 9,
-        hint: 'Bất kỳ số nào cộng với số 0 cũng bằng chính số đó!',
-      },
-      {
-        id: 'as10',
-        title: 'Giải toán: Bông hoa tặng cô',
-        question: 'Lan hái được 4 bông hoa 🌸, Mai cho Lan thêm 3 bông hoa nữa. Hỏi Lan có tất cả bao nhiêu bông hoa?',
-        options: ['7 bông hoa', '6 bông hoa', '8 bông hoa', '5 bông hoa'],
-        correctAnswer: '7 bông hoa',
-        hint: 'Cho thêm tức là làm phép tính cộng: 4 + 3 = ? bông hoa!',
-      },
-      {
-        id: 'as11',
-        title: 'Giải toán: Đĩa dâu tây',
-        question: 'Trên đĩa có 9 quả dâu tây 🍓, bé ăn hết 4 quả. Hỏi trên đĩa còn lại bao nhiêu quả dâu tây?',
-        options: ['5 quả', '6 quả', '4 quả', '7 quả'],
-        correctAnswer: '5 quả',
-        hint: 'Ăn hết tức là bớt đi, làm phép tính trừ: 9 - 4 = ? quả!',
-      },
-    ],
-    timoChallenges: [
-      {
-        id: 'tas1',
-        title: 'Timo: Tính nhanh gộp số tròn 10',
-        badge: 'Timo 2025',
-        question: 'Tính nhanh giá trị của: 8 + 9 + 1 + 2 + 3 = ?',
-        options: [23, 21, 22, 24],
-        correctIndex: 0,
-        hint: 'Mẹo thần kỳ: Bé hãy ghép các cặp số có tổng bằng 10 lại với nhau trước nhé!',
-        explanation: 'Ta có: (8 + 2) + (9 + 1) + 3 = 10 + 10 + 3 = 23. Rất nhanh và chính xác!',
-      },
-      {
-        id: 'tas2',
-        title: 'Timo: Tìm giá trị của con cá',
-        badge: 'Timo 2025',
-        question: 'Tìm giá trị của con cá trong hình dưới đây:',
-        image: '/timo/p2_img4_40.jpeg',
-        options: [31, 21, 18, 19],
-        correctIndex: 3,
-        hint: 'Từ hình vẽ, ta có: 6 + Con cá = 25. Bé lấy 25 trừ đi 6 nhé: 25 - 6 = ?',
-        explanation: 'Ta có phép tính: 6 + Con cá = 25. Giá trị của con cá là: 25 - 6 = 19!',
-      },
-      {
-        id: 'tas3',
-        title: 'Timo: Bãi đỗ xe ô tô thêm bớt',
-        badge: 'Timo 2025',
-        question: 'Lúc đầu có 17 ô tô. 3 ô tô rời đi, 1 xe máy đến, rồi 2 ô tô nữa rời đi. Hỏi còn bao nhiêu Ô TÔ?',
-        options: ['11 chiếc', '14 chiếc', '12 chiếc', '13 chiếc'],
-        correctIndex: 2,
-        hint: 'Cảnh giác bẫy: Đề bài chỉ hỏi Ô TÔ, xe máy không ảnh hưởng đến số ô tô!',
-        explanation: 'Số ô tô = 17 - 3 - 2 = 12 chiếc ô tô.',
-      },
-    ],
-  },
-
-  {
-    id: 'numbers_20',
-    semester: 1,
-    title: 'Khu Vườn Số & Phép Tính Đến 20',
-    badge: 'Học kì 1 - Chủ đề 4',
-    icon: '🔮',
-    color: 'from-sky-400 to-blue-600',
-    bgColor: 'bg-sky-100',
-    borderColor: 'border-sky-400',
-    description: 'Khám phá các số 11-20, cấu tạo chục và đơn vị, cộng trừ không nhớ trong phạm vi 20!',
-    timoCount: 3,
-    basicLevels: [
-      {
-        id: 'n20_1',
-        title: 'Đếm viên bi pha lê sắc màu',
-        question: 'Bé hãy đếm xem có bao nhiêu viên bi pha lê trong hộp?',
-        itemIcon: '🔮',
-        count: 15,
-        targetNumber: 15,
-        correctAnswer: 15,
-        options: [13, 14, 15, 16],
-        hint: 'Bé hãy đếm lần lượt từng hàng viên bi pha lê trong hộp nhé!',
-      },
-      {
-        id: 'n20_2',
-        title: 'Cấu tạo số: 1 chục và 4 đơn vị',
-        question: 'Số gồm 1 chục và 4 đơn vị viết là số mấy?',
-        options: [12, 14, 16, 41],
-        correctAnswer: 14,
-        hint: 'Chữ số hàng chục viết trước, chữ số hàng đơn vị viết sau bé nhé!',
-      },
-      {
-        id: 'n20_3',
-        title: 'Phép cộng không nhớ đến 20',
-        question: 'Tính nhẩm: 12 + 3 = ?',
-        options: [14, 15, 16, 17],
-        correctAnswer: 15,
-        hint: 'Bé hãy giữ nguyên 1 chục và lấy hai chữ số đơn vị cộng lại với nhau nhé!',
-      },
-      {
-        id: 'n20_4',
-        title: 'Phép trừ không nhớ đến 20',
-        question: 'Tính nhẩm: 18 - 5 = ?',
-        options: [12, 13, 14, 15],
-        correctAnswer: 13,
-        hint: 'Bé hãy giữ nguyên 1 chục và lấy hai chữ số đơn vị trừ cho nhau nhé!',
-      },
-      {
-        id: 'n20_5',
-        title: 'So sánh các số đến 20',
-        question: 'Điền dấu thích hợp vào chỗ trống: 17  ...  14',
-        options: ['>', '<', '='],
-        correctAnswer: '>',
-        hint: 'Cả hai số đều có 1 chục, bé hãy so sánh chữ số ở hàng đơn vị nhé!',
-      },
-      {
-        id: 'n20_6',
-        title: 'Đếm số ngôi sao may mắn',
-        question: 'Bé hãy đếm xem trên bầu trời có bao nhiêu ngôi sao ⭐?',
-        itemIcon: '⭐',
-        count: 12,
-        targetNumber: 12,
-        correctAnswer: 12,
-        options: [10, 11, 12, 13],
-        hint: 'Bé hãy đếm từ 1 đến hết các ngôi sao trên bầu trời nhé!',
-      },
-      {
-        id: 'n20_7',
-        title: 'Cấu tạo số: 1 chục và 8 đơn vị',
-        question: 'Số gồm 1 chục và 8 đơn vị viết là số mấy?',
-        options: [18, 81, 10, 8],
-        correctAnswer: 18,
-        hint: '1 chục (10) gộp với 8 đơn vị là số mười tám (18).',
-      },
-      {
-        id: 'n20_8',
-        title: 'Số liền trước và liền sau',
-        question: 'Số liền trước và số liền sau của số 15 lần lượt là hai số nào?',
-        options: ['14 và 16', '13 và 14', '15 và 17', '16 và 17'],
-        correctAnswer: '14 và 16',
-        hint: 'Đếm theo thứ tự: 14 rồi đến 15, sau 15 là 16!',
-      },
-      {
-        id: 'n20_9',
-        title: 'Phép cộng không nhớ',
-        question: 'Tính nhẩm: 11 + 6 = ?',
-        options: [16, 17, 18, 19],
-        correctAnswer: 17,
-        hint: 'Giữ nguyên 1 chục, lấy 1 + 6 = 7, vậy kết quả là 17.',
-      },
-      {
-        id: 'n20_10',
-        title: 'Phép trừ không nhớ',
-        question: 'Tính nhẩm: 19 - 7 = ?',
-        options: [11, 12, 13, 14],
-        correctAnswer: 12,
-        hint: 'Giữ nguyên 1 chục, lấy 9 - 7 = 2, vậy kết quả là 12.',
-      },
-      {
-        id: 'n20_11',
-        title: 'So sánh số có 2 chữ số',
-        question: 'Điền dấu thích hợp vào chỗ trống: 13  ...  16',
-        options: ['<', '>', '='],
-        correctAnswer: '<',
-        hint: 'Cùng có 1 chục, nhưng 3 đơn vị bé hơn 6 đơn vị nên 13 < 16.',
-      },
-    ],
-    timoChallenges: [
-      {
-        id: 'tn20_1',
-        title: 'Timo: Chiếc cốc vỡ trên bàn',
-        badge: 'Timo 2025',
-        question: 'Có 13 chiếc cốc ở trên bàn. Tony làm vỡ 6 chiếc cốc. Hỏi bây giờ trên bàn có bao nhiêu chiếc cốc?',
-        options: ['19 chiếc', '8 chiếc', '7 chiếc', '18 chiếc'],
-        correctIndex: 2,
-        hint: 'Làm vỡ tức là bớt đi: 13 - 6 = ?',
-        explanation: 'Số cốc còn lại là: 13 - 6 = 7 chiếc cốc. Đáp án đúng là 7.',
-      },
-      {
-        id: 'tn20_2',
-        title: 'Timo: Tìm phép tính đúng',
-        badge: 'Timo 2025',
-        question: 'Tìm phép tính đúng trong các phép tính sau đây:',
-        options: ['13 + 5 - 6 = 14', '13 - 6 - 5 = 14', '13 - 5 + 6 = 14', '13 - 6 + 5 = 14'],
-        correctIndex: 2,
-        hint: 'Bé hãy tính nhẩm từng phép tính từ trái sang phải xem câu nào có kết quả đúng bằng 14 nhé!',
-        explanation: 'Ta có 13 - 5 + 6 = 8 + 6 = 14. Phép tính này hoàn toàn chính xác!',
-      },
-      {
-        id: 'tn20_3',
-        title: 'Timo: Tính nhanh dãy số',
-        badge: 'Timo 2025',
-        question: 'Tìm giá trị của: 4 + 1 + 5 + 7 + 4 + 1 + 5 = ?',
-        options: [27, 29, 30, 28],
-        correctIndex: 0,
-        hint: 'Mẹo Timo: (4 + 1 + 5) chính là bằng 10!',
-        explanation: 'Ta gộp: (4 + 1 + 5) + 7 + (4 + 1 + 5) = 10 + 7 + 10 = 27. Đáp án là 27.',
-      },
-    ],
-  },
-
-  // ==========================================
-  // HỌC KÌ 2: SỐ ĐẾN 100, ĐO ĐỘ DÀI & THỜI GIAN
-  // ==========================================
-  {
-    id: 'numbers_100',
-    semester: 2,
-    title: 'Xưởng Gỗ Số Đến 100 & Chục Đơn Vị',
-    badge: 'Học kì 2 - Chủ đề 5',
-    icon: '🪵',
-    color: 'from-amber-600 to-yellow-600',
-    bgColor: 'bg-amber-100',
-    borderColor: 'border-amber-500',
-    description: 'Làm quen các số đến 100, đếm bó chục que tính, đọc viết và so sánh số có 2 chữ số!',
-    timoCount: 3,
-    basicLevels: [
-      {
-        id: 'n100_1',
-        title: 'Đếm các số tròn chục',
-        question: 'Có 4 bó que tính, mỗi bó có 1 chục que (10 que). Hỏi có tất cả bao nhiêu que tính?',
-        options: [14, 40, 4, 400],
-        correctAnswer: 40,
-        hint: 'Mỗi bó là 1 chục (10 que). Bé hãy đếm theo chục: 1 chục, 2 chục, 3 chục, 4 chục là bao nhiêu nhé!',
-      },
-      {
-        id: 'n100_2',
-        title: 'Bó chục và que tính lẻ: 3 chục 5 đơn vị',
-        question: 'Quan sát hình: Có 3 bó chục và 5 que tính rời. Đó là số mấy?',
-        type: 'tens_ones',
-        tens: 3,
-        ones: 5,
-        targetNumber: 35,
-        options: [53, 35, 30, 8],
-        hint: '3 bó chục tương ứng chữ số 3 ở hàng chục, 5 que rời là 5 đơn vị bé nhé!',
-      },
-      {
-        id: 'n100_3',
-        title: 'Bó chục và que tính lẻ: 5 chục 2 đơn vị',
-        question: 'Quan sát hình: Có 5 bó chục và 2 que tính rời. Đó là số mấy?',
-        type: 'tens_ones',
-        tens: 5,
-        ones: 2,
-        targetNumber: 52,
-        options: [25, 50, 52, 55],
-        hint: '5 bó chục tương ứng chữ số 5 ở hàng chục, 2 que rời là 2 đơn vị bé nhé!',
-      },
-      {
-        id: 'n100_4',
-        title: 'Tập đọc số có 2 chữ số',
-        question: 'Số 68 đọc là gì?',
-        options: ['Sáu mươi tám', 'Sáu mươi bốn', 'Tám mươi sáu', 'Sáu mươi'],
-        correctAnswer: 'Sáu mươi tám',
-        hint: 'Bé hãy đọc chữ số hàng chục trước kèm theo chữ "mươi", sau đó đọc chữ số hàng đơn vị nhé!',
-      },
-      {
-        id: 'n100_5',
-        title: 'So sánh hai số có 2 chữ số',
-        question: 'Điền dấu thích hợp vào chỗ trống: 45  ...  54',
-        options: ['<', '>', '='],
-        correctAnswer: '<',
-        hint: 'Bé hãy so sánh chữ số hàng chục trước: 4 chục và 5 chục số nào lớn hơn nhé!',
-      },
-      {
-        id: 'n100_6',
-        title: 'Số liền sau trong bảng số',
-        question: 'Số liền sau của số 89 là số nào?',
-        options: [88, 90, 91, 99],
-        correctAnswer: 90,
-        hint: 'Số liền sau là số ngay phía sau khi đếm, bé lấy số đã cho cộng thêm 1 đơn vị nhé!',
-      },
-      {
-        id: 'n100_7',
-        title: 'Đếm số tròn chục que tính',
-        question: 'Có 6 bó que tính (mỗi bó 1 chục que). Hỏi có tất cả bao nhiêu que tính?',
-        options: [6, 60, 16, 66],
-        correctAnswer: 60,
-        hint: '6 chục que tính chính là sáu mươi que tính (60).',
-      },
-      {
-        id: 'n100_8',
-        title: 'Cấu tạo số: 7 chục và 4 đơn vị',
-        question: 'Số gồm 7 chục và 4 đơn vị viết là số mấy?',
-        options: [74, 47, 70, 40],
-        correctAnswer: 74,
-        hint: 'Hàng chục là 7, hàng đơn vị là 4 -> viết là 74.',
-      },
-      {
-        id: 'n100_9',
-        title: 'Tập đọc số: Số 95',
-        question: 'Số 95 được đọc đúng là gì?',
-        options: ['Chín mươi lăm', 'Chín mươi năm', 'Chín lăm', 'Năm mươi chín'],
-        correctAnswer: 'Chín mươi lăm',
-        hint: 'Khi chữ số hàng đơn vị là 5 và hàng chục từ 1 trở lên, ta đọc là "lăm".',
-      },
-      {
-        id: 'n100_10',
-        title: 'Tìm số lớn nhất',
-        question: 'Trong các số: 34, 72, 59, 28, số nào lớn nhất?',
-        options: [72, 59, 34, 28],
-        correctAnswer: 72,
-        hint: 'Bé so sánh chữ số hàng chục: 7 chục lớn nhất!',
-      },
-      {
-        id: 'n100_11',
-        title: 'Tìm số liền trước của 100',
-        question: 'Số liền trước của số 100 là số nào?',
-        options: [99, 90, 101, 89],
-        correctAnswer: 99,
-        hint: 'Bé lấy 100 bớt đi 1 đơn vị: 100 - 1 = 99.',
-      },
-      {
-        id: 'n100_12',
-        title: 'Số tròn chục lớn nhất có 2 chữ số',
-        question: 'Số tròn chục lớn nhất có 2 chữ số là số mấy?',
-        options: [90, 99, 80, 100],
-        correctAnswer: 90,
-        hint: 'Các số tròn chục có chữ số tận cùng là 0: 10, 20, ..., 90.',
-      },
-    ],
-    timoChallenges: [
-      {
-        id: 'tn100_1',
-        title: 'Timo: Tìm số lớn nhất',
-        badge: 'Timo 2025',
-        question: 'Số nào dưới đây là số lớn nhất? 26015412, 3918378, 23998788, 27000279',
-        options: ['26015412', '3918378', '23998788', '27000279'],
-        correctIndex: 3,
-        hint: 'Số có nhiều chữ số hơn sẽ lớn hơn. Với các số có cùng 8 chữ số, bé hãy so sánh từ chữ số bên trái sang nhé!',
-        explanation: '27000279 có hai chữ số đầu là 27 lớn nhất trong các số 8 chữ số!',
-      },
-      {
-        id: 'tn100_2',
-        title: 'Timo: Số nhỏ nhất có 3 chữ số khác nhau',
-        badge: 'Timo 2025',
-        question: 'Số nhỏ nhất có 3 chữ số khác nhau là số nào?',
-        options: ['100', '102', '123', '111'],
-        correctIndex: 1,
-        hint: 'Để được số nhỏ nhất: chữ số đầu tiên phải nhỏ nhất khác 0, rồi chọn tiếp các chữ số nhỏ nhất còn lại nhé!',
-        explanation: 'Số nhỏ nhất có 3 chữ số khác nhau là 102.',
-      },
-      {
-        id: 'tn100_3',
-        title: 'Timo: Ghép số nhỏ hơn 38',
-        badge: 'Timo 2025',
-        question: 'Có bao nhiêu số có 2 chữ số nhỏ hơn 38 được tạo bởi 2 chữ số khác nhau từ 1, 2, 3, 7 và 9?',
-        options: ['8 số', '11 số', '10 số', '12 số'],
-        correctIndex: 1,
-        hint: 'Bé hãy liệt kê các số có hàng chục là 1, 2 và 3 (nhỏ hơn 38) rồi đếm tổng cộng nhé!',
-        explanation: 'Tổng cộng: 4 + 4 + 3 = 11 số. Đáp án đúng là 11 số.',
-      },
-    ],
-  },
-
-  {
-    id: 'measurement_cm',
-    semester: 2,
-    title: 'Thước Kẻ Xăng-ti-mét (cm)',
-    badge: 'Học kì 2 - Chủ đề 6',
-    icon: '📏',
-    color: 'from-teal-400 to-cyan-600',
-    bgColor: 'bg-teal-100',
-    borderColor: 'border-teal-400',
-    description: 'Thực hành đo độ dài đồ vật bằng thước kẻ chia vạch cm và tính toán có đơn vị!',
-    timoCount: 3,
-    basicLevels: [
-      {
-        id: 'cm1',
-        title: 'Đo độ dài chiếc bút chì',
-        question: 'Quan sát thước kẻ: Chiếc bút chì dài bao nhiêu xăng-ti-mét (cm)?',
-        type: 'ruler_cm',
-        item: 'Bút chì ✏️',
-        lengthCm: 8,
-        targetNumber: 8,
-        options: [6, 7, 8, 9],
-        hint: 'Đầu bút chì đặt đúng ở vạch 0 cm, bé hãy nhìn xem đầu nhọn của bút chì chỉ vào vạch số mấy nhé!',
-      },
-      {
-        id: 'cm2',
-        title: 'Đo độ dài cục tẩy',
-        question: 'Quan sát thước kẻ: Cục tẩy dài bao nhiêu xăng-ti-mét (cm)?',
-        type: 'ruler_cm',
-        item: 'Cục tẩy 🧼',
-        lengthCm: 4,
-        targetNumber: 4,
-        options: [3, 4, 5, 6],
-        hint: 'Đầu cục tẩy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đuôi cục tẩy chỉ vào vạch số mấy trên thước kẻ nhé!',
-      },
-      {
-        id: 'cm3',
-        title: 'Đo độ dài chiếc thìa',
-        question: 'Quan sát thước kẻ: Chiếc thìa dài bao nhiêu xăng-ti-mét (cm)?',
-        type: 'ruler_cm',
-        item: 'Chiếc thìa 🥄',
-        lengthCm: 12,
-        targetNumber: 12,
-        options: [10, 11, 12, 13],
-        hint: 'Đầu chiếc thìa đặt đúng ở vạch 0 cm, bé hãy nhìn vạch số ở đuôi chiếc thìa trên thước kẻ nhé!',
-      },
-      {
-        id: 'cm4',
-        title: 'Cộng số đo độ dài cm',
-        question: 'Tính: 6 cm + 3 cm = ?',
-        options: ['8 cm', '9 cm', '10 cm', '7 cm'],
-        correctAnswer: '9 cm',
-        hint: 'Bé hãy cộng hai số với nhau rồi viết thêm đơn vị cm vào sau kết quả nhé!',
-      },
-      {
-        id: 'cm5',
-        title: 'Trừ số đo độ dài cm',
-        question: 'Tính: 15 cm - 5 cm = ?',
-        options: ['10 cm', '9 cm', '11 cm', '20 cm'],
-        correctAnswer: '10 cm',
-        hint: 'Bé hãy trừ hai số với nhau rồi viết thêm đơn vị cm vào sau kết quả nhé!',
-      },
-      {
-        id: 'cm6',
-        title: 'Đo độ dài kẹp giấy',
-        question: 'Quan sát thước kẻ: Chiếc kẹp giấy 📎 dài bao nhiêu xăng-ti-mét (cm)?',
-        type: 'ruler_cm',
-        item: 'Kẹp giấy 📎',
-        lengthCm: 3,
-        targetNumber: 3,
-        options: [2, 3, 4, 5],
-        hint: 'Đầu kẹp giấy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đầu kia của kẹp giấy chỉ vào vạch số mấy nhé!',
-      },
-      {
-        id: 'cm7',
-        title: 'Đo độ dài bàn chải',
-        question: 'Quan sát thước kẻ: Chiếc bàn chải đánh răng 🪥 dài bao nhiêu xăng-ti-mét (cm)?',
-        type: 'ruler_cm',
-        item: 'Bàn chải 🪥',
-        lengthCm: 14,
-        targetNumber: 14,
-        options: [12, 13, 14, 15],
-        hint: 'Đầu bàn chải đặt đúng ở vạch 0 cm, bé quan sát vạch số ở phần đuôi cán bàn chải trên thước nhé!',
-      },
-      {
-        id: 'cm8',
-        title: 'Cộng số đo xăng-ti-mét',
-        question: 'Tính: 12 cm + 5 cm = ?',
-        options: ['17 cm', '16 cm', '18 cm', '15 cm'],
-        correctAnswer: '17 cm',
-        hint: '12 + 5 = 17, sau đó viết thêm đơn vị cm vào sau kết quả.',
-      },
-      {
-        id: 'cm9',
-        title: 'Trừ số đo xăng-ti-mét',
-        question: 'Tính: 19 cm - 7 cm = ?',
-        options: ['12 cm', '11 cm', '13 cm', '14 cm'],
-        correctAnswer: '12 cm',
-        hint: '19 - 7 = 12, sau đó viết thêm đơn vị cm vào sau kết quả.',
-      },
-      {
-        id: 'cm10',
-        title: 'Giải toán: Hai sợi dây',
-        question: 'Sợi dây đỏ dài 10 cm, sợi dây xanh dài 8 cm. Hỏi cả hai sợi dây dài bao nhiêu xăng-ti-mét?',
-        options: ['18 cm', '17 cm', '19 cm', '2 cm'],
-        correctAnswer: '18 cm',
-        hint: 'Hỏi cả hai sợi dây tức là làm phép tính cộng: 10 cm + 8 cm = ?',
-      },
-    ],
-    timoChallenges: [
-      {
-        id: 'tcm1',
-        title: 'Timo: Cân bập bênh tìm vật nặng nhất',
-        badge: 'Timo 2025',
-        question: 'Cho 3 chiếc cân dưới đây, tìm món đồ nặng nhất:',
-        image: '/timo/p2_img2_36.png',
-        options: ['Khoai tây chiên 🍟', 'Bánh burger 🍔', 'Xô gà rán 🍗', 'Cốc cà phê 🥤'],
-        correctIndex: 2,
-        hint: 'Chiếc cân nào bị ấn chúc xuống dưới là món đồ ở bên đó nặng hơn!',
-        explanation: 'Từ 3 chiếc cân: Gà rán nặng hơn Khoai tây, Khoai tây nặng hơn Burger, Burger nặng hơn Cà phê. Vậy Xô gà rán 🍗 nặng nhất!',
-      },
-      {
-        id: 'tcm2',
-        title: 'Timo: Dãy số tăng đều bước nhảy',
-        badge: 'Timo 2025',
-        question: 'Dựa vào quy luật dưới đây, tìm số tiếp theo:',
-        image: '/timo/p3_img2_56.jpeg',
-        options: ['23', '20', '22', '21'],
-        correctIndex: 0,
-        hint: 'Quan sát dãy số: 3, 7, 11, 15, 19... mỗi số sau bằng số trước cộng thêm 4.',
-        explanation: 'Quy luật: Dãy số tăng đều cách nhau 4 đơn vị (+4): 3 -> 7 -> 11 -> 15 -> 19 -> 19 + 4 = 23. Đáp án đúng là 23.',
-      },
-      {
-        id: 'tcm3',
-        title: 'Timo: Mảnh giấy còn thiếu',
-        badge: 'Timo 2025',
-        question: 'Tìm mảnh giấy còn thiếu để có được phép tính đúng dưới đây:',
-        image: '/timo/p4_img2_64.png',
-        options: ['Mảnh A (số 9)', 'Mảnh B (số 8)', 'Mảnh C (số 11)', 'Mảnh D (số 14)'],
-        correctIndex: 2,
-        hint: 'Ta có: 8 + 6 = 14. Phép tính là 25 - ? = 14. Bé hãy tìm số cần trừ đi nhé!',
-        explanation: 'Vế trái: 8 + 6 = 14. Để vế phải bằng 14 thì 25 - 11 = 14. Vậy mảnh giấy còn thiếu là Mảnh C mang số 11.',
-      },
-    ],
-  },
-
-  {
-    id: 'add_sub_100',
-    semester: 2,
-    title: 'Siêu Thị Phép Cộng & Trừ 100',
-    badge: 'Học kì 2 - Chủ đề 7',
-    icon: '🛒',
-    color: 'from-rose-400 to-red-600',
-    bgColor: 'bg-rose-100',
-    borderColor: 'border-rose-400',
-    description: 'Cộng trừ các số tròn chục, cộng trừ không nhớ số có hai chữ số và giải bài toán thực tế!',
-    timoCount: 3,
-    basicLevels: [
-      {
-        id: 'as100_1',
-        title: 'Cộng các số tròn chục',
-        question: 'Tính nhẩm: 30 + 20 = ?',
-        options: [40, 50, 60, 55],
-        correctAnswer: 50,
-        hint: '30 là 3 chục, 20 là 2 chục. Bé hãy cộng số chục lại nhé!',
-      },
-      {
-        id: 'as100_2',
-        title: 'Trừ các số tròn chục',
-        question: 'Tính nhẩm: 70 - 30 = ?',
-        options: [30, 40, 50, 60],
-        correctAnswer: 40,
-        hint: '70 là 7 chục, 30 là 3 chục. Bé hãy trừ số chục cho nhau nhé!',
-      },
-      {
-        id: 'as100_3',
-        title: 'Cộng số có 2 chữ số với số có 1 chữ số',
-        question: 'Tính: 43 + 5 = ?',
-        options: [47, 48, 49, 58],
-        correctAnswer: 48,
-        hint: 'Bé hãy lấy chữ số hàng đơn vị cộng với nhau rồi ghép với hàng chục nhé!',
-      },
-      {
-        id: 'as100_4',
-        title: 'Cộng 2 chữ số với 2 chữ số không nhớ',
-        question: 'Tính: 34 + 23 = ?',
-        options: [56, 57, 58, 67],
-        correctAnswer: 57,
-        hint: 'Bé cộng hàng đơn vị với hàng đơn vị, rồi cộng hàng chục với hàng chục nhé!',
-      },
-      {
-        id: 'as100_5',
-        title: 'Trừ 2 chữ số với 2 chữ số không nhớ',
-        question: 'Tính: 68 - 25 = ?',
-        options: [42, 43, 44, 45],
-        correctAnswer: 43,
-        hint: 'Bé trừ hàng đơn vị cho hàng đơn vị, rồi trừ hàng chục cho hàng chục nhé!',
-      },
-      {
-        id: 'as100_6',
-        title: 'Giải toán: Đàn vịt nông trại',
-        question: 'Đàn vịt có 35 con vịt trắng và 12 con vịt nâu. Hỏi có tất cả bao nhiêu con vịt?',
-        options: [46, 47, 48, 49],
-        correctAnswer: 47,
-        hint: 'Bé hãy lấy số vịt trắng cộng với số vịt nâu: 35 + 12 = ?',
-      },
-      {
-        id: 'as100_7',
-        title: 'Cộng tròn chục nâng cao',
-        question: 'Tính nhẩm: 40 + 50 = ?',
-        options: [80, 90, 70, 100],
-        correctAnswer: 90,
-        hint: '4 chục cộng 5 chục bằng 9 chục (90).',
-      },
-      {
-        id: 'as100_8',
-        title: 'Trừ tròn chục nâng cao',
-        question: 'Tính nhẩm: 90 - 50 = ?',
-        options: [30, 40, 50, 60],
-        correctAnswer: 40,
-        hint: '9 chục trừ 5 chục bằng 4 chục (40).',
-      },
-      {
-        id: 'as100_9',
-        title: 'Cộng không nhớ 2 chữ số',
-        question: 'Tính: 54 + 23 = ?',
-        options: [76, 77, 78, 87],
-        correctAnswer: 77,
-        hint: 'Hàng đơn vị: 4 + 3 = 7. Hàng chục: 5 + 2 = 7. Kết quả là 77.',
-      },
-      {
-        id: 'as100_10',
-        title: 'Trừ không nhớ 2 chữ số',
-        question: 'Tính: 86 - 32 = ?',
-        options: [54, 53, 55, 64],
-        correctAnswer: 54,
-        hint: 'Hàng đơn vị: 6 - 2 = 4. Hàng chục: 8 - 3 = 5. Kết quả là 54.',
-      },
-      {
-        id: 'as100_11',
-        title: 'Giải toán: Quả bóng bay',
-        question: 'Cửa hàng có 48 quả bóng bay 🎈, đã bán được 16 quả. Hỏi cửa hàng còn lại bao nhiêu quả bóng bay?',
-        options: ['32 quả', '34 quả', '30 quả', '64 quả'],
-        correctAnswer: '32 quả',
-        hint: 'Đã bán tức là bớt đi: 48 - 16 = ? quả bóng bay!',
-      },
-      {
-        id: 'as100_12',
-        title: 'Tính nhẩm dãy số tròn chục',
-        question: 'Tính: 30 + 20 + 10 = ?',
-        options: [50, 60, 70, 80],
-        correctAnswer: 60,
-        hint: '3 chục + 2 chục = 5 chục; 5 chục + 1 chục = 6 chục (60).',
-      },
-    ],
-    timoChallenges: [
-      {
-        id: 'tas100_1',
-        title: 'Timo: Tính giá trị biểu thức',
-        badge: 'Timo 2025',
-        question: 'Tính giá trị của: 24 - 8 + 1 = ?',
-        options: [15, 17, 16, 18],
-        correctIndex: 1,
-        hint: 'Bé hãy tính lần lượt từ trái sang phải: làm phép trừ trước rồi làm phép cộng nhé!',
-        explanation: '24 - 8 = 16. Tiếp theo 16 + 1 = 17. Đáp án đúng là 17.',
-      },
-      {
-        id: 'tas100_2',
-        title: 'Timo: Chia đều trứng vào 5 giỏ',
-        badge: 'Timo 2025',
-        question: 'Chia đều các quả trứng dưới đây vào 5 giỏ. Hỏi mỗi giỏ có bao nhiêu quả trứng?',
-        image: '/timo/p6_img3_85.jpeg',
-        options: ['3 quả', '5 quả', '6 quả', '4 quả'],
-        correctIndex: 3,
-        hint: 'Bé hãy đếm xem có tất cả bao nhiêu quả trứng, rồi chia đều vào 5 giỏ nhé!',
-        explanation: 'Trong hình có 20 quả trứng. Chia đều cho 5 giỏ: 20 chia cho 5 = 4 quả mỗi giỏ. Đáp án là 4 quả.',
-      },
-      {
-        id: 'tas100_3',
-        title: 'Timo: Chồng vở của bạn Alan',
-        badge: 'Timo 2025',
-        question: 'Alan thấy vở mình ở bên trên 3 quyển và bên dưới 4 quyển khác. Hỏi chồng vở có tất cả bao nhiêu quyển?',
-        options: ['7 quyển', '8 quyển', '9 quyển', '6 quyển'],
-        correctIndex: 1,
-        hint: 'Gồm 3 quyển phía dưới + 1 quyển của Alan + 4 quyển phía trên!',
-        explanation: 'Tổng số quyển vở = 3 (dưới) + 1 (vở của Alan) + 4 (trên) = 8 quyển vở!',
-      },
-    ],
-  },
-
-  {
-    id: 'time_statistics',
-    semester: 2,
-    title: 'Đồng Hồ, Lịch & Biểu Đồ Tranh',
-    badge: 'Học kì 2 - Chủ đề 8',
-    icon: '⏰',
-    color: 'from-pink-400 to-rose-600',
-    bgColor: 'bg-pink-100',
-    borderColor: 'border-pink-400',
-    description: 'Xem đồng hồ kim chỉ giờ đúng, ngày trong tuần và đọc biểu đồ tranh thống kê!',
-    timoCount: 4,
-    basicLevels: [
-      {
-        id: 'ts1',
-        title: 'Bé thức dậy lúc mấy giờ?',
-        question: 'Kim ngắn chỉ số 7, kim dài chỉ số 12. Hỏi đồng hồ đang chỉ mấy giờ?',
-        hour: 7,
-        options: ['7 giờ đúng', '12 giờ đúng', '6 giờ đúng'],
-        correctAnswer: '7 giờ đúng',
-        hint: 'Kim ngắn chỉ số mấy là bấy nhiêu giờ khi kim dài chỉ vào số 12 nhé!',
-      },
-      {
-        id: 'ts2',
-        title: 'Giờ bé đi ngủ ngoan',
-        question: 'Đồng hồ chỉ 9 giờ tối (21:00). Kim ngắn chỉ số mấy?',
-        options: ['Số 9', 'Số 12', 'Số 6'],
-        correctAnswer: 'Số 9',
-        hint: 'Kim ngắn luôn chỉ vào số tương ứng với giờ trên mặt đồng hồ nhé!',
-      },
-      {
-        id: 'ts3',
-        title: 'Một tuần có bao nhiêu ngày?',
-        question: 'Một tuần lễ có bao nhiêu ngày?',
-        options: ['5 ngày', '6 ngày', '7 ngày', '10 ngày'],
-        correctAnswer: '7 ngày',
-        hint: 'Bé hãy đếm lần lượt từ Thứ Hai, Thứ Ba... đến Chủ Nhật xem có bao nhiêu ngày nhé!',
-      },
-      {
-        id: 'ts4',
-        title: 'Hôm nay và Ngày mai',
-        question: 'Hôm nay là Thứ Năm. Hỏi ngày mai là thứ mấy trong tuần?',
-        options: ['Thứ Sáu', 'Thứ Bảy', 'Thứ Tư'],
-        correctAnswer: 'Thứ Sáu',
-        hint: 'Ngày mai là ngày tiếp theo sau hôm nay, sau Thứ Năm là thứ mấy nhỉ?',
-      },
-      {
-        id: 'ts5',
-        title: 'Biểu đồ tranh: Đếm hoa trong vườn',
-        question: 'Quan sát biểu đồ tranh: Trong vườn có bao nhiêu bông hoa hồng 🌹?',
-        type: 'picture_graph',
-        graphData: [
-          { label: 'Hoa hồng', icon: '🌹', count: 5 },
-          { label: 'Hoa cúc', icon: '🌻', count: 4 },
-          { label: 'Hoa sen', icon: '🪷', count: 3 },
+    "id": "counting_numbers_10",
+    "semester": 1,
+    "title": "Nông Trại Số 0 - 10 & Tách Gộp",
+    "badge": "Học kì 1 - Chủ đề 1",
+    "icon": "🐥",
+    "color": "from-amber-400 to-orange-500",
+    "bgColor": "bg-amber-100",
+    "borderColor": "border-amber-400",
+    "description": "Đếm các số 0-10, so sánh lớn bé, thứ tự số và sơ đồ Tách - Gộp số chuẩn SGK mới!",
+    "timoCount": 3,
+    "basicLevels": [
+      {
+        "id": "c1",
+        "title": "Bé đếm vịt con bơi lội",
+        "question": "Bé hãy đếm xem trong ao có bao nhiêu chú vịt con?",
+        "itemIcon": "🦆",
+        "count": 5,
+        "targetNumber": 5,
+        "correctAnswer": 5,
+        "options": [
+          3,
+          4,
+          5,
+          6
         ],
-        questionTarget: 'Hoa hồng',
-        targetNumber: 5,
-        options: [3, 4, 5, 6],
-        hint: 'Bé hãy nhìn hàng hoa hồng và đếm xem có bao nhiêu bông nhé!',
+        "hint": "Bé hãy chỉ tay vào từng chú vịt trong ao và đếm từ 1 trở đi nhé!",
+        "explanation": "Bé hãy chỉ tay vào từng chú vịt trong ao và đếm từ 1 trở đi nhé! Vì vậy, kết quả đúng là 5."
       },
       {
-        id: 'ts6',
-        title: 'Biểu đồ tranh: Các bạn thú cưng',
-        question: 'Quan sát biểu đồ tranh: Có bao nhiêu bạn thỏ con 🐰?',
-        type: 'picture_graph',
-        graphData: [
-          { label: 'Mèo con', icon: '🐱', count: 6 },
-          { label: 'Cún con', icon: '🐶', count: 4 },
-          { label: 'Thỏ con', icon: '🐰', count: 7 },
+        "id": "c2",
+        "title": "Vườn dâu tây đỏ mọng",
+        "question": "Có bao nhiêu quả dâu tây đỏ mọng trên cành?",
+        "itemIcon": "🍓",
+        "count": 8,
+        "targetNumber": 8,
+        "options": [
+          6,
+          7,
+          8,
+          9
         ],
-        questionTarget: 'Thỏ con',
-        targetNumber: 7,
-        options: [4, 6, 7, 8],
-        hint: 'Bé hãy nhìn hàng thỏ con và đếm xem có bao nhiêu bạn thỏ nhé!',
+        "hint": "Bé hãy đếm lần lượt từng quả dâu tây từ trái sang phải nhé!",
+        "explanation": "Bé hãy đếm lần lượt từng quả dâu tây từ trái sang phải nhé! Vì vậy, kết quả đúng là 8."
       },
       {
-        id: 'ts7',
-        title: 'Đồng hồ chỉ 12 giờ trưa',
-        question: 'Kim ngắn chỉ số 12, kim dài cũng chỉ số 12. Hỏi đồng hồ chỉ mấy giờ?',
-        hour: 12,
-        options: ['12 giờ đúng', '1 giờ đúng', '6 giờ đúng', '11 giờ đúng'],
-        correctAnswer: '12 giờ đúng',
-        hint: 'Cả hai kim cùng chập vào số 12 là đúng 12 giờ trưa bé nhé!',
-      },
-      {
-        id: 'ts8',
-        title: 'Giờ tan học buổi chiều',
-        question: 'Buổi chiều bé tan trường về nhà lúc kim ngắn chỉ số 5, kim dài chỉ số 12. Đó là mấy giờ?',
-        hour: 5,
-        options: ['5 giờ chiều', '4 giờ chiều', '6 giờ chiều', '12 giờ'],
-        correctAnswer: '5 giờ chiều',
-        hint: 'Kim ngắn chỉ số 5, tức là 5 giờ chiều (17:00).',
-      },
-      {
-        id: 'ts9',
-        title: 'Ngày trong tuần: Thứ Hai đến Thứ mấy?',
-        question: 'Hôm nay là Thứ Hai. Hỏi ngày mai là Thứ mấy?',
-        options: ['Thứ Ba', 'Thứ Tư', 'Chủ Nhật', 'Thứ Bảy'],
-        correctAnswer: 'Thứ Ba',
-        hint: 'Sau ngày Thứ Hai trong tuần là ngày Thứ Ba bé nhé!',
-      },
-      {
-        id: 'ts10',
-        title: 'Hai ngày nghỉ cuối tuần',
-        question: 'Hai ngày nghỉ cuối tuần mà bé được nghỉ học là hai ngày nào?',
-        options: ['Thứ Bảy và Chủ Nhật', 'Thứ Hai và Thứ Ba', 'Thứ Năm và Thứ Sáu'],
-        correctAnswer: 'Thứ Bảy và Chủ Nhật',
-        hint: 'Cuối tuần là Thứ Bảy và Chủ Nhật, bé được đi chơi cùng gia đình!',
-      },
-      {
-        id: 'ts11',
-        title: 'Biểu đồ tranh: Đếm quả dưa hấu',
-        question: 'Quan sát biểu đồ tranh: Trong giỏ có bao nhiêu quả dưa hấu 🍉?',
-        type: 'picture_graph',
-        graphData: [
-          { label: 'Táo đỏ', icon: '🍎', count: 4 },
-          { label: 'Cam vàng', icon: '🍊', count: 3 },
-          { label: 'Dưa hấu', icon: '🍉', count: 2 },
+        "id": "c3",
+        "title": "Đoàn tàu sắc màu",
+        "question": "Toa tàu có dấu hỏi chấm (?) là số mấy?",
+        "type": "train",
+        "sequence": [
+          1,
+          2,
+          3,
+          "?",
+          5
         ],
-        questionTarget: 'Dưa hấu',
-        targetNumber: 2,
-        options: [1, 2, 3, 4],
-        hint: 'Bé hãy nhìn vào hàng dưa hấu và đếm số miếng dưa hấu nhé!',
+        "options": [
+          3,
+          4,
+          6
+        ],
+        "correctNumber": 4,
+        "hint": "Các số đứng liền nhau tăng thêm 1 đơn vị: 2 rồi đến 3, sau đó là...",
+        "explanation": "Các số đứng liền nhau tăng thêm 1 đơn vị: 2 rồi đến 3, sau đó là... Vì vậy, kết quả đúng là undefined."
       },
       {
-        id: 'ts12',
-        title: 'Biểu đồ tranh: Phương tiện nhiều nhất',
-        question: 'Quan sát biểu đồ: Xe máy có 5 chiếc, Ô tô có 3 chiếc, Xe đạp có 2 chiếc. Loại xe nào có nhiều nhất?',
-        options: ['Xe máy 🛵', 'Ô tô 🚗', 'Xe đạp 🚲'],
-        correctAnswer: 'Xe máy 🛵',
-        hint: '5 chiếc là số lượng lớn nhất trong 5, 3 và 2 chiếc xe!',
+        "id": "c4",
+        "title": "Hộp kẹo mút ngọt ngào",
+        "question": "Bé hãy đếm xem trong hộp có bao nhiêu que kẹo mút?",
+        "itemIcon": "🍭",
+        "count": 10,
+        "targetNumber": 10,
+        "options": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "hint": "Bé hãy đếm thật cẩn thận từng hàng kẹo mút trong hộp nhé!",
+        "explanation": "Bé hãy đếm thật cẩn thận từng hàng kẹo mút trong hộp nhé! Vì vậy, kết quả đúng là 10."
       },
+      {
+        "id": "c5",
+        "title": "Sơ đồ tách số (Số 5)",
+        "question": "Quan sát sơ đồ tách số: Số 5 gồm 3 và số mấy?",
+        "type": "number_bond",
+        "total": 5,
+        "partA": 3,
+        "partB": 2,
+        "missingPart": "partB",
+        "targetNumber": 2,
+        "options": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "hint": "Bé hãy xòe 5 ngón tay, sau đó cụp bớt 3 ngón tay để xem còn lại mấy ngón nhé!",
+        "explanation": "Bé hãy xòe 5 ngón tay, sau đó cụp bớt 3 ngón tay để xem còn lại mấy ngón nhé! Vì vậy, kết quả đúng là 2."
+      },
+      {
+        "id": "c6",
+        "title": "Sơ đồ gộp số (Gộp 4 và 2)",
+        "question": "Quan sát sơ đồ gộp số: Gộp 4 và 2 ta được số mấy?",
+        "type": "number_bond",
+        "total": 6,
+        "partA": 4,
+        "partB": 2,
+        "missingPart": "total",
+        "targetNumber": 6,
+        "options": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "hint": "Bé hãy lấy 4 rồi đếm thêm 2 bước nữa để tìm kết quả gộp nhé!",
+        "explanation": "Bé hãy lấy 4 rồi đếm thêm 2 bước nữa để tìm kết quả gộp nhé! Vì vậy, kết quả đúng là 6."
+      },
+      {
+        "id": "c7",
+        "title": "Bé đếm củ cà rốt của thỏ con",
+        "question": "Bé hãy đếm xem trong vườn có bao nhiêu củ cà rốt 🥕?",
+        "itemIcon": "🥕",
+        "count": 7,
+        "targetNumber": 7,
+        "correctAnswer": 7,
+        "options": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "hint": "Bé hãy đếm lần lượt từng củ cà rốt từ trái qua phải nhé!",
+        "explanation": "Bé hãy đếm lần lượt từng củ cà rốt từ trái qua phải nhé! Vì vậy, kết quả đúng là 7."
+      },
+      {
+        "id": "c8",
+        "title": "Tìm số liền trước",
+        "question": "Số liền trước của số 9 là số mấy?",
+        "options": [
+          7,
+          8,
+          9,
+          10
+        ],
+        "correctAnswer": 8,
+        "hint": "Số liền trước là số đứng ngay trước số 9 khi đếm từ 1 đến 10.",
+        "explanation": "Số liền trước là số đứng ngay trước số 9 khi đếm từ 1 đến 10. Vì vậy, kết quả đúng là 8."
+      },
+      {
+        "id": "c9",
+        "title": "So sánh số lượng quả",
+        "question": "Có 4 quả táo đỏ 🍎 và 6 quả cam vàng 🍊. Loại quả nào nhiều hơn?",
+        "options": [
+          "Cam vàng nhiều hơn 🍊",
+          "Táo đỏ nhiều hơn 🍎",
+          "Hai loại bằng nhau"
+        ],
+        "correctAnswer": "Cam vàng nhiều hơn 🍊",
+        "hint": "Bé hãy so sánh xem 6 lớn hơn hay 4 lớn hơn nhé!",
+        "explanation": "Bé hãy so sánh xem 6 lớn hơn hay 4 lớn hơn nhé! Vì vậy, kết quả đúng là Cam vàng nhiều hơn 🍊."
+      },
+      {
+        "id": "c10",
+        "title": "Sơ đồ tách số (Số 8)",
+        "question": "Quan sát sơ đồ tách số: Số 8 gồm 5 và số mấy?",
+        "type": "number_bond",
+        "total": 8,
+        "partA": 5,
+        "partB": 3,
+        "missingPart": "partB",
+        "targetNumber": 3,
+        "options": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "hint": "Bé hãy xòe 8 ngón tay, cụp bớt 5 ngón xem còn lại mấy ngón nhé!",
+        "explanation": "Bé hãy xòe 8 ngón tay, cụp bớt 5 ngón xem còn lại mấy ngón nhé! Vì vậy, kết quả đúng là 3."
+      },
+      {
+        "id": "c11",
+        "title": "Sơ đồ gộp số (Gộp 3 và 4)",
+        "question": "Quan sát sơ đồ gộp số: Gộp 3 và 4 ta được số mấy?",
+        "type": "number_bond",
+        "total": 7,
+        "partA": 3,
+        "partB": 4,
+        "missingPart": "total",
+        "targetNumber": 7,
+        "options": [
+          6,
+          7,
+          8,
+          9
+        ],
+        "hint": "Bé hãy lấy 3 rồi đếm thêm 4 bước nữa: 3... 4, 5, 6, 7!",
+        "explanation": "Bé hãy lấy 3 rồi đếm thêm 4 bước nữa: 3... 4, 5, 6, 7! Vì vậy, kết quả đúng là 7."
+      },
+      {
+        "id": "c12",
+        "title": "Đoàn tàu đếm lùi",
+        "question": "Toa tàu có dấu hỏi chấm (?) là số mấy trong dãy đếm lùi?",
+        "type": "train",
+        "sequence": [
+          10,
+          9,
+          8,
+          "?",
+          6
+        ],
+        "options": [
+          5,
+          7,
+          9
+        ],
+        "correctNumber": 7,
+        "hint": "Dãy số đếm lùi bớt đi 1: 9, 8 rồi lùi xuống...",
+        "explanation": "Dãy số đếm lùi bớt đi 1: 9, 8 rồi lùi xuống... Vì vậy, kết quả đúng là undefined."
+      }
     ],
-    timoChallenges: [
+    "timoChallenges": [
       {
-        id: 'tts1',
-        title: 'Timo: Bài toán ngày trong tuần',
-        badge: 'Timo 2025',
-        question: 'Biết rằng 4 ngày sau là thứ Tư, hỏi hôm nay là thứ mấy?',
-        options: ['Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'],
-        correctIndex: 2,
-        hint: 'Từ thứ Tư, bé hãy lùi lại 4 ngày liên tiếp để tìm ngày hôm nay nhé!',
-        explanation: 'Lùi lại 4 ngày kể từ thứ Tư: Thứ Ba (1) -> Thứ Hai (2) -> Chủ Nhật (3) -> Thứ Bảy (4). Vậy hôm nay là Thứ Bảy!',
+        "id": "tc1",
+        "title": "Timo: Quy luật đếm lá cây",
+        "badge": "Timo 2025",
+        "question": "Dựa vào quy luật dưới đây, hỏi có bao nhiêu chiếc lá trong nhóm tiếp theo?",
+        "image": "/timo/p1_img2_31.png",
+        "options": [
+          "13 chiếc",
+          "12 chiếc",
+          "11 chiếc",
+          "14 chiếc"
+        ],
+        "correctIndex": 0,
+        "hint": "Bé hãy đếm số lá ở từng nhóm: Nhóm 1 có 5 lá, nhóm 2 có 7 lá, nhóm 3 có 9 lá, nhóm 4 có 11 lá.",
+        "explanation": "Quy luật: Mỗi nhóm sau nhiều hơn nhóm trước 2 chiếc lá: 5 (+2) -> 7 (+2) -> 9 (+2) -> 11 (+2) -> 13 chiếc lá! Đáp án là 13 chiếc."
       },
       {
-        id: 'tts2',
-        title: 'Timo: Bài toán tuổi Emily và Alice',
-        badge: 'Timo 2025',
-        question: 'Năm nay Emily 9 tuổi. Alice lớn hơn Emily 5 tuổi. Hỏi Alice bao nhiêu tuổi?',
-        options: ['15 tuổi', '4 tuổi', '13 tuổi', '14 tuổi'],
-        correctIndex: 3,
-        hint: 'Alice lớn hơn Emily 5 tuổi: lấy tuổi Emily cộng thêm 5.',
-        explanation: 'Tuổi của Alice = 9 + 5 = 14 tuổi!',
+        "id": "tc2",
+        "title": "Timo: Toa tàu tăng theo bước nhảy",
+        "badge": "Timo Logic",
+        "question": "Dãy số trên toa tàu: 3, 6, 9, 12, ( ? ). Số tiếp theo là số mấy?",
+        "type": "train",
+        "sequence": [
+          3,
+          6,
+          9,
+          12,
+          "?"
+        ],
+        "options": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "correctIndex": 2,
+        "hint": "Mỗi toa tàu số sau bằng số trước cộng thêm 3!",
+        "explanation": "Quy luật cộng 3: 12 + 3 = 15. Đáp án là 15!"
       },
       {
-        id: 'tts3',
-        title: 'Timo: Quy luật Origami con vật',
-        badge: 'Timo 2025',
-        question: 'Dựa vào quy luật dưới đây, tìm hình tiếp theo:',
-        image: '/timo/p4_img8_70.png',
-        options: ['Chim hạc giấy 🕊️', 'Chiếc thuyền giấy ⛵', 'Chú voi giấy 🐘', 'Chú ếch giấy 🐸'],
-        correctIndex: 0,
-        hint: 'Quan sát dãy các hình gấp giấy: Mèo -> Hạc -> Thuyền -> Voi -> Ếch rồi lặp lại.',
-        explanation: 'Quy luật: Chuỗi 5 con vật gấp giấy lặp lại: (Mèo, Hạc, Thuyền, Voi, Ếch) -> (Mèo, Hạc, Thuyền, Voi, Ếch) -> Mèo -> Tiếp theo là Chim hạc giấy 🕊️!',
-      },
-      {
-        id: 'tts4',
-        title: 'Timo: Tìm hình còn thiếu trong bảng quy luật',
-        badge: 'Timo 2025',
-        question: 'Dựa vào quy luật dưới đây, tìm hình còn thiếu:',
-        image: '/timo/p7_img2_89.jpeg',
-        options: ['Hình A', 'Hình B', 'Hình C', 'Hình D'],
-        correctIndex: 1,
-        hint: 'Quan sát vị trí dưa hấu dồn xuống dưới và chùm nho xoay trong ô 2x2.',
-        explanation: 'Quy luật: Dưa hấu dồn xuống hàng dưới cùng, chùm nho xoay vị trí ô trống sang góc trên bên phải. Hình còn thiếu chính là Hình B!',
-      },
-    ],
+        "id": "tc3",
+        "title": "Timo: Đếm các số lớn hơn 40",
+        "badge": "Timo 2025",
+        "question": "Hỏi có bao nhiêu số lớn hơn 40 trong dãy số dưới đây?",
+        "image": "/timo/p6_img2_84.jpeg",
+        "options": [
+          "4 số",
+          "6 số",
+          "8 số",
+          "7 số"
+        ],
+        "correctIndex": 2,
+        "hint": "Số lớn hơn 40 là các số từ 41 trở lên.",
+        "explanation": "Quan sát dãy số trên hình: có 8 số lớn hơn 40 gồm 95, 61, 70, 42, 47, 98, 56, 80! Đáp án là 8 số."
+      }
+    ]
   },
+  {
+    "id": "geometry_spatial",
+    "semester": 1,
+    "title": "Lâu Đài Hình Khối & Không Gian",
+    "badge": "Học kì 1 - Chủ đề 2",
+    "icon": "🔷",
+    "color": "from-purple-400 to-indigo-600",
+    "bgColor": "bg-purple-100",
+    "borderColor": "border-purple-400",
+    "description": "Nhận biết hình phẳng, khối lập phương, khối hộp chữ nhật và vị trí không gian!",
+    "timoCount": 4,
+    "basicLevels": [
+      {
+        "id": "geo1",
+        "title": "Bé nhận biết hình tròn",
+        "question": "Đồ vật nào dưới đây có dạng HÌNH TRÒN 🟡?",
+        "options": [
+          "Quả bóng đá ⚽",
+          "Hộp quà vuông 🎁",
+          "Biển báo tam giác 🔺"
+        ],
+        "correctAnswer": "Quả bóng đá ⚽",
+        "hint": "Hình tròn có đường viền cong tròn đều và có thể lăn tròn vo bon bon!",
+        "explanation": "Hình tròn có đường viền cong tròn đều và có thể lăn tròn vo bon bon! Vì vậy, kết quả đúng là Quả bóng đá ⚽."
+      },
+      {
+        "id": "geo2",
+        "title": "Đếm cạnh hình tam giác",
+        "question": "Hình tam giác 🔺 có bao nhiêu cạnh?",
+        "options": [
+          "3 cạnh",
+          "4 cạnh",
+          "5 cạnh"
+        ],
+        "correctAnswer": "3 cạnh",
+        "hint": "Trong tiếng Hán Việt, \"Tam\" có nghĩa là mấy nhỉ? Bé hãy đếm số đoạn thẳng tạo nên hình nhé!",
+        "explanation": "Trong tiếng Hán Việt, \"Tam\" có nghĩa là mấy nhỉ? Bé hãy đếm số đoạn thẳng tạo nên hình nhé! Vì vậy, kết quả đúng là 3 cạnh."
+      },
+      {
+        "id": "geo3",
+        "title": "Nhận biết hình chữ nhật",
+        "question": "Đặc điểm nào đúng với HÌNH CHỮ NHẬT 🟩?",
+        "options": [
+          "2 cạnh dài và 2 cạnh ngắn",
+          "Có 3 cạnh nhọn",
+          "Cong tròn lăn được"
+        ],
+        "correctAnswer": "2 cạnh dài và 2 cạnh ngắn",
+        "hint": "Bé hãy quan sát quyển vở hoặc chiếc điện thoại: các cạnh đối diện của chúng trông như thế nào?",
+        "explanation": "Bé hãy quan sát quyển vở hoặc chiếc điện thoại: các cạnh đối diện của chúng trông như thế nào? Vì vậy, kết quả đúng là 2 cạnh dài và 2 cạnh ngắn."
+      },
+      {
+        "id": "geo4",
+        "title": "Xác định vị trí: Trái hay Phải",
+        "question": "Chú gấu bông 🧸 đang đứng ở bên TRÁI hay bên PHẢI cây thông 🎄?",
+        "type": "spatial",
+        "layout": "bear_tree",
+        "options": [
+          "Bên TRÁI",
+          "Bên PHẢI"
+        ],
+        "correctAnswer": "Bên TRÁI",
+        "hint": "Bé hãy giơ hai bàn tay lên và so sánh vị trí của chú gấu với bên tay trái hay tay phải của bé nhé!",
+        "explanation": "Bé hãy giơ hai bàn tay lên và so sánh vị trí của chú gấu với bên tay trái hay tay phải của bé nhé! Vì vậy, kết quả đúng là Bên TRÁI."
+      },
+      {
+        "id": "geo5",
+        "title": "Khối lập phương & Khối hộp chữ nhật",
+        "question": "Hộp sữa tươi 🧃 mà bé uống hàng ngày có dạng khối hình gì?",
+        "options": [
+          "Khối hộp chữ nhật",
+          "Khối lập phương",
+          "Khối cầu tròn"
+        ],
+        "correctAnswer": "Khối hộp chữ nhật",
+        "hint": "Bé hãy quan sát các mặt xung quanh của hộp sữa xem chúng có dạng hình gì nhé!",
+        "explanation": "Bé hãy quan sát các mặt xung quanh của hộp sữa xem chúng có dạng hình gì nhé! Vì vậy, kết quả đúng là Khối hộp chữ nhật."
+      },
+      {
+        "id": "geo6",
+        "title": "Nhận biết hình vuông",
+        "question": "Đặc điểm nào đúng nhất với HÌNH VUÔNG 🟧?",
+        "options": [
+          "Có 4 cạnh dài bằng nhau",
+          "Có 3 cạnh nhọn",
+          "Có 2 cạnh dài và 2 cạnh ngắn"
+        ],
+        "correctAnswer": "Có 4 cạnh dài bằng nhau",
+        "hint": "Hình vuông có 4 cạnh thẳng và tất cả các cạnh đều bằng nhau chằn chặn!",
+        "explanation": "Hình vuông có 4 cạnh thẳng và tất cả các cạnh đều bằng nhau chằn chặn! Vì vậy, kết quả đúng là Có 4 cạnh dài bằng nhau."
+      },
+      {
+        "id": "geo7",
+        "title": "Nhận biết khối lập phương",
+        "question": "Viên xúc xắc đồ chơi 🎲 có dạng khối hình gì?",
+        "options": [
+          "Khối lập phương",
+          "Khối cầu tròn",
+          "Khối hộp chữ nhật"
+        ],
+        "correctAnswer": "Khối lập phương",
+        "hint": "Viên xúc xắc có 6 mặt đều là các hình vuông bằng nhau!",
+        "explanation": "Viên xúc xắc có 6 mặt đều là các hình vuông bằng nhau! Vì vậy, kết quả đúng là Khối lập phương."
+      },
+      {
+        "id": "geo8",
+        "title": "Xác định vị trí: Trên hay Dưới",
+        "question": "Chú chim bồ câu 🕊️ đang đậu ở TRÊN hay ở DƯỚI mái nhà 🏠?",
+        "options": [
+          "Ở TRÊN mái nhà",
+          "Ở DƯỚI mái nhà"
+        ],
+        "correctAnswer": "Ở TRÊN mái nhà",
+        "hint": "Bé hãy nhìn hướng bay và vị trí chú chim so với nóc mái nhà nhé!",
+        "explanation": "Bé hãy nhìn hướng bay và vị trí chú chim so với nóc mái nhà nhé! Vì vậy, kết quả đúng là Ở TRÊN mái nhà."
+      },
+      {
+        "id": "geo9",
+        "title": "Xác định vị trí: Trước hay Sau",
+        "question": "Trong cuộc thi chạy, bạn Thỏ 🐰 đang chạy ở ĐẰNG TRƯỚC hay ĐẰNG SAU bạn Rùa 🐢?",
+        "options": [
+          "Ở ĐẰNG TRƯỚC",
+          "Ở ĐẰNG SAU"
+        ],
+        "correctAnswer": "Ở ĐẰNG TRƯỚC",
+        "hint": "Bạn Thỏ chạy nhanh hơn nên đang dẫn đầu ở vị trí phía trước.",
+        "explanation": "Bạn Thỏ chạy nhanh hơn nên đang dẫn đầu ở vị trí phía trước. Vì vậy, kết quả đúng là Ở ĐẰNG TRƯỚC."
+      },
+      {
+        "id": "geo10",
+        "title": "Đếm hình vuông nhỏ",
+        "question": "Một khung cửa sổ có 4 ô kính vuông nhỏ. Hỏi có tất cả bao nhiêu ô kính vuông?",
+        "options": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "correctAnswer": 4,
+        "hint": "Bé hãy đếm lần lượt 4 ô kính trên khung cửa sổ nhé!",
+        "explanation": "Bé hãy đếm lần lượt 4 ô kính trên khung cửa sổ nhé! Vì vậy, kết quả đúng là 4."
+      },
+      {
+        "id": "geo11",
+        "title": "Nhận biết khối cầu",
+        "question": "Vật nào dưới đây có dạng KHỐI CẦU 🔮?",
+        "options": [
+          "Quả bóng đá ⚽",
+          "Hộp sữa tươi 🧃",
+          "Viên xúc xắc 🎲"
+        ],
+        "correctAnswer": "Quả bóng đá ⚽",
+        "hint": "Khối cầu hoàn toàn tròn và có thể lăn về mọi hướng.",
+        "explanation": "Khối cầu hoàn toàn tròn và có thể lăn về mọi hướng. Vì vậy, kết quả đúng là Quả bóng đá ⚽."
+      }
+    ],
+    "timoChallenges": [
+      {
+        "id": "tgeo1",
+        "title": "Timo: Đếm tam giác lồng nhau",
+        "badge": "Timo 2025",
+        "question": "Có bao nhiêu hình tam giác trong hình vẽ dưới đây?",
+        "image": "/timo/p4_img7_69.jpeg",
+        "options": [
+          "6 hình",
+          "7 hình",
+          "9 hình",
+          "8 hình"
+        ],
+        "correctIndex": 3,
+        "hint": "Đếm các hình tam giác nhỏ trước, sau đó ghép 2 hình nhỏ lại thành hình to hơn!",
+        "explanation": "Có 4 tam giác đơn + 3 tam giác ghép đôi + 1 tam giác lớn bao ngoài = 8 hình tam giác!"
+      },
+      {
+        "id": "tgeo2",
+        "title": "Timo: Đếm khối lập phương 3D xếp chồng",
+        "badge": "Timo 2025",
+        "question": "Jane ghép các hình lập phương. Hỏi cô ấy cần ít nhất bao nhiêu hình lập phương?",
+        "image": "/timo/p5_img3_78.jpeg",
+        "options": [
+          "14 khối",
+          "17 khối",
+          "15 khối",
+          "16 khối"
+        ],
+        "correctIndex": 2,
+        "hint": "Khối ở tầng cao nhất không thể bay lơ lửng, chắc chắn phải có khối ở tầng dưới đỡ lấy nó!",
+        "explanation": "Đếm tổng cả các khối nhìn thấy và các khối ẩn đỡ bên dưới: cần ít nhất 15 khối lập phương!"
+      },
+      {
+        "id": "tgeo3",
+        "title": "Timo: Đếm số cạnh của hình đa giác",
+        "badge": "Timo 2025",
+        "question": "Hỏi hình vẽ dưới đây có tất cả bao nhiêu cạnh?",
+        "image": "/timo/p5_img2_77.png",
+        "options": [
+          "13 cạnh",
+          "12 cạnh",
+          "10 cạnh",
+          "11 cạnh"
+        ],
+        "correctIndex": 1,
+        "hint": "Đếm lần lượt từng cạnh viền bao quanh hình theo chiều kim đồng hồ.",
+        "explanation": "Đếm cẩn thận từng cạnh xung quanh đa giác: có đúng 12 cạnh!"
+      },
+      {
+        "id": "tgeo4",
+        "title": "Timo: Đếm số hình tròn chùm quả",
+        "badge": "Timo 2025",
+        "question": "Có bao nhiêu hình tròn trong hình vẽ dưới đây?",
+        "image": "/timo/p5_img4_79.jpeg",
+        "options": [
+          "6 hình",
+          "5 hình",
+          "8 hình",
+          "7 hình"
+        ],
+        "correctIndex": 3,
+        "hint": "Bé đếm các quả hình tròn trên cành cây (không đếm 2 chiếc lá nhé)!",
+        "explanation": "Có tất cả 7 hình tròn là các quả mọng trên cành cây!"
+      }
+    ]
+  },
+  {
+    "id": "add_sub_10",
+    "semester": 1,
+    "title": "Cây Táo Phép Cộng & Trừ 10",
+    "badge": "Học kì 1 - Chủ đề 3",
+    "icon": "🍎",
+    "color": "from-emerald-400 to-green-600",
+    "bgColor": "bg-emerald-100",
+    "borderColor": "border-emerald-400",
+    "description": "Hái táo thêm vào, bóp vỡ bóng bớt đi, phép tính với số 0 và giải toán có lời văn!",
+    "timoCount": 3,
+    "basicLevels": [
+      {
+        "id": "as1",
+        "title": "Thêm táo vào giỏ (Phép cộng)",
+        "question": "Trong giỏ có 3 quả táo đỏ. Bé hái thêm 2 quả táo xanh nữa. Hỏi trong giỏ có tất cả bao nhiêu quả táo?",
+        "type": "visual_add",
+        "a": 3,
+        "b": 2,
+        "operator": "+",
+        "iconA": "🍎",
+        "iconB": "🍏",
+        "options": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "correctAnswer": 5,
+        "hint": "Bé lấy 3 quả táo đỏ gộp với 2 quả táo xanh: 3 + 2 = ?",
+        "explanation": "Bé lấy 3 quả táo đỏ gộp với 2 quả táo xanh: 3 + 2 = ? Do đó, đáp án chính xác là 5."
+      },
+      {
+        "id": "as2",
+        "title": "Bong bóng vỡ tan (Phép trừ)",
+        "question": "Bé có 6 quả bóng bay 🎈. Gió thổi làm vỡ mất 2 quả. Hỏi bé còn lại bao nhiêu quả bóng bay?",
+        "type": "visual_sub",
+        "a": 6,
+        "b": 2,
+        "operator": "-",
+        "iconA": "🎈",
+        "options": [
+          3,
+          4,
+          5,
+          8
+        ],
+        "correctAnswer": 4,
+        "hint": "Có 6 quả, vỡ 2 quả tức là lấy 6 bớt đi 2: 6 - 2 = ?",
+        "explanation": "Có 6 quả, vỡ 2 quả tức là lấy 6 bớt đi 2: 6 - 2 = ? Do đó, đáp án chính xác là 4."
+      },
+      {
+        "id": "as3",
+        "title": "Phép tính với số 0",
+        "question": "Một số cộng với 0 thì bằng chính số đó: 7 + 0 = ?",
+        "options": [
+          0,
+          6,
+          7,
+          8
+        ],
+        "correctAnswer": 7,
+        "hint": "Bất kì số nào cộng với 0 cũng bằng chính số đó bé nhé!",
+        "explanation": "Bất kì số nào cộng với 0 cũng bằng chính số đó bé nhé! Vì vậy, kết quả đúng là 7."
+      },
+      {
+        "id": "as4",
+        "title": "Tìm số còn thiếu để được 10",
+        "question": "6 + ? = 10. Số nào cần điền vào dấu hỏi chấm?",
+        "type": "equation",
+        "options": [
+          3,
+          4,
+          5,
+          2
+        ],
+        "correctAnswer": 4,
+        "hint": "Bé hãy xòe 10 ngón tay rồi cụp bớt 6 ngón để tìm số ngón tay còn lại nhé!",
+        "explanation": "Bé hãy xòe 10 ngón tay rồi cụp bớt 6 ngón để tìm số ngón tay còn lại nhé! Vì vậy, kết quả đúng là 4."
+      },
+      {
+        "id": "as5",
+        "title": "Những chú chim trên cành (Giải toán)",
+        "question": "Trên cành có 8 chú chim 🐦, 3 chú chim bay đi tìm mồi. Hỏi trên cành còn lại bao nhiêu chú chim?",
+        "options": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "correctAnswer": 5,
+        "hint": "Trên cành có 8 chú chim, 3 chú bay đi tức là làm phép trừ: 8 - 3 = ?",
+        "explanation": "Trên cành có 8 chú chim, 3 chú bay đi tức là làm phép trừ: 8 - 3 = ? Do đó, đáp án chính xác là 5."
+      },
+      {
+        "id": "as6",
+        "title": "Phép cộng trong phạm vi 10",
+        "question": "Tính nhẩm: 4 + 5 = ?",
+        "options": [
+          8,
+          9,
+          10,
+          7
+        ],
+        "correctAnswer": 9,
+        "hint": "Bé hãy lấy 4 rồi đếm thêm 5 bước nữa nhé: 4... 5, 6, 7, 8, 9!",
+        "explanation": "Bé hãy lấy 4 rồi đếm thêm 5 bước nữa nhé: 4... 5, 6, 7, 8, 9! Vì vậy, kết quả đúng là 9."
+      },
+      {
+        "id": "as7",
+        "title": "Phép trừ trong phạm vi 10",
+        "question": "Tính nhẩm: 10 - 6 = ?",
+        "options": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "correctAnswer": 4,
+        "hint": "Bé hãy xòe 10 ngón tay rồi gập bớt 6 ngón tay lại xem còn mấy ngón nhé!",
+        "explanation": "Bé hãy xòe 10 ngón tay rồi gập bớt 6 ngón tay lại xem còn mấy ngón nhé! Vì vậy, kết quả đúng là 4."
+      },
+      {
+        "id": "as8",
+        "title": "Tìm số còn thiếu trong phép trừ",
+        "question": "Điền số thích hợp vào ô trống: 9 - ? = 5",
+        "type": "equation",
+        "options": [
+          3,
+          4,
+          5,
+          2
+        ],
+        "correctAnswer": 4,
+        "hint": "Muốn biết 9 trừ mấy bằng 5, bé lấy 9 trừ đi 5 nhé: 9 - 5 = ?",
+        "explanation": "Muốn biết 9 trừ mấy bằng 5, bé lấy 9 trừ đi 5 nhé: 9 - 5 = ? Do đó, đáp án chính xác là 4."
+      },
+      {
+        "id": "as9",
+        "title": "Phép cộng với số 0",
+        "question": "Tính nhẩm: 0 + 9 = ?",
+        "options": [
+          0,
+          8,
+          9,
+          10
+        ],
+        "correctAnswer": 9,
+        "hint": "Bất kỳ số nào cộng với số 0 cũng bằng chính số đó!",
+        "explanation": "Bất kỳ số nào cộng với số 0 cũng bằng chính số đó! Vì vậy, kết quả đúng là 9."
+      },
+      {
+        "id": "as10",
+        "title": "Giải toán: Bông hoa tặng cô",
+        "question": "Lan hái được 4 bông hoa 🌸, Mai cho Lan thêm 3 bông hoa nữa. Hỏi Lan có tất cả bao nhiêu bông hoa?",
+        "options": [
+          "7 bông hoa",
+          "6 bông hoa",
+          "8 bông hoa",
+          "5 bông hoa"
+        ],
+        "correctAnswer": "7 bông hoa",
+        "hint": "Cho thêm tức là làm phép tính cộng: 4 + 3 = ? bông hoa!",
+        "explanation": "Cho thêm tức là làm phép tính cộng: 4 + 3 = ? bông hoa! Do đó, đáp án chính xác là 7 bông hoa."
+      },
+      {
+        "id": "as11",
+        "title": "Giải toán: Đĩa dâu tây",
+        "question": "Trên đĩa có 9 quả dâu tây 🍓, bé ăn hết 4 quả. Hỏi trên đĩa còn lại bao nhiêu quả dâu tây?",
+        "options": [
+          "5 quả",
+          "6 quả",
+          "4 quả",
+          "7 quả"
+        ],
+        "correctAnswer": "5 quả",
+        "hint": "Ăn hết tức là bớt đi, làm phép tính trừ: 9 - 4 = ? quả!",
+        "explanation": "Ăn hết tức là bớt đi, làm phép tính trừ: 9 - 4 = ? quả! Do đó, đáp án chính xác là 5 quả."
+      }
+    ],
+    "timoChallenges": [
+      {
+        "id": "tas1",
+        "title": "Timo: Tính nhanh gộp số tròn 10",
+        "badge": "Timo 2025",
+        "question": "Tính nhanh giá trị của: 8 + 9 + 1 + 2 + 3 = ?",
+        "options": [
+          23,
+          21,
+          22,
+          24
+        ],
+        "correctIndex": 0,
+        "hint": "Mẹo thần kỳ: Bé hãy ghép các cặp số có tổng bằng 10 lại với nhau trước nhé!",
+        "explanation": "Ta có: (8 + 2) + (9 + 1) + 3 = 10 + 10 + 3 = 23. Rất nhanh và chính xác!"
+      },
+      {
+        "id": "tas2",
+        "title": "Timo: Tìm giá trị của con cá",
+        "badge": "Timo 2025",
+        "question": "Tìm giá trị của con cá trong hình dưới đây:",
+        "image": "/timo/p2_img4_40.jpeg",
+        "options": [
+          31,
+          21,
+          18,
+          19
+        ],
+        "correctIndex": 3,
+        "hint": "Từ hình vẽ, ta có: 6 + Con cá = 25. Bé lấy 25 trừ đi 6 nhé: 25 - 6 = ?",
+        "explanation": "Ta có phép tính: 6 + Con cá = 25. Giá trị của con cá là: 25 - 6 = 19!"
+      },
+      {
+        "id": "tas3",
+        "title": "Timo: Bãi đỗ xe ô tô thêm bớt",
+        "badge": "Timo 2025",
+        "question": "Lúc đầu có 17 ô tô. 3 ô tô rời đi, 1 xe máy đến, rồi 2 ô tô nữa rời đi. Hỏi còn bao nhiêu Ô TÔ?",
+        "options": [
+          "11 chiếc",
+          "14 chiếc",
+          "12 chiếc",
+          "13 chiếc"
+        ],
+        "correctIndex": 2,
+        "hint": "Cảnh giác bẫy: Đề bài chỉ hỏi Ô TÔ, xe máy không ảnh hưởng đến số ô tô!",
+        "explanation": "Số ô tô = 17 - 3 - 2 = 12 chiếc ô tô."
+      }
+    ]
+  },
+  {
+    "id": "numbers_20",
+    "semester": 1,
+    "title": "Khu Vườn Số & Phép Tính Đến 20",
+    "badge": "Học kì 1 - Chủ đề 4",
+    "icon": "🔮",
+    "color": "from-sky-400 to-blue-600",
+    "bgColor": "bg-sky-100",
+    "borderColor": "border-sky-400",
+    "description": "Khám phá các số 11-20, cấu tạo chục và đơn vị, cộng trừ không nhớ trong phạm vi 20!",
+    "timoCount": 3,
+    "basicLevels": [
+      {
+        "id": "n20_1",
+        "title": "Đếm viên bi pha lê sắc màu",
+        "question": "Bé hãy đếm xem có bao nhiêu viên bi pha lê trong hộp?",
+        "itemIcon": "🔮",
+        "count": 15,
+        "targetNumber": 15,
+        "correctAnswer": 15,
+        "options": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "hint": "Bé hãy đếm lần lượt từng hàng viên bi pha lê trong hộp nhé!",
+        "explanation": "Bé hãy đếm lần lượt từng hàng viên bi pha lê trong hộp nhé! Vì vậy, kết quả đúng là 15."
+      },
+      {
+        "id": "n20_2",
+        "title": "Cấu tạo số: 1 chục và 4 đơn vị",
+        "question": "Số gồm 1 chục và 4 đơn vị viết là số mấy?",
+        "options": [
+          12,
+          14,
+          16,
+          41
+        ],
+        "correctAnswer": 14,
+        "hint": "Chữ số hàng chục viết trước, chữ số hàng đơn vị viết sau bé nhé!",
+        "explanation": "Chữ số hàng chục viết trước, chữ số hàng đơn vị viết sau bé nhé! Vì vậy, kết quả đúng là 14."
+      },
+      {
+        "id": "n20_3",
+        "title": "Phép cộng không nhớ đến 20",
+        "question": "Tính nhẩm: 12 + 3 = ?",
+        "options": [
+          14,
+          15,
+          16,
+          17
+        ],
+        "correctAnswer": 15,
+        "hint": "Bé hãy giữ nguyên 1 chục và lấy hai chữ số đơn vị cộng lại với nhau nhé!",
+        "explanation": "Bé hãy giữ nguyên 1 chục và lấy hai chữ số đơn vị cộng lại với nhau nhé! Vì vậy, kết quả đúng là 15."
+      },
+      {
+        "id": "n20_4",
+        "title": "Phép trừ không nhớ đến 20",
+        "question": "Tính nhẩm: 18 - 5 = ?",
+        "options": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "correctAnswer": 13,
+        "hint": "Bé hãy giữ nguyên 1 chục và lấy hai chữ số đơn vị trừ cho nhau nhé!",
+        "explanation": "Bé hãy giữ nguyên 1 chục và lấy hai chữ số đơn vị trừ cho nhau nhé! Vì vậy, kết quả đúng là 13."
+      },
+      {
+        "id": "n20_5",
+        "title": "So sánh các số đến 20",
+        "question": "Điền dấu thích hợp vào chỗ trống: 17  ...  14",
+        "options": [
+          ">",
+          "<",
+          "="
+        ],
+        "correctAnswer": ">",
+        "hint": "Cả hai số đều có 1 chục, bé hãy so sánh chữ số ở hàng đơn vị nhé!",
+        "explanation": "Cả hai số đều có 1 chục, bé hãy so sánh chữ số ở hàng đơn vị nhé! Vì vậy, kết quả đúng là >."
+      },
+      {
+        "id": "n20_6",
+        "title": "Đếm số ngôi sao may mắn",
+        "question": "Bé hãy đếm xem trên bầu trời có bao nhiêu ngôi sao ⭐?",
+        "itemIcon": "⭐",
+        "count": 12,
+        "targetNumber": 12,
+        "correctAnswer": 12,
+        "options": [
+          10,
+          11,
+          12,
+          13
+        ],
+        "hint": "Bé hãy đếm từ 1 đến hết các ngôi sao trên bầu trời nhé!",
+        "explanation": "Bé hãy đếm từ 1 đến hết các ngôi sao trên bầu trời nhé! Vì vậy, kết quả đúng là 12."
+      },
+      {
+        "id": "n20_7",
+        "title": "Cấu tạo số: 1 chục và 8 đơn vị",
+        "question": "Số gồm 1 chục và 8 đơn vị viết là số mấy?",
+        "options": [
+          18,
+          81,
+          10,
+          8
+        ],
+        "correctAnswer": 18,
+        "hint": "1 chục (10) gộp với 8 đơn vị là số mười tám (18).",
+        "explanation": "1 chục (10) gộp với 8 đơn vị là số mười tám (18). Vì vậy, kết quả đúng là 18."
+      },
+      {
+        "id": "n20_8",
+        "title": "Số liền trước và liền sau",
+        "question": "Số liền trước và số liền sau của số 15 lần lượt là hai số nào?",
+        "options": [
+          "14 và 16",
+          "13 và 14",
+          "15 và 17",
+          "16 và 17"
+        ],
+        "correctAnswer": "14 và 16",
+        "hint": "Đếm theo thứ tự: 14 rồi đến 15, sau 15 là 16!",
+        "explanation": "Đếm theo thứ tự: 14 rồi đến 15, sau 15 là 16! Vì vậy, kết quả đúng là 14 và 16."
+      },
+      {
+        "id": "n20_9",
+        "title": "Phép cộng không nhớ",
+        "question": "Tính nhẩm: 11 + 6 = ?",
+        "options": [
+          16,
+          17,
+          18,
+          19
+        ],
+        "correctAnswer": 17,
+        "hint": "Giữ nguyên 1 chục, lấy 1 + 6 = 7, vậy kết quả là 17.",
+        "explanation": "Giữ nguyên 1 chục, lấy 1 + 6 = 7, vậy kết quả là 17. Do đó, đáp án chính xác là 17."
+      },
+      {
+        "id": "n20_10",
+        "title": "Phép trừ không nhớ",
+        "question": "Tính nhẩm: 19 - 7 = ?",
+        "options": [
+          11,
+          12,
+          13,
+          14
+        ],
+        "correctAnswer": 12,
+        "hint": "Giữ nguyên 1 chục, lấy 9 - 7 = 2, vậy kết quả là 12.",
+        "explanation": "Giữ nguyên 1 chục, lấy 9 - 7 = 2, vậy kết quả là 12. Do đó, đáp án chính xác là 12."
+      },
+      {
+        "id": "n20_11",
+        "title": "So sánh số có 2 chữ số",
+        "question": "Điền dấu thích hợp vào chỗ trống: 13  ...  16",
+        "options": [
+          "<",
+          ">",
+          "="
+        ],
+        "correctAnswer": "<",
+        "hint": "Cùng có 1 chục, nhưng 3 đơn vị bé hơn 6 đơn vị nên 13 < 16.",
+        "explanation": "Cùng có 1 chục, nhưng 3 đơn vị bé hơn 6 đơn vị nên 13 < 16. Vì vậy, kết quả đúng là <."
+      }
+    ],
+    "timoChallenges": [
+      {
+        "id": "tn20_1",
+        "title": "Timo: Chiếc cốc vỡ trên bàn",
+        "badge": "Timo 2025",
+        "question": "Có 13 chiếc cốc ở trên bàn. Tony làm vỡ 6 chiếc cốc. Hỏi bây giờ trên bàn có bao nhiêu chiếc cốc?",
+        "options": [
+          "19 chiếc",
+          "8 chiếc",
+          "7 chiếc",
+          "18 chiếc"
+        ],
+        "correctIndex": 2,
+        "hint": "Làm vỡ tức là bớt đi: 13 - 6 = ?",
+        "explanation": "Số cốc còn lại là: 13 - 6 = 7 chiếc cốc. Đáp án đúng là 7."
+      },
+      {
+        "id": "tn20_2",
+        "title": "Timo: Tìm phép tính đúng",
+        "badge": "Timo 2025",
+        "question": "Tìm phép tính đúng trong các phép tính sau đây:",
+        "options": [
+          "13 + 5 - 6 = 14",
+          "13 - 6 - 5 = 14",
+          "13 - 5 + 6 = 14",
+          "13 - 6 + 5 = 14"
+        ],
+        "correctIndex": 2,
+        "hint": "Bé hãy tính nhẩm từng phép tính từ trái sang phải xem câu nào có kết quả đúng bằng 14 nhé!",
+        "explanation": "Ta có 13 - 5 + 6 = 8 + 6 = 14. Phép tính này hoàn toàn chính xác!"
+      },
+      {
+        "id": "tn20_3",
+        "title": "Timo: Tính nhanh dãy số",
+        "badge": "Timo 2025",
+        "question": "Tìm giá trị của: 4 + 1 + 5 + 7 + 4 + 1 + 5 = ?",
+        "options": [
+          27,
+          29,
+          30,
+          28
+        ],
+        "correctIndex": 0,
+        "hint": "Mẹo Timo: (4 + 1 + 5) chính là bằng 10!",
+        "explanation": "Ta gộp: (4 + 1 + 5) + 7 + (4 + 1 + 5) = 10 + 7 + 10 = 27. Đáp án là 27."
+      }
+    ]
+  },
+  {
+    "id": "numbers_100",
+    "semester": 2,
+    "title": "Xưởng Gỗ Số Đến 100 & Chục Đơn Vị",
+    "badge": "Học kì 2 - Chủ đề 5",
+    "icon": "🪵",
+    "color": "from-amber-600 to-yellow-600",
+    "bgColor": "bg-amber-100",
+    "borderColor": "border-amber-500",
+    "description": "Làm quen các số đến 100, đếm bó chục que tính, đọc viết và so sánh số có 2 chữ số!",
+    "timoCount": 3,
+    "basicLevels": [
+      {
+        "id": "n100_1",
+        "title": "Đếm các số tròn chục",
+        "question": "Có 4 bó que tính, mỗi bó có 1 chục que (10 que). Hỏi có tất cả bao nhiêu que tính?",
+        "options": [
+          14,
+          40,
+          4,
+          400
+        ],
+        "correctAnswer": 40,
+        "hint": "Mỗi bó là 1 chục (10 que). Bé hãy đếm theo chục: 1 chục, 2 chục, 3 chục, 4 chục là bao nhiêu nhé!",
+        "explanation": "Mỗi bó là 1 chục (10 que). Bé hãy đếm theo chục: 1 chục, 2 chục, 3 chục, 4 chục là bao nhiêu nhé! Vì vậy, kết quả đúng là 40."
+      },
+      {
+        "id": "n100_2",
+        "title": "Bó chục và que tính lẻ: 3 chục 5 đơn vị",
+        "question": "Quan sát hình: Có 3 bó chục và 5 que tính rời. Đó là số mấy?",
+        "type": "tens_ones",
+        "tens": 3,
+        "ones": 5,
+        "targetNumber": 35,
+        "options": [
+          53,
+          35,
+          30,
+          8
+        ],
+        "hint": "3 bó chục tương ứng chữ số 3 ở hàng chục, 5 que rời là 5 đơn vị bé nhé!",
+        "explanation": "3 bó chục tương ứng chữ số 3 ở hàng chục, 5 que rời là 5 đơn vị bé nhé! Vì vậy, kết quả đúng là 35."
+      },
+      {
+        "id": "n100_3",
+        "title": "Bó chục và que tính lẻ: 5 chục 2 đơn vị",
+        "question": "Quan sát hình: Có 5 bó chục và 2 que tính rời. Đó là số mấy?",
+        "type": "tens_ones",
+        "tens": 5,
+        "ones": 2,
+        "targetNumber": 52,
+        "options": [
+          25,
+          50,
+          52,
+          55
+        ],
+        "hint": "5 bó chục tương ứng chữ số 5 ở hàng chục, 2 que rời là 2 đơn vị bé nhé!",
+        "explanation": "5 bó chục tương ứng chữ số 5 ở hàng chục, 2 que rời là 2 đơn vị bé nhé! Vì vậy, kết quả đúng là 52."
+      },
+      {
+        "id": "n100_4",
+        "title": "Tập đọc số có 2 chữ số",
+        "question": "Số 68 đọc là gì?",
+        "options": [
+          "Sáu mươi tám",
+          "Sáu mươi bốn",
+          "Tám mươi sáu",
+          "Sáu mươi"
+        ],
+        "correctAnswer": "Sáu mươi tám",
+        "hint": "Bé hãy đọc chữ số hàng chục trước kèm theo chữ \"mươi\", sau đó đọc chữ số hàng đơn vị nhé!",
+        "explanation": "Bé hãy đọc chữ số hàng chục trước kèm theo chữ \"mươi\", sau đó đọc chữ số hàng đơn vị nhé! Vì vậy, kết quả đúng là Sáu mươi tám."
+      },
+      {
+        "id": "n100_5",
+        "title": "So sánh hai số có 2 chữ số",
+        "question": "Điền dấu thích hợp vào chỗ trống: 45  ...  54",
+        "options": [
+          "<",
+          ">",
+          "="
+        ],
+        "correctAnswer": "<",
+        "hint": "Bé hãy so sánh chữ số hàng chục trước: 4 chục và 5 chục số nào lớn hơn nhé!",
+        "explanation": "Bé hãy so sánh chữ số hàng chục trước: 4 chục và 5 chục số nào lớn hơn nhé! Vì vậy, kết quả đúng là <."
+      },
+      {
+        "id": "n100_6",
+        "title": "Số liền sau trong bảng số",
+        "question": "Số liền sau của số 89 là số nào?",
+        "options": [
+          88,
+          90,
+          91,
+          99
+        ],
+        "correctAnswer": 90,
+        "hint": "Số liền sau là số ngay phía sau khi đếm, bé lấy số đã cho cộng thêm 1 đơn vị nhé!",
+        "explanation": "Số liền sau là số ngay phía sau khi đếm, bé lấy số đã cho cộng thêm 1 đơn vị nhé! Vì vậy, kết quả đúng là 90."
+      },
+      {
+        "id": "n100_7",
+        "title": "Đếm số tròn chục que tính",
+        "question": "Có 6 bó que tính (mỗi bó 1 chục que). Hỏi có tất cả bao nhiêu que tính?",
+        "options": [
+          6,
+          60,
+          16,
+          66
+        ],
+        "correctAnswer": 60,
+        "hint": "6 chục que tính chính là sáu mươi que tính (60).",
+        "explanation": "6 chục que tính chính là sáu mươi que tính (60). Vì vậy, kết quả đúng là 60."
+      },
+      {
+        "id": "n100_8",
+        "title": "Cấu tạo số: 7 chục và 4 đơn vị",
+        "question": "Số gồm 7 chục và 4 đơn vị viết là số mấy?",
+        "options": [
+          74,
+          47,
+          70,
+          40
+        ],
+        "correctAnswer": 74,
+        "hint": "Hàng chục là 7, hàng đơn vị là 4 -> viết là 74.",
+        "explanation": "Hàng chục là 7, hàng đơn vị là 4 -> viết là 74. Vì vậy, kết quả đúng là 74."
+      },
+      {
+        "id": "n100_9",
+        "title": "Tập đọc số: Số 95",
+        "question": "Số 95 được đọc đúng là gì?",
+        "options": [
+          "Chín mươi lăm",
+          "Chín mươi năm",
+          "Chín lăm",
+          "Năm mươi chín"
+        ],
+        "correctAnswer": "Chín mươi lăm",
+        "hint": "Khi chữ số hàng đơn vị là 5 và hàng chục từ 1 trở lên, ta đọc là \"lăm\".",
+        "explanation": "Khi chữ số hàng đơn vị là 5 và hàng chục từ 1 trở lên, ta đọc là \"lăm\". Vì vậy, kết quả đúng là Chín mươi lăm."
+      },
+      {
+        "id": "n100_10",
+        "title": "Tìm số lớn nhất",
+        "question": "Trong các số: 34, 72, 59, 28, số nào lớn nhất?",
+        "options": [
+          72,
+          59,
+          34,
+          28
+        ],
+        "correctAnswer": 72,
+        "hint": "Bé so sánh chữ số hàng chục: 7 chục lớn nhất!",
+        "explanation": "Bé so sánh chữ số hàng chục: 7 chục lớn nhất! Vì vậy, kết quả đúng là 72."
+      },
+      {
+        "id": "n100_11",
+        "title": "Tìm số liền trước của 100",
+        "question": "Số liền trước của số 100 là số nào?",
+        "options": [
+          99,
+          90,
+          101,
+          89
+        ],
+        "correctAnswer": 99,
+        "hint": "Bé lấy 100 bớt đi 1 đơn vị: 100 - 1 = 99.",
+        "explanation": "Bé lấy 100 bớt đi 1 đơn vị: 100 - 1 = 99. Do đó, đáp án chính xác là 99."
+      },
+      {
+        "id": "n100_12",
+        "title": "Số tròn chục lớn nhất có 2 chữ số",
+        "question": "Số tròn chục lớn nhất có 2 chữ số là số mấy?",
+        "options": [
+          90,
+          99,
+          80,
+          100
+        ],
+        "correctAnswer": 90,
+        "hint": "Các số tròn chục có chữ số tận cùng là 0: 10, 20, ..., 90.",
+        "explanation": "Các số tròn chục có chữ số tận cùng là 0: 10, 20, ..., 90. Vì vậy, kết quả đúng là 90."
+      }
+    ],
+    "timoChallenges": [
+      {
+        "id": "tn100_1",
+        "title": "Timo: Tìm số lớn nhất",
+        "badge": "Timo 2025",
+        "question": "Số nào dưới đây là số lớn nhất? 26015412, 3918378, 23998788, 27000279",
+        "options": [
+          "26015412",
+          "3918378",
+          "23998788",
+          "27000279"
+        ],
+        "correctIndex": 3,
+        "hint": "Số có nhiều chữ số hơn sẽ lớn hơn. Với các số có cùng 8 chữ số, bé hãy so sánh từ chữ số bên trái sang nhé!",
+        "explanation": "27000279 có hai chữ số đầu là 27 lớn nhất trong các số 8 chữ số!"
+      },
+      {
+        "id": "tn100_2",
+        "title": "Timo: Số nhỏ nhất có 3 chữ số khác nhau",
+        "badge": "Timo 2025",
+        "question": "Số nhỏ nhất có 3 chữ số khác nhau là số nào?",
+        "options": [
+          "100",
+          "102",
+          "123",
+          "111"
+        ],
+        "correctIndex": 1,
+        "hint": "Để được số nhỏ nhất: chữ số đầu tiên phải nhỏ nhất khác 0, rồi chọn tiếp các chữ số nhỏ nhất còn lại nhé!",
+        "explanation": "Số nhỏ nhất có 3 chữ số khác nhau là 102."
+      },
+      {
+        "id": "tn100_3",
+        "title": "Timo: Ghép số nhỏ hơn 38",
+        "badge": "Timo 2025",
+        "question": "Có bao nhiêu số có 2 chữ số nhỏ hơn 38 được tạo bởi 2 chữ số khác nhau từ 1, 2, 3, 7 và 9?",
+        "options": [
+          "8 số",
+          "11 số",
+          "10 số",
+          "12 số"
+        ],
+        "correctIndex": 1,
+        "hint": "Bé hãy liệt kê các số có hàng chục là 1, 2 và 3 (nhỏ hơn 38) rồi đếm tổng cộng nhé!",
+        "explanation": "Tổng cộng: 4 + 4 + 3 = 11 số. Đáp án đúng là 11 số."
+      }
+    ]
+  },
+  {
+    "id": "measurement_cm",
+    "semester": 2,
+    "title": "Thước Kẻ Xăng-ti-mét (cm)",
+    "badge": "Học kì 2 - Chủ đề 6",
+    "icon": "📏",
+    "color": "from-teal-400 to-cyan-600",
+    "bgColor": "bg-teal-100",
+    "borderColor": "border-teal-400",
+    "description": "Thực hành đo độ dài đồ vật bằng thước kẻ chia vạch cm và tính toán có đơn vị!",
+    "timoCount": 3,
+    "basicLevels": [
+      {
+        "id": "cm1",
+        "title": "Đo độ dài chiếc bút chì",
+        "question": "Quan sát thước kẻ: Chiếc bút chì dài bao nhiêu xăng-ti-mét (cm)?",
+        "type": "ruler_cm",
+        "item": "Bút chì ✏️",
+        "lengthCm": 8,
+        "targetNumber": 8,
+        "options": [
+          6,
+          7,
+          8,
+          9
+        ],
+        "hint": "Đầu bút chì đặt đúng ở vạch 0 cm, bé hãy nhìn xem đầu nhọn của bút chì chỉ vào vạch số mấy nhé!",
+        "explanation": "Đầu bút chì đặt đúng ở vạch 0 cm, bé hãy nhìn xem đầu nhọn của bút chì chỉ vào vạch số mấy nhé! Vì vậy, kết quả đúng là 8."
+      },
+      {
+        "id": "cm2",
+        "title": "Đo độ dài cục tẩy",
+        "question": "Quan sát thước kẻ: Cục tẩy dài bao nhiêu xăng-ti-mét (cm)?",
+        "type": "ruler_cm",
+        "item": "Cục tẩy 🧼",
+        "lengthCm": 4,
+        "targetNumber": 4,
+        "options": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "hint": "Đầu cục tẩy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đuôi cục tẩy chỉ vào vạch số mấy trên thước kẻ nhé!",
+        "explanation": "Đầu cục tẩy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đuôi cục tẩy chỉ vào vạch số mấy trên thước kẻ nhé! Vì vậy, kết quả đúng là 4."
+      },
+      {
+        "id": "cm3",
+        "title": "Đo độ dài chiếc thìa",
+        "question": "Quan sát thước kẻ: Chiếc thìa dài bao nhiêu xăng-ti-mét (cm)?",
+        "type": "ruler_cm",
+        "item": "Chiếc thìa 🥄",
+        "lengthCm": 12,
+        "targetNumber": 12,
+        "options": [
+          10,
+          11,
+          12,
+          13
+        ],
+        "hint": "Đầu chiếc thìa đặt đúng ở vạch 0 cm, bé hãy nhìn vạch số ở đuôi chiếc thìa trên thước kẻ nhé!",
+        "explanation": "Đầu chiếc thìa đặt đúng ở vạch 0 cm, bé hãy nhìn vạch số ở đuôi chiếc thìa trên thước kẻ nhé! Vì vậy, kết quả đúng là 12."
+      },
+      {
+        "id": "cm4",
+        "title": "Cộng số đo độ dài cm",
+        "question": "Tính: 6 cm + 3 cm = ?",
+        "options": [
+          "8 cm",
+          "9 cm",
+          "10 cm",
+          "7 cm"
+        ],
+        "correctAnswer": "9 cm",
+        "hint": "Bé hãy cộng hai số với nhau rồi viết thêm đơn vị cm vào sau kết quả nhé!",
+        "explanation": "Bé hãy cộng hai số với nhau rồi viết thêm đơn vị cm vào sau kết quả nhé! Vì vậy, kết quả đúng là 9 cm."
+      },
+      {
+        "id": "cm5",
+        "title": "Trừ số đo độ dài cm",
+        "question": "Tính: 15 cm - 5 cm = ?",
+        "options": [
+          "10 cm",
+          "9 cm",
+          "11 cm",
+          "20 cm"
+        ],
+        "correctAnswer": "10 cm",
+        "hint": "Bé hãy trừ hai số với nhau rồi viết thêm đơn vị cm vào sau kết quả nhé!",
+        "explanation": "Bé hãy trừ hai số với nhau rồi viết thêm đơn vị cm vào sau kết quả nhé! Vì vậy, kết quả đúng là 10 cm."
+      },
+      {
+        "id": "cm6",
+        "title": "Đo độ dài kẹp giấy",
+        "question": "Quan sát thước kẻ: Chiếc kẹp giấy 📎 dài bao nhiêu xăng-ti-mét (cm)?",
+        "type": "ruler_cm",
+        "item": "Kẹp giấy 📎",
+        "lengthCm": 3,
+        "targetNumber": 3,
+        "options": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "hint": "Đầu kẹp giấy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đầu kia của kẹp giấy chỉ vào vạch số mấy nhé!",
+        "explanation": "Đầu kẹp giấy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đầu kia của kẹp giấy chỉ vào vạch số mấy nhé! Vì vậy, kết quả đúng là 3."
+      },
+      {
+        "id": "cm7",
+        "title": "Đo độ dài bàn chải",
+        "question": "Quan sát thước kẻ: Chiếc bàn chải đánh răng 🪥 dài bao nhiêu xăng-ti-mét (cm)?",
+        "type": "ruler_cm",
+        "item": "Bàn chải 🪥",
+        "lengthCm": 14,
+        "targetNumber": 14,
+        "options": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "hint": "Đầu bàn chải đặt đúng ở vạch 0 cm, bé quan sát vạch số ở phần đuôi cán bàn chải trên thước nhé!",
+        "explanation": "Đầu bàn chải đặt đúng ở vạch 0 cm, bé quan sát vạch số ở phần đuôi cán bàn chải trên thước nhé! Vì vậy, kết quả đúng là 14."
+      },
+      {
+        "id": "cm8",
+        "title": "Cộng số đo xăng-ti-mét",
+        "question": "Tính: 12 cm + 5 cm = ?",
+        "options": [
+          "17 cm",
+          "16 cm",
+          "18 cm",
+          "15 cm"
+        ],
+        "correctAnswer": "17 cm",
+        "hint": "12 + 5 = 17, sau đó viết thêm đơn vị cm vào sau kết quả.",
+        "explanation": "12 + 5 = 17, sau đó viết thêm đơn vị cm vào sau kết quả. Do đó, đáp án chính xác là 17 cm."
+      },
+      {
+        "id": "cm9",
+        "title": "Trừ số đo xăng-ti-mét",
+        "question": "Tính: 19 cm - 7 cm = ?",
+        "options": [
+          "12 cm",
+          "11 cm",
+          "13 cm",
+          "14 cm"
+        ],
+        "correctAnswer": "12 cm",
+        "hint": "19 - 7 = 12, sau đó viết thêm đơn vị cm vào sau kết quả.",
+        "explanation": "19 - 7 = 12, sau đó viết thêm đơn vị cm vào sau kết quả. Do đó, đáp án chính xác là 12 cm."
+      },
+      {
+        "id": "cm10",
+        "title": "Giải toán: Hai sợi dây",
+        "question": "Sợi dây đỏ dài 10 cm, sợi dây xanh dài 8 cm. Hỏi cả hai sợi dây dài bao nhiêu xăng-ti-mét?",
+        "options": [
+          "18 cm",
+          "17 cm",
+          "19 cm",
+          "2 cm"
+        ],
+        "correctAnswer": "18 cm",
+        "hint": "Hỏi cả hai sợi dây tức là làm phép tính cộng: 10 cm + 8 cm = ?",
+        "explanation": "Hỏi cả hai sợi dây tức là làm phép tính cộng: 10 cm + 8 cm = ? Do đó, đáp án chính xác là 18 cm."
+      }
+    ],
+    "timoChallenges": [
+      {
+        "id": "tcm1",
+        "title": "Timo: Cân bập bênh tìm vật nặng nhất",
+        "badge": "Timo 2025",
+        "question": "Cho 3 chiếc cân dưới đây, tìm món đồ nặng nhất:",
+        "image": "/timo/p2_img2_36.png",
+        "options": [
+          "Khoai tây chiên 🍟",
+          "Bánh burger 🍔",
+          "Xô gà rán 🍗",
+          "Cốc cà phê 🥤"
+        ],
+        "correctIndex": 2,
+        "hint": "Chiếc cân nào bị ấn chúc xuống dưới là món đồ ở bên đó nặng hơn!",
+        "explanation": "Từ 3 chiếc cân: Gà rán nặng hơn Khoai tây, Khoai tây nặng hơn Burger, Burger nặng hơn Cà phê. Vậy Xô gà rán 🍗 nặng nhất!"
+      },
+      {
+        "id": "tcm2",
+        "title": "Timo: Dãy số tăng đều bước nhảy",
+        "badge": "Timo 2025",
+        "question": "Dựa vào quy luật dưới đây, tìm số tiếp theo:",
+        "image": "/timo/p3_img2_56.jpeg",
+        "options": [
+          "23",
+          "20",
+          "22",
+          "21"
+        ],
+        "correctIndex": 0,
+        "hint": "Quan sát dãy số: 3, 7, 11, 15, 19... mỗi số sau bằng số trước cộng thêm 4.",
+        "explanation": "Quy luật: Dãy số tăng đều cách nhau 4 đơn vị (+4): 3 -> 7 -> 11 -> 15 -> 19 -> 19 + 4 = 23. Đáp án đúng là 23."
+      },
+      {
+        "id": "tcm3",
+        "title": "Timo: Mảnh giấy còn thiếu",
+        "badge": "Timo 2025",
+        "question": "Tìm mảnh giấy còn thiếu để có được phép tính đúng dưới đây:",
+        "image": "/timo/p4_img2_64.png",
+        "options": [
+          "Mảnh A (số 9)",
+          "Mảnh B (số 8)",
+          "Mảnh C (số 11)",
+          "Mảnh D (số 14)"
+        ],
+        "correctIndex": 2,
+        "hint": "Ta có: 8 + 6 = 14. Phép tính là 25 - ? = 14. Bé hãy tìm số cần trừ đi nhé!",
+        "explanation": "Vế trái: 8 + 6 = 14. Để vế phải bằng 14 thì 25 - 11 = 14. Vậy mảnh giấy còn thiếu là Mảnh C mang số 11."
+      }
+    ]
+  },
+  {
+    "id": "add_sub_100",
+    "semester": 2,
+    "title": "Siêu Thị Phép Cộng & Trừ 100",
+    "badge": "Học kì 2 - Chủ đề 7",
+    "icon": "🛒",
+    "color": "from-rose-400 to-red-600",
+    "bgColor": "bg-rose-100",
+    "borderColor": "border-rose-400",
+    "description": "Cộng trừ các số tròn chục, cộng trừ không nhớ số có hai chữ số và giải bài toán thực tế!",
+    "timoCount": 3,
+    "basicLevels": [
+      {
+        "id": "as100_1",
+        "title": "Cộng các số tròn chục",
+        "question": "Tính nhẩm: 30 + 20 = ?",
+        "options": [
+          40,
+          50,
+          60,
+          55
+        ],
+        "correctAnswer": 50,
+        "hint": "30 là 3 chục, 20 là 2 chục. Bé hãy cộng số chục lại nhé!",
+        "explanation": "30 là 3 chục, 20 là 2 chục. Bé hãy cộng số chục lại nhé! Vì vậy, kết quả đúng là 50."
+      },
+      {
+        "id": "as100_2",
+        "title": "Trừ các số tròn chục",
+        "question": "Tính nhẩm: 70 - 30 = ?",
+        "options": [
+          30,
+          40,
+          50,
+          60
+        ],
+        "correctAnswer": 40,
+        "hint": "70 là 7 chục, 30 là 3 chục. Bé hãy trừ số chục cho nhau nhé!",
+        "explanation": "70 là 7 chục, 30 là 3 chục. Bé hãy trừ số chục cho nhau nhé! Vì vậy, kết quả đúng là 40."
+      },
+      {
+        "id": "as100_3",
+        "title": "Cộng số có 2 chữ số với số có 1 chữ số",
+        "question": "Tính: 43 + 5 = ?",
+        "options": [
+          47,
+          48,
+          49,
+          58
+        ],
+        "correctAnswer": 48,
+        "hint": "Bé hãy lấy chữ số hàng đơn vị cộng với nhau rồi ghép với hàng chục nhé!",
+        "explanation": "Bé hãy lấy chữ số hàng đơn vị cộng với nhau rồi ghép với hàng chục nhé! Vì vậy, kết quả đúng là 48."
+      },
+      {
+        "id": "as100_4",
+        "title": "Cộng 2 chữ số với 2 chữ số không nhớ",
+        "question": "Tính: 34 + 23 = ?",
+        "options": [
+          56,
+          57,
+          58,
+          67
+        ],
+        "correctAnswer": 57,
+        "hint": "Bé cộng hàng đơn vị với hàng đơn vị, rồi cộng hàng chục với hàng chục nhé!",
+        "explanation": "Bé cộng hàng đơn vị với hàng đơn vị, rồi cộng hàng chục với hàng chục nhé! Vì vậy, kết quả đúng là 57."
+      },
+      {
+        "id": "as100_5",
+        "title": "Trừ 2 chữ số với 2 chữ số không nhớ",
+        "question": "Tính: 68 - 25 = ?",
+        "options": [
+          42,
+          43,
+          44,
+          45
+        ],
+        "correctAnswer": 43,
+        "hint": "Bé trừ hàng đơn vị cho hàng đơn vị, rồi trừ hàng chục cho hàng chục nhé!",
+        "explanation": "Bé trừ hàng đơn vị cho hàng đơn vị, rồi trừ hàng chục cho hàng chục nhé! Vì vậy, kết quả đúng là 43."
+      },
+      {
+        "id": "as100_6",
+        "title": "Giải toán: Đàn vịt nông trại",
+        "question": "Đàn vịt có 35 con vịt trắng và 12 con vịt nâu. Hỏi có tất cả bao nhiêu con vịt?",
+        "options": [
+          46,
+          47,
+          48,
+          49
+        ],
+        "correctAnswer": 47,
+        "hint": "Bé hãy lấy số vịt trắng cộng với số vịt nâu: 35 + 12 = ?",
+        "explanation": "Bé hãy lấy số vịt trắng cộng với số vịt nâu: 35 + 12 = ? Do đó, đáp án chính xác là 47."
+      },
+      {
+        "id": "as100_7",
+        "title": "Cộng tròn chục nâng cao",
+        "question": "Tính nhẩm: 40 + 50 = ?",
+        "options": [
+          80,
+          90,
+          70,
+          100
+        ],
+        "correctAnswer": 90,
+        "hint": "4 chục cộng 5 chục bằng 9 chục (90).",
+        "explanation": "4 chục cộng 5 chục bằng 9 chục (90). Vì vậy, kết quả đúng là 90."
+      },
+      {
+        "id": "as100_8",
+        "title": "Trừ tròn chục nâng cao",
+        "question": "Tính nhẩm: 90 - 50 = ?",
+        "options": [
+          30,
+          40,
+          50,
+          60
+        ],
+        "correctAnswer": 40,
+        "hint": "9 chục trừ 5 chục bằng 4 chục (40).",
+        "explanation": "9 chục trừ 5 chục bằng 4 chục (40). Vì vậy, kết quả đúng là 40."
+      },
+      {
+        "id": "as100_9",
+        "title": "Cộng không nhớ 2 chữ số",
+        "question": "Tính: 54 + 23 = ?",
+        "options": [
+          76,
+          77,
+          78,
+          87
+        ],
+        "correctAnswer": 77,
+        "hint": "Hàng đơn vị: 4 + 3 = 7. Hàng chục: 5 + 2 = 7. Kết quả là 77.",
+        "explanation": "Hàng đơn vị: 4 + 3 = 7. Hàng chục: 5 + 2 = 7. Kết quả là 77. Do đó, đáp án chính xác là 77."
+      },
+      {
+        "id": "as100_10",
+        "title": "Trừ không nhớ 2 chữ số",
+        "question": "Tính: 86 - 32 = ?",
+        "options": [
+          54,
+          53,
+          55,
+          64
+        ],
+        "correctAnswer": 54,
+        "hint": "Hàng đơn vị: 6 - 2 = 4. Hàng chục: 8 - 3 = 5. Kết quả là 54.",
+        "explanation": "Hàng đơn vị: 6 - 2 = 4. Hàng chục: 8 - 3 = 5. Kết quả là 54. Do đó, đáp án chính xác là 54."
+      },
+      {
+        "id": "as100_11",
+        "title": "Giải toán: Quả bóng bay",
+        "question": "Cửa hàng có 48 quả bóng bay 🎈, đã bán được 16 quả. Hỏi cửa hàng còn lại bao nhiêu quả bóng bay?",
+        "options": [
+          "32 quả",
+          "34 quả",
+          "30 quả",
+          "64 quả"
+        ],
+        "correctAnswer": "32 quả",
+        "hint": "Đã bán tức là bớt đi: 48 - 16 = ? quả bóng bay!",
+        "explanation": "Đã bán tức là bớt đi: 48 - 16 = ? quả bóng bay! Do đó, đáp án chính xác là 32 quả."
+      },
+      {
+        "id": "as100_12",
+        "title": "Tính nhẩm dãy số tròn chục",
+        "question": "Tính: 30 + 20 + 10 = ?",
+        "options": [
+          50,
+          60,
+          70,
+          80
+        ],
+        "correctAnswer": 60,
+        "hint": "3 chục + 2 chục = 5 chục; 5 chục + 1 chục = 6 chục (60).",
+        "explanation": "3 chục + 2 chục = 5 chục; 5 chục + 1 chục = 6 chục (60). Do đó, đáp án chính xác là 60."
+      }
+    ],
+    "timoChallenges": [
+      {
+        "id": "tas100_1",
+        "title": "Timo: Tính giá trị biểu thức",
+        "badge": "Timo 2025",
+        "question": "Tính giá trị của: 24 - 8 + 1 = ?",
+        "options": [
+          15,
+          17,
+          16,
+          18
+        ],
+        "correctIndex": 1,
+        "hint": "Bé hãy tính lần lượt từ trái sang phải: làm phép trừ trước rồi làm phép cộng nhé!",
+        "explanation": "24 - 8 = 16. Tiếp theo 16 + 1 = 17. Đáp án đúng là 17."
+      },
+      {
+        "id": "tas100_2",
+        "title": "Timo: Chia đều trứng vào 5 giỏ",
+        "badge": "Timo 2025",
+        "question": "Chia đều các quả trứng dưới đây vào 5 giỏ. Hỏi mỗi giỏ có bao nhiêu quả trứng?",
+        "image": "/timo/p6_img3_85.jpeg",
+        "options": [
+          "3 quả",
+          "5 quả",
+          "6 quả",
+          "4 quả"
+        ],
+        "correctIndex": 3,
+        "hint": "Bé hãy đếm xem có tất cả bao nhiêu quả trứng, rồi chia đều vào 5 giỏ nhé!",
+        "explanation": "Trong hình có 20 quả trứng. Chia đều cho 5 giỏ: 20 chia cho 5 = 4 quả mỗi giỏ. Đáp án là 4 quả."
+      },
+      {
+        "id": "tas100_3",
+        "title": "Timo: Chồng vở của bạn Alan",
+        "badge": "Timo 2025",
+        "question": "Alan thấy vở mình ở bên trên 3 quyển và bên dưới 4 quyển khác. Hỏi chồng vở có tất cả bao nhiêu quyển?",
+        "options": [
+          "7 quyển",
+          "8 quyển",
+          "9 quyển",
+          "6 quyển"
+        ],
+        "correctIndex": 1,
+        "hint": "Gồm 3 quyển phía dưới + 1 quyển của Alan + 4 quyển phía trên!",
+        "explanation": "Tổng số quyển vở = 3 (dưới) + 1 (vở của Alan) + 4 (trên) = 8 quyển vở!"
+      }
+    ]
+  },
+  {
+    "id": "time_statistics",
+    "semester": 2,
+    "title": "Đồng Hồ, Lịch & Biểu Đồ Tranh",
+    "badge": "Học kì 2 - Chủ đề 8",
+    "icon": "⏰",
+    "color": "from-pink-400 to-rose-600",
+    "bgColor": "bg-pink-100",
+    "borderColor": "border-pink-400",
+    "description": "Xem đồng hồ kim chỉ giờ đúng, ngày trong tuần và đọc biểu đồ tranh thống kê!",
+    "timoCount": 4,
+    "basicLevels": [
+      {
+        "id": "ts1",
+        "title": "Bé thức dậy lúc mấy giờ?",
+        "question": "Kim ngắn chỉ số 7, kim dài chỉ số 12. Hỏi đồng hồ đang chỉ mấy giờ?",
+        "hour": 7,
+        "options": [
+          "7 giờ đúng",
+          "12 giờ đúng",
+          "6 giờ đúng"
+        ],
+        "correctAnswer": "7 giờ đúng",
+        "hint": "Kim ngắn chỉ số mấy là bấy nhiêu giờ khi kim dài chỉ vào số 12 nhé!",
+        "explanation": "Kim ngắn chỉ số mấy là bấy nhiêu giờ khi kim dài chỉ vào số 12 nhé! Vì vậy, kết quả đúng là 7 giờ đúng."
+      },
+      {
+        "id": "ts2",
+        "title": "Giờ bé đi ngủ ngoan",
+        "question": "Đồng hồ chỉ 9 giờ tối (21:00). Kim ngắn chỉ số mấy?",
+        "options": [
+          "Số 9",
+          "Số 12",
+          "Số 6"
+        ],
+        "correctAnswer": "Số 9",
+        "hint": "Kim ngắn luôn chỉ vào số tương ứng với giờ trên mặt đồng hồ nhé!",
+        "explanation": "Kim ngắn luôn chỉ vào số tương ứng với giờ trên mặt đồng hồ nhé! Vì vậy, kết quả đúng là Số 9."
+      },
+      {
+        "id": "ts3",
+        "title": "Một tuần có bao nhiêu ngày?",
+        "question": "Một tuần lễ có bao nhiêu ngày?",
+        "options": [
+          "5 ngày",
+          "6 ngày",
+          "7 ngày",
+          "10 ngày"
+        ],
+        "correctAnswer": "7 ngày",
+        "hint": "Bé hãy đếm lần lượt từ Thứ Hai, Thứ Ba... đến Chủ Nhật xem có bao nhiêu ngày nhé!",
+        "explanation": "Bé hãy đếm lần lượt từ Thứ Hai, Thứ Ba... đến Chủ Nhật xem có bao nhiêu ngày nhé! Vì vậy, kết quả đúng là 7 ngày."
+      },
+      {
+        "id": "ts4",
+        "title": "Hôm nay và Ngày mai",
+        "question": "Hôm nay là Thứ Năm. Hỏi ngày mai là thứ mấy trong tuần?",
+        "options": [
+          "Thứ Sáu",
+          "Thứ Bảy",
+          "Thứ Tư"
+        ],
+        "correctAnswer": "Thứ Sáu",
+        "hint": "Ngày mai là ngày tiếp theo sau hôm nay, sau Thứ Năm là thứ mấy nhỉ?",
+        "explanation": "Ngày mai là ngày tiếp theo sau hôm nay, sau Thứ Năm là thứ mấy nhỉ? Vì vậy, kết quả đúng là Thứ Sáu."
+      },
+      {
+        "id": "ts5",
+        "title": "Biểu đồ tranh: Đếm hoa trong vườn",
+        "question": "Quan sát biểu đồ tranh: Trong vườn có bao nhiêu bông hoa hồng 🌹?",
+        "type": "picture_graph",
+        "graphData": [
+          {
+            "label": "Hoa hồng",
+            "icon": "🌹",
+            "count": 5
+          },
+          {
+            "label": "Hoa cúc",
+            "icon": "🌻",
+            "count": 4
+          },
+          {
+            "label": "Hoa sen",
+            "icon": "🪷",
+            "count": 3
+          }
+        ],
+        "questionTarget": "Hoa hồng",
+        "targetNumber": 5,
+        "options": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "hint": "Bé hãy nhìn hàng hoa hồng và đếm xem có bao nhiêu bông nhé!",
+        "explanation": "Bé hãy nhìn hàng hoa hồng và đếm xem có bao nhiêu bông nhé! Vì vậy, kết quả đúng là 5."
+      },
+      {
+        "id": "ts6",
+        "title": "Biểu đồ tranh: Các bạn thú cưng",
+        "question": "Quan sát biểu đồ tranh: Có bao nhiêu bạn thỏ con 🐰?",
+        "type": "picture_graph",
+        "graphData": [
+          {
+            "label": "Mèo con",
+            "icon": "🐱",
+            "count": 6
+          },
+          {
+            "label": "Cún con",
+            "icon": "🐶",
+            "count": 4
+          },
+          {
+            "label": "Thỏ con",
+            "icon": "🐰",
+            "count": 7
+          }
+        ],
+        "questionTarget": "Thỏ con",
+        "targetNumber": 7,
+        "options": [
+          4,
+          6,
+          7,
+          8
+        ],
+        "hint": "Bé hãy nhìn hàng thỏ con và đếm xem có bao nhiêu bạn thỏ nhé!",
+        "explanation": "Bé hãy nhìn hàng thỏ con và đếm xem có bao nhiêu bạn thỏ nhé! Vì vậy, kết quả đúng là 7."
+      },
+      {
+        "id": "ts7",
+        "title": "Đồng hồ chỉ 12 giờ trưa",
+        "question": "Kim ngắn chỉ số 12, kim dài cũng chỉ số 12. Hỏi đồng hồ chỉ mấy giờ?",
+        "hour": 12,
+        "options": [
+          "12 giờ đúng",
+          "1 giờ đúng",
+          "6 giờ đúng",
+          "11 giờ đúng"
+        ],
+        "correctAnswer": "12 giờ đúng",
+        "hint": "Cả hai kim cùng chập vào số 12 là đúng 12 giờ trưa bé nhé!",
+        "explanation": "Cả hai kim cùng chập vào số 12 là đúng 12 giờ trưa bé nhé! Vì vậy, kết quả đúng là 12 giờ đúng."
+      },
+      {
+        "id": "ts8",
+        "title": "Giờ tan học buổi chiều",
+        "question": "Buổi chiều bé tan trường về nhà lúc kim ngắn chỉ số 5, kim dài chỉ số 12. Đó là mấy giờ?",
+        "hour": 5,
+        "options": [
+          "5 giờ chiều",
+          "4 giờ chiều",
+          "6 giờ chiều",
+          "12 giờ"
+        ],
+        "correctAnswer": "5 giờ chiều",
+        "hint": "Kim ngắn chỉ số 5, tức là 5 giờ chiều (17:00).",
+        "explanation": "Kim ngắn chỉ số 5, tức là 5 giờ chiều (17:00). Vì vậy, kết quả đúng là 5 giờ chiều."
+      },
+      {
+        "id": "ts9",
+        "title": "Ngày trong tuần: Thứ Hai đến Thứ mấy?",
+        "question": "Hôm nay là Thứ Hai. Hỏi ngày mai là Thứ mấy?",
+        "options": [
+          "Thứ Ba",
+          "Thứ Tư",
+          "Chủ Nhật",
+          "Thứ Bảy"
+        ],
+        "correctAnswer": "Thứ Ba",
+        "hint": "Sau ngày Thứ Hai trong tuần là ngày Thứ Ba bé nhé!",
+        "explanation": "Sau ngày Thứ Hai trong tuần là ngày Thứ Ba bé nhé! Vì vậy, kết quả đúng là Thứ Ba."
+      },
+      {
+        "id": "ts10",
+        "title": "Hai ngày nghỉ cuối tuần",
+        "question": "Hai ngày nghỉ cuối tuần mà bé được nghỉ học là hai ngày nào?",
+        "options": [
+          "Thứ Bảy và Chủ Nhật",
+          "Thứ Hai và Thứ Ba",
+          "Thứ Năm và Thứ Sáu"
+        ],
+        "correctAnswer": "Thứ Bảy và Chủ Nhật",
+        "hint": "Cuối tuần là Thứ Bảy và Chủ Nhật, bé được đi chơi cùng gia đình!",
+        "explanation": "Cuối tuần là Thứ Bảy và Chủ Nhật, bé được đi chơi cùng gia đình! Vì vậy, kết quả đúng là Thứ Bảy và Chủ Nhật."
+      },
+      {
+        "id": "ts11",
+        "title": "Biểu đồ tranh: Đếm quả dưa hấu",
+        "question": "Quan sát biểu đồ tranh: Trong giỏ có bao nhiêu quả dưa hấu 🍉?",
+        "type": "picture_graph",
+        "graphData": [
+          {
+            "label": "Táo đỏ",
+            "icon": "🍎",
+            "count": 4
+          },
+          {
+            "label": "Cam vàng",
+            "icon": "🍊",
+            "count": 3
+          },
+          {
+            "label": "Dưa hấu",
+            "icon": "🍉",
+            "count": 2
+          }
+        ],
+        "questionTarget": "Dưa hấu",
+        "targetNumber": 2,
+        "options": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "hint": "Bé hãy nhìn vào hàng dưa hấu và đếm số miếng dưa hấu nhé!",
+        "explanation": "Bé hãy nhìn vào hàng dưa hấu và đếm số miếng dưa hấu nhé! Vì vậy, kết quả đúng là 2."
+      },
+      {
+        "id": "ts12",
+        "title": "Biểu đồ tranh: Phương tiện nhiều nhất",
+        "question": "Quan sát biểu đồ: Xe máy có 5 chiếc, Ô tô có 3 chiếc, Xe đạp có 2 chiếc. Loại xe nào có nhiều nhất?",
+        "options": [
+          "Xe máy 🛵",
+          "Ô tô 🚗",
+          "Xe đạp 🚲"
+        ],
+        "correctAnswer": "Xe máy 🛵",
+        "hint": "5 chiếc là số lượng lớn nhất trong 5, 3 và 2 chiếc xe!",
+        "explanation": "5 chiếc là số lượng lớn nhất trong 5, 3 và 2 chiếc xe! Vì vậy, kết quả đúng là Xe máy 🛵."
+      }
+    ],
+    "timoChallenges": [
+      {
+        "id": "tts1",
+        "title": "Timo: Bài toán ngày trong tuần",
+        "badge": "Timo 2025",
+        "question": "Biết rằng 4 ngày sau là thứ Tư, hỏi hôm nay là thứ mấy?",
+        "options": [
+          "Thứ Năm",
+          "Thứ Sáu",
+          "Thứ Bảy",
+          "Chủ Nhật"
+        ],
+        "correctIndex": 2,
+        "hint": "Từ thứ Tư, bé hãy lùi lại 4 ngày liên tiếp để tìm ngày hôm nay nhé!",
+        "explanation": "Lùi lại 4 ngày kể từ thứ Tư: Thứ Ba (1) -> Thứ Hai (2) -> Chủ Nhật (3) -> Thứ Bảy (4). Vậy hôm nay là Thứ Bảy!"
+      },
+      {
+        "id": "tts2",
+        "title": "Timo: Bài toán tuổi Emily và Alice",
+        "badge": "Timo 2025",
+        "question": "Năm nay Emily 9 tuổi. Alice lớn hơn Emily 5 tuổi. Hỏi Alice bao nhiêu tuổi?",
+        "options": [
+          "15 tuổi",
+          "4 tuổi",
+          "13 tuổi",
+          "14 tuổi"
+        ],
+        "correctIndex": 3,
+        "hint": "Alice lớn hơn Emily 5 tuổi: lấy tuổi Emily cộng thêm 5.",
+        "explanation": "Tuổi của Alice = 9 + 5 = 14 tuổi!"
+      },
+      {
+        "id": "tts3",
+        "title": "Timo: Quy luật Origami con vật",
+        "badge": "Timo 2025",
+        "question": "Dựa vào quy luật dưới đây, tìm hình tiếp theo:",
+        "image": "/timo/p4_img8_70.png",
+        "options": [
+          "Chim hạc giấy 🕊️",
+          "Chiếc thuyền giấy ⛵",
+          "Chú voi giấy 🐘",
+          "Chú ếch giấy 🐸"
+        ],
+        "correctIndex": 0,
+        "hint": "Quan sát dãy các hình gấp giấy: Mèo -> Hạc -> Thuyền -> Voi -> Ếch rồi lặp lại.",
+        "explanation": "Quy luật: Chuỗi 5 con vật gấp giấy lặp lại: (Mèo, Hạc, Thuyền, Voi, Ếch) -> (Mèo, Hạc, Thuyền, Voi, Ếch) -> Mèo -> Tiếp theo là Chim hạc giấy 🕊️!"
+      },
+      {
+        "id": "tts4",
+        "title": "Timo: Tìm hình còn thiếu trong bảng quy luật",
+        "badge": "Timo 2025",
+        "question": "Dựa vào quy luật dưới đây, tìm hình còn thiếu:",
+        "image": "/timo/p7_img2_89.jpeg",
+        "options": [
+          "Hình A",
+          "Hình B",
+          "Hình C",
+          "Hình D"
+        ],
+        "correctIndex": 1,
+        "hint": "Quan sát vị trí dưa hấu dồn xuống dưới và chùm nho xoay trong ô 2x2.",
+        "explanation": "Quy luật: Dưa hấu dồn xuống hàng dưới cùng, chùm nho xoay vị trí ô trống sang góc trên bên phải. Hình còn thiếu chính là Hình B!"
+      }
+    ]
+  }
 ];
 
-// Danh mục phần thưởng và huy hiệu cho bé
 export const BADGES_DATA = [
-  { id: 'first_star', name: 'Ngôi Sao Đầu Tiên', icon: '⭐', desc: 'Hoàn thành bài tập đầu tiên', requiredStars: 1 },
-  { id: 'counting_master', name: 'Vua Đếm Số', icon: '👑', desc: 'Chinh phục nông trại đếm số', requiredStars: 10 },
-  { id: 'math_wizard', name: 'Phù Thủy Cộng Trừ', icon: '🧙‍♂️', desc: 'Thành thạo phép cộng và trừ', requiredStars: 25 },
-  { id: 'croc_friend', name: 'Nhà Đo Lường', icon: '📏', desc: 'Sử dụng thước kẻ cm thành thạo', requiredStars: 40 },
-  { id: 'timo_explorer', name: 'Nhà Thám Hiểm Timo', icon: '🧭', desc: 'Vượt qua 5 thử thách Timo đan xen', requiredStars: 60 },
-  { id: 'timo_gold_champion', name: 'Huy Chương Vàng Timo', icon: '🥇', desc: 'Đạt điểm xuất sắc trong phòng luyện đề Timo', requiredStars: 100 },
+  {
+    "id": "first_star",
+    "name": "Ngôi Sao Đầu Tiên",
+    "icon": "⭐",
+    "desc": "Hoàn thành bài tập đầu tiên",
+    "requiredStars": 1
+  },
+  {
+    "id": "counting_master",
+    "name": "Vua Đếm Số",
+    "icon": "👑",
+    "desc": "Chinh phục nông trại đếm số",
+    "requiredStars": 10
+  },
+  {
+    "id": "math_wizard",
+    "name": "Phù Thủy Cộng Trừ",
+    "icon": "🧙‍♂️",
+    "desc": "Thành thạo phép cộng và trừ",
+    "requiredStars": 25
+  },
+  {
+    "id": "croc_friend",
+    "name": "Nhà Đo Lường",
+    "icon": "📏",
+    "desc": "Sử dụng thước kẻ cm thành thạo",
+    "requiredStars": 40
+  },
+  {
+    "id": "timo_explorer",
+    "name": "Nhà Thám Hiểm Timo",
+    "icon": "🧭",
+    "desc": "Vượt qua 5 thử thách Timo đan xen",
+    "requiredStars": 60
+  },
+  {
+    "id": "timo_gold_champion",
+    "name": "Huy Chương Vàng Timo",
+    "icon": "🥇",
+    "desc": "Đạt điểm xuất sắc trong phòng luyện đề Timo",
+    "requiredStars": 100
+  }
 ];
 
 export const CURRICULUM_GRADE_1 = CURRICULUM_ZONES;
-
