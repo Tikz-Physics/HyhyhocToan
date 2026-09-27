@@ -368,70 +368,73 @@ export default function AccountModal({
               </span>
             </div>
 
-            {/* Normal PIN Keypad Mode */}
+            {/* Normal PIN Keypad Mode: 1-col on portrait, 2-col on landscape/tablets */}
             {!showParentHelp ? (
-              <div className="flex flex-col items-center justify-center my-auto py-2">
-                <div className="w-16 h-16 rounded-3xl bg-amber-100 border-4 border-amber-300 shadow-md flex items-center justify-center text-4xl mb-2 flex-shrink-0 animate-bounce-slow">
-                  {pinTargetAccount.avatar || '🦁'}
+              <div className="flex flex-col landscape:flex-row items-center justify-around gap-2 landscape:gap-6 my-auto py-2">
+                {/* Left Column in Landscape: Avatar, Name, PIN slots, Status */}
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-14 h-14 landscape:w-12 landscape:h-12 rounded-2xl bg-amber-100 border-4 border-amber-300 shadow-md flex items-center justify-center text-3xl landscape:text-2xl mb-1 flex-shrink-0 animate-bounce-slow">
+                    {pinTargetAccount.avatar || '🦁'}
+                  </div>
+
+                  <h4 className="text-base font-black text-slate-800">
+                    Bé {pinTargetAccount.name}
+                  </h4>
+                  <p className="text-[11px] font-bold text-slate-500 mb-2 max-w-[200px]">
+                    Nhập mật mã 4 số để vào học
+                  </p>
+
+                  {/* 4 Bubble Indicator Slots */}
+                  <div className={`flex items-center gap-2.5 my-1 ${pinError ? 'animate-shake' : ''}`}>
+                    {[0, 1, 2, 3].map((slotIdx) => {
+                      const isFilled = slotIdx < enteredPin.length;
+                      return (
+                        <div
+                          key={slotIdx}
+                          className={`w-10 h-10 landscape:w-9 landscape:h-9 rounded-xl flex items-center justify-center text-xl font-black border-2 transition-all duration-150 ${
+                            pinError
+                              ? 'border-rose-500 bg-rose-50 text-rose-600 shadow-sm'
+                              : pinSuccess
+                              ? 'border-emerald-500 bg-emerald-100 text-emerald-700 scale-105 shadow-md'
+                              : isFilled
+                              ? 'border-amber-400 bg-amber-400 text-amber-950 shadow-md scale-105'
+                              : 'border-slate-300 bg-slate-50 text-slate-300'
+                          }`}
+                        >
+                          {isFilled ? '⭐' : '•'}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Status Message */}
+                  <div className="h-5 flex items-center justify-center my-0.5">
+                    {pinError && (
+                      <span className="text-[11px] font-black text-rose-600 animate-shake">
+                        ❌ Mật mã chưa đúng, thử lại nhé!
+                      </span>
+                    )}
+                    {pinSuccess && (
+                      <span className="text-[11px] font-black text-emerald-600 animate-pop">
+                        🎉 Đúng rồi! Đang mở...
+                      </span>
+                    )}
+                    {!pinError && !pinSuccess && (
+                      <span className="text-[10px] font-bold text-slate-400">
+                        Gợi ý: Mật mã mặc định khi tạo là <span className="font-extrabold text-amber-700">1234</span>
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <h4 className="text-base sm:text-lg font-black text-slate-800">
-                  Bé {pinTargetAccount.name}
-                </h4>
-                <p className="text-xs font-bold text-slate-500 mb-3">
-                  Nhập mật mã 4 số để vào góc học tập của bé
-                </p>
-
-                {/* 4 Bubble Indicator Slots */}
-                <div className={`flex items-center gap-3.5 my-1 ${pinError ? 'animate-shake' : ''}`}>
-                  {[0, 1, 2, 3].map((slotIdx) => {
-                    const isFilled = slotIdx < enteredPin.length;
-                    return (
-                      <div
-                        key={slotIdx}
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center text-2xl font-black border-2 transition-all duration-150 ${
-                          pinError
-                            ? 'border-rose-500 bg-rose-50 text-rose-600 shadow-sm'
-                            : pinSuccess
-                            ? 'border-emerald-500 bg-emerald-100 text-emerald-700 scale-105 shadow-md'
-                            : isFilled
-                            ? 'border-amber-400 bg-amber-400 text-amber-950 shadow-md scale-105'
-                            : 'border-slate-300 bg-slate-50 text-slate-300'
-                        }`}
-                      >
-                        {isFilled ? '⭐' : '•'}
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Status Message */}
-                <div className="h-6 flex items-center justify-center my-1">
-                  {pinError && (
-                    <span className="text-xs font-black text-rose-600 animate-shake">
-                      ❌ Mật mã chưa đúng, bé thử lại nhé!
-                    </span>
-                  )}
-                  {pinSuccess && (
-                    <span className="text-xs font-black text-emerald-600 animate-pop">
-                      🎉 Đúng rồi! Đang mở tài khoản của bé...
-                    </span>
-                  )}
-                  {!pinError && !pinSuccess && (
-                    <span className="text-[11px] font-bold text-slate-400">
-                      Gợi ý: Mật mã mặc định khi tạo là <span className="font-extrabold text-amber-700">1234</span>
-                    </span>
-                  )}
-                </div>
-
-                {/* Tactile 3x4 Numeric Keypad */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-2.5 w-full max-w-[280px] mt-2">
+                {/* Right Column in Landscape: Tactile 3x4 Numeric Keypad */}
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-[260px] landscape:max-w-[220px]">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                     <button
                       key={num}
                       type="button"
                       onClick={() => handlePinDigit(num)}
-                      className="h-12 sm:h-13 rounded-2xl bg-white hover:bg-amber-100 active:bg-amber-200 border-2 border-slate-200 hover:border-amber-400 text-slate-800 font-black text-xl shadow-xs transition-all flex items-center justify-center cursor-pointer btn-kid-3d"
+                      className="h-11 sm:h-12 landscape:h-10 rounded-2xl bg-white hover:bg-amber-100 active:bg-amber-200 border-2 border-slate-200 hover:border-amber-400 text-slate-800 font-black text-lg landscape:text-base shadow-xs transition-all flex items-center justify-center cursor-pointer btn-kid-3d"
                     >
                       {num}
                     </button>
@@ -440,17 +443,17 @@ export default function AccountModal({
                   <button
                     type="button"
                     onClick={startParentHelp}
-                    className="h-12 sm:h-13 rounded-2xl bg-indigo-50 hover:bg-indigo-100 active:bg-indigo-200 border-2 border-indigo-200 text-indigo-700 font-black text-[11px] leading-tight flex flex-col items-center justify-center cursor-pointer p-1"
+                    className="h-11 sm:h-12 landscape:h-10 rounded-2xl bg-indigo-50 hover:bg-indigo-100 active:bg-indigo-200 border-2 border-indigo-200 text-indigo-700 font-black text-[10px] leading-tight flex flex-col items-center justify-center cursor-pointer p-0.5"
                     title="Ba mẹ trợ giúp khi quên mật mã"
                   >
-                    <span className="text-sm">👨‍👩‍👧</span>
+                    <span className="text-xs">👨‍👩‍👧</span>
                     <span>Quên mã</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => handlePinDigit(0)}
-                    className="h-12 sm:h-13 rounded-2xl bg-white hover:bg-amber-100 active:bg-amber-200 border-2 border-slate-200 hover:border-amber-400 text-slate-800 font-black text-xl shadow-xs transition-all flex items-center justify-center cursor-pointer btn-kid-3d"
+                    className="h-11 sm:h-12 landscape:h-10 rounded-2xl bg-white hover:bg-amber-100 active:bg-amber-200 border-2 border-slate-200 hover:border-amber-400 text-slate-800 font-black text-lg landscape:text-base shadow-xs transition-all flex items-center justify-center cursor-pointer btn-kid-3d"
                   >
                     0
                   </button>
@@ -458,7 +461,7 @@ export default function AccountModal({
                   <button
                     type="button"
                     onClick={handlePinBackspace}
-                    className="h-12 sm:h-13 rounded-2xl bg-rose-50 hover:bg-rose-100 active:bg-rose-200 border-2 border-rose-200 text-rose-700 font-black text-base flex items-center justify-center cursor-pointer transition-all"
+                    className="h-11 sm:h-12 landscape:h-10 rounded-2xl bg-rose-50 hover:bg-rose-100 active:bg-rose-200 border-2 border-rose-200 text-rose-700 font-black text-base flex items-center justify-center cursor-pointer transition-all"
                     title="Xóa 1 số"
                   >
                     ⌫

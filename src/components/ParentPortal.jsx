@@ -41,7 +41,7 @@ export default function ParentPortal({
     .reduce((sum, r) => sum + r.minutes, 0);
 
   return (
-    <div className="max-w-4xl mx-auto p-3 sm:p-6 pb-28 sm:pb-24 space-y-6">
+    <div className="max-w-4xl mx-auto p-3 sm:p-6 pb-28 sm:pb-24 landscape:pb-12 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] space-y-6">
       {/* Banner */}
       <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 rounded-3xl p-6 text-white shadow-xl flex items-center justify-between gap-4">
         <div>

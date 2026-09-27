@@ -1088,7 +1088,7 @@ export default function InteractiveCanvas({
           <img
             src={getAssetUrl(level.image)}
             alt="Hình bài tập"
-            className="max-h-32 sm:max-h-40 object-contain rounded-lg"
+            className="max-h-32 sm:max-h-40 landscape:max-h-24 object-contain rounded-lg"
           />
         </div>
       )}
@@ -1120,17 +1120,17 @@ export default function InteractiveCanvas({
         let gridCols = 'grid-cols-2 max-w-sm';
         if (isNumeric) {
           if (count === 3) gridCols = 'grid-cols-3 max-w-sm';
-          else if (count === 4) gridCols = 'grid-cols-2 sm:grid-cols-4 max-w-md';
+          else if (count === 4) gridCols = 'grid-cols-2 sm:grid-cols-4 landscape:grid-cols-4 max-w-md landscape:max-w-xl';
           else if (count === 2) gridCols = 'grid-cols-2 max-w-xs';
         } else if (hasLongText) {
-          // Phương án có chữ dài: 1 cột trên mobile cho thoáng chữ, 3 cột trên tablet/desktop
-          if (count === 3) gridCols = 'grid-cols-1 sm:grid-cols-3 max-w-2xl';
-          else if (count === 4) gridCols = 'grid-cols-1 sm:grid-cols-2 max-w-xl';
-          else if (count === 2) gridCols = 'grid-cols-1 sm:grid-cols-2 max-w-md';
+          // Phương án có chữ dài: 1 cột trên mobile cho thoáng chữ, 3 cột trên tablet/desktop/landscape
+          if (count === 3) gridCols = 'grid-cols-1 sm:grid-cols-3 landscape:grid-cols-3 max-w-2xl';
+          else if (count === 4) gridCols = 'grid-cols-1 sm:grid-cols-2 landscape:grid-cols-2 max-w-xl';
+          else if (count === 2) gridCols = 'grid-cols-1 sm:grid-cols-2 landscape:grid-cols-2 max-w-md';
         } else {
           // Chữ ngắn (5-8 ký tự)
-          if (count === 3) gridCols = 'grid-cols-3 max-w-md';
-          else if (count === 4) gridCols = 'grid-cols-2 max-w-md';
+          if (count === 3) gridCols = 'grid-cols-3 landscape:grid-cols-3 max-w-md';
+          else if (count === 4) gridCols = 'grid-cols-2 sm:grid-cols-4 landscape:grid-cols-4 max-w-md landscape:max-w-xl';
           else if (count === 2) gridCols = 'grid-cols-2 max-w-xs';
         }
 
@@ -1138,18 +1138,18 @@ export default function InteractiveCanvas({
         const correctOpt = getCorrectOption();
 
         return (
-          <div className="mt-3 pt-2.5 border-t-2 border-dashed border-amber-200/90">
+          <div className="mt-2.5 landscape:mt-1.5 pt-2 border-t-2 border-dashed border-amber-200/90">
             {/* Chỉ dẫn rõ ràng vị trí bé bấm chọn đáp án */}
-            <div className="flex items-center justify-center gap-1.5 mb-2.5">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-amber-100/95 border border-amber-300 rounded-full shadow-2xs">
-                <span className="text-sm animate-bounce">👇</span>
-                <span className="text-xs sm:text-sm font-black text-amber-950 uppercase tracking-wide">
+            <div className="flex items-center justify-center gap-1.5 mb-2 landscape:mb-1">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 sm:px-3.5 sm:py-1 bg-amber-100/95 border border-amber-300 rounded-full shadow-2xs">
+                <span className="text-xs sm:text-sm animate-bounce">👇</span>
+                <span className="text-[11px] sm:text-sm font-black text-amber-950 uppercase tracking-wide">
                   {hasAnswered ? 'Kết quả lựa chọn của bé:' : 'Bé bấm chọn 1 đáp án đúng:'}
                 </span>
               </div>
             </div>
 
-            <div className={`grid ${gridCols} gap-2 sm:gap-2.5 mx-auto`}>
+            <div className={`grid ${gridCols} gap-1.5 sm:gap-2.5 mx-auto`}>
               {level.options.map((opt, i) => {
                 const isChosen = selectedOption === opt;
                 const isThisWrong = (isWrong && isChosen) || wrongOption === opt;
@@ -1173,9 +1173,9 @@ export default function InteractiveCanvas({
                     type="button"
                     disabled={hasAnswered}
                     onClick={() => handleOptionCardTouch(opt, i)}
-                    className={`rounded-2xl font-black transition-all flex items-center justify-between gap-2 p-2.5 sm:p-3 min-h-[54px] sm:min-h-[60px] h-auto btn-kid-3d ${
+                    className={`rounded-2xl font-black transition-all flex items-center justify-between gap-1.5 sm:gap-2 p-2 sm:p-3 landscape:p-1.5 min-h-[46px] sm:min-h-[58px] landscape:min-h-[44px] h-auto btn-kid-3d ${
                       hasAnswered ? '' : 'cursor-pointer'
-                    } ${isNumeric ? 'text-lg sm:text-2xl' : 'text-xs sm:text-sm'} ${style}`}
+                    } ${isNumeric ? 'text-base sm:text-2xl landscape:text-lg' : 'text-xs sm:text-sm'} ${style}`}
                   >
                     {/* Nhãn chữ cái phương án A, B, C, D */}
                     <span

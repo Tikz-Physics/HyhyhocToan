@@ -94,7 +94,7 @@ export default function ZoneView({
       className={
         isFocusMode
           ? 'fixed inset-0 z-50 bg-gradient-to-b from-amber-50 via-orange-50/60 to-yellow-50 overflow-y-auto p-2 sm:p-4 landscape:p-2 flex flex-col justify-start'
-          : 'max-w-xl landscape:max-w-3xl mx-auto p-1.5 sm:p-3 pb-8 flex flex-col justify-start'
+          : 'max-w-xl landscape:max-w-4xl mx-auto p-1.5 sm:p-3 pb-8 landscape:pb-4 pl-[max(0.5rem,env(safe-area-inset-left))] pr-[max(0.5rem,env(safe-area-inset-right))] flex flex-col justify-start'
       }
     >
       {/* 1-Line Top Navigation: Back + Tabs + Progress Dots + Read Button + Focus Mode Button */}
@@ -228,15 +228,17 @@ export default function ZoneView({
 
       {/* Question Box: Short, Clear, Minimalist */}
       <div
-        className={`border-2 border-amber-300 rounded-2xl p-2.5 mb-1.5 text-center shadow-xs transition-all ${
+        className={`border-2 border-amber-300 rounded-2xl p-2 sm:p-2.5 landscape:py-1.5 mb-1.5 text-center shadow-xs transition-all ${
           isFocusMode
-            ? 'bg-white focus-glow ring-2 ring-amber-400 py-3 sm:py-4 max-w-2xl mx-auto w-full'
+            ? 'bg-white focus-glow ring-2 ring-amber-400 py-2 sm:py-3 max-w-2xl mx-auto w-full'
             : 'bg-gradient-to-r from-amber-50 to-orange-50'
         }`}
       >
         <p
           className={`font-black leading-snug ${
-            isFocusMode ? 'text-lg sm:text-2xl text-amber-950' : 'text-base sm:text-xl text-slate-800'
+            isFocusMode
+              ? 'text-base sm:text-2xl text-amber-950'
+              : 'text-sm sm:text-xl landscape:text-base text-slate-800'
           }`}
         >
           {currentLevel.question}
@@ -282,7 +284,7 @@ export default function ZoneView({
       )}
 
       {/* Main Question Navigation Bar (Luôn hiển thị: Câu trước, Vị trí câu, Câu tiếp theo) */}
-      <div className="mt-3.5 pt-2.5 border-t border-amber-200/80 flex items-center justify-between gap-2 w-full max-w-md mx-auto">
+      <div className="mt-3 landscape:mt-1.5 pt-2 border-t border-amber-200/80 flex items-center justify-between gap-2 w-full max-w-md mx-auto">
         <button
           type="button"
           onClick={handlePrev}

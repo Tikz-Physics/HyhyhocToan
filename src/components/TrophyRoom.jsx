@@ -66,7 +66,7 @@ export default function TrophyRoom({
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-3 sm:p-6 pb-28 sm:pb-24">
+    <div className="max-w-4xl mx-auto p-3 sm:p-6 pb-28 sm:pb-24 landscape:pb-12 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))]">
       {/* Friendly Notice Toast */}
       {notice && (
         <div className="mb-4 p-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-center rounded-2xl shadow-lg animate-pop">
@@ -249,7 +249,7 @@ export default function TrophyRoom({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 landscape:grid-cols-3 gap-3.5">
               {DEFAULT_REAL_REWARDS.map((reward) => {
                 const canAfford = stars >= reward.cost;
                 return (
@@ -414,7 +414,7 @@ export default function TrophyRoom({
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 landscape:grid-cols-3 gap-4">
             {COMPANIONS.map((pet) => {
               const isUnlocked = unlockedPets.includes(pet.id);
               const isActive = activePet === pet.id;

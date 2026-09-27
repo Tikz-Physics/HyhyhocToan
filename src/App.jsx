@@ -365,7 +365,7 @@ export default function App() {
       <main className="flex-1">
         {/* VIEW 1: MAP / DASHBOARD (SIÊU TINH GỌN - VỪA KHÍT MÀN HÌNH ĐIỆN THOẠI) */}
         {currentView === 'map' && (
-          <div className="max-w-4xl mx-auto p-2 sm:p-4 pb-20 sm:pb-8 flex flex-col gap-2.5">
+          <div className="max-w-4xl mx-auto p-2 sm:p-4 pb-20 sm:pb-8 landscape:pb-8 pl-[max(0.5rem,env(safe-area-inset-left))] pr-[max(0.5rem,env(safe-area-inset-right))] flex flex-col gap-2.5">
             {/* Compact Top Bar: Pet Status + Semester Tabs + Luyện Đề Button */}
             <div className="bg-gradient-to-r from-amber-200 via-orange-200 to-yellow-200 rounded-2xl p-2 sm:p-3 border-2 border-amber-300 shadow-xs flex items-center justify-between gap-2">
               {/* Pet Info */}
@@ -481,8 +481,8 @@ export default function App() {
               </div>
             </div>
 
-            {/* Learning Zones for Selected Grade - 2 columns on mobile, 4 columns on tablet/desktop */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+            {/* Learning Zones for Selected Grade - 2 columns on mobile portrait, 4 columns on landscape & tablet/desktop */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 landscape:grid-cols-4 gap-2 sm:gap-2.5">
               {activeCurriculumZones.filter(
                 (zone) => selectedSemester === 'all' || zone.semester === selectedSemester
               ).map((zone) => {

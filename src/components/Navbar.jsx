@@ -59,7 +59,7 @@ export default function Navbar({
   return (
     <>
       {/* Top Header for all devices */}
-      <header className="sticky top-0 z-50 bg-gradient-to-r from-amber-300 via-orange-300 to-yellow-300 border-b-4 border-amber-400 shadow-lg px-3 py-2 sm:px-6">
+      <header className="sticky top-0 z-50 bg-gradient-to-r from-amber-300 via-orange-300 to-yellow-300 border-b-4 border-amber-400 shadow-lg px-2.5 sm:px-6 py-1.5 landscape:py-1 sm:py-2 pl-[max(0.6rem,env(safe-area-inset-left))] pr-[max(0.6rem,env(safe-area-inset-right))]">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-2">
           {/* Logo & Brand & Grade Switcher */}
           <div className="flex items-center gap-2 select-none">
@@ -132,8 +132,8 @@ export default function Navbar({
             </div>
           </div>
 
-          {/* Desktop & Tablet Navigation Tabs (Hidden on small mobile, visible on sm and up) */}
-          <nav className="hidden sm:flex items-center gap-1.5 md:gap-2">
+          {/* Desktop, Tablet & Landscape Navigation Tabs */}
+          <nav className="hidden sm:flex landscape:flex items-center gap-1 sm:gap-1.5 md:gap-2">
             <button
               onClick={() => {
                 soundManager.playClick();
@@ -296,8 +296,8 @@ export default function Navbar({
         </div>
       </header>
 
-      {/* Mobile Bottom Navigation Bar (Visible only on mobile screens < 640px) */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t-2 border-amber-300 shadow-2xl px-2 py-1 flex items-center justify-around">
+      {/* Mobile Bottom Navigation Bar (Visible only on mobile portrait screens) */}
+      <div className="sm:hidden landscape:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t-2 border-amber-300 shadow-2xl px-2 pt-1 pb-[max(0.35rem,env(safe-area-inset-bottom))] flex items-center justify-around">
         <button
           onClick={() => {
             soundManager.playClick();
