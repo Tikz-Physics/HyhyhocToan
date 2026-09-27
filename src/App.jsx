@@ -20,6 +20,7 @@ import {
 import UpdateModal from './components/UpdateModal';
 import UpdateFloatingBanner from './components/UpdateFloatingBanner';
 import { onUpdateAvailable, checkForAppUpdate } from './utils/updateManager';
+import { syncAccountToCloud, onCloudSyncEvent } from './utils/cloudSync';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('map'); // 'map', 'zone', 'timo_arena', 'trophies', 'parents'
@@ -99,6 +100,30 @@ export default function App() {
   useEffect(() => {
     saveActiveAccountId(currentAccountId);
   }, [currentAccountId]);
+
+  // Tự động đẩy tiến trình tài khoản hiện tại lên Đám Mây để thi đua giữa các máy
+  useEffect(() => {
+    if (currentAccount && currentAccount.id) {
+      syncAccountToCloud(currentAccount);
+    }
+  }, [
+    currentAccount.stars,
+    currentAccount.completedTasks?.length,
+    currentAccount.userMedals?.length,
+    currentAccount.grade,
+    currentAccount.name,
+    currentAccount.avatar,
+  ]);
+
+  // Lắng nghe sự kiện đồng bộ từ các cửa sổ / tab khác
+  useEffect(() => {
+    const unsub = onCloudSyncEvent((data) => {
+      if (data?.type === 'ACCOUNT_UPDATED') {
+        // Đồng bộ dữ liệu
+      }
+    });
+    return unsub;
+  }, []);
 
   const updateCurrentAccount = (updater) => {
     setAccounts((prevAccounts) => {
@@ -211,25 +236,48 @@ export default function App() {
     }));
   };
 
-  const handleCreateAccount = ({ name, avatar }) => {
-    const newId = `acc_${Date.now()}`;
+  const handleCreateAccount = (accData) => {
+    const newId = accData.id || `acc_${Date.now()}`;
     const newAcc = {
       id: newId,
-      name,
-      avatar,
-      stars: 10,
-      completedTasks: [],
-      userMedals: [],
-      unlockedPets: ['dino'],
-      activePet: 'dino',
-      createdAt: Date.now(),
+      name: accData.name,
+      avatar: accData.avatar || '🦁',
+      grade: accData.grade || selectedGrade || 1,
+      stars: accData.stars ?? 10,
+      completedTasks: accData.completedTasks || [],
+      userMedals: accData.userMedals || [],
+      unlockedPets: accData.unlockedPets || ['dino'],
+      activePet: accData.activePet || 'dino',
+      redeemedRewards: accData.redeemedRewards || [],
+      usedRewardHistory: accData.usedRewardHistory || [],
+      createdAt: accData.createdAt || Date.now(),
     };
-    const nextAccounts = [...accounts, newAcc];
+    const nextAccounts = [...accounts.filter((a) => a.id !== newId), newAcc];
     setAccounts(nextAccounts);
     setCurrentAccountId(newId);
     saveAccounts(nextAccounts);
     saveActiveAccountId(newId);
     setIsAccountModalOpen(false);
+  };
+
+  const handleBulkImportAccounts = (importedList) => {
+    if (!Array.isArray(importedList) || importedList.length === 0) return;
+    setAccounts((prev) => {
+      const mergedMap = new Map();
+      prev.forEach((a) => mergedMap.set(a.id, a));
+      importedList.forEach((a) => {
+        if (a && a.id) {
+          mergedMap.set(a.id, { ...mergedMap.get(a.id), ...a });
+        }
+      });
+      const next = Array.from(mergedMap.values());
+      saveAccounts(next);
+      return next;
+    });
+    if (importedList[0]?.id) {
+      setCurrentAccountId(importedList[0].id);
+      saveActiveAccountId(importedList[0].id);
+    }
   };
 
   const handleSwitchAccount = (id) => {
@@ -441,6 +489,8 @@ export default function App() {
         {/* VIEW 3: TIMO ARENA */}
         {currentView === 'timo_arena' && (
           <TimoArena
+            selectedGrade={selectedGrade}
+            onSelectGrade={handleSelectGrade}
             onAddStars={handleAddStars}
             onAwardMedal={handleAwardMedal}
             userMedals={userMedals}
@@ -491,6 +541,7 @@ export default function App() {
         onSwitchAccount={handleSwitchAccount}
         onCreateAccount={handleCreateAccount}
         onDeleteAccount={handleDeleteAccount}
+        onBulkImportAccounts={handleBulkImportAccounts}
       />
 
       {/* App Update & Install Modal */}

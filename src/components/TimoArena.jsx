@@ -18,18 +18,26 @@ import {
 } from 'lucide-react';
 import {
   TIMO_SECTIONS,
-  TIMO_EXAMS,
-  TIMO_EXAM_SET_1,
-  generateRandomTimoExam,
-} from '../data/timoQuestions';
+  getTimoExamsByGrade,
+  generateRandomTimoExamByGrade,
+} from '../data/timoExamsByGrade';
+import { GRADE_CONFIGS } from '../data/curriculumData';
 import { soundManager } from '../utils/soundManager';
 import { getAssetUrl } from '../utils/assetHelper';
 import FloatingPetCompanion from './FloatingPetCompanion';
 import { getPetStage } from '../data/petData';
 
-export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [] }) {
-  const [selectedExamId, setSelectedExamId] = useState('exam_1');
-  const [activeExamQuestions, setActiveExamQuestions] = useState(TIMO_EXAM_SET_1);
+export default function TimoArena({
+  selectedGrade = 1,
+  onSelectGrade,
+  onAddStars,
+  onAwardMedal,
+  completedTasks = [],
+}) {
+  const [currentGrade, setCurrentGrade] = useState(() => Number(selectedGrade) || 1);
+  const gradeExams = getTimoExamsByGrade(currentGrade);
+  const [selectedExamId, setSelectedExamId] = useState(() => gradeExams[0]?.id || 'exam_1');
+  const [activeExamQuestions, setActiveExamQuestions] = useState(() => gradeExams[0]?.questions || []);
   const [selectedSection, setSelectedSection] = useState('all');
   const [examMode, setExamMode] = useState('practice'); // 'practice' (luyện tập tự do) or 'timed' (thi thử bấm giờ)
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,6 +51,32 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
   const timerRef = useRef(null);
 
   const currentPet = getPetStage(completedTasks.length);
+
+  // Sync external selectedGrade prop
+  useEffect(() => {
+    if (selectedGrade && Number(selectedGrade) !== currentGrade) {
+      handleChangeGrade(Number(selectedGrade));
+    }
+  }, [selectedGrade]);
+
+  const handleChangeGrade = (newGrade) => {
+    soundManager.playPop();
+    const g = Number(newGrade) || 1;
+    setCurrentGrade(g);
+    const newExams = getTimoExamsByGrade(g);
+    setSelectedExamId(newExams[0]?.id || 'exam_1');
+    setActiveExamQuestions(newExams[0]?.questions || []);
+    setSelectedSection('all');
+    setCurrentIndex(0);
+    setUserAnswers({});
+    setShowExplanation({});
+    setIsSubmitted(false);
+    setLastAnswerStatus('idle');
+    setTimeLeft(40 * 60);
+    setTimerActive(false);
+    if (timerRef.current) clearInterval(timerRef.current);
+    if (onSelectGrade) onSelectGrade(g);
+  };
 
   // Switch exam set
   const handleSelectExam = (examId) => {
@@ -58,10 +92,10 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
     setTimerActive(false);
     if (timerRef.current) clearInterval(timerRef.current);
 
-    if (examId === 'exam_random') {
-      setActiveExamQuestions(generateRandomTimoExam());
+    if (examId.includes('random')) {
+      setActiveExamQuestions(generateRandomTimoExamByGrade(currentGrade));
     } else {
-      const found = TIMO_EXAMS.find((e) => e.id === examId);
+      const found = gradeExams.find((e) => e.id === examId);
       if (found && found.questions) {
         setActiveExamQuestions(found.questions);
       }
@@ -81,7 +115,7 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
     setTimeLeft(40 * 60);
     setTimerActive(false);
     if (timerRef.current) clearInterval(timerRef.current);
-    setActiveExamQuestions(generateRandomTimoExam());
+    setActiveExamQuestions(generateRandomTimoExamByGrade(currentGrade));
   };
 
   // Filter questions based on selected section
@@ -91,7 +125,7 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
   });
 
   const currentQ = filteredQuestions[currentIndex] || filteredQuestions[0];
-  const currentExamInfo = TIMO_EXAMS.find((e) => e.id === selectedExamId) || TIMO_EXAMS[0];
+  const currentExamInfo = gradeExams.find((e) => e.id === selectedExamId) || gradeExams[0] || {};
 
   const handleSubmitExam = useCallback(() => {
     clearInterval(timerRef.current);
@@ -206,17 +240,17 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
   const answeredCount = Object.keys(userAnswers).length;
 
   return (
-    <div className="max-w-2xl mx-auto p-1.5 sm:p-3 pb-20">
+    <div className="max-w-5xl xl:max-w-6xl mx-auto p-2 sm:p-4 pb-20">
       {/* Title & Mode Switch - Compact Bar */}
       <div className="bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 rounded-2xl p-2.5 sm:p-3 text-white shadow-sm mb-3 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="text-2xl">🏆</span>
           <div>
             <h1 className="text-sm sm:text-lg font-black tracking-tight leading-none">
-              Đấu Trường TIMO Toán Tư Duy
+              Đấu Trường TIMO Toán Tư Duy (Lớp {currentGrade})
             </h1>
             <p className="text-[10px] text-amber-100 font-bold mt-0.5">
-              100+ câu hỏi chuẩn quốc tế 5 chuyên đề
+              5 bộ đề chuẩn quốc tế • Đầy đủ 5 chuyên đề
             </p>
           </div>
         </div>
@@ -255,14 +289,42 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
         </div>
       </div>
 
+      {/* Grade Selector Bar inside Timo Arena */}
+      <div className="bg-white/95 rounded-2xl border-2 border-amber-300 p-2 sm:p-2.5 mb-3 shadow-xs flex items-center justify-between gap-1 overflow-x-auto">
+        <div className="text-[11px] sm:text-xs font-black text-amber-950 uppercase px-1.5 flex items-center gap-1 flex-shrink-0">
+          <Award className="w-3.5 h-3.5 text-rose-500 animate-bounce" />
+          <span>Khối Lớp:</span>
+        </div>
+        <div className="flex items-center gap-1 sm:gap-1.5 flex-1 justify-around">
+          {GRADE_CONFIGS.map((g) => {
+            const isActive = currentGrade === g.grade;
+            return (
+              <button
+                key={g.grade}
+                type="button"
+                onClick={() => handleChangeGrade(g.grade)}
+                className={`flex-1 py-1 px-1 sm:px-2.5 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-1 btn-kid-3d cursor-pointer ${
+                  isActive
+                    ? 'bg-gradient-to-r from-rose-500 to-amber-500 text-white shadow-md ring-2 ring-rose-300 scale-102'
+                    : 'bg-amber-50/70 hover:bg-amber-100 text-slate-700 border border-amber-200'
+                }`}
+              >
+                <span className="text-xs sm:text-sm">{g.icon}</span>
+                <span className="whitespace-nowrap">{g.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Exam Selector Bar */}
       <div className="bg-white rounded-2xl border-2 border-amber-300 p-2.5 sm:p-3 mb-3 shadow-xs">
         <div className="flex items-center justify-between gap-1 mb-2 px-0.5">
           <div className="flex items-center gap-1.5 text-xs font-black text-slate-800">
             <Layers className="w-4 h-4 text-amber-500" />
-            <span>CHỌN BỘ ĐỀ THI:</span>
+            <span>CHỌN BỘ ĐỀ THI LỚP {currentGrade}:</span>
           </div>
-          {selectedExamId === 'exam_random' && (
+          {selectedExamId.includes('random') && (
             <button
               onClick={handleRegenerateRandomExam}
               className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-rose-500 to-amber-500 text-white text-[11px] font-black shadow-xs hover:scale-105 transition-all btn-kid-3d"
@@ -276,7 +338,7 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
 
         {/* 5 Exam Buttons */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
-          {TIMO_EXAMS.map((exam) => {
+          {gradeExams.map((exam) => {
             const isSelected = selectedExamId === exam.id;
             return (
               <button
@@ -299,7 +361,7 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
                   </span>
                 </div>
                 <span className="text-[10px] font-bold opacity-85 truncate max-w-full">
-                  {exam.id === 'exam_random' ? 'Vô hạn 25 câu' : '25 câu chuẩn'}
+                  {exam.id.includes('random') ? 'Vô hạn 25 câu' : '25 câu chuẩn'}
                 </span>
               </button>
             );
@@ -458,13 +520,13 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
       )}
 
       {/* Main Question Interface */}
-      <div className={isFocusMode ? '' : 'grid grid-cols-1 lg:grid-cols-4 gap-6'}>
-        {/* Left 3 cols (or Fullscreen when in Focus Mode): Current Question */}
+      <div className={isFocusMode ? '' : 'grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6'}>
+        {/* Left 8 cols on lg / 9 cols on xl (or Fullscreen when in Focus Mode): Current Question */}
         <div
           className={
             isFocusMode
               ? 'fixed inset-0 z-50 bg-gradient-to-b from-amber-50 via-orange-50/70 to-yellow-50 overflow-y-auto p-3 sm:p-6 landscape:p-2.5 flex flex-col justify-start'
-              : 'lg:col-span-3 bg-white rounded-3xl border-4 border-slate-200 shadow-xl p-4 sm:p-7 relative'
+              : 'lg:col-span-8 xl:col-span-9 bg-white rounded-3xl border-4 border-slate-200 shadow-xl p-4 sm:p-7 relative'
           }
         >
           {/* Header */}
@@ -677,16 +739,16 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
           </div>
         </div>
 
-        {/* Right 1 col: Question Map / Palette */}
-        <div className="bg-white rounded-3xl border-4 border-slate-200 shadow-md p-5 h-fit">
+        {/* Right 4 cols on lg / 3 cols on xl: Question Map / Palette */}
+        <div className="lg:col-span-4 xl:col-span-3 bg-white rounded-3xl border-4 border-slate-200 shadow-md p-3 sm:p-4 md:p-5 h-fit min-w-[210px]">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-extrabold text-slate-800 text-sm">Bảng câu hỏi</h3>
-            <span className="text-xs font-bold text-slate-500">
+            <h3 className="font-extrabold text-slate-800 text-sm whitespace-nowrap">Bảng câu hỏi</h3>
+            <span className="text-xs font-bold text-slate-500 whitespace-nowrap">
               {answeredCount}/{filteredQuestions.length} câu
             </span>
           </div>
 
-          <div className="grid grid-cols-5 gap-2">
+          <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
             {filteredQuestions.map((q, idx) => {
               const isAnswered = Boolean(userAnswers[q.id]);
               const isCurrent = idx === currentIndex;
@@ -711,7 +773,7 @@ export default function TimoArena({ onAddStars, onAwardMedal, completedTasks = [
                     setLastAnswerStatus('idle');
                     setCurrentIndex(idx);
                   }}
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black transition-all btn-kid-3d ${bg}`}
+                  className={`w-full aspect-square min-w-0 max-w-[44px] mx-auto rounded-xl flex items-center justify-center text-xs sm:text-sm font-black transition-all btn-kid-3d p-0 leading-none ${bg}`}
                 >
                   {idx + 1}
                 </button>

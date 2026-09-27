@@ -50,7 +50,7 @@ export default function Navbar({
   };
 
   const navBtnClass = (viewName) => `
-    flex items-center gap-1.5 px-3.5 py-2 rounded-2xl font-bold text-sm md:text-base transition-all duration-150 btn-kid-3d
+    flex items-center gap-1.5 px-2.5 lg:px-3.5 py-1.5 lg:py-2 rounded-2xl font-bold text-xs sm:text-sm md:text-base transition-all duration-150 btn-kid-3d whitespace-nowrap shrink-0
     ${currentView === viewName
       ? 'bg-amber-400 text-amber-950 shadow-md ring-2 ring-amber-500 scale-105'
       : 'bg-white/80 hover:bg-white text-slate-700 shadow-sm border border-amber-200'}
@@ -142,7 +142,7 @@ export default function Navbar({
               className={navBtnClass('map')}
             >
               <Home className="w-4 h-4 text-orange-600" />
-              <span>Khu Vườn</span>
+              <span className="whitespace-nowrap">Khu Vườn</span>
             </button>
 
             <button
@@ -150,14 +150,14 @@ export default function Navbar({
                 soundManager.playFanfare();
                 setCurrentView('timo_arena');
               }}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-2xl font-bold text-sm md:text-base transition-all duration-150 btn-kid-3d ${
+              className={`flex items-center gap-1.5 px-2.5 lg:px-3.5 py-1.5 lg:py-2 rounded-2xl font-bold text-xs sm:text-sm md:text-base transition-all duration-150 btn-kid-3d whitespace-nowrap shrink-0 ${
                 currentView === 'timo_arena'
                   ? 'bg-gradient-to-r from-rose-500 to-amber-500 text-white shadow-md ring-2 ring-rose-300 scale-105'
                   : 'bg-white text-rose-700 hover:bg-rose-50 border-2 border-rose-300 shadow-sm'
               }`}
             >
               <Award className="w-4 h-4 text-amber-400 animate-bounce-slow" />
-              <span>Luyện Đề</span>
+              <span className="whitespace-nowrap">Luyện Đề</span>
             </button>
 
             <button
@@ -168,7 +168,7 @@ export default function Navbar({
               className={navBtnClass('trophies')}
             >
               <Trophy className="w-4 h-4 text-yellow-600" />
-              <span>Đổi Thưởng</span>
+              <span className="whitespace-nowrap">Đổi Thưởng</span>
             </button>
 
             <button
@@ -179,7 +179,7 @@ export default function Navbar({
               className={navBtnClass('parents')}
             >
               <Users className="w-4 h-4 text-blue-600" />
-              <span>Phụ Huynh</span>
+              <span className="whitespace-nowrap">Phụ Huynh</span>
             </button>
           </nav>
 
@@ -274,7 +274,7 @@ export default function Navbar({
                 if (onOpenUpdateModal) onOpenUpdateModal();
               }}
               title="Cập nhật ứng dụng & Tải về máy"
-              className={`relative flex items-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs ${
+              className={`relative flex items-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs whitespace-nowrap shrink-0 ${
                 updateInfo?.hasUpdate
                   ? 'bg-rose-500 hover:bg-rose-600 text-white border-rose-600 animate-bounce'
                   : 'bg-white hover:bg-amber-100/80 border-amber-400 text-amber-950'
@@ -285,7 +285,7 @@ export default function Navbar({
                   updateInfo?.hasUpdate ? 'text-white animate-spin' : ''
                 }`}
               />
-              <span className="hidden md:inline">
+              <span className="hidden md:inline whitespace-nowrap">
                 {updateInfo?.hasUpdate ? 'Có bản mới!' : 'Cập nhật'}
               </span>
               {updateInfo?.hasUpdate && (

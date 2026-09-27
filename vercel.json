@@ -2,6 +2,7 @@
   "version": 2,
   "rewrites": [
     { "source": "/api/tts", "destination": "/api/tts" },
+    { "source": "/api/sync", "destination": "/api/sync" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
