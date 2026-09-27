@@ -168,12 +168,20 @@ export default function App() {
   };
 
   const handleUseRewardVoucher = (voucherId) => {
-    updateCurrentAccount((prev) => ({
-      ...prev,
-      redeemedRewards: (prev.redeemedRewards || []).map((v) =>
-        v.id === voucherId ? { ...v, status: 'used', usedAt: Date.now() } : v
-      ),
-    }));
+    updateCurrentAccount((prev) => {
+      const allRedeemed = prev.redeemedRewards || [];
+      const targetVoucher = allRedeemed.find((v) => v.id === voucherId);
+      const remainingVouchers = allRedeemed.filter((v) => v.id !== voucherId);
+      const updatedHistory = targetVoucher
+        ? [{ ...targetVoucher, status: 'used', usedAt: Date.now() }, ...(prev.usedRewardHistory || [])]
+        : (prev.usedRewardHistory || []);
+
+      return {
+        ...prev,
+        redeemedRewards: remainingVouchers,
+        usedRewardHistory: updatedHistory,
+      };
+    });
   };
 
   const handleTaskCompleted = (taskId) => {
@@ -462,6 +470,7 @@ export default function App() {
             completedTasks={completedTasks}
             userMedals={userMedals}
             redeemedRewards={redeemedRewards}
+            usedRewardHistory={currentAccount.usedRewardHistory || []}
             onResetProgress={handleResetProgress}
             currentAccount={currentAccount}
             onOpenAccountModal={() => setIsAccountModalOpen(true)}

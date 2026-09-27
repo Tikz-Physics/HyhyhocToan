@@ -8,6 +8,7 @@ export default function ParentPortal({
   completedTasks = [],
   userMedals = [],
   redeemedRewards = [],
+  usedRewardHistory = [],
   onResetProgress,
   currentAccount,
   onOpenAccountModal,
@@ -24,8 +25,12 @@ export default function ParentPortal({
   );
 
   const availableVouchers = redeemedRewards.filter((r) => r.status === 'available');
-  const usedVouchers = redeemedRewards.filter((r) => r.status === 'used');
-  const totalScreenMinutes = redeemedRewards
+  const usedVouchers = [
+    ...usedRewardHistory,
+    ...redeemedRewards.filter((r) => r.status === 'used'),
+  ];
+  const allVouchers = [...availableVouchers, ...usedVouchers];
+  const totalScreenMinutes = allVouchers
     .filter((r) => r.minutes > 0)
     .reduce((sum, r) => sum + r.minutes, 0);
 
@@ -120,7 +125,7 @@ export default function ParentPortal({
           <div className="min-w-0">
             <span className="text-[11px] font-bold text-slate-500 block truncate">Phiếu thưởng đổi</span>
             <p className="text-xl sm:text-2xl font-black text-slate-800">
-              {availableVouchers.length} <span className="text-xs font-semibold text-slate-400">/ {redeemedRewards.length}</span>
+              {availableVouchers.length} <span className="text-xs font-semibold text-slate-400">/ {allVouchers.length}</span>
             </p>
           </div>
         </div>
@@ -146,13 +151,13 @@ export default function ParentPortal({
           </div>
         </div>
 
-        {redeemedRewards.length === 0 ? (
+        {allVouchers.length === 0 ? (
           <div className="p-4 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-center text-xs font-bold text-slate-500">
             Bé chưa dùng sao để đổi phiếu thưởng nào. Khi bé đổi xem TV hoặc chơi game trong Phòng Truyền Thống, phiếu sẽ hiển thị tại đây.
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {redeemedRewards.map((v) => {
+            {allVouchers.map((v) => {
               const isAvailable = v.status === 'available';
               return (
                 <div

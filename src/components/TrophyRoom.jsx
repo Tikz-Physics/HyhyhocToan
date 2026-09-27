@@ -153,63 +153,57 @@ export default function TrophyRoom({
       {activeTab === 'real_rewards' && (
         <div className="space-y-6 animate-pop">
           {/* Active Vouchers Section (Phiếu Thưởng Của Bé) */}
-          <div className="bg-white rounded-3xl border-4 border-amber-300 p-4 sm:p-6 shadow-md">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Clock className="w-6 h-6 text-rose-500" />
-                <h2 className="font-black text-lg sm:text-xl text-slate-800">
-                  Phiếu Thưởng Của Bé ({redeemedRewards.filter(r => r.status === 'available').length} phiếu sẵn sàng)
-                </h2>
-              </div>
-            </div>
+          {(() => {
+            const availableVouchers = (redeemedRewards || []).filter((r) => r.status === 'available');
+            return (
+              <div className="bg-white rounded-3xl border-4 border-amber-300 p-4 sm:p-6 shadow-md">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-6 h-6 text-rose-500" />
+                    <h2 className="font-black text-lg sm:text-xl text-slate-800">
+                      Phiếu Thưởng Của Bé ({availableVouchers.length} phiếu sẵn sàng)
+                    </h2>
+                  </div>
+                </div>
 
-            {redeemedRewards.length === 0 ? (
-              <div className="p-6 bg-amber-50/70 border-2 border-dashed border-amber-200 rounded-2xl text-center">
-                <span className="text-4xl block mb-2">🎟️</span>
-                <p className="font-extrabold text-slate-700 text-sm">
-                  Bé chưa đổi phiếu thưởng nào!
-                </p>
-                <p className="text-xs text-slate-500 mt-1">
-                  Hãy chọn một phần thưởng bên dưới để đổi giờ xem video hoặc chơi game nhé!
-                </p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {redeemedRewards.map((voucher) => {
-                  const isAvailable = voucher.status === 'available';
-                  return (
-                    <div
-                      key={voucher.id}
-                      className={`p-4 rounded-2xl border-2 transition-all flex flex-col justify-between ${
-                        isAvailable
-                          ? 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-400 shadow-sm'
-                          : 'bg-slate-50 border-slate-200 opacity-60'
-                      }`}
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="w-12 h-12 rounded-xl bg-white border border-amber-300 flex items-center justify-center text-2xl shadow-2xs flex-shrink-0">
-                          {voucher.icon || '🎁'}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-black text-sm text-slate-900 truncate">
-                              {voucher.title}
-                            </span>
-                            {isAvailable && (
+                {availableVouchers.length === 0 ? (
+                  <div className="p-6 bg-amber-50/70 border-2 border-dashed border-amber-200 rounded-2xl text-center">
+                    <span className="text-4xl block mb-2">🎟️</span>
+                    <p className="font-extrabold text-slate-700 text-sm">
+                      Bé chưa có phiếu thưởng nào sẵn sàng!
+                    </p>
+                    <p className="text-xs text-slate-500 mt-1">
+                      Hãy đổi một phần thưởng bên dưới để nhận giờ xem video hoặc chơi game nhé! Thẻ sẽ được sử dụng và tự động mất đi sau khi bé hoàn tất.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {availableVouchers.map((voucher) => (
+                      <div
+                        key={voucher.id}
+                        className="p-4 rounded-2xl border-2 transition-all flex flex-col justify-between bg-gradient-to-r from-amber-50 to-orange-50 border-amber-400 shadow-sm"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="w-12 h-12 rounded-xl bg-white border border-amber-300 flex items-center justify-center text-2xl shadow-2xs flex-shrink-0">
+                            {voucher.icon || '🎁'}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-1.5">
+                              <span className="font-black text-sm text-slate-900 truncate">
+                                {voucher.title}
+                              </span>
                               <span className="bg-emerald-500 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase flex-shrink-0">
                                 Sẵn sàng
                               </span>
-                            )}
+                            </div>
+                            <p className="text-xs text-slate-500 mt-0.5">
+                              Đổi với {voucher.cost} ⭐ • {voucher.minutes > 0 ? `${voucher.minutes} phút` : 'Quà tặng'}
+                            </p>
                           </div>
-                          <p className="text-xs text-slate-500 mt-0.5">
-                            Đổi với {voucher.cost} ⭐ • {voucher.minutes > 0 ? `${voucher.minutes} phút` : 'Quà tặng'}
-                          </p>
                         </div>
-                      </div>
 
-                      <div className="mt-3 pt-2.5 border-t border-amber-200/80 flex items-center justify-between gap-2">
-                        {isAvailable ? (
-                          voucher.minutes > 0 ? (
+                        <div className="mt-3 pt-2.5 border-t border-amber-200/80 flex items-center justify-between gap-2">
+                          {voucher.minutes > 0 ? (
                             <button
                               type="button"
                               onClick={() => {
@@ -227,26 +221,22 @@ export default function TrophyRoom({
                               onClick={() => {
                                 soundManager.playCorrect();
                                 if (onUseRewardVoucher) onUseRewardVoucher(voucher.id);
+                                setNotice(`🎉 Đã nhận thưởng "${voucher.title}"! Thẻ thưởng đã hoàn tất và được thu hồi.`);
                               }}
                               className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white font-black text-xs rounded-xl shadow-xs flex items-center justify-center gap-1.5 btn-kid-3d cursor-pointer"
                             >
                               <Check className="w-3.5 h-3.5" />
-                              <span>Ba Mẹ Bấm Xác Nhận Đã Nhận Quà</span>
+                              <span>Ba Mẹ Bấm Xác Nhận Đã Nhận Quà (Thu Hồi Thẻ)</span>
                             </button>
-                          )
-                        ) : (
-                          <div className="w-full py-1 text-center font-bold text-xs text-slate-400 flex items-center justify-center gap-1">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                            <span>Đã sử dụng xong</span>
-                          </div>
-                        )}
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            );
+          })()}
 
           {/* Catalog of Rewards */}
           <div className="bg-white rounded-3xl border-4 border-amber-200 p-4 sm:p-6 shadow-md">
@@ -493,6 +483,7 @@ export default function TrophyRoom({
           onClose={() => setActiveVoucherForTimer(null)}
           onFinishVoucher={(id) => {
             if (onUseRewardVoucher) onUseRewardVoucher(id);
+            setNotice(`🎉 Đã sử dụng xong thời gian thưởng! Thẻ đã hoàn tất và được thu hồi.`);
           }}
         />
       )}
