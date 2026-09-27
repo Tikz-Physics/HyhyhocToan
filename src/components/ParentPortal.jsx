@@ -6,6 +6,7 @@ export default function ParentPortal({
   stars,
   completedTasks = [],
   userMedals = [],
+  redeemedRewards = [],
   onResetProgress,
   currentAccount,
   onOpenAccountModal,
@@ -18,6 +19,12 @@ export default function ParentPortal({
     (acc, z) => acc + z.basicLevels.length + z.timoChallenges.length,
     0
   );
+
+  const availableVouchers = redeemedRewards.filter((r) => r.status === 'available');
+  const usedVouchers = redeemedRewards.filter((r) => r.status === 'used');
+  const totalScreenMinutes = redeemedRewards
+    .filter((r) => r.minutes > 0)
+    .reduce((sum, r) => sum + r.minutes, 0);
 
   return (
     <div className="max-w-4xl mx-auto p-3 sm:p-6 pb-28 sm:pb-24 space-y-6">
@@ -70,40 +77,115 @@ export default function ParentPortal({
       )}
 
       {/* Metrics Overview */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white rounded-2xl p-5 border-2 border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl font-black">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+        <div className="bg-white rounded-2xl p-4 sm:p-5 border-2 border-slate-200 shadow-sm flex items-center gap-3">
+          <div className="w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0">
             ⭐
           </div>
-          <div>
-            <span className="text-xs font-bold text-slate-500">Tổng sao tích lũy</span>
-            <p className="text-2xl font-black text-slate-800">{stars} Sao</p>
+          <div className="min-w-0">
+            <span className="text-[11px] font-bold text-slate-500 block truncate">Sao tích lũy</span>
+            <p className="text-xl sm:text-2xl font-black text-slate-800">{stars} Sao</p>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-5 border-2 border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl font-black">
+        <div className="bg-white rounded-2xl p-4 sm:p-5 border-2 border-slate-200 shadow-sm flex items-center gap-3">
+          <div className="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0">
             ✅
           </div>
-          <div>
-            <span className="text-xs font-bold text-slate-500">Nhiệm vụ hoàn thành</span>
-            <p className="text-2xl font-black text-slate-800">
-              {completedTasks.length} / {totalAvailableTasks} bài
+          <div className="min-w-0">
+            <span className="text-[11px] font-bold text-slate-500 block truncate">Bài đã hoàn thành</span>
+            <p className="text-lg sm:text-2xl font-black text-slate-800 truncate">
+              {completedTasks.length} / {totalAvailableTasks}
             </p>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-5 border-2 border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl font-black">
+        <div className="bg-white rounded-2xl p-4 sm:p-5 border-2 border-slate-200 shadow-sm flex items-center gap-3">
+          <div className="w-11 h-11 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0">
             🏅
           </div>
-          <div>
-            <span className="text-xs font-bold text-slate-500">Huy chương Timo</span>
-            <p className="text-2xl font-black text-slate-800">
-              {userMedals.length} huy chương
+          <div className="min-w-0">
+            <span className="text-[11px] font-bold text-slate-500 block truncate">Huy chương Timo</span>
+            <p className="text-xl sm:text-2xl font-black text-slate-800">{userMedals.length}</p>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-2xl p-4 sm:p-5 border-2 border-slate-200 shadow-sm flex items-center gap-3">
+          <div className="w-11 h-11 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0">
+            🎟️
+          </div>
+          <div className="min-w-0">
+            <span className="text-[11px] font-bold text-slate-500 block truncate">Phiếu thưởng đổi</span>
+            <p className="text-xl sm:text-2xl font-black text-slate-800">
+              {availableVouchers.length} <span className="text-xs font-semibold text-slate-400">/ {redeemedRewards.length}</span>
             </p>
           </div>
         </div>
+      </div>
+
+      {/* Real-World Reward Management Section */}
+      <div className="bg-white rounded-3xl border-4 border-rose-200 p-4 sm:p-6 shadow-md">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-rose-100">
+          <div className="flex items-center gap-2.5">
+            <span className="text-2xl sm:text-3xl">🎁</span>
+            <div>
+              <h2 className="text-lg sm:text-xl font-black text-slate-800">
+                Nhật Ký Đổi Thưởng Ngoài Đời Thực
+              </h2>
+              <p className="text-xs font-semibold text-slate-500">
+                Phụ huynh theo dõi thời gian xem video, chơi game bé đã đổi bằng điểm tự học
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-rose-50 border border-rose-200 px-3.5 py-1.5 rounded-xl text-xs font-black text-rose-800 self-start sm:self-auto">
+            Tổng giờ màn hình đã quy đổi: {totalScreenMinutes} phút
+          </div>
+        </div>
+
+        {redeemedRewards.length === 0 ? (
+          <div className="p-4 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-center text-xs font-bold text-slate-500">
+            Bé chưa dùng sao để đổi phiếu thưởng nào. Khi bé đổi xem TV hoặc chơi game trong Phòng Truyền Thống, phiếu sẽ hiển thị tại đây.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {redeemedRewards.map((v) => {
+              const isAvailable = v.status === 'available';
+              return (
+                <div
+                  key={v.id}
+                  className={`p-3 rounded-2xl border flex items-center justify-between gap-3 ${
+                    isAvailable
+                      ? 'bg-rose-50/70 border-rose-300'
+                      : 'bg-slate-50 border-slate-200 opacity-60'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="text-2xl flex-shrink-0">{v.icon}</span>
+                    <div className="min-w-0">
+                      <div className="font-black text-xs sm:text-sm text-slate-800 truncate">
+                        {v.title}
+                      </div>
+                      <div className="text-[11px] font-bold text-slate-500">
+                        {v.minutes > 0 ? `Thời lượng: ${v.minutes} phút` : 'Phần thưởng trải nghiệm'} • {v.cost} ⭐
+                      </div>
+                    </div>
+                  </div>
+
+                  <span
+                    className={`text-[10px] font-black px-2.5 py-1 rounded-full uppercase flex-shrink-0 ${
+                      isAvailable
+                        ? 'bg-emerald-500 text-white shadow-xs'
+                        : 'bg-slate-300 text-slate-600'
+                    }`}
+                  >
+                    {isAvailable ? 'Sẵn sàng dùng' : 'Đã sử dụng'}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Progress Breakdown across Zones */}
@@ -137,7 +219,6 @@ export default function ParentPortal({
 
         <div className="space-y-4">
           {currentZones.map((zone) => {
-
             const totalInZone = zone.basicLevels.length + zone.timoChallenges.length;
             const completedInZone = completedTasks.filter((t) =>
               t.startsWith(zone.id)
@@ -175,30 +256,30 @@ export default function ParentPortal({
         <div className="flex items-center gap-2 mb-4">
           <Lightbulb className="w-6 h-6 text-amber-500" />
           <h2 className="text-lg sm:text-xl font-extrabold text-slate-800">
-            Lời Khuyên Sư Phạm Cho Cha Mẹ Có Con Học Lớp 1
+            Cơ Chế Sư Phạm & Lời Khuyên Dành Cho Phụ Huynh
           </h2>
         </div>
 
         <div className="space-y-3.5 text-sm font-semibold text-slate-700 leading-relaxed">
           <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200">
             <strong className="text-amber-900 block mb-1">
-              1. Trực quan hóa trước khi viết số:
+              1. Cơ chế tính điểm 1 lần & Phạt khi làm sai:
             </strong>
-            Trẻ 6 tuổi cần nhìn thấy các vật thể cụ thể (quả táo, chiếc kẹo, ngón tay) trước khi làm quen với các con số trừu tượng. Việc cho bé chạm đếm trực tiếp trên màn hình giúp hình thành cảm giác số học vững chắc.
+            Mỗi bài tập chỉ được cộng điểm một lần duy nhất khi giải đúng, ngăn chặn việc bấm đi bấm lại để cày sao. Khi chọn sai, bé bị trừ 1 ⭐ và các phương án lập tức bị khóa để bé đọc kỹ hướng dẫn giải chi tiết trước khi bấm "Làm lại". Điều này rèn luyện tính cẩn thận và suy nghĩ kỹ trước khi quyết định.
+          </div>
+
+          <div className="p-3 bg-rose-50 rounded-2xl border border-rose-200">
+            <strong className="text-rose-900 block mb-1">
+              2. Phần thưởng thực tế & Kiểm soát thời gian màn hình:
+            </strong>
+            Số sao bé tích lũy được đổi thành các phiếu thưởng thực tế ngoài đời (10 phút xem YouTube, 15 phút chơi game iPad, ăn kem, đi dạo công viên). Đồng hồ đếm ngược tích hợp giúp cha mẹ và bé dễ dàng thiết lập kỷ luật sử dụng thiết bị lành mạnh.
           </div>
 
           <div className="p-3 bg-blue-50 rounded-2xl border border-blue-200">
             <strong className="text-blue-900 block mb-1">
-              2. Phương pháp tiếp cận Toán Timo / Kangaroo:
+              3. Phương pháp tiếp cận Toán Timo / Kangaroo:
             </strong>
-            Toán Timo lớp 1 không yêu cầu tính toán quá phức tạp mà chú trọng **nhận biết quy luật (pattern)** và **hình dung không gian (3D cubes, gấp giấy)**. Hãy khuyến khích con tìm sự lặp lại của màu sắc, hình dáng thay vì chỉ chăm chú vào phép tính.
-          </div>
-
-          <div className="p-3 bg-emerald-50 rounded-2xl border border-emerald-200">
-            <strong className="text-emerald-900 block mb-1">
-              3. Luôn khen ngợi nỗ lực thay vì chỉ điểm số:
-            </strong>
-            Khi con làm sai, hãy cùng con ấn nút "Đọc đề" và "Mẹo của Dino" để con tự phát hiện chỗ nhầm lẫn. Việc không phạt hay trừ điểm khi làm sai giúp bé nuôi dưỡng sự tự tin và đam mê học tập lâu dài.
+            Toán Timo chú trọng **nhận biết quy luật (pattern)** và **hình dung không gian (3D cubes, gấp giấy)**. Mọi câu hỏi đều có phần Hướng dẫn giải chi tiết với phương pháp tư duy từng bước giúp con hiểu bản chất.
           </div>
         </div>
       </div>

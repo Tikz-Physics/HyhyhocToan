@@ -55,6 +55,7 @@ export default function App() {
   const userMedals = currentAccount.userMedals || [];
   const unlockedPets = currentAccount.unlockedPets || ['dino'];
   const activePet = currentAccount.activePet || 'dino';
+  const redeemedRewards = currentAccount.redeemedRewards || [];
 
   const [selectedGrade, setSelectedGrade] = useState(() => currentAccount.grade || 1);
   const activeCurriculumZones = getCurriculumZones(selectedGrade);
@@ -106,6 +107,13 @@ export default function App() {
     }));
   };
 
+  const handleDeductStars = (amount = 1) => {
+    updateCurrentAccount((prev) => ({
+      ...prev,
+      stars: Math.max(0, (prev.stars || 0) - amount),
+    }));
+  };
+
   const handleSpendStars = (amount, newPetId) => {
     updateCurrentAccount((prev) => {
       const nextPets = newPetId && !prev.unlockedPets?.includes(newPetId)
@@ -117,6 +125,38 @@ export default function App() {
         unlockedPets: nextPets,
       };
     });
+  };
+
+  const handleRedeemRealReward = (reward) => {
+    updateCurrentAccount((prev) => {
+      const currentStars = prev.stars || 0;
+      if (currentStars < reward.cost) return prev;
+      const newVoucher = {
+        id: `voucher_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+        rewardId: reward.id,
+        title: reward.title,
+        icon: reward.icon,
+        minutes: reward.minutes,
+        cost: reward.cost,
+        category: reward.category,
+        createdAt: Date.now(),
+        status: 'available',
+      };
+      return {
+        ...prev,
+        stars: Math.max(0, currentStars - reward.cost),
+        redeemedRewards: [newVoucher, ...(prev.redeemedRewards || [])],
+      };
+    });
+  };
+
+  const handleUseRewardVoucher = (voucherId) => {
+    updateCurrentAccount((prev) => ({
+      ...prev,
+      redeemedRewards: (prev.redeemedRewards || []).map((v) =>
+        v.id === voucherId ? { ...v, status: 'used', usedAt: Date.now() } : v
+      ),
+    }));
   };
 
   const handleTaskCompleted = (taskId) => {
@@ -365,6 +405,7 @@ export default function App() {
             zone={selectedZone}
             onBack={() => setCurrentView('map')}
             onAddStars={handleAddStars}
+            onDeductStars={handleDeductStars}
             completedTasks={completedTasks}
             onTaskCompleted={handleTaskCompleted}
           />
@@ -389,6 +430,9 @@ export default function App() {
             unlockedPets={unlockedPets}
             activePet={activePet}
             onSelectPet={handleSelectActivePet}
+            redeemedRewards={redeemedRewards}
+            onRedeemRealReward={handleRedeemRealReward}
+            onUseRewardVoucher={handleUseRewardVoucher}
           />
         )}
 
@@ -398,6 +442,7 @@ export default function App() {
             stars={stars}
             completedTasks={completedTasks}
             userMedals={userMedals}
+            redeemedRewards={redeemedRewards}
             onResetProgress={handleResetProgress}
             currentAccount={currentAccount}
             onOpenAccountModal={() => setIsAccountModalOpen(true)}

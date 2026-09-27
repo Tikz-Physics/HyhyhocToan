@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { soundManager } from '../utils/soundManager';
 import { getAssetUrl } from '../utils/assetHelper';
-import { Check } from 'lucide-react';
+import { Check, ChevronRight, RotateCcw, BookOpen, Sparkles, AlertCircle } from 'lucide-react';
 import QuestionIllustration from './QuestionIllustration';
 
 const getTimeOfDayInfo = (h) => {
@@ -58,8 +58,12 @@ const getTimeOfDayInfo = (h) => {
 
 export default function InteractiveCanvas({
   level,
+  isTimo = false,
   onComplete,
   onAnswerStatus,
+  onCorrectAnswer,
+  onWrongAnswer,
+  alreadyCompleted = false,
 }) {
   const [userValue, setUserValue] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
@@ -67,9 +71,35 @@ export default function InteractiveCanvas({
   const [clockHour, setClockHour] = useState(level.hour || 12);
   const [applesInBasket, setApplesInBasket] = useState([]);
   const [poppedBalloons, setPoppedBalloons] = useState(new Set());
+  const [hasAnswered, setHasAnswered] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isWrong, setIsWrong] = useState(false);
   const [wrongOption, setWrongOption] = useState(null);
   const [errorShake, setErrorShake] = useState(false);
+  const [showExplanation, setShowExplanation] = useState(false);
+
+  // Helper to determine the true correct answer string
+  const getCorrectOption = () => {
+    if (level.correctIndex !== undefined && level.options && level.options[level.correctIndex] !== undefined) {
+      return level.options[level.correctIndex];
+    }
+    const target = level.targetNumber ?? level.correctNumber ?? level.correctAnswer;
+    if (target !== undefined) {
+      if (level.options) {
+        const found = level.options.find((opt) => String(opt).trim() === String(target).trim());
+        if (found !== undefined) return found;
+        const numFound = level.options.find((opt) => !isNaN(Number(opt)) && Number(opt) === Number(target));
+        if (numFound !== undefined) return numFound;
+        const letters = ['A', 'B', 'C', 'D'];
+        const letterIdx = letters.indexOf(String(target).trim().toUpperCase());
+        if (letterIdx !== -1 && level.options[letterIdx] !== undefined) {
+          return level.options[letterIdx];
+        }
+      }
+      return target;
+    }
+    return null;
+  };
 
   // Robust check for any answer value or option index
   const evaluateAnswer = (choice, optIndex = -1) => {
@@ -101,36 +131,54 @@ export default function InteractiveCanvas({
   };
 
   const triggerSuccess = (val = null) => {
-    if (isSuccess) return;
+    if (hasAnswered && isSuccess) return;
+    setHasAnswered(true);
     setIsSuccess(true);
+    setIsWrong(false);
     setWrongOption(null);
+    setShowExplanation(true);
     if (val !== null) {
       setUserValue(String(val));
       setSelectedOption(val);
     }
     if (onAnswerStatus) onAnswerStatus('correct');
+    if (onCorrectAnswer) onCorrectAnswer({ level });
     soundManager.playCorrect();
     confetti({
       particleCount: 50,
       spread: 60,
       origin: { y: 0.6 },
     });
-    setTimeout(() => {
-      onComplete();
-    }, 1200);
   };
 
   const triggerError = (opt = null) => {
-    soundManager.playWrong();
+    if (hasAnswered) return;
+    setHasAnswered(true);
+    setIsWrong(true);
+    setIsSuccess(false);
     setWrongOption(opt);
     setErrorShake(true);
+    setShowExplanation(true);
     if (onAnswerStatus) onAnswerStatus('wrong');
+    if (onWrongAnswer) onWrongAnswer({ level, penalty: 1 });
+    soundManager.playWrong();
     setTimeout(() => setErrorShake(false), 500);
+  };
+
+  const handleRetry = () => {
+    soundManager.playPop();
+    setHasAnswered(false);
+    setIsSuccess(false);
+    setIsWrong(false);
+    setSelectedOption(null);
+    setWrongOption(null);
+    setUserValue('');
+    if (onAnswerStatus) onAnswerStatus('idle');
   };
 
   // --- 2. TRAIN: Direct tap carriage ---
   const handleSelectTrainCarriage = (val, idx) => {
-    if (isSuccess) return;
+    if (hasAnswered) return;
     soundManager.playClick();
     setSelectedOption(val);
     setUserValue(String(val));
@@ -141,6 +189,7 @@ export default function InteractiveCanvas({
       triggerError(val);
     }
   };
+
 
   // --- 3. ADDITION: Drop apples into basket ---
   const handleTapApple = (idx) => {
@@ -178,7 +227,7 @@ export default function InteractiveCanvas({
 
   // --- 5. CROCODILE: Direct chomp buttons ---
   const handleChomp = (direction) => {
-    if (isSuccess) return;
+    if (hasAnswered) return;
     soundManager.playPop(0.9);
     setCrocDirection(direction);
 
@@ -202,7 +251,7 @@ export default function InteractiveCanvas({
 
   // --- 6. CLOCK: Touch hour numbers on clock ---
   const handleClockTouch = (h) => {
-    if (isSuccess) return;
+    if (hasAnswered) return;
     soundManager.playPop(1.2);
     setClockHour(h);
 
@@ -217,7 +266,7 @@ export default function InteractiveCanvas({
 
   // --- 7. GENERIC OPTION CARD TOUCH (For all questions with options) ---
   const handleOptionCardTouch = (opt, idx) => {
-    if (isSuccess) return;
+    if (hasAnswered) return;
     soundManager.playClick();
     setSelectedOption(opt);
     setUserValue(String(opt));
@@ -252,7 +301,7 @@ export default function InteractiveCanvas({
 
   // --- 8. CANDY NUMBER PAD TOUCH ---
   const handleKeypadPress = (num) => {
-    if (isSuccess) return;
+    if (hasAnswered) return;
     soundManager.playPop(1 + (num % 10) * 0.05);
     const numStr = String(num);
     setUserValue(numStr);
@@ -1086,6 +1135,7 @@ export default function InteractiveCanvas({
         }
 
         const letterBadges = ['A', 'B', 'C', 'D'];
+        const correctOpt = getCorrectOption();
 
         return (
           <div className="mt-3 pt-2.5 border-t-2 border-dashed border-amber-200/90">
@@ -1094,7 +1144,7 @@ export default function InteractiveCanvas({
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-amber-100/95 border border-amber-300 rounded-full shadow-2xs">
                 <span className="text-sm animate-bounce">👇</span>
                 <span className="text-xs sm:text-sm font-black text-amber-950 uppercase tracking-wide">
-                  Bé bấm chọn 1 đáp án đúng:
+                  {hasAnswered ? 'Kết quả lựa chọn của bé:' : 'Bé bấm chọn 1 đáp án đúng:'}
                 </span>
               </div>
             </div>
@@ -1102,30 +1152,37 @@ export default function InteractiveCanvas({
             <div className={`grid ${gridCols} gap-2 sm:gap-2.5 mx-auto`}>
               {level.options.map((opt, i) => {
                 const isChosen = selectedOption === opt;
-                const isWrong = wrongOption === opt;
+                const isThisWrong = (isWrong && isChosen) || wrongOption === opt;
+                const isThisCorrect = hasAnswered && (
+                  (correctOpt !== null && String(opt).trim() === String(correctOpt).trim()) ||
+                  (isSuccess && isChosen)
+                );
 
                 let style = 'bg-white hover:bg-amber-50/80 active:scale-95 border-2 border-amber-400 text-slate-800 shadow-xs hover:shadow-md';
-                if (isSuccess && isChosen) {
+                if (isThisCorrect) {
                   style = 'bg-emerald-500 border-2 border-emerald-600 text-white shadow-md ring-4 ring-emerald-200';
-                } else if (isWrong) {
+                } else if (isThisWrong) {
                   style = 'bg-rose-500 border-2 border-rose-600 text-white animate-wiggle shadow-xs';
+                } else if (hasAnswered) {
+                  style = 'bg-slate-100 border-2 border-slate-300 text-slate-400 opacity-60 cursor-not-allowed';
                 }
 
                 return (
                   <button
                     key={i}
                     type="button"
+                    disabled={hasAnswered}
                     onClick={() => handleOptionCardTouch(opt, i)}
-                    className={`rounded-2xl font-black transition-all flex items-center justify-between gap-2 p-2.5 sm:p-3 min-h-[54px] sm:min-h-[60px] h-auto btn-kid-3d cursor-pointer ${
-                      isNumeric ? 'text-lg sm:text-2xl' : 'text-xs sm:text-sm'
-                    } ${style}`}
+                    className={`rounded-2xl font-black transition-all flex items-center justify-between gap-2 p-2.5 sm:p-3 min-h-[54px] sm:min-h-[60px] h-auto btn-kid-3d ${
+                      hasAnswered ? '' : 'cursor-pointer'
+                    } ${isNumeric ? 'text-lg sm:text-2xl' : 'text-xs sm:text-sm'} ${style}`}
                   >
                     {/* Nhãn chữ cái phương án A, B, C, D */}
                     <span
                       className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center flex-shrink-0 shadow-2xs transition-colors self-center ${
-                        isSuccess && isChosen
+                        isThisCorrect
                           ? 'bg-white text-emerald-700'
-                          : isWrong
+                          : isThisWrong
                           ? 'bg-white text-rose-700'
                           : 'bg-amber-200 text-amber-950 border border-amber-300'
                       }`}
@@ -1138,9 +1195,11 @@ export default function InteractiveCanvas({
                       {opt}
                     </span>
 
-                    {/* Icon kiểm tra khi chọn đúng */}
-                    {isSuccess && isChosen ? (
+                    {/* Icon kiểm tra khi chọn đúng hoặc sai */}
+                    {isThisCorrect ? (
                       <Check className="w-5 h-5 text-white animate-pop flex-shrink-0 ml-1 self-center" />
+                    ) : isThisWrong ? (
+                      <span className="text-sm font-black text-white ml-1 self-center">✖</span>
                     ) : (
                       <span className="w-5 flex-shrink-0" />
                     )}
@@ -1169,12 +1228,111 @@ export default function InteractiveCanvas({
               <button
                 key={n}
                 type="button"
+                disabled={hasAnswered}
                 onClick={() => handleKeypadPress(n)}
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-b from-amber-50 to-orange-100 active:from-amber-200 text-amber-950 border-2 border-amber-300 font-black text-sm sm:text-base shadow-2xs btn-candy-number flex items-center justify-center cursor-pointer"
+                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl border-2 font-black text-sm sm:text-base shadow-2xs btn-candy-number flex items-center justify-center ${
+                  hasAnswered
+                    ? 'bg-slate-200 text-slate-400 border-slate-300 cursor-not-allowed'
+                    : 'bg-gradient-to-b from-amber-50 to-orange-100 active:from-amber-200 text-amber-950 border-amber-300 cursor-pointer'
+                }`}
               >
                 {n}
               </button>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* 12. BANNER THÔNG BÁO KẾT QUẢ & HƯỚNG DẪN GIẢI CHI TIẾT */}
+      {hasAnswered && (
+        <div className="mt-4 pt-3 border-t-2 border-dashed border-amber-300/80 animate-pop">
+          {/* Banner kết quả */}
+          {isSuccess ? (
+            <div className="p-3.5 bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-300 rounded-2xl shadow-sm mb-3">
+              <div className="flex items-center gap-2.5">
+                <span className="text-2xl animate-bounce">🎉</span>
+                <div className="flex-1">
+                  <div className="text-sm sm:text-base font-black text-emerald-800">
+                    Tuyệt vời! Bé đã trả lời rất chính xác!
+                  </div>
+                  <div className="text-xs sm:text-sm font-bold text-emerald-600">
+                    {alreadyCompleted
+                      ? '⭐ (Bài này bé đã nhận sao trước đó rồi nè!)'
+                      : '⭐ +2 Sao đã được cộng vào kho sao của bé!'}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="p-3.5 bg-gradient-to-r from-rose-50 to-red-50 border-2 border-rose-300 rounded-2xl shadow-sm mb-3">
+              <div className="flex items-start gap-2.5">
+                <span className="text-2xl">💡</span>
+                <div className="flex-1">
+                  <div className="text-sm sm:text-base font-black text-rose-800">
+                    Chưa đúng rồi bé ơi! Bé bị trừ 1 ⭐
+                  </div>
+                  <div className="text-xs sm:text-sm font-semibold text-rose-700 mt-0.5">
+                    Đừng nản lòng nhé! Hãy đọc kỹ hướng dẫn giải chi tiết bên dưới để hiểu bài rồi bấm làm lại nha!
+                  </div>
+                  <div className="mt-2.5 flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handleRetry}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-black text-xs sm:text-sm rounded-xl shadow-xs transition-all cursor-pointer"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      Làm lại câu này
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Khối Hướng Dẫn Giải Chi Tiết */}
+          <div className="bg-amber-50/90 border-2 border-amber-300 rounded-2xl p-3.5 sm:p-4 shadow-sm">
+            <div className="flex items-center gap-2 mb-2.5 pb-2 border-b border-amber-200">
+              <div className="w-7 h-7 rounded-lg bg-amber-400 flex items-center justify-center text-amber-950 font-black text-sm">
+                📖
+              </div>
+              <h4 className="text-sm sm:text-base font-black text-amber-950">
+                Hướng Dẫn Giải Chi Tiết
+              </h4>
+            </div>
+
+            <div className="space-y-2 text-xs sm:text-sm">
+              {/* Đáp án đúng */}
+              <div className="p-2.5 bg-white/80 border border-emerald-200 rounded-xl flex items-center gap-2 text-emerald-900 font-bold">
+                <span className="text-base">🎯</span>
+                <div>
+                  <span className="font-black text-emerald-950">Đáp án chính xác: </span>
+                  <span className="px-2 py-0.5 bg-emerald-100 text-emerald-900 font-black rounded-lg ml-1 border border-emerald-300">
+                    {String(getCorrectOption() ?? level.correctAnswer ?? level.targetNumber ?? 'Đáp án')}
+                  </span>
+                </div>
+              </div>
+
+              {/* Lời giải & Phương pháp */}
+              {(level.explanation || level.hint || level.guidance) && (
+                <div className="p-2.5 bg-white/80 border border-amber-200 rounded-xl text-amber-950">
+                  <div className="font-black text-amber-900 flex items-center gap-1.5 mb-1">
+                    <span>💡</span>
+                    <span>Phương pháp giải & Tư duy:</span>
+                  </div>
+                  <div className="font-semibold text-slate-800 leading-relaxed pl-5">
+                    {level.explanation || level.hint || level.guidance}
+                  </div>
+                </div>
+              )}
+
+              {/* Ghi nhớ */}
+              <div className="p-2 bg-amber-100/70 border border-amber-200 rounded-xl text-amber-900 text-xs font-semibold flex items-center gap-1.5">
+                <span>⭐</span>
+                <span>
+                  {level.summary || 'Bé hãy ghi nhớ phương pháp này để áp dụng cho những câu hỏi tương tự nhé!'}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       )}

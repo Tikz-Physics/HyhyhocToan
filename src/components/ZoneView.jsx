@@ -9,6 +9,7 @@ export default function ZoneView({
   zone,
   onBack,
   onAddStars,
+  onDeductStars,
   completedTasks,
   onTaskCompleted,
 }) {
@@ -22,6 +23,8 @@ export default function ZoneView({
   const currentPet = getPetStage(completedTasks.length);
   const currentList = activeTab === 'basic' ? zone.basicLevels : zone.timoChallenges;
   const currentLevel = currentList[levelIndex] || currentList[0];
+  const currentTaskId = `${zone.id}_${activeTab}_${currentLevel.id}`;
+  const isAlreadyCompleted = completedTasks.includes(currentTaskId);
 
   useEffect(() => {
     if (currentLevel?.question) {
@@ -32,11 +35,26 @@ export default function ZoneView({
     };
   }, [levelIndex, activeTab, currentLevel?.question]);
 
-  const handleLevelCompleted = () => {
+  const handleCorrectAnswer = () => {
     setIsCompletedCurrent(true);
-    const starReward = activeTab === 'basic' ? 2 : 3;
-    onAddStars(starReward);
-    onTaskCompleted(`${zone.id}_${activeTab}_${currentLevel.id}`);
+    // Cơ chế tính điểm: Chỉ cộng điểm 1 lần duy nhất cho mỗi bài học
+    if (!completedTasks.includes(currentTaskId)) {
+      const starReward = activeTab === 'basic' ? 2 : 3;
+      onAddStars(starReward);
+      onTaskCompleted(currentTaskId);
+    }
+  };
+
+  const handleWrongAnswer = ({ penalty = 1 } = {}) => {
+    setIsCompletedCurrent(false);
+    // Cơ chế phạt: Trừ điểm khi chọn sai
+    if (onDeductStars) {
+      onDeductStars(penalty);
+    }
+  };
+
+  const handleLevelCompleted = () => {
+    handleCorrectAnswer();
   };
 
   const handleNext = () => {
@@ -228,11 +246,14 @@ export default function ZoneView({
       {/* Main Interactive Canvas */}
       <div className="w-full">
         <InteractiveCanvas
-          key={`${zone.id}_${activeTab}_${currentLevel.id}`}
+          key={currentTaskId}
           level={currentLevel}
           isTimo={activeTab === 'timo'}
           onComplete={handleLevelCompleted}
           onAnswerStatus={setLastAnswerStatus}
+          onCorrectAnswer={handleCorrectAnswer}
+          onWrongAnswer={handleWrongAnswer}
+          alreadyCompleted={isAlreadyCompleted}
         />
       </div>
 

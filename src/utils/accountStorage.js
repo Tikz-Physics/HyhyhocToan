@@ -45,6 +45,7 @@ export function loadAccounts() {
     userMedals: existingMedals,
     unlockedPets: ['dino'],
     activePet: 'dino',
+    redeemedRewards: [],
     createdAt: Date.now(),
   };
 
