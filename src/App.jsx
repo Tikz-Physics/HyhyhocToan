@@ -238,10 +238,12 @@ export default function App() {
 
   const handleCreateAccount = (accData) => {
     const newId = accData.id || `acc_${Date.now()}`;
+    const cleanPin = String(accData.pin || '1234').replace(/\D/g, '').slice(0, 4) || '1234';
     const newAcc = {
       id: newId,
       name: accData.name,
       avatar: accData.avatar || '🦁',
+      pin: cleanPin,
       grade: accData.grade || selectedGrade || 1,
       stars: accData.stars ?? 10,
       completedTasks: accData.completedTasks || [],
@@ -258,6 +260,15 @@ export default function App() {
     saveAccounts(nextAccounts);
     saveActiveAccountId(newId);
     setIsAccountModalOpen(false);
+  };
+
+  const handleUpdateAccountPin = (accountId, newPin) => {
+    const cleanPin = String(newPin || '1234').replace(/\D/g, '').slice(0, 4) || '1234';
+    setAccounts((prev) => {
+      const updated = prev.map((a) => (a.id === accountId ? { ...a, pin: cleanPin } : a));
+      saveAccounts(updated);
+      return updated;
+    });
   };
 
   const handleBulkImportAccounts = (importedList) => {
@@ -524,6 +535,7 @@ export default function App() {
             onResetProgress={handleResetProgress}
             currentAccount={currentAccount}
             onOpenAccountModal={() => setIsAccountModalOpen(true)}
+            onUpdateAccountPin={handleUpdateAccountPin}
             selectedGrade={selectedGrade}
             onSelectGrade={handleSelectGrade}
             onOpenUpdateModal={() => setIsUpdateModalOpen(true)}
@@ -542,6 +554,7 @@ export default function App() {
         onCreateAccount={handleCreateAccount}
         onDeleteAccount={handleDeleteAccount}
         onBulkImportAccounts={handleBulkImportAccounts}
+        onUpdateAccountPin={handleUpdateAccountPin}
       />
 
       {/* App Update & Install Modal */}

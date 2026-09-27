@@ -16,6 +16,12 @@ import {
   ShieldCheck,
   Smartphone,
   Laptop,
+  Lock,
+  Unlock,
+  Eye,
+  EyeOff,
+  ArrowLeft,
+  HelpCircle,
 } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
 import { getPetStage } from '../data/petData';
@@ -39,11 +45,25 @@ export default function AccountModal({
   onCreateAccount,
   onDeleteAccount,
   onBulkImportAccounts,
+  onUpdateAccountPin,
 }) {
   const [activeTab, setActiveTab] = useState('local'); // 'local' | 'leaderboard' | 'transfer'
   const [isCreating, setIsCreating] = useState(false);
   const [newName, setNewName] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState('🦁');
+  const [newPin, setNewPin] = useState('1234');
+  const [showNewPin, setShowNewPin] = useState(false);
+
+  // PIN verification state
+  const [pinTargetAccount, setPinTargetAccount] = useState(null);
+  const [enteredPin, setEnteredPin] = useState('');
+  const [pinError, setPinError] = useState(false);
+  const [pinSuccess, setPinSuccess] = useState(false);
+  const [showParentHelp, setShowParentHelp] = useState(false);
+  const [parentChallenge, setParentChallenge] = useState({ n1: 24, n2: 35, ans: 59 });
+  const [parentChallengeInput, setParentChallengeInput] = useState('');
+  const [parentChallengeError, setParentChallengeError] = useState(false);
+  const [revealedPin, setRevealedPin] = useState(null);
 
   // Cloud leaderboard state
   const [cloudStudents, setCloudStudents] = useState([]);
@@ -99,12 +119,120 @@ export default function AccountModal({
     }
   }, [isOpen, activeTab]);
 
+  // Keyboard listener for 4-digit PIN keypad
+  useEffect(() => {
+    if (!pinTargetAccount || showParentHelp) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key >= '0' && e.key <= '9') {
+        handlePinDigit(e.key);
+      } else if (e.key === 'Backspace') {
+        handlePinBackspace();
+      } else if (e.key === 'Escape') {
+        handleClosePinPrompt();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [pinTargetAccount, enteredPin, pinSuccess, showParentHelp]);
+
+  const handlePinDigit = (digit) => {
+    if (enteredPin.length >= 4 || pinSuccess) return;
+    soundManager.playPop(1.1 + enteredPin.length * 0.1);
+    const nextPin = enteredPin + String(digit);
+    setEnteredPin(nextPin);
+
+    if (nextPin.length === 4) {
+      const correctPin = pinTargetAccount?.pin || '1234';
+      if (nextPin === correctPin) {
+        setPinSuccess(true);
+        soundManager.playFanfare();
+        confetti({
+          particleCount: 50,
+          spread: 60,
+          origin: { y: 0.6 },
+        });
+        setTimeout(() => {
+          onSwitchAccount(pinTargetAccount.id);
+          setPinTargetAccount(null);
+          setEnteredPin('');
+          setPinSuccess(false);
+          onClose();
+        }, 500);
+      } else {
+        setPinError(true);
+        soundManager.playWrong();
+        setTimeout(() => {
+          setEnteredPin('');
+          setPinError(false);
+        }, 750);
+      }
+    }
+  };
+
+  const handlePinBackspace = () => {
+    if (enteredPin.length > 0) {
+      soundManager.playClick();
+      setEnteredPin(enteredPin.slice(0, -1));
+      setPinError(false);
+    }
+  };
+
+  const handleClosePinPrompt = () => {
+    soundManager.playPop();
+    setPinTargetAccount(null);
+    setEnteredPin('');
+    setPinError(false);
+    setPinSuccess(false);
+    setShowParentHelp(false);
+    setRevealedPin(null);
+  };
+
+  const startParentHelp = () => {
+    soundManager.playPop();
+    const n1 = Math.floor(Math.random() * 40) + 15;
+    const n2 = Math.floor(Math.random() * 40) + 12;
+    setParentChallenge({ n1, n2, ans: n1 + n2 });
+    setParentChallengeInput('');
+    setParentChallengeError(false);
+    setShowParentHelp(true);
+    setRevealedPin(null);
+  };
+
+  const verifyParentHelp = (e) => {
+    e.preventDefault();
+    if (Number(parentChallengeInput.trim()) === parentChallenge.ans) {
+      soundManager.playFanfare();
+      setRevealedPin(pinTargetAccount?.pin || '1234');
+      setParentChallengeError(false);
+    } else {
+      soundManager.playWrong();
+      setParentChallengeError(true);
+    }
+  };
+
+  const handleParentDirectLogin = () => {
+    if (!pinTargetAccount) return;
+    soundManager.playFanfare();
+    confetti({
+      particleCount: 50,
+      spread: 60,
+      origin: { y: 0.6 },
+    });
+    onSwitchAccount(pinTargetAccount.id);
+    handleClosePinPrompt();
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   const handleCreateSubmit = (e) => {
     e.preventDefault();
     const trimmed = newName.trim();
     if (!trimmed) return;
+
+    const cleanPin = newPin.trim() ? newPin.trim().replace(/\D/g, '').padEnd(4, '0').slice(0, 4) : '1234';
 
     soundManager.playFanfare();
     confetti({
@@ -116,9 +244,11 @@ export default function AccountModal({
     onCreateAccount({
       name: trimmed,
       avatar: selectedAvatar,
+      pin: cleanPin,
     });
 
     setNewName('');
+    setNewPin('1234');
     setIsCreating(false);
     onClose();
   };
@@ -144,6 +274,7 @@ export default function AccountModal({
       id: student.id || `acc_${Date.now()}`,
       name: student.name,
       avatar: student.avatar || '🦁',
+      pin: student.pin || '1234',
       grade: student.grade || 1,
       stars: student.stars || 0,
       completedTasks: student.completedTasks || [],
@@ -191,6 +322,219 @@ export default function AccountModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-pop">
       <div className="bg-white rounded-3xl border-4 border-amber-400 shadow-2xl max-w-xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-6 text-slate-800 relative">
+        {/* PIN VERIFICATION KEYPAD OVERLAY */}
+        {pinTargetAccount && (
+          <div className="absolute inset-0 z-40 bg-white/98 backdrop-blur-md rounded-3xl p-4 sm:p-6 flex flex-col justify-between overflow-y-auto animate-pop shadow-2xl">
+            {/* Header with back button */}
+            <div className="flex items-center justify-between border-b pb-2.5">
+              <button
+                type="button"
+                onClick={handleClosePinPrompt}
+                className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl transition-colors cursor-pointer"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>Quay lại</span>
+              </button>
+
+              <span className="text-xs font-black uppercase text-amber-800 bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-full flex items-center gap-1">
+                <Lock className="w-3.5 h-3.5 text-amber-600" />
+                Mật Mã 4 Số Bảo Vệ
+              </span>
+            </div>
+
+            {/* Normal PIN Keypad Mode */}
+            {!showParentHelp ? (
+              <div className="flex flex-col items-center justify-center my-auto py-2">
+                <div className="w-16 h-16 rounded-3xl bg-amber-100 border-4 border-amber-300 shadow-md flex items-center justify-center text-4xl mb-2 flex-shrink-0 animate-bounce-slow">
+                  {pinTargetAccount.avatar || '🦁'}
+                </div>
+
+                <h4 className="text-base sm:text-lg font-black text-slate-800">
+                  Bé {pinTargetAccount.name}
+                </h4>
+                <p className="text-xs font-bold text-slate-500 mb-3">
+                  Nhập mật mã 4 số để vào góc học tập của bé
+                </p>
+
+                {/* 4 Bubble Indicator Slots */}
+                <div className={`flex items-center gap-3.5 my-1 ${pinError ? 'animate-shake' : ''}`}>
+                  {[0, 1, 2, 3].map((slotIdx) => {
+                    const isFilled = slotIdx < enteredPin.length;
+                    return (
+                      <div
+                        key={slotIdx}
+                        className={`w-12 h-12 rounded-2xl flex items-center justify-center text-2xl font-black border-2 transition-all duration-150 ${
+                          pinError
+                            ? 'border-rose-500 bg-rose-50 text-rose-600 shadow-sm'
+                            : pinSuccess
+                            ? 'border-emerald-500 bg-emerald-100 text-emerald-700 scale-105 shadow-md'
+                            : isFilled
+                            ? 'border-amber-400 bg-amber-400 text-amber-950 shadow-md scale-105'
+                            : 'border-slate-300 bg-slate-50 text-slate-300'
+                        }`}
+                      >
+                        {isFilled ? '⭐' : '•'}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Status Message */}
+                <div className="h-6 flex items-center justify-center my-1">
+                  {pinError && (
+                    <span className="text-xs font-black text-rose-600 animate-shake">
+                      ❌ Mật mã chưa đúng, bé thử lại nhé!
+                    </span>
+                  )}
+                  {pinSuccess && (
+                    <span className="text-xs font-black text-emerald-600 animate-pop">
+                      🎉 Đúng rồi! Đang mở tài khoản của bé...
+                    </span>
+                  )}
+                  {!pinError && !pinSuccess && (
+                    <span className="text-[11px] font-bold text-slate-400">
+                      Gợi ý: Mật mã mặc định khi tạo là <span className="font-extrabold text-amber-700">1234</span>
+                    </span>
+                  )}
+                </div>
+
+                {/* Tactile 3x4 Numeric Keypad */}
+                <div className="grid grid-cols-3 gap-2 sm:gap-2.5 w-full max-w-[280px] mt-2">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                    <button
+                      key={num}
+                      type="button"
+                      onClick={() => handlePinDigit(num)}
+                      className="h-12 sm:h-13 rounded-2xl bg-white hover:bg-amber-100 active:bg-amber-200 border-2 border-slate-200 hover:border-amber-400 text-slate-800 font-black text-xl shadow-xs transition-all flex items-center justify-center cursor-pointer btn-kid-3d"
+                    >
+                      {num}
+                    </button>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={startParentHelp}
+                    className="h-12 sm:h-13 rounded-2xl bg-indigo-50 hover:bg-indigo-100 active:bg-indigo-200 border-2 border-indigo-200 text-indigo-700 font-black text-[11px] leading-tight flex flex-col items-center justify-center cursor-pointer p-1"
+                    title="Ba mẹ trợ giúp khi quên mật mã"
+                  >
+                    <span className="text-sm">👨‍👩‍👧</span>
+                    <span>Quên mã</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handlePinDigit(0)}
+                    className="h-12 sm:h-13 rounded-2xl bg-white hover:bg-amber-100 active:bg-amber-200 border-2 border-slate-200 hover:border-amber-400 text-slate-800 font-black text-xl shadow-xs transition-all flex items-center justify-center cursor-pointer btn-kid-3d"
+                  >
+                    0
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handlePinBackspace}
+                    className="h-12 sm:h-13 rounded-2xl bg-rose-50 hover:bg-rose-100 active:bg-rose-200 border-2 border-rose-200 text-rose-700 font-black text-base flex items-center justify-center cursor-pointer transition-all"
+                    title="Xóa 1 số"
+                  >
+                    ⌫
+                  </button>
+                </div>
+              </div>
+            ) : (
+              /* Parent Override Challenge Card */
+              <div className="flex flex-col items-center justify-center my-auto p-4 bg-indigo-50/80 border-2 border-indigo-300 rounded-3xl w-full max-w-sm mx-auto space-y-3.5 animate-pop">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-2xl">
+                  👨‍👩‍👧
+                </div>
+
+                <div className="text-center">
+                  <h4 className="font-black text-sm sm:text-base text-indigo-950">
+                    Góc Ba Mẹ Hỗ Trợ Quên Mật Mã
+                  </h4>
+                  <p className="text-xs text-indigo-800 font-medium mt-0.5">
+                    Để chắc chắn là người lớn thao tác, ba mẹ hãy tính phép cộng sau:
+                  </p>
+                </div>
+
+                {!revealedPin ? (
+                  <form onSubmit={verifyParentHelp} className="w-full space-y-3">
+                    <div className="bg-white border-2 border-indigo-200 rounded-2xl p-3 text-center">
+                      <span className="text-lg font-black text-indigo-900 tracking-wider">
+                        {parentChallenge.n1} + {parentChallenge.n2} = ?
+                      </span>
+                    </div>
+
+                    <input
+                      type="number"
+                      autoFocus
+                      value={parentChallengeInput}
+                      onChange={(e) => setParentChallengeInput(e.target.value)}
+                      placeholder="Nhập kết quả..."
+                      className="w-full px-3 py-2 text-center bg-white border-2 border-indigo-300 focus:border-indigo-600 rounded-xl font-black text-base text-indigo-950 outline-none"
+                    />
+
+                    {parentChallengeError && (
+                      <p className="text-xs font-black text-rose-600 text-center animate-shake">
+                        Kết quả chưa đúng, ba mẹ thử lại nhé!
+                      </p>
+                    )}
+
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setShowParentHelp(false)}
+                        className="flex-1 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl text-xs"
+                      >
+                        Quay lại
+                      </button>
+                      <button
+                        type="submit"
+                        className="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl text-xs shadow-xs"
+                      >
+                        Kiểm Tra 🚀
+                      </button>
+                    </div>
+                  </form>
+                ) : (
+                  <div className="w-full space-y-3 text-center animate-pop">
+                    <div className="bg-white border-2 border-emerald-400 rounded-2xl p-3.5 space-y-1">
+                      <span className="text-xs font-bold text-slate-500 block">
+                        Mật mã 4 số của bé {pinTargetAccount.name}:
+                      </span>
+                      <span className="text-3xl font-black text-emerald-600 tracking-widest block font-mono">
+                        {revealedPin}
+                      </span>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowParentHelp(false);
+                          setRevealedPin(null);
+                        }}
+                        className="flex-1 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl text-xs"
+                      >
+                        Đóng
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleParentDirectLogin}
+                        className="flex-1 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-black rounded-xl text-xs shadow-xs"
+                      >
+                        Đăng Nhập Ngay 🎉
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="text-center text-[10px] text-slate-400 font-semibold pt-1">
+              Bảo vệ tài khoản học và tránh nhầm lẫn giữa các bạn nhỏ
+            </div>
+          </div>
+        )}
+
         {/* Header */}
         <div className="flex items-center justify-between border-b pb-3 mb-3">
           <div className="flex items-center gap-2.5">
@@ -302,8 +646,12 @@ export default function AccountModal({
                         key={acc.id}
                         onClick={() => {
                           if (!isCurrent) {
-                            soundManager.playClick();
-                            onSwitchAccount(acc.id);
+                            soundManager.playPop();
+                            setPinTargetAccount(acc);
+                            setEnteredPin('');
+                            setPinError(false);
+                            setPinSuccess(false);
+                            setShowParentHelp(false);
                           }
                         }}
                         className={`p-2.5 sm:p-3 rounded-2xl border-2 flex items-center justify-between gap-3 cursor-pointer transition-all ${
@@ -318,13 +666,17 @@ export default function AccountModal({
                           </div>
 
                           <div className="min-w-0">
-                            <div className="flex items-center gap-1.5">
+                            <div className="flex items-center gap-1.5 flex-wrap">
                               <h4 className="font-black text-sm sm:text-base text-slate-800 truncate">
                                 {acc.name}
                               </h4>
-                              {isCurrent && (
+                              {isCurrent ? (
                                 <span className="bg-emerald-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-0.5 flex-shrink-0">
                                   <Check className="w-3 h-3" /> Đang học
+                                </span>
+                              ) : (
+                                <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[9px] font-black px-1.5 py-0.2 rounded-md flex items-center gap-0.5">
+                                  <Lock className="w-2.5 h-2.5 text-amber-700" /> PIN 4 số
                                 </span>
                               )}
                             </div>
@@ -351,12 +703,17 @@ export default function AccountModal({
                               type="button"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                soundManager.playFanfare();
-                                onSwitchAccount(acc.id);
+                                soundManager.playPop();
+                                setPinTargetAccount(acc);
+                                setEnteredPin('');
+                                setPinError(false);
+                                setPinSuccess(false);
+                                setShowParentHelp(false);
                               }}
-                              className="bg-amber-400 hover:bg-amber-500 text-amber-950 font-black text-xs px-3 py-1.5 rounded-xl shadow-xs btn-kid-3d"
+                              className="bg-amber-400 hover:bg-amber-500 text-amber-950 font-black text-xs px-3 py-1.5 rounded-xl shadow-xs btn-kid-3d flex items-center gap-1"
                             >
-                              Chọn
+                              <Lock className="w-3 h-3 text-amber-900" />
+                              <span>Chọn</span>
                             </button>
                           )}
 
@@ -417,6 +774,43 @@ export default function AccountModal({
                     maxLength={25}
                     className="w-full px-3.5 py-2.5 bg-slate-50 border-2 border-slate-300 focus:border-amber-500 rounded-2xl font-bold text-sm text-slate-800 outline-none transition-colors"
                   />
+                </div>
+
+                {/* 4-digit PIN setup */}
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
+                      Mật mã 4 chữ số (Mã PIN bảo vệ):
+                    </label>
+                    <span className="text-[11px] font-black text-amber-700 bg-amber-100 px-2 py-0.5 rounded-md">
+                      Mặc định: 1234
+                    </span>
+                  </div>
+                  <div className="relative">
+                    <input
+                      type={showNewPin ? 'text' : 'password'}
+                      value={newPin}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, '').slice(0, 4);
+                        setNewPin(val);
+                      }}
+                      placeholder="1234"
+                      maxLength={4}
+                      inputMode="numeric"
+                      className="w-full pl-3.5 pr-10 py-2.5 bg-slate-50 border-2 border-slate-300 focus:border-amber-500 rounded-2xl font-black text-base tracking-widest text-slate-800 outline-none transition-colors font-mono"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNewPin(!showNewPin)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+                      title={showNewPin ? 'Ẩn mật mã' : 'Hiện mật mã'}
+                    >
+                      {showNewPin ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-slate-500 font-bold mt-1">
+                    🔒 Bé sẽ nhập 4 số này khi đăng nhập để tránh bấm nhầm tài khoản của nhau.
+                  </p>
                 </div>
 
                 <div>
@@ -639,13 +1033,18 @@ export default function AccountModal({
                             <button
                               type="button"
                               onClick={() => {
-                                soundManager.playFanfare();
-                                onSwitchAccount(st.id);
-                                onClose();
+                                soundManager.playPop();
+                                const localAcc = accounts.find((a) => a.id === st.id) || st;
+                                setPinTargetAccount(localAcc);
+                                setEnteredPin('');
+                                setPinError(false);
+                                setPinSuccess(false);
+                                setShowParentHelp(false);
                               }}
-                              className="bg-amber-400 hover:bg-amber-500 text-amber-950 font-black text-xs px-2.5 py-1 rounded-xl shadow-2xs btn-kid-3d"
+                              className="bg-amber-400 hover:bg-amber-500 text-amber-950 font-black text-xs px-2.5 py-1 rounded-xl shadow-2xs btn-kid-3d flex items-center gap-1"
                             >
-                              Chọn bé
+                              <Lock className="w-3 h-3 text-amber-900" />
+                              <span>Chọn bé</span>
                             </button>
                           )
                         ) : (

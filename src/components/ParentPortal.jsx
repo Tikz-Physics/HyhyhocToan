@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BarChart3, Lightbulb, RotateCcw, RefreshCw, Smartphone } from 'lucide-react';
+import { BarChart3, Lightbulb, RotateCcw, RefreshCw, Smartphone, Lock, Eye, EyeOff } from 'lucide-react';
 import { getCurriculumZones, GRADE_CONFIGS } from '../data/curriculumData';
 import { CURRENT_APP_VERSION } from '../utils/updateManager';
 
@@ -12,12 +12,17 @@ export default function ParentPortal({
   onResetProgress,
   currentAccount,
   onOpenAccountModal,
+  onUpdateAccountPin,
   selectedGrade = 1,
   onSelectGrade,
   onOpenUpdateModal,
   updateInfo,
 }) {
   const [isConfirmingReset, setIsConfirmingReset] = useState(false);
+  const [showPin, setShowPin] = useState(false);
+  const [isChangingPin, setIsChangingPin] = useState(false);
+  const [newPinInput, setNewPinInput] = useState('');
+  const [pinChangeSuccess, setPinChangeSuccess] = useState(false);
   const currentZones = getCurriculumZones(selectedGrade);
   const totalAvailableTasks = currentZones.reduce(
     (acc, z) => acc + z.basicLevels.length + z.timoChallenges.length,
@@ -81,6 +86,132 @@ export default function ParentPortal({
           >
             👥 Đổi Bé Khác / + Thêm Bé
           </button>
+        </div>
+      )}
+
+      {/* Child PIN Security Setting Card */}
+      {currentAccount && (
+        <div className="bg-white rounded-3xl border-4 border-indigo-200 p-4 sm:p-5 shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5 w-full sm:w-auto">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-50 border-2 border-indigo-300 flex items-center justify-center text-2xl text-indigo-600 flex-shrink-0">
+              🔒
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-black text-slate-800">
+                  Mật Mã 4 Số Bảo Vệ Bé ({currentAccount.name})
+                </h3>
+                <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                  Đang bật
+                </span>
+              </div>
+              <p className="text-xs font-semibold text-slate-500 mt-0.5">
+                Mỗi bé cần nhập 4 số này để đăng nhập, tránh việc các bé tự ý bấm sang tài khoản của nhau.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+            <div className="flex items-center gap-2 bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 font-mono text-sm font-black text-slate-800">
+              <span>{showPin ? (currentAccount.pin || '1234') : '••••'}</span>
+              <button
+                type="button"
+                onClick={() => setShowPin(!showPin)}
+                className="text-slate-400 hover:text-slate-700 cursor-pointer p-0.5"
+                title={showPin ? 'Ẩn mật mã' : 'Hiện mật mã'}
+              >
+                {showPin ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                setNewPinInput(currentAccount.pin || '1234');
+                setIsChangingPin(true);
+                setPinChangeSuccess(false);
+              }}
+              className="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs rounded-xl shadow-xs cursor-pointer btn-kid-3d whitespace-nowrap"
+            >
+              Đổi Mã PIN
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Change PIN Modal Popup */}
+      {isChangingPin && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-pop">
+          <div className="bg-white rounded-3xl border-4 border-indigo-400 p-5 max-w-sm w-full shadow-2xl text-slate-800 space-y-4">
+            <div className="flex items-center justify-between border-b pb-2">
+              <h4 className="font-black text-base text-slate-800 flex items-center gap-2">
+                <span>🔒</span> Đổi Mật Mã 4 Số Cho Bé
+              </h4>
+              <button
+                onClick={() => {
+                  setIsChangingPin(false);
+                  setNewPinInput('');
+                  setPinChangeSuccess(false);
+                }}
+                className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold flex items-center justify-center cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-600 font-medium">
+              Nhập mật mã 4 số mới cho bé <strong>{currentAccount.name}</strong>:
+            </p>
+
+            <input
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              maxLength={4}
+              autoFocus
+              value={newPinInput}
+              onChange={(e) => setNewPinInput(e.target.value.replace(/\D/g, '').slice(0, 4))}
+              placeholder="VD: 5678"
+              className="w-full text-center text-3xl font-black font-mono tracking-widest py-3 border-2 border-indigo-300 focus:border-indigo-600 rounded-2xl bg-indigo-50/50 text-indigo-950 outline-none"
+            />
+
+            {pinChangeSuccess && (
+              <p className="text-xs font-black text-emerald-600 text-center animate-pop">
+                🎉 Đã đổi mật mã thành công!
+              </p>
+            )}
+
+            <div className="flex gap-2 pt-1">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsChangingPin(false);
+                  setNewPinInput('');
+                }}
+                className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl"
+              >
+                Hủy
+              </button>
+              <button
+                type="button"
+                disabled={newPinInput.length !== 4}
+                onClick={() => {
+                  if (newPinInput.length === 4 && onUpdateAccountPin) {
+                    onUpdateAccountPin(currentAccount.id, newPinInput);
+                    setPinChangeSuccess(true);
+                    setTimeout(() => {
+                      setIsChangingPin(false);
+                      setPinChangeSuccess(false);
+                      setNewPinInput('');
+                    }, 1000);
+                  }
+                }}
+                className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-black text-xs rounded-xl shadow-xs btn-kid-3d"
+              >
+                Lưu Mật Mã 💾
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

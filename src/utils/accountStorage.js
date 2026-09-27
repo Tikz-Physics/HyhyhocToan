@@ -10,7 +10,10 @@ export function loadAccounts() {
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed;
+        return parsed.map((acc) => ({
+          ...acc,
+          pin: acc.pin || '1234',
+        }));
       }
     }
   } catch (err) {
@@ -40,6 +43,7 @@ export function loadAccounts() {
     id: 'default_child',
     name: 'Bé Yêu 🎈',
     avatar: '🦁',
+    pin: '1234',
     stars: existingStars,
     completedTasks: existingTasks,
     userMedals: existingMedals,
