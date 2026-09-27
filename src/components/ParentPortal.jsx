@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BarChart3, Lightbulb, RotateCcw } from 'lucide-react';
-import { CURRICULUM_ZONES } from '../data/curriculumData';
+import { getCurriculumZones, GRADE_CONFIGS } from '../data/curriculumData';
 
 export default function ParentPortal({
   stars,
@@ -9,9 +9,12 @@ export default function ParentPortal({
   onResetProgress,
   currentAccount,
   onOpenAccountModal,
+  selectedGrade = 1,
+  onSelectGrade,
 }) {
   const [isConfirmingReset, setIsConfirmingReset] = useState(false);
-  const totalAvailableTasks = CURRICULUM_ZONES.reduce(
+  const currentZones = getCurriculumZones(selectedGrade);
+  const totalAvailableTasks = currentZones.reduce(
     (acc, z) => acc + z.basicLevels.length + z.timoChallenges.length,
     0
   );
@@ -103,17 +106,38 @@ export default function ParentPortal({
         </div>
       </div>
 
-      {/* Progress Breakdown across 6 Zones */}
-      <div className="bg-white rounded-3xl border-4 border-slate-200 p-6 shadow-md">
-        <div className="flex items-center gap-2 mb-4">
-          <BarChart3 className="w-6 h-6 text-blue-600" />
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-800">
-            Tiến Trình Theo 8 Chủ Đề Toán Lớp 1 (SGK Mới)
-          </h2>
+      {/* Progress Breakdown across Zones */}
+      <div className="bg-white rounded-3xl border-4 border-slate-200 p-4 sm:p-6 shadow-md">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div className="flex items-center gap-2">
+            <BarChart3 className="w-6 h-6 text-blue-600" />
+            <h2 className="text-lg sm:text-xl font-extrabold text-slate-800">
+              Tiến Trình Theo 8 Chủ Đề Toán Lớp {selectedGrade} (CTGDPT 2018)
+            </h2>
+          </div>
+
+          {/* Grade selection pills */}
+          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl overflow-x-auto">
+            {GRADE_CONFIGS.map((g) => (
+              <button
+                key={g.grade}
+                type="button"
+                onClick={() => onSelectGrade && onSelectGrade(g.grade)}
+                className={`px-2.5 py-1 rounded-lg text-xs font-black transition-all cursor-pointer ${
+                  Number(selectedGrade) === g.grade
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                {g.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="space-y-4">
-          {CURRICULUM_ZONES.map((zone) => {
+          {currentZones.map((zone) => {
+
             const totalInZone = zone.basicLevels.length + zone.timoChallenges.length;
             const completedInZone = completedTasks.filter((t) =>
               t.startsWith(zone.id)

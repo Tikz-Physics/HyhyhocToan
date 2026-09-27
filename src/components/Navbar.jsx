@@ -1,6 +1,7 @@
-import React from 'react';
-import { Volume2, VolumeX, Mic, MicOff, Trophy, Home, Award, Users } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Volume2, VolumeX, Mic, MicOff, Trophy, Home, Award, Users, ChevronDown } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
+import { GRADE_CONFIGS } from '../data/curriculumData';
 
 export default function Navbar({
   currentView,
@@ -12,7 +13,24 @@ export default function Navbar({
   setVoiceOn,
   currentAccount,
   onOpenAccountModal,
+  selectedGrade = 1,
+  onSelectGrade,
 }) {
+  const [isGradeMenuOpen, setIsGradeMenuOpen] = useState(false);
+  const gradeMenuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (gradeMenuRef.current && !gradeMenuRef.current.contains(e.target)) {
+        setIsGradeMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const currentGradeConfig = GRADE_CONFIGS.find((g) => g.grade === Number(selectedGrade)) || GRADE_CONFIGS[0];
+
   const handleToggleSound = () => {
     const next = soundManager.toggleSound();
     setSoundOn(next);
@@ -41,24 +59,74 @@ export default function Navbar({
       {/* Top Header for all devices */}
       <header className="sticky top-0 z-50 bg-gradient-to-r from-amber-300 via-orange-300 to-yellow-300 border-b-4 border-amber-400 shadow-lg px-3 py-2 sm:px-6">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-2">
-          {/* Logo & Brand */}
-          <div
-            onClick={() => {
-              soundManager.playPop();
-              setCurrentView('map');
-            }}
-            className="flex items-center gap-1.5 cursor-pointer group select-none"
-          >
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-xl flex items-center justify-center text-lg sm:text-xl shadow-xs border-2 border-amber-400 group-hover:rotate-6 transition-transform flex-shrink-0">
-              🦖
-            </div>
-            <div className="flex items-center gap-1">
-              <span className="font-black text-sm sm:text-lg text-amber-950 tracking-tight whitespace-nowrap">
+          {/* Logo & Brand & Grade Switcher */}
+          <div className="flex items-center gap-2 select-none">
+            <div
+              onClick={() => {
+                soundManager.playPop();
+                setCurrentView('map');
+              }}
+              className="flex items-center gap-1.5 cursor-pointer group"
+            >
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-xl flex items-center justify-center text-lg sm:text-xl shadow-xs border-2 border-amber-400 group-hover:rotate-6 transition-transform flex-shrink-0">
+                🦖
+              </div>
+              <span className="font-black text-sm sm:text-lg text-amber-950 tracking-tight whitespace-nowrap hidden xs:inline">
                 HyhyhocToan
               </span>
-              <span className="bg-rose-500 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase tracking-wider">
-                Lớp 1 🎈
-              </span>
+            </div>
+
+            {/* Interactive Grade Selector Dropdown */}
+            <div className="relative" ref={gradeMenuRef}>
+              <button
+                type="button"
+                onClick={() => {
+                  soundManager.playClick();
+                  setIsGradeMenuOpen(!isGradeMenuOpen);
+                }}
+                className="bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 active:scale-95 text-white text-[10px] sm:text-xs font-black px-2 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm border border-white/40 cursor-pointer btn-kid-3d"
+                title="Bấm để đổi khối lớp học (Lớp 1 đến Lớp 5)"
+              >
+                <span>{currentGradeConfig.label}</span>
+                <span className="text-xs">{currentGradeConfig.icon}</span>
+                <ChevronDown className={`w-3 h-3 transition-transform ${isGradeMenuOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {isGradeMenuOpen && (
+                <div className="absolute left-0 mt-2 w-44 bg-white rounded-2xl shadow-2xl border-2 border-amber-400 p-1.5 z-50 animate-pop">
+                  <div className="px-2 py-1 text-[10px] font-black text-amber-900/60 uppercase tracking-wider border-b border-amber-100 flex items-center justify-between">
+                    <span>Chọn Khối Lớp</span>
+                    <span>1 - 5</span>
+                  </div>
+                  <div className="flex flex-col gap-1 mt-1">
+                    {GRADE_CONFIGS.map((g) => {
+                      const isActive = Number(selectedGrade) === g.grade;
+                      return (
+                        <button
+                          key={g.grade}
+                          type="button"
+                          onClick={() => {
+                            soundManager.playPop();
+                            if (onSelectGrade) onSelectGrade(g.grade);
+                            setIsGradeMenuOpen(false);
+                          }}
+                          className={`w-full px-2.5 py-1.5 rounded-xl flex items-center justify-between text-xs font-black transition-all cursor-pointer ${
+                            isActive
+                              ? 'bg-amber-400 text-amber-950 shadow-xs'
+                              : 'text-slate-700 hover:bg-amber-50 active:bg-amber-100'
+                          }`}
+                        >
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-sm">{g.icon}</span>
+                            <span>{g.label}</span>
+                          </div>
+                          {isActive && <span className="text-xs font-black">✓</span>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

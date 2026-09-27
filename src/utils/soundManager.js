@@ -19,41 +19,68 @@ export function formatMathForSpeech(text) {
   // 1. Remove emojis and pictographs
   res = res.replace(/\p{Extended_Pictographic}/gu, '');
 
-  // 2. Units: 'cm' -> 'xăng-ti-mét'
-  res = res.replace(/(\d+)\s*cm\b/gi, (m, num) => `${num} xăng-ti-mét`);
-  res = res.replace(/\bcm\b/gi, 'xăng-ti-mét');
+  // 2. Units of Area and Volume: cm2, m2, dm2, mm2, cm3, dm3, m3
+  res = res.replace(/(\d+)\s*cm2\b/gi, (m, n) => `${n} xăng-ti-mét vuông`);
+  res = res.replace(/(\d+)\s*m2\b/gi, (m, n) => `${n} mét vuông`);
+  res = res.replace(/(\d+)\s*dm2\b/gi, (m, n) => `${n} đề-xi-mét vuông`);
+  res = res.replace(/(\d+)\s*mm2\b/gi, (m, n) => `${n} mi-li-mét vuông`);
+  res = res.replace(/(\d+)\s*cm3\b/gi, (m, n) => `${n} xăng-ti-mét khối`);
+  res = res.replace(/(\d+)\s*dm3\b/gi, (m, n) => `${n} đề-xi-mét khối`);
+  res = res.replace(/(\d+)\s*m3\b/gi, (m, n) => `${n} mét khối`);
 
-  // 3. Question equals: '= ?' -> 'bằng bao nhiêu?'
+  // 3. Units of Length, Mass, Speed and Volume
+  res = res.replace(/(\d+)\s*km\/h\b/gi, (m, n) => `${n} ki-lô-mét trên giờ`);
+  res = res.replace(/(\d+)\s*km\b/gi, (m, n) => `${n} ki-lô-mét`);
+  res = res.replace(/(\d+)\s*dm\b/gi, (m, n) => `${n} đề-xi-mét`);
+  res = res.replace(/(\d+)\s*cm\b/gi, (m, num) => `${num} xăng-ti-mét`);
+  res = res.replace(/(\d+)\s*mm\b/gi, (m, n) => `${n} mi-li-mét`);
+  res = res.replace(/(\d+)\s*kg\b/gi, (m, n) => `${n} ki-lô-gam`);
+  res = res.replace(/(\d+)\s*ml\b/gi, (m, n) => `${n} mi-li-lít`);
+  res = res.replace(/\bcm\b/gi, 'xăng-ti-mét');
+  res = res.replace(/(\d+)\s*%/g, (m, n) => `${n} phần trăm`);
+
+  // 4. Fractions: 1/2 -> một phần hai, 3/4 -> ba phần tư, a/b -> a phần b
+  res = res.replace(/\b1\/2\b/g, 'một phần hai');
+  res = res.replace(/\b1\/3\b/g, 'một phần ba');
+  res = res.replace(/\b1\/4\b/g, 'một phần tư');
+  res = res.replace(/\b3\/4\b/g, 'ba phần tư');
+  res = res.replace(/\b1\/5\b/g, 'một phần năm');
+  res = res.replace(/(\d+)\/(\d+)/g, (m, a, b) => `${a} phần ${b}`);
+
+  // 5. Question equals: '= ?' -> 'bằng bao nhiêu?'
   res = res.replace(/\s*=\s*\?/g, ' bằng bao nhiêu?');
 
-  // 4. Missing number in equation: '6 + ? = 10'
+  // 6. Missing number in equation: '6 + ? = 10'
   res = res.replace(/(?<=\+|\-|\×|\*|\:|\÷)\s*\?/g, ' mấy');
   res = res.replace(/\?\s*(?==)/g, 'mấy ');
 
-  // 5. Minus sign between numbers or operands -> 'trừ'
-  // Crucial: TTS reads '68 - 25' as '68 đến 25' without this!
+  // 7. Multiplication and Division
+  res = res.replace(/(\d+)\s*[x×*]\s*(\d+)/g, (m, a, b) => `${a} nhân ${b}`);
+  res = res.replace(/(\d+)\s*[:÷]\s*(\d+)/g, (m, a, b) => `${a} chia ${b}`);
+
+  // 8. Minus sign between numbers or operands -> 'trừ'
   res = res.replace(/(\d+)\s*[-−–]\s*(\d+)/g, (m, a, b) => `${a} trừ ${b}`);
   res = res.replace(/(?<=\d|\))\s*[-−–]\s*/g, ' trừ ');
   res = res.replace(/\s*[-−–]\s*(?=\d|\()/g, ' trừ ');
 
-  // 6. Plus sign -> 'cộng'
+  // 9. Plus sign -> 'cộng'
   res = res.replace(/(\d+)\s*\+\s*(\d+)/g, (m, a, b) => `${a} cộng ${b}`);
   res = res.replace(/(?<=\d|\))\s*\+\s*/g, ' cộng ');
   res = res.replace(/\s*\+\s*(?=\d|\()/g, ' cộng ');
   res = res.replace(/\s*\+\s*/g, ' cộng ');
 
-  // 7. Equal sign -> 'bằng'
+  // 10. Equal sign -> 'bằng'
   res = res.replace(/\s*=\s*/g, ' bằng ');
 
-  // 8. Comparisons & ranges
+  // 11. Comparisons & ranges
   res = res.replace(/(\d+)\s*(\.{3,}|…)\s*(\d+)/g, (m, a, dots, b) => `${a} với ${b}`);
   res = res.replace(/\s*>\s*/g, ' lớn hơn ');
   res = res.replace(/\s*<\s*/g, ' bé hơn ');
 
-  // 9. Soften colons after keywords to avoid TTS saying "hai chấm"
+  // 12. Soften colons after keywords to avoid TTS saying "hai chấm"
   res = res.replace(/(Tính|Tính nhẩm|Tìm giá trị của|Đố bé|Quan sát)\s*:/gi, (m, word) => `${word},`);
 
-  // 10. Clean up spaces
+  // 13. Clean up spaces
   res = res.replace(/\s+/g, ' ').trim();
   return res;
 }

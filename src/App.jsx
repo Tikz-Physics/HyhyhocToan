@@ -5,7 +5,7 @@ import ZoneView from './components/ZoneView';
 import TimoArena from './components/TimoArena';
 import TrophyRoom from './components/TrophyRoom';
 import ParentPortal from './components/ParentPortal';
-import { CURRICULUM_ZONES } from './data/curriculumData';
+import { CURRICULUM_ZONES, getCurriculumZones, GRADE_CONFIGS } from './data/curriculumData';
 import { soundManager } from './utils/soundManager';
 import PetEvolution from './components/PetEvolution';
 import AccountModal from './components/AccountModal';
@@ -55,6 +55,23 @@ export default function App() {
   const userMedals = currentAccount.userMedals || [];
   const unlockedPets = currentAccount.unlockedPets || ['dino'];
   const activePet = currentAccount.activePet || 'dino';
+
+  const [selectedGrade, setSelectedGrade] = useState(() => currentAccount.grade || 1);
+  const activeCurriculumZones = getCurriculumZones(selectedGrade);
+
+  useEffect(() => {
+    if (currentAccount?.grade) {
+      setSelectedGrade(currentAccount.grade);
+    }
+  }, [currentAccountId]);
+
+  const handleSelectGrade = (newGrade) => {
+    setSelectedGrade(newGrade);
+    const newZones = getCurriculumZones(newGrade);
+    setSelectedZoneId(newZones[0]?.id || '');
+    updateCurrentAccount({ grade: newGrade });
+    soundManager.playPop();
+  };
 
   // Synchronize accounts and active ID to localStorage as safety net
   useEffect(() => {
@@ -178,7 +195,7 @@ export default function App() {
     alert(`Đã đặt lại tiến trình của bé ${currentAccount.name} thành công!`);
   };
 
-  const selectedZone = CURRICULUM_ZONES.find((z) => z.id === selectedZoneId) || CURRICULUM_ZONES[0];
+  const selectedZone = activeCurriculumZones.find((z) => z.id === selectedZoneId) || activeCurriculumZones[0];
   const currentPet = getPetStage(completedTasks.length);
 
   return (
@@ -194,6 +211,8 @@ export default function App() {
         setVoiceOn={setVoiceOn}
         currentAccount={currentAccount}
         onOpenAccountModal={() => setIsAccountModalOpen(true)}
+        selectedGrade={selectedGrade}
+        onSelectGrade={handleSelectGrade}
       />
 
       {/* Main Content Areas */}
@@ -288,9 +307,37 @@ export default function App() {
               </button>
             </div>
 
-            {/* 8 Learning Zones - 2 columns on mobile, 4 columns on tablet/desktop */}
+            {/* Multi-Grade Switcher Bar (Lớp 1, 2, 3, 4, 5) */}
+            <div className="bg-white/95 rounded-2xl p-1.5 sm:p-2 border-2 border-amber-300 shadow-xs flex items-center justify-between gap-1 overflow-x-auto">
+              <div className="text-[11px] sm:text-xs font-black text-amber-950 uppercase px-2 hidden sm:flex items-center gap-1 flex-shrink-0">
+                <span>Khối Lớp:</span>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-1.5 flex-1 justify-around">
+                {GRADE_CONFIGS.map((g) => {
+                  const isActive = Number(selectedGrade) === g.grade;
+                  return (
+                    <button
+                      key={g.grade}
+                      type="button"
+                      onClick={() => handleSelectGrade(g.grade)}
+                      className={`flex-1 py-1.5 px-1 sm:px-2.5 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-1 btn-kid-3d cursor-pointer ${
+                        isActive
+                          ? 'bg-gradient-to-r from-amber-400 to-orange-400 text-amber-950 shadow-md ring-2 ring-amber-500 scale-102'
+                          : 'bg-amber-50/70 hover:bg-amber-100 text-slate-700 border border-amber-200 shadow-2xs'
+                      }`}
+                      title={`${g.label}: ${g.desc}`}
+                    >
+                      <span className="text-sm">{g.icon}</span>
+                      <span className="whitespace-nowrap">{g.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Learning Zones for Selected Grade - 2 columns on mobile, 4 columns on tablet/desktop */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
-              {CURRICULUM_ZONES.filter(
+              {activeCurriculumZones.filter(
                 (zone) => selectedSemester === 'all' || zone.semester === selectedSemester
               ).map((zone) => {
                 const completedInZone = completedTasks.filter((t) =>
@@ -354,6 +401,8 @@ export default function App() {
             onResetProgress={handleResetProgress}
             currentAccount={currentAccount}
             onOpenAccountModal={() => setIsAccountModalOpen(true)}
+            selectedGrade={selectedGrade}
+            onSelectGrade={handleSelectGrade}
           />
         )}
       </main>
@@ -371,7 +420,7 @@ export default function App() {
 
       {/* Compact Desktop-only footer */}
       <footer className="hidden sm:block py-1.5 px-4 text-center text-[11px] font-bold text-slate-400">
-        <p>HyhyhocToan • Học Toán Lớp 1 & Luyện Thi Timo 🎈</p>
+        <p>HyhyhocToan • Hệ Thống Học Toán Tiểu Học Lớp 1 - 5 & Đấu Trường Timo 🎈</p>
       </footer>
     </div>
   );
