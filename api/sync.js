@@ -1,11 +1,56 @@
-// API Serverless Đồng Bộ Đám Mây & Bảng Vàng Thi Đua Liên Máy
-// Hỗ trợ lưu trữ, cập nhật và đồng bộ tài khoản giữa tất cả các máy đăng nhập
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
 
 let inMemoryStore = {};
+const TMP_FILE = path.join(os.tmpdir(), 'hyhy_sync_store_2026.json');
+
+function getStore() {
+  if (Object.keys(inMemoryStore).length === 0) {
+    try {
+      if (fs.existsSync(TMP_FILE)) {
+        const raw = fs.readFileSync(TMP_FILE, 'utf8');
+        inMemoryStore = JSON.parse(raw) || {};
+      }
+    } catch {}
+  }
+  return inMemoryStore;
+}
+
+function persistStore() {
+  try {
+    fs.writeFileSync(TMP_FILE, JSON.stringify(inMemoryStore), 'utf8');
+  } catch {}
+}
 
 export default async function handler(req, res) {
+  // Helper for environments where res.status or res.json is missing
+  if (!res.status) {
+    res.status = function (code) {
+      this.statusCode = code;
+      return this;
+    };
+  }
+  if (!res.json) {
+    res.json = function (data) {
+      this.setHeader('Content-Type', 'application/json');
+      this.end(JSON.stringify(data));
+      return this;
+    };
+  }
+
+  // Parse query if not provided
+  if (!req.query && req.url) {
+    try {
+      const parsedUrl = new URL(req.url, 'http://localhost');
+      req.query = Object.fromEntries(parsedUrl.searchParams.entries());
+    } catch {
+      req.query = {};
+    }
+  }
+
   // Enable CORS
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
   res.setHeader(
@@ -18,10 +63,12 @@ export default async function handler(req, res) {
     return;
   }
 
-  const room = (req.query.room || (req.body && req.body.room) || 'HYHY_VIP_CHAMPIONS_2026').toUpperCase();
+  const store = getStore();
+  const room = (req.query?.room || (req.body && req.body.room) || 'HYHY_VIP_CHAMPIONS_2026').toUpperCase();
 
   if (req.method === 'DELETE') {
-    inMemoryStore[room] = [];
+    store[room] = [];
+    persistStore();
     return res.status(200).json({
       success: true,
       message: `Đã làm sạch dữ liệu phòng ${room}`,
@@ -31,7 +78,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    const data = inMemoryStore[room] || [];
+    const data = store[room] || [];
     return res.status(200).json({
       success: true,
       room,
@@ -49,30 +96,31 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Missing student data or id' });
       }
 
-      if (!inMemoryStore[room]) {
-        inMemoryStore[room] = [];
+      if (!store[room]) {
+        store[room] = [];
       }
 
-      const existingIndex = inMemoryStore[room].findIndex((s) => s.id === student.id);
+      const existingIndex = store[room].findIndex((s) => s.id === student.id);
       const updatedStudent = {
         ...student,
         lastUpdated: Date.now(),
       };
 
       if (existingIndex >= 0) {
-        inMemoryStore[room][existingIndex] = updatedStudent;
+        store[room][existingIndex] = updatedStudent;
       } else {
-        inMemoryStore[room].push(updatedStudent);
+        store[room].push(updatedStudent);
       }
 
       // Sort by stars descending for leaderboard
-      inMemoryStore[room].sort((a, b) => (b.stars || 0) - (a.stars || 0));
+      store[room].sort((a, b) => (b.stars || 0) - (a.stars || 0));
+      persistStore();
 
       return res.status(200).json({
         success: true,
         room,
         updatedAt: Date.now(),
-        students: inMemoryStore[room],
+        students: store[room],
       });
     } catch (err) {
       return res.status(500).json({ error: err.message });

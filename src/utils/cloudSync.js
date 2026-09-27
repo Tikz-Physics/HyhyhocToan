@@ -71,16 +71,22 @@ export async function syncAccountToCloud(account, customRoom = null) {
 
   const room = customRoom || getSyncRoomCode();
 
-  // Chuẩn bị hồ sơ thi đua
+  // Chuẩn bị hồ sơ thi đua và đồng bộ liên máy
   const payloadStudent = {
     id: account.id,
     name: account.name || 'Bé Yêu',
     avatar: account.avatar || '🦁',
+    pin: account.pin || '1234',
     grade: account.grade || 1,
     stars: account.stars || 0,
+    completedTasks: account.completedTasks || [],
     completedTasksCount: (account.completedTasks || []).length,
+    userMedals: account.userMedals || [],
     userMedalsCount: (account.userMedals || []).length,
+    unlockedPets: account.unlockedPets || ['dino'],
     activePet: account.activePet || 'dino',
+    redeemedRewards: account.redeemedRewards || [],
+    usedRewardHistory: account.usedRewardHistory || [],
     highestTimoScore: account.highestTimoScore || 0,
     lastActive: Date.now(),
     deviceInfo: getDevicePlatform(),

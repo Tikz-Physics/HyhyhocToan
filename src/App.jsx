@@ -21,7 +21,7 @@ import {
 import UpdateModal from './components/UpdateModal';
 import UpdateFloatingBanner from './components/UpdateFloatingBanner';
 import { onUpdateAvailable, checkForAppUpdate } from './utils/updateManager';
-import { syncAccountToCloud, onCloudSyncEvent, wipeCloudRoomData } from './utils/cloudSync';
+import { syncAccountToCloud, onCloudSyncEvent, wipeCloudRoomData, fetchCloudLeaderboard } from './utils/cloudSync';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('map'); // 'map', 'zone', 'timo_arena', 'trophies', 'parents'
@@ -39,6 +39,7 @@ export default function App() {
     checkForAppUpdate().then((res) => {
       if (res?.hasUpdate) setUpdateInfo(res);
     });
+    fetchCloudLeaderboard();
     return unsub;
   }, []);
 

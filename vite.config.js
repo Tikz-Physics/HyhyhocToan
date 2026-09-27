@@ -52,9 +52,41 @@ function ttsProxyPlugin() {
   };
 }
 
+function syncProxyPlugin() {
+  return {
+    name: 'sync-proxy-plugin',
+    configureServer(server) {
+      server.middlewares.use('/api/sync', async (req, res) => {
+        try {
+          const syncModule = await import('./api/sync.js');
+          const handler = syncModule.default;
+          let body = '';
+          req.on('data', (chunk) => {
+            body += chunk;
+          });
+          req.on('end', async () => {
+            if (body) {
+              try {
+                req.body = JSON.parse(body);
+              } catch {
+                req.body = body;
+              }
+            }
+            await handler(req, res);
+          });
+        } catch (e) {
+          res.statusCode = 500;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: e.message }));
+        }
+      });
+    },
+  };
+}
+
 // https://vite.dev/config/
 export default defineConfig({
   base: './',
-  plugins: [react(), tailwindcss(), ttsProxyPlugin()],
+  plugins: [react(), tailwindcss(), ttsProxyPlugin(), syncProxyPlugin()],
 })
 
