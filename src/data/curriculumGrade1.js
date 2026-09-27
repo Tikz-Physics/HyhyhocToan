@@ -45,7 +45,8 @@ export const CURRICULUM_ZONES = [
           9
         ],
         "hint": "Bé hãy đếm lần lượt từng quả dâu tây từ trái sang phải nhé!",
-        "explanation": "Bé hãy đếm lần lượt từng quả dâu tây từ trái sang phải nhé! Vì vậy, kết quả đúng là 8."
+        "explanation": "Bé hãy đếm lần lượt từng quả dâu tây từ trái sang phải nhé! Vì vậy, kết quả đúng là 8.",
+        "correctAnswer": 8
       },
       {
         "id": "c3",
@@ -66,7 +67,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctNumber": 4,
         "hint": "Các số đứng liền nhau tăng thêm 1 đơn vị: 2 rồi đến 3, sau đó là...",
-        "explanation": "Các số đứng liền nhau tăng thêm 1 đơn vị: 2 rồi đến 3, sau đó là... Vì vậy, kết quả đúng là undefined."
+        "explanation": "Các số đứng liền nhau tăng thêm 1 đơn vị: 2 rồi đến 3, sau đó là... Vì vậy, kết quả đúng là 4.",
+        "correctAnswer": 4
       },
       {
         "id": "c4",
@@ -82,7 +84,8 @@ export const CURRICULUM_ZONES = [
           11
         ],
         "hint": "Bé hãy đếm thật cẩn thận từng hàng kẹo mút trong hộp nhé!",
-        "explanation": "Bé hãy đếm thật cẩn thận từng hàng kẹo mút trong hộp nhé! Vì vậy, kết quả đúng là 10."
+        "explanation": "Bé hãy đếm thật cẩn thận từng hàng kẹo mút trong hộp nhé! Vì vậy, kết quả đúng là 10.",
+        "correctAnswer": 10
       },
       {
         "id": "c5",
@@ -101,7 +104,8 @@ export const CURRICULUM_ZONES = [
           4
         ],
         "hint": "Bé hãy xòe 5 ngón tay, sau đó cụp bớt 3 ngón tay để xem còn lại mấy ngón nhé!",
-        "explanation": "Bé hãy xòe 5 ngón tay, sau đó cụp bớt 3 ngón tay để xem còn lại mấy ngón nhé! Vì vậy, kết quả đúng là 2."
+        "explanation": "Bé hãy xòe 5 ngón tay, sau đó cụp bớt 3 ngón tay để xem còn lại mấy ngón nhé! Vì vậy, kết quả đúng là 2.",
+        "correctAnswer": 2
       },
       {
         "id": "c6",
@@ -120,7 +124,8 @@ export const CURRICULUM_ZONES = [
           8
         ],
         "hint": "Bé hãy lấy 4 rồi đếm thêm 2 bước nữa để tìm kết quả gộp nhé!",
-        "explanation": "Bé hãy lấy 4 rồi đếm thêm 2 bước nữa để tìm kết quả gộp nhé! Vì vậy, kết quả đúng là 6."
+        "explanation": "Bé hãy lấy 4 rồi đếm thêm 2 bước nữa để tìm kết quả gộp nhé! Vì vậy, kết quả đúng là 6.",
+        "correctAnswer": 6
       },
       {
         "id": "c7",
@@ -183,7 +188,8 @@ export const CURRICULUM_ZONES = [
           5
         ],
         "hint": "Bé hãy xòe 8 ngón tay, cụp bớt 5 ngón xem còn lại mấy ngón nhé!",
-        "explanation": "Bé hãy xòe 8 ngón tay, cụp bớt 5 ngón xem còn lại mấy ngón nhé! Vì vậy, kết quả đúng là 3."
+        "explanation": "Bé hãy xòe 8 ngón tay, cụp bớt 5 ngón xem còn lại mấy ngón nhé! Vì vậy, kết quả đúng là 3.",
+        "correctAnswer": 3
       },
       {
         "id": "c11",
@@ -202,7 +208,8 @@ export const CURRICULUM_ZONES = [
           9
         ],
         "hint": "Bé hãy lấy 3 rồi đếm thêm 4 bước nữa: 3... 4, 5, 6, 7!",
-        "explanation": "Bé hãy lấy 3 rồi đếm thêm 4 bước nữa: 3... 4, 5, 6, 7! Vì vậy, kết quả đúng là 7."
+        "explanation": "Bé hãy lấy 3 rồi đếm thêm 4 bước nữa: 3... 4, 5, 6, 7! Vì vậy, kết quả đúng là 7.",
+        "correctAnswer": 7
       },
       {
         "id": "c12",
@@ -223,7 +230,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctNumber": 7,
         "hint": "Dãy số đếm lùi bớt đi 1: 9, 8 rồi lùi xuống...",
-        "explanation": "Dãy số đếm lùi bớt đi 1: 9, 8 rồi lùi xuống... Vì vậy, kết quả đúng là undefined."
+        "explanation": "Dãy số đếm lùi bớt đi 1: 9, 8 rồi lùi xuống... Vì vậy, kết quả đúng là 7.",
+        "correctAnswer": 7
       }
     ],
     "timoChallenges": [
@@ -241,7 +249,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 0,
         "hint": "Bé hãy đếm số lá ở từng nhóm: Nhóm 1 có 5 lá, nhóm 2 có 7 lá, nhóm 3 có 9 lá, nhóm 4 có 11 lá.",
-        "explanation": "Quy luật: Mỗi nhóm sau nhiều hơn nhóm trước 2 chiếc lá: 5 (+2) -> 7 (+2) -> 9 (+2) -> 11 (+2) -> 13 chiếc lá! Đáp án là 13 chiếc."
+        "explanation": "Quy luật: Mỗi nhóm sau nhiều hơn nhóm trước 2 chiếc lá: 5 (+2) -> 7 (+2) -> 9 (+2) -> 11 (+2) -> 13 chiếc lá! Đáp án là 13 chiếc.",
+        "correctAnswer": "13 chiếc"
       },
       {
         "id": "tc2",
@@ -264,7 +273,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 2,
         "hint": "Mỗi toa tàu số sau bằng số trước cộng thêm 3!",
-        "explanation": "Quy luật cộng 3: 12 + 3 = 15. Đáp án là 15!"
+        "explanation": "Quy luật cộng 3: 12 + 3 = 15. Đáp án là 15!",
+        "correctAnswer": 15
       },
       {
         "id": "tc3",
@@ -280,7 +290,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 2,
         "hint": "Số lớn hơn 40 là các số từ 41 trở lên.",
-        "explanation": "Quan sát dãy số trên hình: có 8 số lớn hơn 40 gồm 95, 61, 70, 42, 47, 98, 56, 80! Đáp án là 8 số."
+        "explanation": "Quan sát dãy số trên hình: có 8 số lớn hơn 40 gồm 95, 61, 70, 42, 47, 98, 56, 80! Đáp án là 8 số.",
+        "correctAnswer": "8 số"
       }
     ]
   },
@@ -455,7 +466,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 3,
         "hint": "Đếm các hình tam giác nhỏ trước, sau đó ghép 2 hình nhỏ lại thành hình to hơn!",
-        "explanation": "Có 4 tam giác đơn + 3 tam giác ghép đôi + 1 tam giác lớn bao ngoài = 8 hình tam giác!"
+        "explanation": "Có 4 tam giác đơn + 3 tam giác ghép đôi + 1 tam giác lớn bao ngoài = 8 hình tam giác!",
+        "correctAnswer": "8 hình"
       },
       {
         "id": "tgeo2",
@@ -471,7 +483,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 2,
         "hint": "Khối ở tầng cao nhất không thể bay lơ lửng, chắc chắn phải có khối ở tầng dưới đỡ lấy nó!",
-        "explanation": "Đếm tổng cả các khối nhìn thấy và các khối ẩn đỡ bên dưới: cần ít nhất 15 khối lập phương!"
+        "explanation": "Đếm tổng cả các khối nhìn thấy và các khối ẩn đỡ bên dưới: cần ít nhất 15 khối lập phương!",
+        "correctAnswer": "15 khối"
       },
       {
         "id": "tgeo3",
@@ -487,7 +500,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 1,
         "hint": "Đếm lần lượt từng cạnh viền bao quanh hình theo chiều kim đồng hồ.",
-        "explanation": "Đếm cẩn thận từng cạnh xung quanh đa giác: có đúng 12 cạnh!"
+        "explanation": "Đếm cẩn thận từng cạnh xung quanh đa giác: có đúng 12 cạnh!",
+        "correctAnswer": "12 cạnh"
       },
       {
         "id": "tgeo4",
@@ -503,7 +517,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 3,
         "hint": "Bé đếm các quả hình tròn trên cành cây (không đếm 2 chiếc lá nhé)!",
-        "explanation": "Có tất cả 7 hình tròn là các quả mọng trên cành cây!"
+        "explanation": "Có tất cả 7 hình tròn là các quả mọng trên cành cây!",
+        "correctAnswer": "7 hình"
       }
     ]
   },
@@ -701,7 +716,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 0,
         "hint": "Mẹo thần kỳ: Bé hãy ghép các cặp số có tổng bằng 10 lại với nhau trước nhé!",
-        "explanation": "Ta có: (8 + 2) + (9 + 1) + 3 = 10 + 10 + 3 = 23. Rất nhanh và chính xác!"
+        "explanation": "Ta có: (8 + 2) + (9 + 1) + 3 = 10 + 10 + 3 = 23. Rất nhanh và chính xác!",
+        "correctAnswer": 23
       },
       {
         "id": "tas2",
@@ -717,7 +733,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 3,
         "hint": "Từ hình vẽ, ta có: 6 + Con cá = 25. Bé lấy 25 trừ đi 6 nhé: 25 - 6 = ?",
-        "explanation": "Ta có phép tính: 6 + Con cá = 25. Giá trị của con cá là: 25 - 6 = 19!"
+        "explanation": "Ta có phép tính: 6 + Con cá = 25. Giá trị của con cá là: 25 - 6 = 19!",
+        "correctAnswer": 19
       },
       {
         "id": "tas3",
@@ -732,7 +749,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 2,
         "hint": "Cảnh giác bẫy: Đề bài chỉ hỏi Ô TÔ, xe máy không ảnh hưởng đến số ô tô!",
-        "explanation": "Số ô tô = 17 - 3 - 2 = 12 chiếc ô tô."
+        "explanation": "Số ô tô = 17 - 3 - 2 = 12 chiếc ô tô.",
+        "correctAnswer": "12 chiếc"
       }
     ]
   },
@@ -921,7 +939,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 2,
         "hint": "Làm vỡ tức là bớt đi: 13 - 6 = ?",
-        "explanation": "Số cốc còn lại là: 13 - 6 = 7 chiếc cốc. Đáp án đúng là 7."
+        "explanation": "Số cốc còn lại là: 13 - 6 = 7 chiếc cốc. Đáp án đúng là 7.",
+        "correctAnswer": "7 chiếc"
       },
       {
         "id": "tn20_2",
@@ -936,7 +955,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 2,
         "hint": "Bé hãy tính nhẩm từng phép tính từ trái sang phải xem câu nào có kết quả đúng bằng 14 nhé!",
-        "explanation": "Ta có 13 - 5 + 6 = 8 + 6 = 14. Phép tính này hoàn toàn chính xác!"
+        "explanation": "Ta có 13 - 5 + 6 = 8 + 6 = 14. Phép tính này hoàn toàn chính xác!",
+        "correctAnswer": "13 - 5 + 6 = 14"
       },
       {
         "id": "tn20_3",
@@ -951,7 +971,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 0,
         "hint": "Mẹo Timo: (4 + 1 + 5) chính là bằng 10!",
-        "explanation": "Ta gộp: (4 + 1 + 5) + 7 + (4 + 1 + 5) = 10 + 7 + 10 = 27. Đáp án là 27."
+        "explanation": "Ta gộp: (4 + 1 + 5) + 7 + (4 + 1 + 5) = 10 + 7 + 10 = 27. Đáp án là 27.",
+        "correctAnswer": 27
       }
     ]
   },
@@ -996,7 +1017,8 @@ export const CURRICULUM_ZONES = [
           8
         ],
         "hint": "3 bó chục tương ứng chữ số 3 ở hàng chục, 5 que rời là 5 đơn vị bé nhé!",
-        "explanation": "3 bó chục tương ứng chữ số 3 ở hàng chục, 5 que rời là 5 đơn vị bé nhé! Vì vậy, kết quả đúng là 35."
+        "explanation": "3 bó chục tương ứng chữ số 3 ở hàng chục, 5 que rời là 5 đơn vị bé nhé! Vì vậy, kết quả đúng là 35.",
+        "correctAnswer": 35
       },
       {
         "id": "n100_3",
@@ -1013,7 +1035,8 @@ export const CURRICULUM_ZONES = [
           55
         ],
         "hint": "5 bó chục tương ứng chữ số 5 ở hàng chục, 2 que rời là 2 đơn vị bé nhé!",
-        "explanation": "5 bó chục tương ứng chữ số 5 ở hàng chục, 2 que rời là 2 đơn vị bé nhé! Vì vậy, kết quả đúng là 52."
+        "explanation": "5 bó chục tương ứng chữ số 5 ở hàng chục, 2 que rời là 2 đơn vị bé nhé! Vì vậy, kết quả đúng là 52.",
+        "correctAnswer": 52
       },
       {
         "id": "n100_4",
@@ -1155,7 +1178,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 3,
         "hint": "Số có nhiều chữ số hơn sẽ lớn hơn. Với các số có cùng 8 chữ số, bé hãy so sánh từ chữ số bên trái sang nhé!",
-        "explanation": "27000279 có hai chữ số đầu là 27 lớn nhất trong các số 8 chữ số!"
+        "explanation": "27000279 có hai chữ số đầu là 27 lớn nhất trong các số 8 chữ số!",
+        "correctAnswer": "27000279"
       },
       {
         "id": "tn100_2",
@@ -1170,7 +1194,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 1,
         "hint": "Để được số nhỏ nhất: chữ số đầu tiên phải nhỏ nhất khác 0, rồi chọn tiếp các chữ số nhỏ nhất còn lại nhé!",
-        "explanation": "Số nhỏ nhất có 3 chữ số khác nhau là 102."
+        "explanation": "Số nhỏ nhất có 3 chữ số khác nhau là 102.",
+        "correctAnswer": "102"
       },
       {
         "id": "tn100_3",
@@ -1185,7 +1210,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 1,
         "hint": "Bé hãy liệt kê các số có hàng chục là 1, 2 và 3 (nhỏ hơn 38) rồi đếm tổng cộng nhé!",
-        "explanation": "Tổng cộng: 4 + 4 + 3 = 11 số. Đáp án đúng là 11 số."
+        "explanation": "Tổng cộng: 4 + 4 + 3 = 11 số. Đáp án đúng là 11 số.",
+        "correctAnswer": "11 số"
       }
     ]
   },
@@ -1216,7 +1242,8 @@ export const CURRICULUM_ZONES = [
           9
         ],
         "hint": "Đầu bút chì đặt đúng ở vạch 0 cm, bé hãy nhìn xem đầu nhọn của bút chì chỉ vào vạch số mấy nhé!",
-        "explanation": "Đầu bút chì đặt đúng ở vạch 0 cm, bé hãy nhìn xem đầu nhọn của bút chì chỉ vào vạch số mấy nhé! Vì vậy, kết quả đúng là 8."
+        "explanation": "Đầu bút chì đặt đúng ở vạch 0 cm, bé hãy nhìn xem đầu nhọn của bút chì chỉ vào vạch số mấy nhé! Vì vậy, kết quả đúng là 8.",
+        "correctAnswer": 8
       },
       {
         "id": "cm2",
@@ -1233,7 +1260,8 @@ export const CURRICULUM_ZONES = [
           6
         ],
         "hint": "Đầu cục tẩy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đuôi cục tẩy chỉ vào vạch số mấy trên thước kẻ nhé!",
-        "explanation": "Đầu cục tẩy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đuôi cục tẩy chỉ vào vạch số mấy trên thước kẻ nhé! Vì vậy, kết quả đúng là 4."
+        "explanation": "Đầu cục tẩy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đuôi cục tẩy chỉ vào vạch số mấy trên thước kẻ nhé! Vì vậy, kết quả đúng là 4.",
+        "correctAnswer": 4
       },
       {
         "id": "cm3",
@@ -1250,7 +1278,8 @@ export const CURRICULUM_ZONES = [
           13
         ],
         "hint": "Đầu chiếc thìa đặt đúng ở vạch 0 cm, bé hãy nhìn vạch số ở đuôi chiếc thìa trên thước kẻ nhé!",
-        "explanation": "Đầu chiếc thìa đặt đúng ở vạch 0 cm, bé hãy nhìn vạch số ở đuôi chiếc thìa trên thước kẻ nhé! Vì vậy, kết quả đúng là 12."
+        "explanation": "Đầu chiếc thìa đặt đúng ở vạch 0 cm, bé hãy nhìn vạch số ở đuôi chiếc thìa trên thước kẻ nhé! Vì vậy, kết quả đúng là 12.",
+        "correctAnswer": 12
       },
       {
         "id": "cm4",
@@ -1295,7 +1324,8 @@ export const CURRICULUM_ZONES = [
           5
         ],
         "hint": "Đầu kẹp giấy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đầu kia của kẹp giấy chỉ vào vạch số mấy nhé!",
-        "explanation": "Đầu kẹp giấy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đầu kia của kẹp giấy chỉ vào vạch số mấy nhé! Vì vậy, kết quả đúng là 3."
+        "explanation": "Đầu kẹp giấy đặt đúng ở vạch 0 cm, bé hãy quan sát xem đầu kia của kẹp giấy chỉ vào vạch số mấy nhé! Vì vậy, kết quả đúng là 3.",
+        "correctAnswer": 3
       },
       {
         "id": "cm7",
@@ -1312,7 +1342,8 @@ export const CURRICULUM_ZONES = [
           15
         ],
         "hint": "Đầu bàn chải đặt đúng ở vạch 0 cm, bé quan sát vạch số ở phần đuôi cán bàn chải trên thước nhé!",
-        "explanation": "Đầu bàn chải đặt đúng ở vạch 0 cm, bé quan sát vạch số ở phần đuôi cán bàn chải trên thước nhé! Vì vậy, kết quả đúng là 14."
+        "explanation": "Đầu bàn chải đặt đúng ở vạch 0 cm, bé quan sát vạch số ở phần đuôi cán bàn chải trên thước nhé! Vì vậy, kết quả đúng là 14.",
+        "correctAnswer": 14
       },
       {
         "id": "cm8",
@@ -1372,7 +1403,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 2,
         "hint": "Chiếc cân nào bị ấn chúc xuống dưới là món đồ ở bên đó nặng hơn!",
-        "explanation": "Từ 3 chiếc cân: Gà rán nặng hơn Khoai tây, Khoai tây nặng hơn Burger, Burger nặng hơn Cà phê. Vậy Xô gà rán 🍗 nặng nhất!"
+        "explanation": "Từ 3 chiếc cân: Gà rán nặng hơn Khoai tây, Khoai tây nặng hơn Burger, Burger nặng hơn Cà phê. Vậy Xô gà rán 🍗 nặng nhất!",
+        "correctAnswer": "Xô gà rán 🍗"
       },
       {
         "id": "tcm2",
@@ -1388,7 +1420,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 0,
         "hint": "Quan sát dãy số: 3, 7, 11, 15, 19... mỗi số sau bằng số trước cộng thêm 4.",
-        "explanation": "Quy luật: Dãy số tăng đều cách nhau 4 đơn vị (+4): 3 -> 7 -> 11 -> 15 -> 19 -> 19 + 4 = 23. Đáp án đúng là 23."
+        "explanation": "Quy luật: Dãy số tăng đều cách nhau 4 đơn vị (+4): 3 -> 7 -> 11 -> 15 -> 19 -> 19 + 4 = 23. Đáp án đúng là 23.",
+        "correctAnswer": "23"
       },
       {
         "id": "tcm3",
@@ -1404,7 +1437,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 2,
         "hint": "Ta có: 8 + 6 = 14. Phép tính là 25 - ? = 14. Bé hãy tìm số cần trừ đi nhé!",
-        "explanation": "Vế trái: 8 + 6 = 14. Để vế phải bằng 14 thì 25 - 11 = 14. Vậy mảnh giấy còn thiếu là Mảnh C mang số 11."
+        "explanation": "Vế trái: 8 + 6 = 14. Để vế phải bằng 14 thì 25 - 11 = 14. Vậy mảnh giấy còn thiếu là Mảnh C mang số 11.",
+        "correctAnswer": "Mảnh C (số 11)"
       }
     ]
   },
@@ -1603,7 +1637,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 1,
         "hint": "Bé hãy tính lần lượt từ trái sang phải: làm phép trừ trước rồi làm phép cộng nhé!",
-        "explanation": "24 - 8 = 16. Tiếp theo 16 + 1 = 17. Đáp án đúng là 17."
+        "explanation": "24 - 8 = 16. Tiếp theo 16 + 1 = 17. Đáp án đúng là 17.",
+        "correctAnswer": 17
       },
       {
         "id": "tas100_2",
@@ -1619,7 +1654,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 3,
         "hint": "Bé hãy đếm xem có tất cả bao nhiêu quả trứng, rồi chia đều vào 5 giỏ nhé!",
-        "explanation": "Trong hình có 20 quả trứng. Chia đều cho 5 giỏ: 20 chia cho 5 = 4 quả mỗi giỏ. Đáp án là 4 quả."
+        "explanation": "Trong hình có 20 quả trứng. Chia đều cho 5 giỏ: 20 chia cho 5 = 4 quả mỗi giỏ. Đáp án là 4 quả.",
+        "correctAnswer": "4 quả"
       },
       {
         "id": "tas100_3",
@@ -1634,7 +1670,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 1,
         "hint": "Gồm 3 quyển phía dưới + 1 quyển của Alan + 4 quyển phía trên!",
-        "explanation": "Tổng số quyển vở = 3 (dưới) + 1 (vở của Alan) + 4 (trên) = 8 quyển vở!"
+        "explanation": "Tổng số quyển vở = 3 (dưới) + 1 (vở của Alan) + 4 (trên) = 8 quyển vở!",
+        "correctAnswer": "8 quyển"
       }
     ]
   },
@@ -1735,7 +1772,8 @@ export const CURRICULUM_ZONES = [
           6
         ],
         "hint": "Bé hãy nhìn hàng hoa hồng và đếm xem có bao nhiêu bông nhé!",
-        "explanation": "Bé hãy nhìn hàng hoa hồng và đếm xem có bao nhiêu bông nhé! Vì vậy, kết quả đúng là 5."
+        "explanation": "Bé hãy nhìn hàng hoa hồng và đếm xem có bao nhiêu bông nhé! Vì vậy, kết quả đúng là 5.",
+        "correctAnswer": 5
       },
       {
         "id": "ts6",
@@ -1768,7 +1806,8 @@ export const CURRICULUM_ZONES = [
           8
         ],
         "hint": "Bé hãy nhìn hàng thỏ con và đếm xem có bao nhiêu bạn thỏ nhé!",
-        "explanation": "Bé hãy nhìn hàng thỏ con và đếm xem có bao nhiêu bạn thỏ nhé! Vì vậy, kết quả đúng là 7."
+        "explanation": "Bé hãy nhìn hàng thỏ con và đếm xem có bao nhiêu bạn thỏ nhé! Vì vậy, kết quả đúng là 7.",
+        "correctAnswer": 7
       },
       {
         "id": "ts7",
@@ -1858,7 +1897,8 @@ export const CURRICULUM_ZONES = [
           4
         ],
         "hint": "Bé hãy nhìn vào hàng dưa hấu và đếm số miếng dưa hấu nhé!",
-        "explanation": "Bé hãy nhìn vào hàng dưa hấu và đếm số miếng dưa hấu nhé! Vì vậy, kết quả đúng là 2."
+        "explanation": "Bé hãy nhìn vào hàng dưa hấu và đếm số miếng dưa hấu nhé! Vì vậy, kết quả đúng là 2.",
+        "correctAnswer": 2
       },
       {
         "id": "ts12",
@@ -1888,7 +1928,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 2,
         "hint": "Từ thứ Tư, bé hãy lùi lại 4 ngày liên tiếp để tìm ngày hôm nay nhé!",
-        "explanation": "Lùi lại 4 ngày kể từ thứ Tư: Thứ Ba (1) -> Thứ Hai (2) -> Chủ Nhật (3) -> Thứ Bảy (4). Vậy hôm nay là Thứ Bảy!"
+        "explanation": "Lùi lại 4 ngày kể từ thứ Tư: Thứ Ba (1) -> Thứ Hai (2) -> Chủ Nhật (3) -> Thứ Bảy (4). Vậy hôm nay là Thứ Bảy!",
+        "correctAnswer": "Thứ Bảy"
       },
       {
         "id": "tts2",
@@ -1903,7 +1944,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 3,
         "hint": "Alice lớn hơn Emily 5 tuổi: lấy tuổi Emily cộng thêm 5.",
-        "explanation": "Tuổi của Alice = 9 + 5 = 14 tuổi!"
+        "explanation": "Tuổi của Alice = 9 + 5 = 14 tuổi!",
+        "correctAnswer": "14 tuổi"
       },
       {
         "id": "tts3",
@@ -1919,7 +1961,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 0,
         "hint": "Quan sát dãy các hình gấp giấy: Mèo -> Hạc -> Thuyền -> Voi -> Ếch rồi lặp lại.",
-        "explanation": "Quy luật: Chuỗi 5 con vật gấp giấy lặp lại: (Mèo, Hạc, Thuyền, Voi, Ếch) -> (Mèo, Hạc, Thuyền, Voi, Ếch) -> Mèo -> Tiếp theo là Chim hạc giấy 🕊️!"
+        "explanation": "Quy luật: Chuỗi 5 con vật gấp giấy lặp lại: (Mèo, Hạc, Thuyền, Voi, Ếch) -> (Mèo, Hạc, Thuyền, Voi, Ếch) -> Mèo -> Tiếp theo là Chim hạc giấy 🕊️!",
+        "correctAnswer": "Chim hạc giấy 🕊️"
       },
       {
         "id": "tts4",
@@ -1935,7 +1978,8 @@ export const CURRICULUM_ZONES = [
         ],
         "correctIndex": 1,
         "hint": "Quan sát vị trí dưa hấu dồn xuống dưới và chùm nho xoay trong ô 2x2.",
-        "explanation": "Quy luật: Dưa hấu dồn xuống hàng dưới cùng, chùm nho xoay vị trí ô trống sang góc trên bên phải. Hình còn thiếu chính là Hình B!"
+        "explanation": "Quy luật: Dưa hấu dồn xuống hàng dưới cùng, chùm nho xoay vị trí ô trống sang góc trên bên phải. Hình còn thiếu chính là Hình B!",
+        "correctAnswer": "Hình B"
       }
     ]
   }
