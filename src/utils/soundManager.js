@@ -12,6 +12,32 @@
  * - All emojis stripped cleanly
  * - Colons after keywords softened to pauses
  */
+const VIETNAMESE_MATH_LETTER_MAP = {
+  A: 'A',
+  B: 'Bê',
+  C: 'Xê',
+  D: 'Đê',
+  E: 'E',
+  F: 'Ép',
+  G: 'Gờ',
+  H: 'Hát',
+  I: 'I',
+  K: 'Ca',
+  L: 'E-lờ',
+  M: 'Mờ',
+  N: 'Nờ',
+  O: 'O',
+  P: 'Pê',
+  Q: 'Quy',
+  R: 'E-rờ',
+  S: 'Sờ',
+  T: 'Tê',
+  U: 'U',
+  V: 'Vê',
+  X: 'Ích',
+  Y: 'I',
+};
+
 export function formatMathForSpeech(text) {
   if (!text) return '';
   let res = String(text);
@@ -80,7 +106,49 @@ export function formatMathForSpeech(text) {
   // 12. Soften colons after keywords to avoid TTS saying "hai chấm"
   res = res.replace(/(Tính|Tính nhẩm|Tìm giá trị của|Đố bé|Quan sát)\s*:/gi, (m, word) => `${word},`);
 
-  // 13. Clean up spaces
+  // -------------------------------------------------------------
+  // 13. CHUẨN HÓA CÁCH ĐỌC ĐIỂM, ĐOẠN THẲNG, HÌNH HỌC TIẾNG VIỆT (M, N, P, Q, A, B, C, D...)
+  // -------------------------------------------------------------
+  // a) Các tên đoạn thẳng, đa giác gồm 2 đến 6 chữ cái in hoa liền nhau: MNPQ, MN, NP, PQ, ABCD, ABC, AB, CD, v.v.
+  res = res.replace(/(?<![a-zA-ZÀ-ỹ])[A-Z]{2,6}(?![a-zA-ZÀ-ỹ])/gu, (match) => {
+    const chars = match.split('');
+    if (chars.every((ch) => VIETNAMESE_MATH_LETTER_MAP[ch])) {
+      return chars.map((ch) => VIETNAMESE_MATH_LETTER_MAP[ch]).join(' ');
+    }
+    return match;
+  });
+
+  // b) Danh sách các điểm cách nhau bởi dấu phẩy hoặc chữ "và", "hoặc": "M, N, P, Q" hoặc "A, B và C"
+  res = res.replace(/(?<![a-zA-ZÀ-ỹ])[A-Z](?:\s*,\s*[A-Z])*(?:\s+và\s+[A-Z])?(?![a-zA-ZÀ-ỹ])/gu, (match) => {
+    if (match.includes(',') || match.includes(' và ') || match.includes(' hoặc ')) {
+      return match.replace(/[A-Z]/g, (ch) => VIETNAMESE_MATH_LETTER_MAP[ch] || ch);
+    }
+    return match;
+  });
+
+  // c) Điểm hoặc biến số đứng sau các từ khóa hình học (hỗ trợ cả từ có dấu tiếng Việt):
+  // "điểm M", "Điểm M", "đoạn thẳng AB", "cạnh a", "tâm O", "góc A", "tia Ox"
+  res = res.replace(/(?<![a-zA-ZÀ-ỹ])(các điểm|điểm|đỉnh|đoạn thẳng|đoạn|cạnh|góc|tâm|tia|đường thẳng|hình|tam giác|tứ giác|đường gấp khúc)\s+([A-Z])(?![a-zA-ZÀ-ỹ])/giu, (m, kw, ch) => {
+    return `${kw} ${VIETNAMESE_MATH_LETTER_MAP[ch.toUpperCase()] || ch}`;
+  });
+
+  // d) Tên điểm đứng trước từ nối hoặc phép tính: "M bằng", "N cộng"
+  res = res.replace(/(?<![a-zA-ZÀ-ỹ])([A-Z])\s+(?=bằng|cộng|trừ|nhân|chia)/gu, (m, ch) => {
+    return `${VIETNAMESE_MATH_LETTER_MAP[ch] || ch} `;
+  });
+
+  // e) Đọc các đáp án lựa chọn A, B, C, D theo tiếng Việt: "Đáp án A", "Đáp án B" -> "Đáp án A", "Đáp án Bê"
+  res = res.replace(/(?<![a-zA-ZÀ-ỹ])Đáp án\s+([A-D])(?![a-zA-ZÀ-ỹ])/giu, (m, ch) => {
+    return `Đáp án ${VIETNAMESE_MATH_LETTER_MAP[ch.toUpperCase()] || ch}`;
+  });
+
+  // f) Đọc ẩn số x, y trong toán: "Tìm x" -> "Tìm ích", "x cộng" -> "ích cộng", "x bằng" -> "ích bằng"
+  res = res.replace(/(?<![a-zA-ZÀ-ỹ])([Tt]ìm)\s+x(?![a-zA-ZÀ-ỹ])/gu, '$1 ích');
+  res = res.replace(/(?<![a-zA-ZÀ-ỹ])([Tt]ìm)\s+y(?![a-zA-ZÀ-ỹ])/gu, '$1 y');
+  res = res.replace(/(?<![a-zA-ZÀ-ỹ])x\s+(bằng|cộng|trừ|nhân|chia)(?![a-zA-ZÀ-ỹ])/gu, 'ích $1');
+  res = res.replace(/(?<![a-zA-ZÀ-ỹ])(cộng|trừ|nhân|chia)\s+x(?![a-zA-ZÀ-ỹ])/gu, '$1 ích');
+
+  // 14. Clean up spaces
   res = res.replace(/\s+/g, ' ').trim();
   return res;
 }
