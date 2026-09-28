@@ -158,6 +158,7 @@ class SoundManager {
     this.ctx = null;
     let savedSound = true;
     let savedVoice = true;
+    let savedPetAudio = false;
     try {
       const s = localStorage.getItem('hyhyhoctoan_sound_enabled') ?? localStorage.getItem('toan_lop1_sound_enabled');
       if (s !== null) {
@@ -173,11 +174,20 @@ class SoundManager {
         localStorage.setItem('hyhyhoctoan_voice_enabled', 'true');
         localStorage.setItem('toan_lop1_voice_enabled', 'true');
       }
+      const p = localStorage.getItem('hyhyhoctoan_pet_audio_enabled') ?? localStorage.getItem('toan_lop1_pet_audio_enabled');
+      if (p !== null) {
+        savedPetAudio = p === 'true';
+      } else {
+        // Pet sounds are opt-in so opening the companion never surprises the learner.
+        localStorage.setItem('hyhyhoctoan_pet_audio_enabled', 'false');
+        localStorage.setItem('toan_lop1_pet_audio_enabled', 'false');
+      }
     } catch {
       // ignore
     }
     this.soundEnabled = savedSound;
     this.voiceEnabled = savedVoice;
+    this.petAudioEnabled = savedPetAudio;
     this.vietnameseVoice = null;
     this.currentAudio = null;
     this.isSpeaking = false;
@@ -382,7 +392,7 @@ class SoundManager {
   }
 
   speakPet(text) {
-    if (!text) return;
+    if (!this.petAudioEnabled || !text) return;
     // Play cute animal chirp sound effect
     this.playPetChirp();
 
@@ -420,7 +430,7 @@ class SoundManager {
   }
 
   playPetChirp() {
-    if (!this.soundEnabled) return;
+    if (!this.soundEnabled || !this.petAudioEnabled) return;
     const ctx = this.getAudioContext();
     if (!ctx) return;
     try {
@@ -641,6 +651,22 @@ class SoundManager {
 
   toggleVoice() {
     return this.setVoice(!this.voiceEnabled);
+  }
+
+  setPetAudio(enabled) {
+    this.petAudioEnabled = !!enabled;
+    if (!this.petAudioEnabled) {
+      this.stopSpeaking();
+    }
+    try {
+      localStorage.setItem('hyhyhoctoan_pet_audio_enabled', this.petAudioEnabled ? 'true' : 'false');
+      localStorage.setItem('toan_lop1_pet_audio_enabled', this.petAudioEnabled ? 'true' : 'false');
+    } catch {}
+    return this.petAudioEnabled;
+  }
+
+  togglePetAudio() {
+    return this.setPetAudio(!this.petAudioEnabled);
   }
 
   setMasterAudio(enabled) {

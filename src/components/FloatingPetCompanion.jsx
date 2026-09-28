@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { Volume2, Lightbulb, Music, X, Sparkles, Heart } from 'lucide-react';
+import { Volume2, VolumeX, Lightbulb, Music, X, Sparkles, Heart } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
 import Pet3DCharacter from './Pet3DCharacter';
 
@@ -50,6 +50,7 @@ export default function FloatingPetCompanion({
   });
   const [isHopping, setIsHopping] = useState(false);
   const [facingDirection, setFacingDirection] = useState(1); // 1 = right, -1 = left
+  const [petAudioEnabled, setPetAudioEnabled] = useState(() => soundManager.petAudioEnabled);
 
   // Effective companion
   const currentPet = activeCompanion || pet || {
@@ -171,6 +172,12 @@ export default function FloatingPetCompanion({
       }
       return next;
     });
+  };
+
+  const togglePetAudio = (e) => {
+    e?.stopPropagation();
+    const next = soundManager.togglePetAudio();
+    setPetAudioEnabled(next);
   };
 
   // Pointer Down Drag Handler
@@ -501,6 +508,25 @@ export default function FloatingPetCompanion({
             </span>
             <span className="text-[10px] font-bold underline text-amber-800">
               {isWandering ? 'Ghim lại' : 'Cho chạy'}
+            </span>
+          </button>
+
+          {/* Pet voice and chirp are opt-in and independent from lesson audio. */}
+          <button
+            type="button"
+            onClick={togglePetAudio}
+            className={`w-full py-1.5 px-2 rounded-xl text-xs font-black flex items-center justify-between border transition-all cursor-pointer ${
+              petAudioEnabled
+                ? 'bg-indigo-100 hover:bg-indigo-200 border-indigo-300 text-indigo-950'
+                : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700'
+            }`}
+          >
+            <span className="flex items-center gap-1 text-[11px]">
+              {petAudioEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
+              <span>{petAudioEnabled ? 'Âm thanh thú cưng' : 'Đã tắt tiếng thú cưng'}</span>
+            </span>
+            <span className="text-[10px] font-bold underline">
+              {petAudioEnabled ? 'Tắt tiếng' : 'Bật lại'}
             </span>
           </button>
 
