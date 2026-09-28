@@ -39,7 +39,57 @@ export default function App() {
     checkForAppUpdate().then((res) => {
       if (res?.hasUpdate) setUpdateInfo(res);
     });
-    fetchCloudLeaderboard();
+
+    // Tự động tải và hợp nhất danh sách tài khoản đám mây khi mở ứng dụng
+    const initSync = async () => {
+      try {
+        const res = await fetchCloudLeaderboard();
+        if (res && res.students && Array.isArray(res.students) && res.students.length > 0) {
+          setAccounts((prev) => {
+            const mergedMap = new Map();
+            // Nạp tài khoản cục bộ trước
+            prev.forEach((a) => mergedMap.set(a.id, a));
+            // Hợp nhất tài khoản đám mây
+            res.students.forEach((s) => {
+              if (s && s.id) {
+                const local = mergedMap.get(s.id);
+                if (local) {
+                  mergedMap.set(s.id, {
+                    ...s,
+                    ...local,
+                    stars: Math.max(local.stars || 0, s.stars || 0),
+                  });
+                } else {
+                  mergedMap.set(s.id, {
+                    id: s.id,
+                    name: s.name,
+                    avatar: s.avatar || '🦁',
+                    pin: s.pin || '1234',
+                    grade: s.grade || 1,
+                    stars: s.stars || 0,
+                    completedTasks: s.completedTasks || [],
+                    userMedals: s.userMedals || [],
+                    unlockedPets: s.unlockedPets || ['dino'],
+                    activePet: s.activePet || 'dino',
+                    redeemedRewards: s.redeemedRewards || [],
+                    usedRewardHistory: s.usedRewardHistory || [],
+                    highestTimoScore: s.highestTimoScore || 0,
+                    createdAt: s.createdAt || Date.now(),
+                  });
+                }
+              }
+            });
+            const nextList = Array.from(mergedMap.values()).sort((a, b) => (b.stars || 0) - (a.stars || 0));
+            saveAccounts(nextList);
+            return nextList;
+          });
+        }
+      } catch (err) {
+        console.warn('Init sync failed:', err);
+      }
+    };
+    initSync();
+
     return unsub;
   }, []);
 
@@ -271,6 +321,8 @@ export default function App() {
     saveAccounts(nextAccounts);
     saveActiveAccountId(newId);
     setIsAccountModalOpen(false);
+    // Ngay lập tức đồng bộ tài khoản mới lên đám mây để mọi thiết bị khác đều thấy!
+    syncAccountToCloud(newAcc);
   };
 
   const handleWipeAllAccounts = async () => {
@@ -311,7 +363,20 @@ export default function App() {
     }
   };
 
-  const handleSwitchAccount = (id) => {
+  const handleSwitchAccount = (id, accountData = null) => {
+    if (accountData) {
+      setAccounts((prev) => {
+        const exists = prev.some((a) => a.id === id);
+        const next = exists
+          ? prev.map((a) => (a.id === id ? { ...a, ...accountData } : a))
+          : [...prev, accountData];
+        saveAccounts(next);
+        return next;
+      });
+      if (accountData.grade) {
+        setSelectedGrade(Number(accountData.grade));
+      }
+    }
     setCurrentAccountId(id);
     saveActiveAccountId(id);
     setIsAccountModalOpen(false);

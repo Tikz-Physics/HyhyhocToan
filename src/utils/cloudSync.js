@@ -4,6 +4,7 @@
 const STORAGE_ROOM_KEY = 'hyhy_sync_room_code';
 const STORAGE_LEADERBOARD_CACHE = 'hyhy_cloud_leaderboard_cache';
 const DEFAULT_ROOM = 'HYHY_VIP_CHAMPIONS_2026';
+const DIRECT_CLOUD_STORE_URL = 'https://api.restful-api.dev/objects/ff808181a09d98f701a0e641dd802adb';
 
 // Kênh BroadcastChannel đồng bộ tức thì giữa các tab/cửa sổ trên cùng máy
 let broadcastChannel = null;
@@ -44,7 +45,21 @@ export async function wipeCloudRoomData(targetRoom = null) {
       method: 'DELETE',
     });
   } catch (e) {
-    console.warn('Lỗi khi xóa bảng vàng đám mây:', e);
+    console.warn('Lỗi khi xóa bảng vàng đám mây qua /api/sync:', e);
+  }
+
+  // Also wipe direct cloud fallback if default room
+  if (room === DEFAULT_ROOM) {
+    try {
+      await fetch(DIRECT_CLOUD_STORE_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: DEFAULT_ROOM,
+          data: { room: DEFAULT_ROOM, updatedAt: Date.now(), students: [] },
+        }),
+      });
+    } catch {}
   }
 }
 
@@ -52,14 +67,19 @@ export async function wipeCloudRoomData(targetRoom = null) {
 export function getCachedLeaderboard() {
   try {
     const raw = localStorage.getItem(STORAGE_LEADERBOARD_CACHE);
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) return parsed;
+    }
   } catch {}
   return [];
 }
 
 export function setCachedLeaderboard(list) {
   try {
-    localStorage.setItem(STORAGE_LEADERBOARD_CACHE, JSON.stringify(list));
+    if (Array.isArray(list)) {
+      localStorage.setItem(STORAGE_LEADERBOARD_CACHE, JSON.stringify(list));
+    }
   } catch {}
 }
 
@@ -105,14 +125,19 @@ export async function syncAccountToCloud(account, customRoom = null) {
   let updatedList;
   if (existingIdx >= 0) {
     updatedList = [...cached];
-    updatedList[existingIdx] = { ...updatedList[existingIdx], ...payloadStudent };
+    updatedList[existingIdx] = {
+      ...updatedList[existingIdx],
+      ...payloadStudent,
+      stars: Math.max(updatedList[existingIdx].stars || 0, payloadStudent.stars || 0),
+    };
   } else {
     updatedList = [...cached, payloadStudent];
   }
   updatedList.sort((a, b) => (b.stars || 0) - (a.stars || 0));
   setCachedLeaderboard(updatedList);
 
-  // 3. Gửi lên máy chủ đồng bộ đám mây
+  // 3. Gửi lên máy chủ /api/sync
+  let apiSuccess = false;
   try {
     const res = await fetch(`/api/sync?room=${encodeURIComponent(room)}`, {
       method: 'POST',
@@ -125,51 +150,111 @@ export async function syncAccountToCloud(account, customRoom = null) {
 
     if (res.ok) {
       const data = await res.json();
-      if (data.students) {
+      if (data && data.students && Array.isArray(data.students)) {
         setCachedLeaderboard(data.students);
+        apiSuccess = true;
         return data.students;
       }
     }
   } catch (err) {
-    // Nếu chạy static offline hoặc không có serverless API, lưu vào localStorage chia sẻ
-    console.warn('Lưu đám mây qua API tạm thời dùng cache cục bộ:', err);
+    console.warn('Lưu đám mây qua /api/sync thất bại, chuyển sang direct cloud store:', err);
+  }
+
+  // 4. Nếu /api/sync không thành công hoặc chạy static không có backend, gọi trực tiếp direct cloud store
+  if (!apiSuccess && room === DEFAULT_ROOM) {
+    try {
+      const directRes = await fetch(DIRECT_CLOUD_STORE_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: DEFAULT_ROOM,
+          data: {
+            room: DEFAULT_ROOM,
+            updatedAt: Date.now(),
+            students: updatedList,
+          },
+        }),
+      });
+      if (directRes.ok) {
+        return updatedList;
+      }
+    } catch (e) {
+      console.warn('Direct cloud store update error:', e);
+    }
   }
 
   return updatedList;
 }
 
 /**
- * Tải bảng xếp hạng thi đua mới nhất từ đám mây
+ * Tải bảng xếp hạng thi đua mới nhất từ đám mây (Hỗ trợ đa tầng: API -> Direct Cloud -> Cache)
  */
 export async function fetchCloudLeaderboard(customRoom = null) {
   const room = customRoom || getSyncRoomCode();
 
+  // Tầng 1: Gọi /api/sync
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+
     const res = await fetch(`/api/sync?room=${encodeURIComponent(room)}&t=${Date.now()}`, {
       method: 'GET',
       headers: { 'Accept': 'application/json' },
+      signal: controller.signal,
     });
+    clearTimeout(timeoutId);
 
     if (res.ok) {
       const data = await res.json();
-      if (data.students && Array.isArray(data.students)) {
+      if (data && data.students && Array.isArray(data.students) && data.students.length > 0) {
         setCachedLeaderboard(data.students);
         return {
           success: true,
           students: data.students,
-          room: data.room,
-          updatedAt: data.updatedAt,
+          room: data.room || room,
+          updatedAt: data.updatedAt || Date.now(),
         };
       }
     }
   } catch (err) {
-    console.warn('Không thể kết nối API đồng bộ đám mây, sử dụng bộ nhớ đệm:', err);
+    console.warn('Không thể kết nối /api/sync, thử tầng 2 Direct Cloud Store:', err);
   }
 
-  // Fallback về cache
+  // Tầng 2: Gọi Direct Cloud Store (nếu là phòng mặc định)
+  if (room === DEFAULT_ROOM) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+      const directRes = await fetch(DIRECT_CLOUD_STORE_URL, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' },
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
+      if (directRes.ok) {
+        const json = await directRes.json();
+        if (json && json.data && Array.isArray(json.data.students) && json.data.students.length > 0) {
+          const remoteList = json.data.students.sort((a, b) => (b.stars || 0) - (a.stars || 0));
+          setCachedLeaderboard(remoteList);
+          return {
+            success: true,
+            students: remoteList,
+            room,
+            updatedAt: json.data.updatedAt || Date.now(),
+          };
+        }
+      }
+    } catch (e) {
+      console.warn('Không thể kết nối Direct Cloud Store, dùng bộ nhớ đệm:', e);
+    }
+  }
+
+  // Tầng 3: Fallback về cache
   const cached = getCachedLeaderboard();
   return {
-    success: false,
+    success: cached.length > 0,
     students: cached,
     room,
     isCached: true,

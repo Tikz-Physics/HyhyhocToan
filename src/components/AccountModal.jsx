@@ -122,10 +122,26 @@ export default function AccountModal({
   const finalizeLogin = (targetAccount) => {
     if (!targetAccount) return;
     const isLocal = accounts.some((a) => a.id === targetAccount.id);
+    const fullAcc = {
+      id: targetAccount.id,
+      name: targetAccount.name,
+      avatar: targetAccount.avatar || '🦁',
+      pin: targetAccount.pin || '1234',
+      grade: targetAccount.grade || 1,
+      stars: targetAccount.stars || 0,
+      completedTasks: targetAccount.completedTasks || [],
+      userMedals: targetAccount.userMedals || [],
+      unlockedPets: targetAccount.unlockedPets || ['dino'],
+      activePet: targetAccount.activePet || 'dino',
+      redeemedRewards: targetAccount.redeemedRewards || [],
+      usedRewardHistory: targetAccount.usedRewardHistory || [],
+      highestTimoScore: targetAccount.highestTimoScore || 0,
+      createdAt: targetAccount.createdAt || Date.now(),
+    };
     if (!isLocal) {
-      handleImportStudentToLocal(targetAccount);
+      handleImportStudentToLocal(fullAcc);
     }
-    onSwitchAccount(targetAccount.id);
+    onSwitchAccount(fullAcc.id, fullAcc);
     setPinTargetAccount(null);
     setEnteredPin('');
     setPinSuccess(false);
@@ -141,7 +157,7 @@ export default function AccountModal({
         // Hợp nhất cả tài khoản cục bộ hiện tại vào danh sách hiển thị
         const mergedMap = new Map();
         res.students.forEach((s) => mergedMap.set(s.id, s));
-        accounts.forEach((acc) => {
+        (accounts || []).forEach((acc) => {
           if (!mergedMap.has(acc.id)) {
             mergedMap.set(acc.id, {
               id: acc.id,
@@ -154,6 +170,13 @@ export default function AccountModal({
               userMedalsCount: (acc.userMedals || []).length,
               lastActive: Date.now(),
               deviceInfo: 'Máy này 💻',
+            });
+          } else {
+            const remote = mergedMap.get(acc.id);
+            mergedMap.set(acc.id, {
+              ...remote,
+              ...acc,
+              stars: Math.max(acc.stars || 0, remote.stars || 0),
             });
           }
         });
@@ -171,9 +194,12 @@ export default function AccountModal({
 
   useEffect(() => {
     if (isOpen) {
+      if (!accounts || accounts.length === 0) {
+        setActiveTab('leaderboard');
+      }
       loadLeaderboardData();
     }
-  }, [isOpen, activeTab]);
+  }, [isOpen, accounts?.length]);
 
   // Keyboard listener for 4-digit PIN keypad
   useEffect(() => {

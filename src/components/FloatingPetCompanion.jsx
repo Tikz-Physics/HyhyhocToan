@@ -78,9 +78,12 @@ export default function FloatingPetCompanion({
     };
   }, []);
 
-  const showSpeech = (text, duration = 4000) => {
+  const showSpeech = (text, duration = 4500, speakOut = true) => {
     if (speechTimerRef.current) clearTimeout(speechTimerRef.current);
     setSpeechBubble(text);
+    if (speakOut) {
+      soundManager.speakPet(text);
+    }
     if (duration > 0) {
       speechTimerRef.current = setTimeout(() => {
         setSpeechBubble('');
@@ -100,7 +103,7 @@ export default function FloatingPetCompanion({
           ? currentPet.cheers
           : ['Hoan hô bé! Bé làm đúng rồi! 🎉', 'Bé tính nhanh như chớp! ⭐', 'Tuyệt đỉnh luôn bé ơi! 💖'];
         const cheer = cheers[Math.floor(Math.random() * cheers.length)];
-        showSpeech(cheer, 4500);
+        showSpeech(cheer, 4500, true);
 
         setTimeout(() => {
           setMood('idle');
@@ -114,13 +117,13 @@ export default function FloatingPetCompanion({
           'Cố lên bé ơi, bạn thú cưng luôn tin ở bé! ✨',
         ];
         const enc = encourages[Math.floor(Math.random() * encourages.length)];
-        showSpeech(enc, 4500);
+        showSpeech(enc, 4500, true);
 
         setTimeout(() => {
           setMood('idle');
         }, 3000);
       }
-    }, 10);
+    }, 50);
 
     return () => clearTimeout(reactionTimer);
   }, [lastAnswerStatus, currentPet.cheers]);
@@ -225,8 +228,7 @@ export default function FloatingPetCompanion({
       'Bé tính nhanh như chớp, lại còn dịu dàng nữa! 🎈',
     ];
     const q = petQuotes[Math.floor(Math.random() * petQuotes.length)];
-    showSpeech(q, 4500);
-    soundManager.speak(q);
+    showSpeech(q, 4500, true);
 
     confetti({
       particleCount: 25,
@@ -253,14 +255,11 @@ export default function FloatingPetCompanion({
     setShowHearts(true);
 
     if (treatType === 'apple') {
-      showSpeech('Măm măm... Táo giòn ngọt lịm! Tớ no căng bụng rồi! 🍎✨', 4000);
-      soundManager.speak('Táo đỏ giòn ngọt! Cảm ơn bé yêu!');
+      showSpeech('Măm măm... Táo giòn ngọt lịm! Tớ no căng bụng rồi! Cảm ơn bé yêu! 🍎✨', 4000, true);
     } else if (treatType === 'icecream') {
-      showSpeech('Woa kem ốc quế mát lạnh thơm ngon tuyệt đỉnh! 🍦💖', 4000);
-      soundManager.speak('Kem ốc quế mát lạnh! Thích mê luôn bé ơi!');
+      showSpeech('Woa kem ốc quế mát lạnh thơm ngon tuyệt đỉnh! Thích mê luôn bé ơi! 🍦💖', 4000, true);
     } else if (treatType === 'milk') {
-      showSpeech('Ực ực... Sữa tươi bổ dưỡng giúp tớ cao lớn và thông minh! 🥛💪', 4000);
-      soundManager.speak('Sữa tươi thơm ngon! Năng lượng dồi dào rồi!');
+      showSpeech('Ực ực... Sữa tươi thơm ngon bổ dưỡng giúp tớ nhiều năng lượng! 🥛💪', 4000, true);
     }
 
     confetti({
@@ -296,8 +295,7 @@ export default function FloatingPetCompanion({
       'Bé hãy uống một ngụm nước và hít thở thật sâu rồi cùng tớ làm tiếp nhé! 💧',
     ];
     const voiceText = funTalks[Math.floor(Math.random() * funTalks.length)];
-    showSpeech(`🗣️ "${voiceText}"`, 6000);
-    soundManager.speak(voiceText);
+    showSpeech(voiceText, 6000, true);
 
     setTimeout(() => {
       setMood('idle');
@@ -311,8 +309,7 @@ export default function FloatingPetCompanion({
     setMood('thinking');
 
     const tip = hint || currentPet.skillDesc || 'Bé hãy quan sát thật kỹ các hình và đếm từng món đồ một nhé!';
-    showSpeech(`💡 Mách nước: "${tip}"`, 6000);
-    soundManager.speak(tip);
+    showSpeech(tip, 6000, true);
 
     setTimeout(() => {
       setMood('idle');
@@ -325,7 +322,7 @@ export default function FloatingPetCompanion({
     soundManager.playFanfare();
     setMood('dancing');
     setShowHearts(true);
-    showSpeech('Lá la la ~ Thú cưng nhảy múa cùng bé yêu học toán vui quá! 🪅🎶', 4000);
+    showSpeech('Lá la la ~ Thú cưng nhảy múa cùng bé yêu học toán vui quá! 🪅🎶', 4000, true);
 
     confetti({
       particleCount: 40,
@@ -421,13 +418,32 @@ export default function FloatingPetCompanion({
           >
             <X className="w-3.5 h-3.5" />
           </button>
-          <div className="flex items-start gap-2">
+          <div className="flex items-start gap-2.5">
             <span className="text-xl flex-shrink-0 animate-bounce">
               {mood === 'happy' ? '🎉' : mood === 'eating' ? '🍎' : mood === 'dancing' ? '🎶' : '💬'}
             </span>
-            <p className="text-xs sm:text-sm font-black text-amber-950 leading-snug">
-              {speechBubble}
-            </p>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs sm:text-sm font-black text-amber-950 leading-snug">
+                {speechBubble}
+              </p>
+              <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-amber-200/80">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    soundManager.speakPet(speechBubble);
+                  }}
+                  className="px-2 py-0.5 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-950 font-black text-[10px] flex items-center gap-1 cursor-pointer transition-all active:scale-95 shadow-2xs border border-amber-300"
+                  title="Bấm để nghe bạn thú cưng nói lại"
+                >
+                  <Volume2 className="w-3 h-3 text-amber-700 animate-pulse" />
+                  <span>Nghe lại 🔊</span>
+                </button>
+                <span className="text-[9px] font-bold text-slate-400 truncate">
+                  {currentPet.name}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       )}
