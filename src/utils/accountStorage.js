@@ -4,6 +4,25 @@ const STORAGE_KEY_ACTIVE_ID = 'hyhyhoctoan_active_account_id';
 const LEGACY_KEY_ACCOUNTS = 'toan_lop1_accounts';
 const LEGACY_KEY_ACTIVE_ID = 'toan_lop1_current_account_id';
 const SYSTEM_RESET_KEY = 'hyhy_system_reset_v3_pin_mandatory_2026';
+const DEVICE_ID_KEY = 'hyhyhoctoan_device_id';
+
+export function getDeviceId() {
+  try {
+    const existing = localStorage.getItem(DEVICE_ID_KEY);
+    if (existing) return existing;
+    const generated = typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : `device_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+    localStorage.setItem(DEVICE_ID_KEY, generated);
+    return generated;
+  } catch {
+    return 'unknown-device';
+  }
+}
+
+export function isAccountOwnedByDevice(account) {
+  return Boolean(account?.createdDeviceId && account.createdDeviceId === getDeviceId());
+}
 
 export function wipeAllAccountsAndReset() {
   try {
@@ -33,6 +52,7 @@ export function loadAccounts() {
           const migrated = legacyAccounts.map((acc) => ({
             ...acc,
             pin: acc.pin ? String(acc.pin).replace(/\D/g, '').slice(0, 4) : '1234',
+            createdDeviceId: acc.createdDeviceId || getDeviceId(),
           }));
           saveAccounts(migrated);
           localStorage.setItem(SYSTEM_RESET_KEY, 'v3_pin_2026');
@@ -56,6 +76,7 @@ export function loadAccounts() {
           unlockedPets: ['dino'],
           activePet: 'dino',
           createdAt: Date.now(),
+          createdDeviceId: getDeviceId(),
         }];
         saveAccounts(migrated);
         localStorage.setItem(SYSTEM_RESET_KEY, 'v3_pin_2026');
@@ -73,6 +94,7 @@ export function loadAccounts() {
         return parsed.map((acc) => ({
           ...acc,
           pin: acc.pin ? String(acc.pin).slice(0, 4) : '1234',
+          createdDeviceId: acc.createdDeviceId || getDeviceId(),
         }));
       }
     }

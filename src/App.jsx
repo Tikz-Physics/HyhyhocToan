@@ -10,6 +10,7 @@ import {
   saveAccounts,
   loadActiveAccountId,
   saveActiveAccountId,
+  getDeviceId,
   wipeAllAccountsAndReset,
 } from './utils/accountStorage';
 import UpdateModal from './components/UpdateModal';
@@ -263,6 +264,7 @@ export default function App() {
       name: cleanName,
       avatar: accData.avatar || '🦁',
       pin: cleanPin,
+      createdDeviceId: accData.createdDeviceId || getDeviceId(),
       grade: targetGrade,
       stars: accData.stars ?? 10,
       completedTasks: accData.completedTasks || [],
@@ -317,7 +319,12 @@ export default function App() {
           importResult.skipped += 1;
           return;
         }
-        mergedMap.set(a.id, { ...mergedMap.get(a.id), ...a, name: cleanName });
+        mergedMap.set(a.id, {
+          ...mergedMap.get(a.id),
+          ...a,
+          name: cleanName,
+          createdDeviceId: a.createdDeviceId || 'external-device',
+        });
         usedNames.set(nameKey, a.id);
         importResult.imported += 1;
         if (!importResult.firstId) {

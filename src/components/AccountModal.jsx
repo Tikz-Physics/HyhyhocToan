@@ -22,6 +22,7 @@ import {
 import { soundManager } from '../utils/soundManager';
 import { getPetStage } from '../data/petData';
 import { cleanAccountName, isDuplicateAccountName } from '../utils/accountName';
+import { isAccountOwnedByDevice } from '../utils/accountStorage';
 import {
   getSyncRoomCode,
   setSyncRoomCode,
@@ -55,6 +56,7 @@ export default function AccountModal({
 
   // PIN verification state
   const [pinTargetAccount, setPinTargetAccount] = useState(null);
+  const [pinAction, setPinAction] = useState('login');
   const [enteredPin, setEnteredPin] = useState('');
   const [pinError, setPinError] = useState(false);
   const [pinSuccess, setPinSuccess] = useState(false);
@@ -168,7 +170,16 @@ export default function AccountModal({
           origin: { y: 0.6 },
         });
         setTimeout(() => {
-          finalizeLogin(pinTargetAccount);
+          if (pinAction === 'delete') {
+            onDeleteAccount(pinTargetAccount.id);
+            setPinTargetAccount(null);
+            setEnteredPin('');
+            setPinError(false);
+            setPinSuccess(false);
+            setPinAction('login');
+          } else {
+            finalizeLogin(pinTargetAccount);
+          }
         }, 500);
       } else {
         setPinError(true);
@@ -179,7 +190,7 @@ export default function AccountModal({
         }, 750);
       }
     }
-  }, [enteredPin, pinSuccess, pinTargetAccount, finalizeLogin]);
+  }, [enteredPin, pinSuccess, pinTargetAccount, pinAction, finalizeLogin, onDeleteAccount]);
 
   const handlePinBackspace = useCallback(() => {
     if (enteredPin.length > 0) {
@@ -195,6 +206,7 @@ export default function AccountModal({
     setEnteredPin('');
     setPinError(false);
     setPinSuccess(false);
+    setPinAction('login');
     setShowParentHelp(false);
     setRevealedPin(null);
   }, []);
@@ -305,6 +317,26 @@ export default function AccountModal({
     loadLeaderboardData(clean);
   };
 
+  const requestDeleteAccount = (account) => {
+    if (!account || accounts.length <= 1) return;
+    if (!window.confirm(`Bạn có chắc muốn xóa tài khoản của bé "${account.name}" không?`)) return;
+
+    soundManager.playPop();
+    if (isAccountOwnedByDevice(account)) {
+      onDeleteAccount(account.id);
+      return;
+    }
+
+    // Accounts created on another device require the account PIN before deletion.
+    setPinAction('delete');
+    setPinTargetAccount(account);
+    setEnteredPin('');
+    setPinError(false);
+    setPinSuccess(false);
+    setShowParentHelp(false);
+    setRevealedPin(null);
+  };
+
 
   const handleGenerateTransferCode = () => {
     const code = generateSyncExportCode(accounts);
@@ -368,8 +400,10 @@ export default function AccountModal({
                   <h4 className="text-base font-black text-slate-800">
                     {pinTargetAccount.name}
                   </h4>
-                  <p className="text-[11px] font-bold text-slate-500 mb-2 max-w-[200px]">
-                    Nhập mật mã 4 số để vào học
+                   <p className="text-[11px] font-bold text-slate-500 mb-2 max-w-[220px]">
+                     {pinAction === 'delete'
+                       ? 'Nhập đúng mật mã 4 số để xóa tài khoản từ thiết bị khác'
+                       : 'Nhập mật mã 4 số để vào học'}
                   </p>
 
                   {/* 4 Bubble Indicator Slots */}
@@ -417,7 +451,7 @@ export default function AccountModal({
 
                 {/* Right Column in Landscape: Tactile 3x4 Numeric Keypad */}
                 <div className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-[260px] landscape:max-w-[220px]">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                     <button
                       key={num}
                       type="button"
@@ -428,7 +462,7 @@ export default function AccountModal({
                     </button>
                   ))}
 
-                  <button
+                   {pinAction !== 'delete' && <button
                     type="button"
                     onClick={startParentHelp}
                     className="h-11 sm:h-12 landscape:h-10 rounded-2xl bg-indigo-50 hover:bg-indigo-100 active:bg-indigo-200 border-2 border-indigo-200 text-indigo-700 font-black text-[10px] leading-tight flex flex-col items-center justify-center cursor-pointer p-0.5"
@@ -436,7 +470,7 @@ export default function AccountModal({
                   >
                     <span className="text-xs">👨‍👩‍👧</span>
                     <span>Quên mã</span>
-                  </button>
+                   </button>}
 
                   <button
                     type="button"
@@ -938,14 +972,7 @@ export default function AccountModal({
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
-                            if (
-                              window.confirm(
-                                `Bạn có chắc muốn xóa tài khoản của bé "${acc.name}" không?`
-                              )
-                            ) {
-                              soundManager.playPop();
-                              onDeleteAccount(acc.id);
-                            }
+                            requestDeleteAccount(acc);
                           }}
                           title="Xóa tài khoản này"
                           className="p-1.5 text-slate-400 hover:text-rose-600 transition-colors"
