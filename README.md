@@ -45,7 +45,22 @@ npm run dev
 
 # Đóng gói sản phẩm (Production Build)
 npm run build
+
+# Chạy lint + toàn bộ kiểm thử dữ liệu, tài khoản và API
+npm test
 ```
+
+## 🔐 Cấu Hình Đồng Bộ An Toàn
+
+Ứng dụng không còn chứa URL kho dữ liệu công khai và không gửi PIN hay tiến trình
+chi tiết lên bảng xếp hạng. Khi triển khai backend, có thể cấu hình các biến môi
+trường sau ở phía máy chủ:
+
+- `SYNC_STORE_URL`: endpoint lưu bảng xếp hạng riêng (không bắt buộc).
+- `SYNC_ALLOWED_ORIGIN`: origin web được phép gọi API nếu chạy khác origin.
+- `SYNC_ADMIN_TOKEN`: token bắt buộc cho thao tác xóa dữ liệu phòng.
+
+Không đưa các giá trị này vào mã frontend hoặc biến môi trường có tiền tố public.
 
 ---
 

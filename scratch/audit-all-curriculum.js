@@ -11,7 +11,7 @@ CURRICULUM_ZONES.forEach((zone) => {
   console.log(`\nZone: ${zone.title} (${zone.id}) - ${zone.basicLevels.length} basic levels`);
   totalBasic += zone.basicLevels.length;
 
-  zone.basicLevels.forEach((lvl, idx) => {
+  zone.basicLevels.forEach((lvl) => {
     // 1. Question text
     if (!lvl.question || lvl.question.trim().length === 0) {
       errors.push(`[${zone.id}] ${lvl.id} has empty question`);

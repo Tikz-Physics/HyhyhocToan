@@ -197,7 +197,7 @@ export default function Navbar({
                 className="flex items-center gap-1.5 bg-white/95 hover:bg-white active:scale-95 border-2 border-amber-300 hover:border-amber-400 px-2 py-1 sm:px-3 sm:py-1.5 rounded-2xl shadow-sm text-amber-950 font-black text-xs sm:text-sm btn-kid-3d cursor-pointer"
               >
                 <span className="text-base sm:text-lg">{currentAccount.avatar || '🦁'}</span>
-                <span className="max-w-[65px] sm:max-w-[100px] truncate">{currentAccount.name || 'Bé Học'}</span>
+                <span className="max-w-[65px] sm:max-w-[100px] truncate">{currentAccount.name || 'Tài khoản'}</span>
               </button>
             )}
 

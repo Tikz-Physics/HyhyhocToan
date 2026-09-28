@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { RefreshCw, X, Sparkles } from 'lucide-react';
+import { RefreshCw, X } from 'lucide-react';
 import { applyAppUpdate } from '../utils/updateManager';
 import { soundManager } from '../utils/soundManager';
 
 export default function UpdateFloatingBanner({
   updateInfo,
-  onOpenDetails,
 }) {
   const [dismissed, setDismissed] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);

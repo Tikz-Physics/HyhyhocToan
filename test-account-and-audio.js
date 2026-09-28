@@ -25,14 +25,35 @@ const {
   saveActiveAccountId,
 } = await import('./src/utils/accountStorage.js');
 
-// Default when empty
+// Thiết bị mới bắt buộc đi qua onboarding, không tự tạo tài khoản giả.
 const defaultAccs = loadAccounts();
-assert.strictEqual(defaultAccs.length, 1);
-assert.strictEqual(defaultAccs[0].id, 'default_child');
-console.log('✓ Initial account loaded correctly');
+assert.strictEqual(defaultAccs.length, 0);
+console.log('✓ Empty device correctly requires onboarding');
+
+// Dữ liệu phiên bản cũ phải được di chuyển, không bị xóa.
+localStorage.clear();
+localStorage.setItem('toan_lop1_stars', '17');
+localStorage.setItem('toan_lop1_completed', JSON.stringify(['legacy_task']));
+const migratedAccs = loadAccounts();
+assert.strictEqual(migratedAccs.length, 1);
+assert.strictEqual(migratedAccs[0].stars, 17);
+assert.deepStrictEqual(migratedAccs[0].completedTasks, ['legacy_task']);
+console.log('✓ Legacy progress migrates without data loss');
+localStorage.clear();
 
 // Create multiple accounts and save
-const acc1 = { ...defaultAccs[0], stars: 25 };
+const acc1 = {
+  id: 'acc_first',
+  name: 'Bé Đầu Tiên',
+  avatar: '🦁',
+  pin: '1234',
+  grade: 1,
+  stars: 25,
+  completedTasks: [],
+  userMedals: [],
+  unlockedPets: ['dino'],
+  activePet: 'dino',
+};
 const acc2 = {
   id: 'acc_sam',
   name: 'Bé Sam',

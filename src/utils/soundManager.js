@@ -77,7 +77,7 @@ export function formatMathForSpeech(text) {
   res = res.replace(/\s*=\s*\?/g, ' bằng bao nhiêu?');
 
   // 6. Missing number in equation: '6 + ? = 10'
-  res = res.replace(/(?<=\+|\-|\×|\*|\:|\÷)\s*\?/g, ' mấy');
+  res = res.replace(/(?<=\+|-|×|\*|:|÷)\s*\?/g, ' mấy');
   res = res.replace(/\?\s*(?==)/g, 'mấy ');
 
   // 7. Multiplication and Division
@@ -237,6 +237,23 @@ class SoundManager {
     return null;
   }
 
+  getCuteVietnameseVoice() {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return null;
+    const voices = window.speechSynthesis.getVoices() || [];
+    const vietnameseVoices = voices.filter((voice) =>
+      voice.lang?.toLowerCase().startsWith('vi') ||
+      /vietnam|tiếng việt|tieng viet|hoaimy|namminh|linh/i.test(voice.name)
+    );
+
+    // Prefer the softer Vietnamese voices commonly available on Windows,
+    // Android and Apple devices, then gracefully fall back to any vi voice.
+    return (
+      vietnameseVoices.find((voice) => /hoaimy|linh|female|woman|nữ/i.test(voice.name)) ||
+      vietnameseVoices[0] ||
+      this.getVietnameseVoice()
+    );
+  }
+
   onSpeechChange(callback) {
     this.speechCallbacks.add(callback);
     return () => this.speechCallbacks.delete(callback);
@@ -377,14 +394,14 @@ class SoundManager {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       try {
         window.speechSynthesis.cancel();
-        const viVoice = this.getVietnameseVoice();
+        const viVoice = this.getCuteVietnameseVoice();
         const utterance = new SpeechSynthesisUtterance(cleanText);
         utterance.lang = 'vi-VN';
         if (viVoice) {
           utterance.voice = viVoice;
         }
-        utterance.rate = 1.0;
-        utterance.pitch = 1.35; // Cute kid pet pitch
+        utterance.rate = 0.94;
+        utterance.pitch = 1.22;
 
         utterance.onend = () => this.notifySpeech(false, '');
         utterance.onerror = () => {
@@ -408,30 +425,22 @@ class SoundManager {
     if (!ctx) return;
     try {
       const now = ctx.currentTime;
-      // Two-tone sweet chirp
-      const osc1 = ctx.createOscillator();
-      const gain1 = ctx.createGain();
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(600, now);
-      osc1.frequency.exponentialRampToValueAtTime(950, now + 0.08);
-      gain1.gain.setValueAtTime(0.2, now);
-      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
-      osc1.connect(gain1);
-      gain1.connect(ctx.destination);
-      osc1.start(now);
-      osc1.stop(now + 0.1);
-
-      const osc2 = ctx.createOscillator();
-      const gain2 = ctx.createGain();
-      osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(950, now + 0.08);
-      osc2.frequency.exponentialRampToValueAtTime(1300, now + 0.18);
-      gain2.gain.setValueAtTime(0.22, now + 0.08);
-      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
-      osc2.connect(gain2);
-      gain2.connect(ctx.destination);
-      osc2.start(now + 0.08);
-      osc2.stop(now + 0.22);
+      // A soft three-note sparkle feels friendly without masking the spoken words.
+      [659.25, 783.99, 987.77].forEach((frequency, index) => {
+        const start = now + index * 0.07;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = index === 2 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(frequency, start);
+        osc.frequency.exponentialRampToValueAtTime(frequency * 1.04, start + 0.11);
+        gain.gain.setValueAtTime(0.001, start);
+        gain.gain.exponentialRampToValueAtTime(index === 2 ? 0.08 : 0.1, start + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.001, start + 0.18);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + 0.19);
+      });
     } catch {}
   }
 

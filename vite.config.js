@@ -88,5 +88,24 @@ function syncProxyPlugin() {
 export default defineConfig({
   base: './',
   plugins: [react(), tailwindcss(), ttsProxyPlugin(), syncProxyPlugin()],
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            {
+              name: 'curriculum-data',
+              test: /[\\/]src[\\/]data[\\/]curriculumGrade[1-5]\.js$/,
+            },
+            {
+              name: 'vendor',
+              test: /[\\/]node_modules[\\/]/,
+              maxSize: 250000,
+            },
+          ],
+        },
+      },
+    },
+  },
 })
 

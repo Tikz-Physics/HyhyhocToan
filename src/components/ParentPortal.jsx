@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BarChart3, Lightbulb, RotateCcw, RefreshCw, Smartphone, Lock, Eye, EyeOff } from 'lucide-react';
+import { BarChart3, Lightbulb, RotateCcw, RefreshCw, Eye, EyeOff } from 'lucide-react';
 import { getCurriculumZones, GRADE_CONFIGS } from '../data/curriculumData';
 import { CURRENT_APP_VERSION } from '../utils/updateManager';
 

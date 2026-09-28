@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import confetti from 'canvas-confetti';
 import {
   Plus,
@@ -14,22 +14,18 @@ import {
   Share2,
   Key,
   ShieldCheck,
-  Smartphone,
-  Laptop,
   Lock,
-  Unlock,
   Eye,
   EyeOff,
   ArrowLeft,
-  HelpCircle,
 } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
 import { getPetStage } from '../data/petData';
+import { cleanAccountName, isDuplicateAccountName } from '../utils/accountName';
 import {
   getSyncRoomCode,
   setSyncRoomCode,
   fetchCloudLeaderboard,
-  syncAccountToCloud,
   generateSyncExportCode,
   importSyncExportCode,
 } from '../utils/cloudSync';
@@ -45,11 +41,9 @@ export default function AccountModal({
   onCreateAccount,
   onDeleteAccount,
   onBulkImportAccounts,
-  onUpdateAccountPin,
   onWipeAllAccounts,
 }) {
   const hasLocalAccounts = Boolean(accounts && accounts.length > 0);
-  const isMandatory = !hasLocalAccounts;
   // Thiết bị mới chưa có tài khoản cục bộ sẽ hiển thị ngay Bảng Vàng để thấy mọi tài khoản đã tạo!
   const [activeTab, setActiveTab] = useState(() => (!hasLocalAccounts ? 'leaderboard' : 'local'));
   const [isCreating, setIsCreating] = useState(false);
@@ -82,46 +76,10 @@ export default function AccountModal({
   const [transferCode, setTransferCode] = useState('');
   const [inputTransferCode, setInputTransferCode] = useState('');
 
-  // Đồng bộ một bé từ Đám Mây về máy này để học tiếp
-  const handleImportStudentToLocal = (student) => {
-    soundManager.playStar();
-    confetti({
-      particleCount: 40,
-      spread: 50,
-      origin: { y: 0.7 },
-    });
-
-    const newAcc = {
-      id: student.id || `acc_${Date.now()}`,
-      name: student.name,
-      avatar: student.avatar || '🦁',
-      pin: student.pin || '1234',
-      grade: student.grade || 1,
-      stars: student.stars || 0,
-      completedTasks: student.completedTasks || [],
-      userMedals: student.userMedals || [],
-      unlockedPets: student.unlockedPets || ['dino'],
-      activePet: student.activePet || 'dino',
-      redeemedRewards: student.redeemedRewards || [],
-      usedRewardHistory: student.usedRewardHistory || [],
-      highestTimoScore: student.highestTimoScore || 0,
-      createdAt: student.createdAt || Date.now(),
-    };
-
-    if (onBulkImportAccounts) {
-      onBulkImportAccounts([newAcc]);
-    } else {
-      onCreateAccount(newAcc);
-    }
-
-    setSyncStatusMsg(`Đã kết nối tài khoản bé "${student.name}" về máy này thành công!`);
-    setTimeout(() => setSyncStatusMsg(''), 4000);
-    return newAcc;
-  };
-
-  const finalizeLogin = (targetAccount) => {
+  const finalizeLogin = useCallback((targetAccount) => {
     if (!targetAccount) return;
     const isLocal = accounts.some((a) => a.id === targetAccount.id);
+    if (!isLocal) return;
     const fullAcc = {
       id: targetAccount.id,
       name: targetAccount.name,
@@ -138,19 +96,15 @@ export default function AccountModal({
       highestTimoScore: targetAccount.highestTimoScore || 0,
       createdAt: targetAccount.createdAt || Date.now(),
     };
-    if (!isLocal) {
-      handleImportStudentToLocal(fullAcc);
-    }
     onSwitchAccount(fullAcc.id, fullAcc);
     setPinTargetAccount(null);
     setEnteredPin('');
     setPinSuccess(false);
     onClose();
-  };
+  }, [accounts, onSwitchAccount, onClose]);
 
   // Tải bảng xếp hạng đám mây khi mở modal hoặc đổi tab
-  const loadLeaderboardData = async (targetRoom = null) => {
-    setIsRefreshing(true);
+  const loadLeaderboardData = useCallback(async (targetRoom = null) => {
     try {
       const res = await fetchCloudLeaderboard(targetRoom);
       if (res && res.students) {
@@ -163,7 +117,6 @@ export default function AccountModal({
               id: acc.id,
               name: acc.name,
               avatar: acc.avatar,
-              pin: acc.pin || '1234',
               grade: acc.grade || 1,
               stars: acc.stars || 0,
               completedTasksCount: (acc.completedTasks || []).length,
@@ -190,36 +143,15 @@ export default function AccountModal({
     } finally {
       setIsRefreshing(false);
     }
-  };
+  }, [accounts]);
 
   useEffect(() => {
-    if (isOpen) {
-      if (!accounts || accounts.length === 0) {
-        setActiveTab('leaderboard');
-      }
-      loadLeaderboardData();
-    }
-  }, [isOpen, accounts?.length]);
+    if (!isOpen) return;
+    const timerId = window.setTimeout(() => loadLeaderboardData(), 0);
+    return () => window.clearTimeout(timerId);
+  }, [isOpen, loadLeaderboardData]);
 
-  // Keyboard listener for 4-digit PIN keypad
-  useEffect(() => {
-    if (!pinTargetAccount || showParentHelp) return;
-
-    const handleKeyDown = (e) => {
-      if (e.key >= '0' && e.key <= '9') {
-        handlePinDigit(e.key);
-      } else if (e.key === 'Backspace') {
-        handlePinBackspace();
-      } else if (e.key === 'Escape') {
-        handleClosePinPrompt();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [pinTargetAccount, enteredPin, pinSuccess, showParentHelp]);
-
-  const handlePinDigit = (digit) => {
+  const handlePinDigit = useCallback((digit) => {
     if (enteredPin.length >= 4 || pinSuccess) return;
     soundManager.playPop(1.1 + enteredPin.length * 0.1);
     const nextPin = enteredPin + String(digit);
@@ -247,17 +179,17 @@ export default function AccountModal({
         }, 750);
       }
     }
-  };
+  }, [enteredPin, pinSuccess, pinTargetAccount, finalizeLogin]);
 
-  const handlePinBackspace = () => {
+  const handlePinBackspace = useCallback(() => {
     if (enteredPin.length > 0) {
       soundManager.playClick();
       setEnteredPin(enteredPin.slice(0, -1));
       setPinError(false);
     }
-  };
+  }, [enteredPin]);
 
-  const handleClosePinPrompt = () => {
+  const handleClosePinPrompt = useCallback(() => {
     soundManager.playPop();
     setPinTargetAccount(null);
     setEnteredPin('');
@@ -265,7 +197,25 @@ export default function AccountModal({
     setPinSuccess(false);
     setShowParentHelp(false);
     setRevealedPin(null);
-  };
+  }, []);
+
+  // Keyboard listener for 4-digit PIN keypad
+  useEffect(() => {
+    if (!pinTargetAccount || showParentHelp) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key >= '0' && e.key <= '9') {
+        handlePinDigit(e.key);
+      } else if (e.key === 'Backspace') {
+        handlePinBackspace();
+      } else if (e.key === 'Escape') {
+        handleClosePinPrompt();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [pinTargetAccount, showParentHelp, handlePinDigit, handlePinBackspace, handleClosePinPrompt]);
 
   const startParentHelp = () => {
     soundManager.playPop();
@@ -305,9 +255,14 @@ export default function AccountModal({
 
   const handleCreateSubmit = (e) => {
     e.preventDefault();
-    const trimmed = newName.trim();
-    if (!trimmed) {
-      alert('Vui lòng nhập tên của bé để tiếp tục!');
+    const cleanedName = cleanAccountName(newName);
+    if (!cleanedName) {
+      alert('Vui lòng nhập tên tài khoản để tiếp tục!');
+      return;
+    }
+
+    if (isDuplicateAccountName(cleanedName, [...accounts, ...cloudStudents])) {
+      alert('Tên tài khoản này đã tồn tại. Vui lòng chọn tên khác!');
       return;
     }
 
@@ -317,18 +272,23 @@ export default function AccountModal({
       return;
     }
 
+    const wasCreated = onCreateAccount({
+      name: cleanedName,
+      avatar: selectedAvatar,
+      grade: newGrade,
+      pin: cleanPin,
+    });
+
+    if (wasCreated === false) {
+      alert('Tên tài khoản này đã tồn tại. Vui lòng chọn tên khác!');
+      return;
+    }
+
     soundManager.playFanfare();
     confetti({
       particleCount: 60,
       spread: 70,
       origin: { y: 0.6 },
-    });
-
-    onCreateAccount({
-      name: trimmed,
-      avatar: selectedAvatar,
-      grade: newGrade,
-      pin: cleanPin,
     });
 
     setNewName('');
@@ -357,10 +317,12 @@ export default function AccountModal({
     const imported = importSyncExportCode(inputTransferCode);
     if (imported && imported.length > 0) {
       soundManager.playFanfare();
+      let result = { imported: imported.length, skipped: 0 };
       if (onBulkImportAccounts) {
-        onBulkImportAccounts(imported);
+        result = onBulkImportAccounts(imported) || result;
       }
-      setSyncStatusMsg(`Đã khôi phục thành công ${imported.length} tài khoản bạn học!`);
+      const skippedText = result.skipped > 0 ? ` Bỏ qua ${result.skipped} tài khoản trùng tên.` : '';
+      setSyncStatusMsg(`Đã khôi phục thành công ${result.imported} tài khoản!${skippedText}`);
       setInputTransferCode('');
       setTimeout(() => {
         setSyncStatusMsg('');
@@ -404,7 +366,7 @@ export default function AccountModal({
                   </div>
 
                   <h4 className="text-base font-black text-slate-800">
-                    Bé {pinTargetAccount.name}
+                    {pinTargetAccount.name}
                   </h4>
                   <p className="text-[11px] font-bold text-slate-500 mb-2 max-w-[200px]">
                     Nhập mật mã 4 số để vào học
@@ -608,7 +570,7 @@ export default function AccountModal({
                 {isCreating
                   ? 'Bảo mật với Mã PIN 4 số • Điền thông tin bé để bắt đầu'
                   : activeTab === 'leaderboard'
-                  ? 'Sắp xếp theo số sao ⭐ • Nhập PIN 4 số để vào học'
+                  ? 'Sắp xếp theo số sao ⭐ • Chỉ tài khoản đã có trên máy mới đăng nhập được'
                   : 'Danh sách các bạn nhỏ đang học trên máy này'}
               </p>
             </div>
@@ -617,6 +579,7 @@ export default function AccountModal({
           {hasLocalAccounts && (
             <button
               type="button"
+              aria-label="Đóng cửa sổ tài khoản"
               onClick={() => {
                 soundManager.playPop();
                 onClose();
@@ -740,15 +703,15 @@ export default function AccountModal({
 
               <div>
                 <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-1">
-                  Tên bé học:
+                  Tên tài khoản:
                 </label>
                 <input
                   type="text"
                   autoFocus
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
-                  placeholder="Ví dụ: Bé Nam, Bé Sam, Bé Bắp..."
-                  maxLength={25}
+                  placeholder="Ví dụ: Nam, Sam, Bắp, Mèo Mun..."
+                  maxLength={50}
                   className="w-full px-3.5 py-2.5 bg-slate-50 border-2 border-slate-300 focus:border-amber-500 rounded-2xl font-bold text-sm text-slate-800 outline-none transition-colors"
                 />
               </div>
@@ -1226,7 +1189,7 @@ export default function AccountModal({
                               <Check className="w-3 h-3 text-emerald-600" />
                               <span>Đang học</span>
                             </span>
-                          ) : (
+                          ) : isLocal ? (
                             <button
                               type="button"
                               onClick={() => {
@@ -1244,6 +1207,10 @@ export default function AccountModal({
                               <Lock className="w-3.5 h-3.5 text-amber-900" />
                               <span>Vào học 🔒</span>
                             </button>
+                          ) : (
+                            <span className="bg-slate-100 border border-slate-200 text-slate-500 text-[10px] font-black px-2.5 py-1 rounded-xl">
+                              Chỉ xếp hạng
+                            </span>
                           )}
                         </div>
                       </div>

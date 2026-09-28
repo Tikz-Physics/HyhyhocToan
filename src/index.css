@@ -130,6 +130,92 @@
   animation: petHop 0.6s ease-in-out infinite;
 }
 
+/* 3D pet atlas: six lightweight mascots share one transparent texture. */
+.pet-3d-stage {
+  position: relative;
+  width: 5.5rem;
+  height: 5.5rem;
+  transform-origin: 50% 88%;
+  will-change: transform;
+}
+
+.pet-3d-stage-compact {
+  width: 4rem;
+  height: 4rem;
+}
+
+.pet-3d-sprite {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-repeat: no-repeat;
+  background-size: 300% 200%;
+  filter: drop-shadow(0 7px 5px rgb(71 38 8 / 0.24));
+  transform-origin: 50% 88%;
+  border-radius: 1.25rem;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.32);
+}
+
+.pet-3d-shadow {
+  position: absolute;
+  z-index: 1;
+  left: 18%;
+  right: 18%;
+  bottom: 4%;
+  height: 12%;
+  border-radius: 9999px;
+  background: rgb(68 38 15 / 0.2);
+  filter: blur(4px);
+}
+
+@keyframes pet3dIdle {
+  0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
+  50% { transform: translateY(-3px) rotate(1deg) scale(1.02); }
+}
+
+@keyframes pet3dRun {
+  0%, 100% { transform: translateY(0) rotate(-5deg) scaleX(1.02) scaleY(0.97); }
+  25% { transform: translateY(-9px) rotate(4deg) scaleX(0.98) scaleY(1.04); }
+  50% { transform: translateY(-2px) rotate(6deg) scaleX(1.04) scaleY(0.96); }
+  75% { transform: translateY(-10px) rotate(-3deg) scaleX(0.98) scaleY(1.05); }
+}
+
+@keyframes pet3dDance {
+  0%, 100% { transform: rotate(-8deg) translateY(0); }
+  50% { transform: rotate(8deg) translateY(-8px) scale(1.05); }
+}
+
+.pet-3d-idle .pet-3d-sprite { animation: pet3dIdle 2.4s ease-in-out infinite; }
+.pet-3d-running .pet-3d-sprite { animation: pet3dRun 0.34s ease-in-out infinite; }
+.pet-3d-dancing .pet-3d-sprite { animation: pet3dDance 0.42s ease-in-out infinite; }
+.pet-3d-happy .pet-3d-sprite { filter: drop-shadow(0 7px 5px rgb(71 38 8 / 0.24)) saturate(1.15) brightness(1.08); }
+
+.pet-3d-running .pet-3d-shadow {
+  animation: petShadowRun 0.34s ease-in-out infinite;
+}
+
+@keyframes petShadowRun {
+  0%, 100% { transform: scaleX(1); opacity: 0.65; }
+  50% { transform: scaleX(0.65); opacity: 0.3; }
+}
+
+.pet-3d-treat {
+  position: absolute;
+  z-index: 3;
+  right: -0.15rem;
+  top: 1.7rem;
+  font-size: 1.25rem;
+  animation: pet3dIdle 0.65s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet-3d-sprite,
+  .pet-3d-shadow,
+  .animate-pet-hop {
+    animation: none !important;
+  }
+}
+
 /* Character Body Part Keyframes */
 @keyframes walkLegL {
   0%, 100% { transform: rotate(-18deg); }

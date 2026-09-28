@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { soundManager } from '../utils/soundManager';
 import { getAssetUrl } from '../utils/assetHelper';
-import { Check, ChevronRight, RotateCcw, BookOpen, Sparkles, AlertCircle } from 'lucide-react';
+import { Check, RotateCcw } from 'lucide-react';
 import QuestionIllustration from './QuestionIllustration';
 
 const getTimeOfDayInfo = (h) => {
@@ -58,8 +58,6 @@ const getTimeOfDayInfo = (h) => {
 
 export default function InteractiveCanvas({
   level,
-  isTimo = false,
-  onComplete,
   onAnswerStatus,
   onCorrectAnswer,
   onWrongAnswer,
@@ -76,7 +74,6 @@ export default function InteractiveCanvas({
   const [isWrong, setIsWrong] = useState(false);
   const [wrongOption, setWrongOption] = useState(null);
   const [errorShake, setErrorShake] = useState(false);
-  const [showExplanation, setShowExplanation] = useState(false);
 
   // Helper to determine the true correct answer string
   const getCorrectOption = () => {
@@ -136,7 +133,6 @@ export default function InteractiveCanvas({
     setIsSuccess(true);
     setIsWrong(false);
     setWrongOption(null);
-    setShowExplanation(true);
     if (val !== null) {
       setUserValue(String(val));
       setSelectedOption(val);
@@ -158,7 +154,6 @@ export default function InteractiveCanvas({
     setIsSuccess(false);
     setWrongOption(opt);
     setErrorShake(true);
-    setShowExplanation(true);
     if (onAnswerStatus) onAnswerStatus('wrong');
     if (onWrongAnswer) onWrongAnswer({ level, penalty: 1 });
     soundManager.playWrong();
@@ -175,21 +170,6 @@ export default function InteractiveCanvas({
     setUserValue('');
     if (onAnswerStatus) onAnswerStatus('idle');
   };
-
-  // --- 2. TRAIN: Direct tap carriage ---
-  const handleSelectTrainCarriage = (val, idx) => {
-    if (hasAnswered) return;
-    soundManager.playClick();
-    setSelectedOption(val);
-    setUserValue(String(val));
-
-    if (evaluateAnswer(val, idx)) {
-      triggerSuccess(val);
-    } else {
-      triggerError(val);
-    }
-  };
-
 
   // --- 3. ADDITION: Drop apples into basket ---
   const handleTapApple = (idx) => {

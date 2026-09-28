@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Pause, X, CheckCircle, Clock, Volume2 } from 'lucide-react';
+import { Play, Pause, X, CheckCircle, Clock } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundManager } from '../utils/soundManager';
 

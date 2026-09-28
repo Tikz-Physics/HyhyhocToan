@@ -2,15 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { Volume2, Lightbulb, Music, X, Sparkles, Heart } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
-import AnimatedCharacter from './AnimatedCharacter';
+import Pet3DCharacter from './Pet3DCharacter';
 
 const COMPANION_PETS = [
-  { id: 'dino', name: 'Khủng Long Dino', icon: '🦖', quote: 'Dino dũng cảm cùng bé vượt qua mọi thử thách!' },
-  { id: 'dragon', name: 'Rồng Thần Lửa', icon: '🐲', quote: 'Gầm vang! Rồng Thần mang phép thuật toán học cho bé!' },
+  { id: 'dino', name: 'Khủng Long Dino', icon: '🦖', quote: 'Dino tung tăng cùng bạn khám phá từng bài toán nhé!' },
+  { id: 'dragon', name: 'Rồng Thần Lửa', icon: '🐲', quote: 'Rồng con mang một túi phép màu toán học đến nè!' },
   { id: 'chick', name: 'Bé Rồng Con', icon: '🐣', quote: 'Chíp chíp! Cùng nhau hái táo và đếm số nhé!' },
   { id: 'bunny', name: 'Thỏ Trắng', icon: '🐰', quote: 'Thỏ Trắng tai dài lắng nghe từng bài toán của bé!' },
   { id: 'unicorn', name: 'Kỳ Lân Mộng Mơ', icon: '🦄', quote: 'Kỳ lân cầu vồng tỏa ánh sáng lấp lánh diệu kỳ!' },
-  { id: 'puppy', name: 'Cún Bắp Vàng', icon: '🐶', quote: 'Gâu gâu! Cún Bắp yêu bé chăm học nhất trên đời!' },
+  { id: 'puppy', name: 'Cún Bắp Vàng', icon: '🐶', quote: 'Gâu gâu! Cún Bắp thích học và chạy nhảy cùng bạn!' },
 ];
 
 export default function FloatingPetCompanion({
@@ -32,8 +32,8 @@ export default function FloatingPetCompanion({
   const [position, setPosition] = useState(() => {
     if (typeof window === 'undefined') return { x: 280, y: 500 };
     return {
-      x: Math.max(16, window.innerWidth - 72),
-      y: Math.max(16, window.innerHeight - 110),
+      x: Math.max(16, window.innerWidth - 118),
+      y: Math.max(16, window.innerHeight - 106),
     };
   });
   const [isDragging, setIsDragging] = useState(false);
@@ -58,16 +58,16 @@ export default function FloatingPetCompanion({
     icon: '🐣',
     badge: 'Bạn Đồng Hành',
     quote: 'Cùng học toán thật vui nhé!',
-    spokenVoice: 'Chào bé yêu! Tớ là bạn đồng hành cùng bé học toán đây!',
-    cheers: ['Bé giỏi quá!', 'Tuyệt vời lắm bé ơi!'],
+    spokenVoice: 'Chíp chíp! Tớ đến học toán và chơi cùng bạn nè!',
+    cheers: ['Hí hí, bạn làm đúng rồi nè!', 'Hay quá! Tớ vui muốn nhảy tung tăng!'],
   };
 
   // Keep pet inside screen on resize or flip
   useEffect(() => {
     const handleResize = () => {
       setPosition((prev) => ({
-        x: Math.max(10, Math.min(prev.x, window.innerWidth - 68)),
-        y: Math.max(10, Math.min(prev.y, window.innerHeight - 68)),
+        x: Math.max(10, Math.min(prev.x, window.innerWidth - 118)),
+        y: Math.max(10, Math.min(prev.y, window.innerHeight - 106)),
       }));
     };
     window.addEventListener('resize', handleResize);
@@ -101,7 +101,7 @@ export default function FloatingPetCompanion({
         setShowHearts(true);
         const cheers = currentPet.cheers && currentPet.cheers.length > 0
           ? currentPet.cheers
-          : ['Hoan hô bé! Bé làm đúng rồi! 🎉', 'Bé tính nhanh như chớp! ⭐', 'Tuyệt đỉnh luôn bé ơi! 💖'];
+          : ['Hí hí, bạn làm đúng rồi nè! 🎉', 'Hay quá! Tớ vui muốn nhảy tung tăng! ⭐', 'Chíp chíp, mình giỏi quá đi! 💖'];
         const cheer = cheers[Math.floor(Math.random() * cheers.length)];
         showSpeech(cheer, 4500, true);
 
@@ -112,9 +112,9 @@ export default function FloatingPetCompanion({
       } else if (lastAnswerStatus === 'wrong') {
         setMood('encouraging');
         const encourages = [
-          'Không sao đâu bé, bé thử lại một lần nữa nhé! 💪',
-          'Bé đếm lại một chút xíu là đúng ngay nè! 🌟',
-          'Cố lên bé ơi, bạn thú cưng luôn tin ở bé! ✨',
+          'Hông sao đâu, mình thử lại cùng nhau nha! 🌷',
+          'Mình đếm chậm thêm một chút nhé, sắp đúng rồi nè! 🌟',
+          'Tớ ngồi đây cổ vũ bạn. Mình thử lại nhé! ✨',
         ];
         const enc = encourages[Math.floor(Math.random() * encourages.length)];
         showSpeech(enc, 4500, true);
@@ -140,8 +140,8 @@ export default function FloatingPetCompanion({
           const dx = (Math.random() - 0.5) * 2 * maxDx;
           const dy = (Math.random() - 0.5) * 2 * maxDy;
 
-          const nextX = Math.max(16, Math.min(prev.x + dx, window.innerWidth - 72));
-          const nextY = Math.max(16, Math.min(prev.y + dy, window.innerHeight - 72));
+          const nextX = Math.max(16, Math.min(prev.x + dx, window.innerWidth - 118));
+          const nextY = Math.max(16, Math.min(prev.y + dy, window.innerHeight - 106));
 
           setFacingDirection(nextX >= prev.x ? 1 : -1);
           setIsHopping(true);
@@ -165,9 +165,9 @@ export default function FloatingPetCompanion({
         localStorage.setItem('hyhyhoctoan_pet_wander', String(next));
       } catch {}
       if (next) {
-        showSpeech('Tớ sẽ chạy nhảy tung tăng quanh màn hình cùng bé nhé! 🏃💨', 3000);
+        showSpeech('Yay! Tớ chạy tung tăng quanh màn hình nha! 🐾', 3000);
       } else {
-        showSpeech('Tớ sẽ đứng yên tại đây để bé học bài nhé! 📌', 3000);
+        showSpeech('Tớ ngồi ngoan ở đây học cùng bạn nha! 📌', 3000);
       }
       return next;
     });
@@ -191,8 +191,8 @@ export default function FloatingPetCompanion({
       if (Math.hypot(dx, dy) > 6) {
         dragRef.current.moved = true;
       }
-      const newX = Math.max(8, Math.min(dragRef.current.initX + dx, window.innerWidth - 64));
-      const newY = Math.max(8, Math.min(dragRef.current.initY + dy, window.innerHeight - 64));
+      const newX = Math.max(8, Math.min(dragRef.current.initX + dx, window.innerWidth - 118));
+      const newY = Math.max(8, Math.min(dragRef.current.initY + dy, window.innerHeight - 106));
       setPosition({ x: newX, y: newY });
     };
 
@@ -206,7 +206,7 @@ export default function FloatingPetCompanion({
         soundManager.playPop();
         setIsOpen((prev) => !prev);
         if (!isOpen && !speechBubble) {
-          showSpeech(`Bé muốn chơi trò gì cùng ${currentPet.name} nào? 🎈`, 3000);
+          showSpeech(`Chíp chíp! Bạn muốn chơi gì cùng ${currentPet.name} nè? 🎈`, 3000);
         }
       }
     };
@@ -222,10 +222,10 @@ export default function FloatingPetCompanion({
     setMood('happy');
     setShowHearts(true);
     const petQuotes = [
-      'Dạ thích quá! Tớ yêu bé nhiều lắm! 🥰💖',
-      'Bé xoa đầu làm tớ thấy ấm áp và hạnh phúc quá! Cảm ơn bé! ✨',
-      'Bạn nhỏ ngoan của tớ ơi, tớ luôn ở cạnh cổ vũ bé! ⭐',
-      'Bé tính nhanh như chớp, lại còn dịu dàng nữa! 🎈',
+      'Ưm... thích quá! Cảm ơn bạn nha! 🥰',
+      'Hí hí, xoa thêm một chút nữa nha! ✨',
+      'Tớ thấy ấm áp quá. Tớ sẽ cổ vũ bạn! ⭐',
+      'Chíp chíp! Bạn dịu dàng ghê á! 🎈',
     ];
     const q = petQuotes[Math.floor(Math.random() * petQuotes.length)];
     showSpeech(q, 4500, true);
@@ -255,11 +255,11 @@ export default function FloatingPetCompanion({
     setShowHearts(true);
 
     if (treatType === 'apple') {
-      showSpeech('Măm măm... Táo giòn ngọt lịm! Tớ no căng bụng rồi! Cảm ơn bé yêu! 🍎✨', 4000, true);
+      showSpeech('Măm măm... Táo giòn ngon quá! Cảm ơn bạn nha! 🍎✨', 4000, true);
     } else if (treatType === 'icecream') {
-      showSpeech('Woa kem ốc quế mát lạnh thơm ngon tuyệt đỉnh! Thích mê luôn bé ơi! 🍦💖', 4000, true);
+      showSpeech('Woa, kem mát lạnh nè! Tớ thích mê luôn! 🍦💖', 4000, true);
     } else if (treatType === 'milk') {
-      showSpeech('Ực ực... Sữa tươi thơm ngon bổ dưỡng giúp tớ nhiều năng lượng! 🥛💪', 4000, true);
+      showSpeech('Ực ực... Sữa ngon quá! Tớ đầy năng lượng rồi! 🥛✨', 4000, true);
     }
 
     confetti({
@@ -288,11 +288,11 @@ export default function FloatingPetCompanion({
     setMood('happy');
 
     const funTalks = [
-      `Chào bé yêu! ${currentPet.name} luôn ở cạnh cổ vũ bé học toán nhé! 🎈`,
-      'Bé có biết không? Học toán giúp não bộ chúng mình thông minh như siêu nhân đấy! 🧠✨',
-      'Đố bé nhé: 1 cộng 1 bằng mấy? Bằng 2 chú chim hót líu lo! 🐦',
-      'Mỗi ngôi sao bé kiếm được là một điều ước kỳ diệu lấp lánh trên bầu trời! ⭐',
-      'Bé hãy uống một ngụm nước và hít thở thật sâu rồi cùng tớ làm tiếp nhé! 💧',
+      `Chíp chíp! ${currentPet.name} thích học toán cùng bạn lắm! 🎈`,
+      'Hí hí, mỗi bài toán là một trò chơi nhỏ đó nha! 🧠✨',
+      'Đố bạn nè: một cộng một bằng mấy? Bằng hai chú chim líu lo! 🐦',
+      'Mỗi ngôi sao bạn nhận được đều lấp lánh xinh ơi là xinh! ⭐',
+      'Mình uống một ngụm nước rồi học tiếp nha! 💧',
     ];
     const voiceText = funTalks[Math.floor(Math.random() * funTalks.length)];
     showSpeech(voiceText, 6000, true);
@@ -322,7 +322,7 @@ export default function FloatingPetCompanion({
     soundManager.playFanfare();
     setMood('dancing');
     setShowHearts(true);
-    showSpeech('Lá la la ~ Thú cưng nhảy múa cùng bé yêu học toán vui quá! 🪅🎶', 4000, true);
+    showSpeech('La la la~ Mình lắc lư một chút nha! 🪅🎶', 4000, true);
 
     confetti({
       particleCount: 40,
@@ -340,14 +340,29 @@ export default function FloatingPetCompanion({
     }, 2000);
   };
 
+  // Action: one playful high jump on demand
+  const handleJump = (e) => {
+    e?.stopPropagation();
+    soundManager.playStar();
+    setMood('happy');
+    setShowHearts(true);
+    setIsHopping(true);
+    showSpeech('Một, hai, ba... bật cao! Hí hí, vui quá! 🐾✨', 3200, true);
+
+    setTimeout(() => {
+      setIsHopping(false);
+      setMood('idle');
+      setShowHearts(false);
+    }, 1400);
+  };
+
   // Action: Quick Companion Switcher
   const handleSwitchCompanion = (companion, e) => {
     e?.stopPropagation();
     soundManager.playFanfare();
     setActiveCompanion(companion);
     setShowHearts(true);
-    showSpeech(`✨ Úm ba la! Tớ là ${companion.name}! Chúng mình cùng học toán nhé! 🎉`, 4000);
-    soundManager.speak(`${companion.name} xin chào bé yêu!`);
+    showSpeech(`✨ Tinh tinh! Tớ là ${companion.name}. Mình cùng chơi nhé! 🎉`, 4000);
 
     confetti({
       particleCount: 35,
@@ -381,7 +396,7 @@ export default function FloatingPetCompanion({
           className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 border-3 border-white shadow-xl flex items-center justify-center overflow-hidden cursor-pointer hover:scale-110 active:scale-95 transition-transform animate-bounce-slow p-1"
         >
           <div className="scale-75 pointer-events-none">
-            <AnimatedCharacter type={currentPet.id || 'dino'} mood="idle" />
+            <Pet3DCharacter type={currentPet.id || 'dino'} mood="idle" compact />
           </div>
         </button>
       </div>
@@ -532,8 +547,8 @@ export default function FloatingPetCompanion({
             </div>
           </div>
 
-          {/* 3 Interactive Buttons: Trò chuyện, Mách nước, Múa vui */}
-          <div className="grid grid-cols-3 gap-1 pt-0.5">
+          {/* Four playful actions */}
+          <div className="grid grid-cols-4 gap-1 pt-0.5">
             <button
               type="button"
               onClick={handleTalk}
@@ -557,6 +572,14 @@ export default function FloatingPetCompanion({
             >
               <Music className="w-3.5 h-3.5 text-purple-600" />
               <span>Múa Vui</span>
+            </button>
+            <button
+              type="button"
+              onClick={handleJump}
+              className="py-1.5 px-1 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 rounded-xl text-[11px] font-black flex flex-col items-center gap-0.5 btn-kid-3d cursor-pointer"
+            >
+              <span className="text-sm leading-none" aria-hidden="true">🐾</span>
+              <span>Nhảy Cao</span>
             </button>
           </div>
 
@@ -597,6 +620,7 @@ export default function FloatingPetCompanion({
             setIsMinimized(true);
           }}
           title="Thu nhỏ thú cưng"
+          aria-label="Thu nhỏ thú cưng"
           className="w-5 h-5 rounded-full bg-white/80 hover:bg-white border border-slate-300 shadow-2xs flex items-center justify-center text-slate-500 hover:text-slate-700 text-[10px] font-bold transition-all opacity-60 hover:opacity-100 cursor-pointer"
         >
           _
@@ -641,7 +665,7 @@ export default function FloatingPetCompanion({
                 : ''
             }`}
           >
-            <AnimatedCharacter
+            <Pet3DCharacter
               type={currentPet.id || 'dino'}
               mood={mood}
               isHopping={isHopping}

@@ -52,13 +52,6 @@ export default function TimoArena({
 
   const currentPet = getPetStage(completedTasks.length);
 
-  // Sync external selectedGrade prop
-  useEffect(() => {
-    if (selectedGrade && Number(selectedGrade) !== currentGrade) {
-      handleChangeGrade(Number(selectedGrade));
-    }
-  }, [selectedGrade]);
-
   const handleChangeGrade = (newGrade) => {
     soundManager.playPop();
     const g = Number(newGrade) || 1;

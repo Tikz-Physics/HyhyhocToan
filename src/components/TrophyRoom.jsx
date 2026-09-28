@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Trophy, Check, Lock, Heart, Award, Sparkles, Gift, Clock, Tv, Gamepad2, CheckCircle2 } from 'lucide-react';
+import { Trophy, Check, Lock, Heart, Award, Sparkles, Gift, Clock } from 'lucide-react';
 import { BADGES_DATA } from '../data/curriculumData';
 import { DEFAULT_REAL_REWARDS } from '../data/realRewardsData';
 import { soundManager } from '../utils/soundManager';

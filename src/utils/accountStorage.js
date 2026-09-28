@@ -23,11 +23,46 @@ export function wipeAllAccountsAndReset() {
 
 export function loadAccounts() {
   try {
-    // 1. Kiểm tra xem thiết bị đã được chuyển đổi sang cơ chế mới chưa
+    // Chuyển dữ liệu cũ sang cấu trúc mới mà không xóa tiến trình của bé.
     const isReset = localStorage.getItem(SYSTEM_RESET_KEY);
     if (!isReset) {
-      // Xóa toàn bộ tài khoản cũ trên thiết bị này để yêu cầu lập tài khoản mới
-      wipeAllAccountsAndReset();
+      const legacyRaw = localStorage.getItem(STORAGE_KEY_ACCOUNTS) || localStorage.getItem(LEGACY_KEY_ACCOUNTS);
+      if (legacyRaw) {
+        const legacyAccounts = JSON.parse(legacyRaw);
+        if (Array.isArray(legacyAccounts) && legacyAccounts.length > 0) {
+          const migrated = legacyAccounts.map((acc) => ({
+            ...acc,
+            pin: acc.pin ? String(acc.pin).replace(/\D/g, '').slice(0, 4) : '1234',
+          }));
+          saveAccounts(migrated);
+          localStorage.setItem(SYSTEM_RESET_KEY, 'v3_pin_2026');
+          return migrated;
+        }
+      }
+
+      const legacyStars = localStorage.getItem('toan_lop1_stars');
+      const legacyCompleted = localStorage.getItem('toan_lop1_completed');
+      const legacyMedals = localStorage.getItem('toan_lop1_medals');
+      if (legacyStars !== null || legacyCompleted !== null || legacyMedals !== null) {
+        const migrated = [{
+          id: 'default_child',
+          name: 'Bé Yêu',
+          avatar: '🦁',
+          pin: '1234',
+          grade: 1,
+          stars: Math.max(0, Number(legacyStars) || 0),
+          completedTasks: legacyCompleted ? JSON.parse(legacyCompleted) : [],
+          userMedals: legacyMedals ? JSON.parse(legacyMedals) : [],
+          unlockedPets: ['dino'],
+          activePet: 'dino',
+          createdAt: Date.now(),
+        }];
+        saveAccounts(migrated);
+        localStorage.setItem(SYSTEM_RESET_KEY, 'v3_pin_2026');
+        return migrated;
+      }
+
+      localStorage.setItem(SYSTEM_RESET_KEY, 'v3_pin_2026');
       return [];
     }
 

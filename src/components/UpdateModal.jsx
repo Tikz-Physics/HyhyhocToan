@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RefreshCw, Download, CheckCircle, Sparkles, X, Smartphone, ShieldCheck, ArrowRight } from 'lucide-react';
+import { RefreshCw, Download, CheckCircle, Sparkles, X, Smartphone, ShieldCheck } from 'lucide-react';
 import {
   CURRENT_APP_VERSION,
   applyAppUpdate,
@@ -15,7 +15,6 @@ export default function UpdateModal({
   updateInfo,
 }) {
   const [isUpdating, setIsUpdating] = useState(false);
-  const [installSuccess, setInstallSuccess] = useState(false);
   const isInstalled = isRunningStandalone();
   const installable = canInstallApp();
 
@@ -34,7 +33,6 @@ export default function UpdateModal({
     const success = await promptInstallApp();
     if (success) {
       soundManager.playFanfare();
-      setInstallSuccess(true);
     }
   };
 

@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import ZoneCard from './components/ZoneCard';
-import ZoneView from './components/ZoneView';
-import TimoArena from './components/TimoArena';
-import TrophyRoom from './components/TrophyRoom';
-import ParentPortal from './components/ParentPortal';
 import { CURRICULUM_ZONES, getCurriculumZones, GRADE_CONFIGS } from './data/curriculumData';
 import { soundManager } from './utils/soundManager';
-import PetEvolution from './components/PetEvolution';
-import AccountModal from './components/AccountModal';
 import { getPetStage } from './data/petData';
-import { Award, Sparkles, ChevronRight } from 'lucide-react';
+import { Award } from 'lucide-react';
 import {
   loadAccounts,
   saveAccounts,
@@ -21,7 +15,20 @@ import {
 import UpdateModal from './components/UpdateModal';
 import UpdateFloatingBanner from './components/UpdateFloatingBanner';
 import { onUpdateAvailable, checkForAppUpdate } from './utils/updateManager';
-import { syncAccountToCloud, onCloudSyncEvent, wipeCloudRoomData, fetchCloudLeaderboard } from './utils/cloudSync';
+import { syncAccountToCloud, onCloudSyncEvent, fetchCloudLeaderboard } from './utils/cloudSync';
+import { cleanAccountName, isDuplicateAccountName, getAccountNameKey } from './utils/accountName';
+
+const ZoneView = lazy(() => import('./components/ZoneView'));
+const TimoArena = lazy(() => import('./components/TimoArena'));
+const TrophyRoom = lazy(() => import('./components/TrophyRoom'));
+const ParentPortal = lazy(() => import('./components/ParentPortal'));
+const AccountModal = lazy(() => import('./components/AccountModal'));
+
+const ViewLoading = () => (
+  <div className="min-h-[40vh] flex items-center justify-center text-amber-900 font-black">
+    Đang tải nội dung…
+  </div>
+);
 
 export default function App() {
   const [currentView, setCurrentView] = useState('map'); // 'map', 'zone', 'timo_arena', 'trophies', 'parents'
@@ -44,46 +51,9 @@ export default function App() {
     const initSync = async () => {
       try {
         const res = await fetchCloudLeaderboard();
-        if (res && res.students && Array.isArray(res.students) && res.students.length > 0) {
-          setAccounts((prev) => {
-            const mergedMap = new Map();
-            // Nạp tài khoản cục bộ trước
-            prev.forEach((a) => mergedMap.set(a.id, a));
-            // Hợp nhất tài khoản đám mây
-            res.students.forEach((s) => {
-              if (s && s.id) {
-                const local = mergedMap.get(s.id);
-                if (local) {
-                  mergedMap.set(s.id, {
-                    ...s,
-                    ...local,
-                    stars: Math.max(local.stars || 0, s.stars || 0),
-                  });
-                } else {
-                  mergedMap.set(s.id, {
-                    id: s.id,
-                    name: s.name,
-                    avatar: s.avatar || '🦁',
-                    pin: s.pin || '1234',
-                    grade: s.grade || 1,
-                    stars: s.stars || 0,
-                    completedTasks: s.completedTasks || [],
-                    userMedals: s.userMedals || [],
-                    unlockedPets: s.unlockedPets || ['dino'],
-                    activePet: s.activePet || 'dino',
-                    redeemedRewards: s.redeemedRewards || [],
-                    usedRewardHistory: s.usedRewardHistory || [],
-                    highestTimoScore: s.highestTimoScore || 0,
-                    createdAt: s.createdAt || Date.now(),
-                  });
-                }
-              }
-            });
-            const nextList = Array.from(mergedMap.values()).sort((a, b) => (b.stars || 0) - (a.stars || 0));
-            saveAccounts(nextList);
-            return nextList;
-          });
-        }
+        // Leaderboard chỉ dùng để hiển thị. Không biến dữ liệu công khai thành
+        // tài khoản local và không tự đăng nhập tài khoản từ thiết bị khác.
+        void res;
       } catch (err) {
         console.warn('Init sync failed:', err);
       }
@@ -111,7 +81,7 @@ export default function App() {
     accounts.find((a) => a.id === currentAccountId) ||
     accounts[0] || {
       id: 'student_onboarding',
-      name: 'Bé Học Mới',
+      name: 'Tài khoản mới',
       avatar: '🦁',
       pin: '1234',
       grade: 1,
@@ -134,12 +104,6 @@ export default function App() {
   const [selectedGrade, setSelectedGrade] = useState(() => currentAccount.grade || 1);
   const activeCurriculumZones = getCurriculumZones(selectedGrade);
 
-  useEffect(() => {
-    if (currentAccount?.grade) {
-      setSelectedGrade(currentAccount.grade);
-    }
-  }, [currentAccountId, currentAccount?.grade]);
-
   const handleSelectGrade = (newGrade) => {
     setSelectedGrade(newGrade);
     const newZones = getCurriculumZones(newGrade);
@@ -161,18 +125,11 @@ export default function App() {
 
   // Tự động đẩy tiến trình tài khoản hiện tại lên Đám Mây để thi đua giữa các máy
   useEffect(() => {
-    if (currentAccount && currentAccount.id && accounts.length > 0) {
-      syncAccountToCloud(currentAccount);
+    const accountToSync = accounts.find((account) => account.id === currentAccountId);
+    if (accountToSync) {
+      syncAccountToCloud(accountToSync);
     }
-  }, [
-    currentAccount?.stars,
-    currentAccount?.completedTasks?.length,
-    currentAccount?.userMedals?.length,
-    currentAccount?.grade,
-    currentAccount?.name,
-    currentAccount?.avatar,
-    accounts.length,
-  ]);
+  }, [accounts, currentAccountId]);
 
   // Lắng nghe sự kiện đồng bộ từ các cửa sổ / tab khác
   useEffect(() => {
@@ -296,12 +253,14 @@ export default function App() {
   };
 
   const handleCreateAccount = (accData) => {
+    const cleanName = cleanAccountName(accData.name);
+    if (!cleanName || isDuplicateAccountName(cleanName, accounts)) return false;
     const newId = accData.id || `acc_${Date.now()}`;
     const cleanPin = String(accData.pin || '1234').replace(/\D/g, '').slice(0, 4) || '1234';
     const targetGrade = Number(accData.grade || selectedGrade || 1);
     const newAcc = {
       id: newId,
-      name: accData.name,
+      name: cleanName,
       avatar: accData.avatar || '🦁',
       pin: cleanPin,
       grade: targetGrade,
@@ -323,11 +282,11 @@ export default function App() {
     setIsAccountModalOpen(false);
     // Ngay lập tức đồng bộ tài khoản mới lên đám mây để mọi thiết bị khác đều thấy!
     syncAccountToCloud(newAcc);
+    return true;
   };
 
-  const handleWipeAllAccounts = async () => {
+  const handleWipeAllAccounts = () => {
     wipeAllAccountsAndReset();
-    await wipeCloudRoomData();
     setAccounts([]);
     setCurrentAccountId(null);
     setIsAccountModalOpen(true);
@@ -344,23 +303,38 @@ export default function App() {
   };
 
   const handleBulkImportAccounts = (importedList) => {
-    if (!Array.isArray(importedList) || importedList.length === 0) return;
-    setAccounts((prev) => {
-      const mergedMap = new Map();
-      prev.forEach((a) => mergedMap.set(a.id, a));
-      importedList.forEach((a) => {
-        if (a && a.id) {
-          mergedMap.set(a.id, { ...mergedMap.get(a.id), ...a });
+    if (!Array.isArray(importedList) || importedList.length === 0) return { imported: 0, skipped: 0 };
+    const importResult = { imported: 0, skipped: 0, firstId: null, firstGrade: 1 };
+    const mergedMap = new Map();
+    accounts.forEach((a) => mergedMap.set(a.id, a));
+    const usedNames = new Map(accounts.map((a) => [getAccountNameKey(a.name), a.id]));
+    importedList.forEach((a) => {
+      if (a && a.id) {
+        const cleanName = cleanAccountName(a.name);
+        const nameKey = getAccountNameKey(cleanName);
+        const existingIdForName = usedNames.get(nameKey);
+        if (!cleanName || (existingIdForName && existingIdForName !== a.id)) {
+          importResult.skipped += 1;
+          return;
         }
-      });
-      const next = Array.from(mergedMap.values());
-      saveAccounts(next);
-      return next;
+        mergedMap.set(a.id, { ...mergedMap.get(a.id), ...a, name: cleanName });
+        usedNames.set(nameKey, a.id);
+        importResult.imported += 1;
+        if (!importResult.firstId) {
+          importResult.firstId = a.id;
+          importResult.firstGrade = Number(a.grade) || 1;
+        }
+      }
     });
-    if (importedList[0]?.id) {
-      setCurrentAccountId(importedList[0].id);
-      saveActiveAccountId(importedList[0].id);
+    const next = Array.from(mergedMap.values());
+    setAccounts(next);
+    saveAccounts(next);
+    if (importResult.firstId) {
+      setCurrentAccountId(importResult.firstId);
+      setSelectedGrade(importResult.firstGrade);
+      saveActiveAccountId(importResult.firstId);
     }
+    return importResult;
   };
 
   const handleSwitchAccount = (id, accountData = null) => {
@@ -572,79 +546,90 @@ export default function App() {
 
         {/* VIEW 2: ZONE INTERACTIVE LEARNING */}
         {currentView === 'zone' && (
-          <ZoneView
-            zone={selectedZone}
-            onBack={() => setCurrentView('map')}
-            onAddStars={handleAddStars}
-            onDeductStars={handleDeductStars}
-            completedTasks={completedTasks}
-            onTaskCompleted={handleTaskCompleted}
-          />
+          <Suspense fallback={<ViewLoading />}>
+            <ZoneView
+              zone={selectedZone}
+              onBack={() => setCurrentView('map')}
+              onAddStars={handleAddStars}
+              onDeductStars={handleDeductStars}
+              completedTasks={completedTasks}
+              onTaskCompleted={handleTaskCompleted}
+            />
+          </Suspense>
         )}
 
         {/* VIEW 3: TIMO ARENA */}
         {currentView === 'timo_arena' && (
-          <TimoArena
-            selectedGrade={selectedGrade}
-            onSelectGrade={handleSelectGrade}
-            onAddStars={handleAddStars}
-            onAwardMedal={handleAwardMedal}
-            userMedals={userMedals}
-            completedTasks={completedTasks}
-          />
+          <Suspense fallback={<ViewLoading />}>
+            <TimoArena
+              key={`timo-grade-${selectedGrade}`}
+              selectedGrade={selectedGrade}
+              onSelectGrade={handleSelectGrade}
+              onAddStars={handleAddStars}
+              onAwardMedal={handleAwardMedal}
+              userMedals={userMedals}
+              completedTasks={completedTasks}
+            />
+          </Suspense>
         )}
 
         {/* VIEW 4: TROPHY & COMPANION PETS */}
         {currentView === 'trophies' && (
-          <TrophyRoom
-            stars={stars}
-            onSpendStars={handleSpendStars}
-            userMedals={userMedals}
-            unlockedPets={unlockedPets}
-            activePet={activePet}
-            onSelectPet={handleSelectActivePet}
-            redeemedRewards={redeemedRewards}
-            onRedeemRealReward={handleRedeemRealReward}
-            onUseRewardVoucher={handleUseRewardVoucher}
-          />
+          <Suspense fallback={<ViewLoading />}>
+            <TrophyRoom
+              stars={stars}
+              onSpendStars={handleSpendStars}
+              userMedals={userMedals}
+              unlockedPets={unlockedPets}
+              activePet={activePet}
+              onSelectPet={handleSelectActivePet}
+              redeemedRewards={redeemedRewards}
+              onRedeemRealReward={handleRedeemRealReward}
+              onUseRewardVoucher={handleUseRewardVoucher}
+            />
+          </Suspense>
         )}
 
         {/* VIEW 5: PARENT PORTAL */}
         {currentView === 'parents' && (
-          <ParentPortal
-            stars={stars}
-            completedTasks={completedTasks}
-            userMedals={userMedals}
-            redeemedRewards={redeemedRewards}
-            usedRewardHistory={currentAccount.usedRewardHistory || []}
-            onResetProgress={handleResetProgress}
-            currentAccount={currentAccount}
-            onOpenAccountModal={() => setIsAccountModalOpen(true)}
-            onUpdateAccountPin={handleUpdateAccountPin}
-            onWipeAllAccounts={handleWipeAllAccounts}
-            selectedGrade={selectedGrade}
-            onSelectGrade={handleSelectGrade}
-            onOpenUpdateModal={() => setIsUpdateModalOpen(true)}
-            updateInfo={updateInfo}
-          />
+          <Suspense fallback={<ViewLoading />}>
+            <ParentPortal
+              stars={stars}
+              completedTasks={completedTasks}
+              userMedals={userMedals}
+              redeemedRewards={redeemedRewards}
+              usedRewardHistory={currentAccount.usedRewardHistory || []}
+              onResetProgress={handleResetProgress}
+              currentAccount={currentAccount}
+              onOpenAccountModal={() => setIsAccountModalOpen(true)}
+              onUpdateAccountPin={handleUpdateAccountPin}
+              onWipeAllAccounts={handleWipeAllAccounts}
+              selectedGrade={selectedGrade}
+              onSelectGrade={handleSelectGrade}
+              onOpenUpdateModal={() => setIsUpdateModalOpen(true)}
+              updateInfo={updateInfo}
+            />
+          </Suspense>
         )}
       </main>
 
       {/* Account Switcher & Creator Modal */}
-      <AccountModal
-        isOpen={isAccountModalOpen || accounts.length === 0}
-        onClose={() => {
-          if (accounts.length > 0) setIsAccountModalOpen(false);
-        }}
-        accounts={accounts}
-        currentAccountId={currentAccountId}
-        onSwitchAccount={handleSwitchAccount}
-        onCreateAccount={handleCreateAccount}
-        onDeleteAccount={handleDeleteAccount}
-        onBulkImportAccounts={handleBulkImportAccounts}
-        onUpdateAccountPin={handleUpdateAccountPin}
-        onWipeAllAccounts={handleWipeAllAccounts}
-      />
+      <Suspense fallback={accounts.length === 0 ? <ViewLoading /> : null}>
+        <AccountModal
+          isOpen={isAccountModalOpen || accounts.length === 0}
+          onClose={() => {
+            if (accounts.length > 0) setIsAccountModalOpen(false);
+          }}
+          accounts={accounts}
+          currentAccountId={currentAccountId}
+          onSwitchAccount={handleSwitchAccount}
+          onCreateAccount={handleCreateAccount}
+          onDeleteAccount={handleDeleteAccount}
+          onBulkImportAccounts={handleBulkImportAccounts}
+          onUpdateAccountPin={handleUpdateAccountPin}
+          onWipeAllAccounts={handleWipeAllAccounts}
+        />
+      </Suspense>
 
       {/* App Update & Install Modal */}
       <UpdateModal
