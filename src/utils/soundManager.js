@@ -158,7 +158,6 @@ class SoundManager {
     this.ctx = null;
     let savedSound = true;
     let savedVoice = true;
-    let savedPetAudio = false;
     try {
       const s = localStorage.getItem('hyhyhoctoan_sound_enabled') ?? localStorage.getItem('toan_lop1_sound_enabled');
       if (s !== null) {
@@ -174,20 +173,13 @@ class SoundManager {
         localStorage.setItem('hyhyhoctoan_voice_enabled', 'true');
         localStorage.setItem('toan_lop1_voice_enabled', 'true');
       }
-      const p = localStorage.getItem('hyhyhoctoan_pet_audio_enabled') ?? localStorage.getItem('toan_lop1_pet_audio_enabled');
-      if (p !== null) {
-        savedPetAudio = p === 'true';
-      } else {
-        // Pet sounds are opt-in so opening the companion never surprises the learner.
-        localStorage.setItem('hyhyhoctoan_pet_audio_enabled', 'false');
-        localStorage.setItem('toan_lop1_pet_audio_enabled', 'false');
-      }
     } catch {
       // ignore
     }
     this.soundEnabled = savedSound;
     this.voiceEnabled = savedVoice;
-    this.petAudioEnabled = savedPetAudio;
+    // Pet audio is intentionally disabled until a future product decision enables it.
+    this.petAudioEnabled = false;
     this.vietnameseVoice = null;
     this.currentAudio = null;
     this.isSpeaking = false;
@@ -391,68 +383,9 @@ class SoundManager {
     }
   }
 
-  speakPet(text) {
-    if (!this.petAudioEnabled || !text) return;
-    // Play cute animal chirp sound effect
-    this.playPetChirp();
+  speakPet() {}
 
-    if (!this.voiceEnabled) return;
-    const cleanText = formatMathForSpeech(text).replace(/^[\p{Extended_Pictographic}\s"“”]+|[\p{Extended_Pictographic}\s"“”]+$/gu, '').trim();
-    if (!cleanText) return;
-
-    // Use higher pitch for a cute, child-friendly animal companion voice
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      try {
-        window.speechSynthesis.cancel();
-        const viVoice = this.getCuteVietnameseVoice();
-        const utterance = new SpeechSynthesisUtterance(cleanText);
-        utterance.lang = 'vi-VN';
-        if (viVoice) {
-          utterance.voice = viVoice;
-        }
-        utterance.rate = 0.94;
-        utterance.pitch = 1.22;
-
-        utterance.onend = () => this.notifySpeech(false, '');
-        utterance.onerror = () => {
-          this.speakGoogleVietnamese(cleanText);
-        };
-
-        this.notifySpeech(true, cleanText);
-        window.speechSynthesis.speak(utterance);
-        return;
-      } catch {
-        // Fallback below
-      }
-    }
-
-    this.speakGoogleVietnamese(cleanText);
-  }
-
-  playPetChirp() {
-    if (!this.soundEnabled || !this.petAudioEnabled) return;
-    const ctx = this.getAudioContext();
-    if (!ctx) return;
-    try {
-      const now = ctx.currentTime;
-      // A soft three-note sparkle feels friendly without masking the spoken words.
-      [659.25, 783.99, 987.77].forEach((frequency, index) => {
-        const start = now + index * 0.07;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = index === 2 ? 'sine' : 'triangle';
-        osc.frequency.setValueAtTime(frequency, start);
-        osc.frequency.exponentialRampToValueAtTime(frequency * 1.04, start + 0.11);
-        gain.gain.setValueAtTime(0.001, start);
-        gain.gain.exponentialRampToValueAtTime(index === 2 ? 0.08 : 0.1, start + 0.015);
-        gain.gain.exponentialRampToValueAtTime(0.001, start + 0.18);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(start);
-        osc.stop(start + 0.19);
-      });
-    } catch {}
-  }
+  playPetChirp() {}
 
   stopSpeaking() {
     if (this.currentAudio) {
@@ -653,20 +586,18 @@ class SoundManager {
     return this.setVoice(!this.voiceEnabled);
   }
 
-  setPetAudio(enabled) {
-    this.petAudioEnabled = !!enabled;
-    if (!this.petAudioEnabled) {
-      this.stopSpeaking();
-    }
+  setPetAudio() {
+    this.petAudioEnabled = false;
+    this.stopSpeaking();
     try {
-      localStorage.setItem('hyhyhoctoan_pet_audio_enabled', this.petAudioEnabled ? 'true' : 'false');
-      localStorage.setItem('toan_lop1_pet_audio_enabled', this.petAudioEnabled ? 'true' : 'false');
+      localStorage.setItem('hyhyhoctoan_pet_audio_enabled', 'false');
+      localStorage.setItem('toan_lop1_pet_audio_enabled', 'false');
     } catch {}
     return this.petAudioEnabled;
   }
 
   togglePetAudio() {
-    return this.setPetAudio(!this.petAudioEnabled);
+    return this.setPetAudio(false);
   }
 
   setMasterAudio(enabled) {
