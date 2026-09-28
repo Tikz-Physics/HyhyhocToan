@@ -97,6 +97,7 @@ export default function AccountModal({
       usedRewardHistory: targetAccount.usedRewardHistory || [],
       highestTimoScore: targetAccount.highestTimoScore || 0,
       createdAt: targetAccount.createdAt || Date.now(),
+      createdDeviceId: targetAccount.createdDeviceId || 'external-device',
     };
     onSwitchAccount(fullAcc.id, fullAcc);
     setPinTargetAccount(null);
