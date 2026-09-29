@@ -1,6 +1,6 @@
 {
-  "version": "2.2.3",
-  "buildTime": 1790654446843,
+  "version": "2.2.4",
+  "buildTime": 1790655237021,
   "releaseDate": "2026-09-29",
-  "changelog": "Hợp nhất tài khoản từ nhiều máy, khôi phục dữ liệu không bị ghi đè và lọc PIN/tiến trình chi tiết khỏi Bảng Vàng công khai."
+  "changelog": "Hiển thị Top 10 và các tài khoản trên máy ở cuối bảng; hỗ trợ đổi tên, xóa và tự động cập nhật Bảng Vàng."
 }

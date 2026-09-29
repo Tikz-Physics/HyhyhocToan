@@ -209,6 +209,39 @@ export async function syncAccountToCloud(account, customRoom = null) {
   return updatedList;
 }
 
+/** Remove one local account from the public fallback leaderboard. */
+export async function removeAccountFromCloud(accountId, customRoom = null) {
+  if (!accountId) return false;
+  const room = customRoom || getSyncRoomCode();
+  if (room !== DEFAULT_ROOM || !DIRECT_CLOUD_STORE_URL) return false;
+
+  try {
+    const remoteStudents = await fetchDirectCloudStudents();
+    const remaining = mergeLeaderboardStudents(remoteStudents).filter(
+      (student) => student.id !== accountId
+    );
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const response = await fetch(DIRECT_CLOUD_STORE_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        name: DEFAULT_ROOM,
+        data: { room: DEFAULT_ROOM, updatedAt: Date.now(), students: remaining },
+      }),
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+    if (response.ok) {
+      setCachedLeaderboard(remaining);
+      return true;
+    }
+  } catch (err) {
+    console.warn('Không thể xóa tài khoản khỏi Bảng Vàng:', err);
+  }
+  return false;
+}
+
 /**
  * Tải bảng xếp hạng thi đua mới nhất từ đám mây (Hỗ trợ đa tầng: API -> Direct Cloud -> Cache)
  */

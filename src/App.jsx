@@ -16,7 +16,12 @@ import {
 import UpdateModal from './components/UpdateModal';
 import UpdateFloatingBanner from './components/UpdateFloatingBanner';
 import { onUpdateAvailable, checkForAppUpdate } from './utils/updateManager';
-import { syncAccountToCloud, onCloudSyncEvent, fetchCloudLeaderboard } from './utils/cloudSync';
+import {
+  syncAccountToCloud,
+  removeAccountFromCloud,
+  onCloudSyncEvent,
+  fetchCloudLeaderboard,
+} from './utils/cloudSync';
 import { cleanAccountName, isDuplicateAccountName, getAccountNameKey } from './utils/accountName';
 
 const ZoneView = lazy(() => import('./components/ZoneView'));
@@ -379,6 +384,22 @@ export default function App() {
     setCurrentAccountId(nextActiveId);
     saveAccounts(remaining);
     saveActiveAccountId(nextActiveId);
+    removeAccountFromCloud(id);
+  };
+
+  const handleRenameAccount = (id, nextName) => {
+    const cleanName = cleanAccountName(nextName);
+    if (!cleanName || isDuplicateAccountName(cleanName, accounts.filter((a) => a.id !== id))) {
+      return false;
+    }
+    const next = accounts.map((account) =>
+      account.id === id ? { ...account, name: cleanName } : account
+    );
+    setAccounts(next);
+    saveAccounts(next);
+    const renamed = next.find((account) => account.id === id);
+    if (renamed) syncAccountToCloud(renamed);
+    return true;
   };
 
   const handleResetProgress = () => {
@@ -640,6 +661,7 @@ export default function App() {
           onSwitchAccount={handleSwitchAccount}
           onCreateAccount={handleCreateAccount}
           onDeleteAccount={handleDeleteAccount}
+          onRenameAccount={handleRenameAccount}
           onBulkImportAccounts={handleBulkImportAccounts}
           onUpdateAccountPin={handleUpdateAccountPin}
           onWipeAllAccounts={handleWipeAllAccounts}

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hyhyhoctoan-cache-v2.2.3';
+const CACHE_NAME = 'hyhyhoctoan-cache-v2.2.4';
 
 // Tài nguyên thiết yếu
 const PRECACHE_ASSETS = [

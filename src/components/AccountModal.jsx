@@ -18,6 +18,7 @@ import {
   Eye,
   EyeOff,
   ArrowLeft,
+  Pencil,
 } from 'lucide-react';
 import { soundManager } from '../utils/soundManager';
 import { getPetStage } from '../data/petData';
@@ -42,6 +43,7 @@ export default function AccountModal({
   onSwitchAccount,
   onCreateAccount,
   onDeleteAccount,
+  onRenameAccount,
   onBulkImportAccounts,
   onWipeAllAccounts,
 }) {
@@ -78,6 +80,16 @@ export default function AccountModal({
   // The cloud keeps every account for synchronization, while the UI only
   // presents the ten highest scores to keep the leaderboard easy to scan.
   const topLeaderboardStudents = cloudStudents.slice(0, 10);
+  const topLeaderboardIds = new Set(topLeaderboardStudents.map((student) => student.id));
+  const localStudentsOutsideTop = cloudStudents.filter(
+    (student) =>
+      !topLeaderboardIds.has(student.id) &&
+      (accounts || []).some((account) => account.id === student.id)
+  );
+  const visibleLeaderboardStudents = [...topLeaderboardStudents, ...localStudentsOutsideTop];
+  const leaderboardRanks = new Map(
+    cloudStudents.map((student, index) => [student.id, index + 1])
+  );
 
   // Transfer code state
   const [transferCode, setTransferCode] = useState('');
@@ -350,6 +362,19 @@ export default function AccountModal({
     setPinSuccess(false);
     setShowParentHelp(false);
     setRevealedPin(null);
+  };
+
+  const requestRenameAccount = (account) => {
+    if (!account || !onRenameAccount) return;
+    const nextName = window.prompt('Nhập tên mới cho tài khoản:', account.name || '');
+    if (nextName === null) return;
+    const renamed = onRenameAccount(account.id, nextName);
+    if (!renamed) {
+      alert('Tên tài khoản không hợp lệ hoặc đã tồn tại. Vui lòng chọn tên khác!');
+      return;
+    }
+    setSyncStatusMsg(`Đã đổi tên ${account.name} và cập nhật Bảng Vàng.`);
+    loadLeaderboardData();
   };
 
 
@@ -963,6 +988,20 @@ export default function AccountModal({
                     </div>
 
                     <div className="flex items-center gap-1 flex-shrink-0">
+                      {onRenameAccount && (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            requestRenameAccount(acc);
+                          }}
+                          title="Đổi tên tài khoản này"
+                          className="p-1.5 text-slate-400 hover:text-indigo-600 transition-colors"
+                        >
+                          <Pencil className="w-4 h-4" />
+                        </button>
+                      )}
+
                       {!isCurrent && (
                         <button
                           type="button"
@@ -1117,7 +1156,7 @@ export default function AccountModal({
 
             {cloudStudents.length > 10 && (
               <div className="text-center text-[10px] font-black text-slate-500">
-                Đang hiển thị Top 10 · Tổng cộng {cloudStudents.length} tài khoản đã đồng bộ
+                Đang hiển thị Top 10 + tài khoản trên máy · Tổng cộng {cloudStudents.length} tài khoản
               </div>
             )}
 
@@ -1152,19 +1191,20 @@ export default function AccountModal({
                 )
               ) : (
                 <>
-                  {topLeaderboardStudents.map((st, idx) => {
+                  {visibleLeaderboardStudents.map((st, idx) => {
                     const isCurrent = st.id === currentAccountId && hasLocalAccounts;
                     const isLocal = accounts.some((a) => a.id === st.id);
-                    let rankBadge = `${idx + 1}`;
+                    const actualRank = leaderboardRanks.get(st.id) || idx + 1;
+                    let rankBadge = `${actualRank}`;
                     let rankBg = 'bg-slate-100 text-slate-700';
 
-                    if (idx === 0) {
+                    if (actualRank === 1) {
                       rankBadge = '🥇';
                       rankBg = 'bg-amber-100 text-amber-900 border-2 border-amber-400 shadow-xs';
-                    } else if (idx === 1) {
+                    } else if (actualRank === 2) {
                       rankBadge = '🥈';
                       rankBg = 'bg-slate-200 text-slate-800 border border-slate-300';
-                    } else if (idx === 2) {
+                    } else if (actualRank === 3) {
                       rankBadge = '🥉';
                       rankBg = 'bg-amber-50 text-amber-800 border border-amber-300';
                     }
