@@ -57,6 +57,69 @@ export default function QuestionIllustration({ level }) {
   if (!level) return null;
   const id = level.id || '';
 
+  if (id === 'c8') {
+    return (
+      <div className="my-2 mx-auto max-w-xl rounded-2xl border-2 border-sky-200 bg-gradient-to-b from-sky-50 to-white p-3 shadow-inner">
+        <div className="mb-3 flex items-center justify-center gap-1.5 text-[11px] font-black text-sky-900">
+          <span>👣</span>
+          <span>Số liền trước đứng ngay bên trái</span>
+        </div>
+        <div className="relative flex items-center justify-between gap-0.5 px-1 pt-2">
+          <div className="absolute left-3 right-3 top-[1.15rem] h-1 rounded-full bg-sky-200 sm:top-[1.7rem]" />
+          {Array.from({ length: 11 }).map((_, number) => {
+            const isTarget = number === 9;
+            const isPredecessor = number === 8;
+            return (
+              <div key={number} className="relative z-10 flex min-w-0 flex-1 flex-col items-center">
+                <div
+                  className={`flex h-5 w-5 items-center justify-center rounded-full border-2 text-[9px] font-black shadow-xs sm:h-9 sm:w-9 sm:text-sm ${
+                    isTarget
+                      ? 'border-rose-500 bg-rose-500 text-white ring-4 ring-rose-100'
+                      : isPredecessor
+                      ? 'border-amber-500 bg-amber-300 text-amber-950 ring-4 ring-amber-100 animate-pulse'
+                      : 'border-sky-300 bg-white text-sky-900'
+                  }`}
+                >
+                  {isPredecessor ? '?' : number}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="mt-2 text-center text-[10px] font-black text-amber-800">
+          Ô ngay bên trái số 9 là số nào?
+        </div>
+      </div>
+    );
+  }
+
+  if (id === 'c9') {
+    const groups = [
+      { label: 'Táo đỏ', icon: '🍎', count: 4, color: 'border-rose-300 bg-rose-50' },
+      { label: 'Cam vàng', icon: '🍊', count: 6, color: 'border-amber-300 bg-amber-50' },
+    ];
+    return (
+      <div className="my-2 mx-auto grid max-w-xl grid-cols-2 gap-2 rounded-2xl border-2 border-amber-200 bg-amber-50/60 p-2.5 shadow-inner">
+        {groups.map((group) => (
+          <div key={group.label} className={`rounded-2xl border-2 p-2 ${group.color}`}>
+            <div className="mb-2 flex items-center justify-between">
+              <span className="text-[11px] font-black text-slate-800">{group.label}</span>
+              <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-black text-slate-700 shadow-xs">{group.count} quả</span>
+            </div>
+            <div className="flex min-h-16 flex-wrap items-center justify-center gap-1.5">
+              {Array.from({ length: group.count }).map((_, index) => (
+                <span key={index} className="text-2xl drop-shadow-sm sm:text-3xl">{group.icon}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+        <div className="col-span-2 text-center text-[10px] font-black text-amber-900">
+          👀 So sánh hai khay: bên nào có nhiều hình hơn?
+        </div>
+      </div>
+    );
+  }
+
   // =========================================================================
   // KHỐI LỚP 1: 41 CÂU HỎI TRỰC QUAN ĐẶC THÙ (ĐÃ ĐỐI SOÁT 100% ĐỀ BÀI)
   // =========================================================================

@@ -311,15 +311,27 @@ export default function InteractiveCanvas({
       {level.itemIcon && level.count && (
         <div className="flex flex-col items-center w-full max-w-sm mx-auto">
           {/* Ao nước / vườn quả hiển thị đồ vật */}
-          <div className="w-full bg-gradient-to-b from-sky-100 via-blue-50/70 to-emerald-50/60 p-2.5 sm:p-3 rounded-2xl border-2 border-sky-300 shadow-inner flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 my-1">
-            {Array.from({ length: level.count }).map((_, i) => (
-              <div
-                key={i}
-                className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white/95 border border-sky-200 shadow-xs flex items-center justify-center text-2xl sm:text-3xl select-none"
-              >
-                <span>{level.itemIcon}</span>
-              </div>
-            ))}
+          <div className="w-full bg-gradient-to-b from-sky-100 via-blue-50/80 to-emerald-100/70 p-2.5 sm:p-3 rounded-2xl border-2 border-sky-300 shadow-inner my-1">
+            <div className="flex items-center justify-between mb-2 px-1">
+              <span className="text-[10px] sm:text-xs font-black text-sky-900 bg-white/80 border border-sky-200 px-2 py-0.5 rounded-full">
+                {level.sceneLabel || 'Cùng đếm đồ vật'}
+              </span>
+              <span className="text-[9px] font-bold text-sky-700">Chạm mắt từng hình • Đếm 1 lần</span>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+              {Array.from({ length: level.count }).map((_, i) => (
+                <div
+                  key={i}
+                  className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white/75 border border-white shadow-[0_4px_0_rgba(14,116,144,0.12)] flex items-center justify-center text-2xl sm:text-3xl select-none transition-transform hover:-translate-y-1"
+                  aria-label={`Đồ vật thứ ${i + 1}`}
+                >
+                  <span className="drop-shadow-sm">{level.itemIcon}</span>
+                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-sky-600 text-white text-[8px] font-black flex items-center justify-center border border-white">
+                    {i + 1}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Ô kết quả */}
@@ -340,6 +352,9 @@ export default function InteractiveCanvas({
       {/* 2. ĐOÀN TÀU TÌM SỐ (Train Carriages) */}
       {level.type === 'train' && (
         <div className="flex flex-col items-center">
+          <div className="mb-1 text-[10px] font-black text-indigo-800 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-full">
+            {level.sequence?.[0] > level.sequence?.[1] ? '⬅️ Dãy số đếm lùi' : '➡️ Dãy số tăng dần'}
+          </div>
           <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto py-1 max-w-full px-1">
             <div className="text-3xl sm:text-4xl animate-bounce-slow">🚂</div>
             {level.sequence.map((item, idx) => (
@@ -862,6 +877,33 @@ export default function InteractiveCanvas({
             <span>=</span>
             <div className="w-11 h-11 rounded-xl bg-amber-100 border-3 border-amber-400 flex items-center justify-center text-lg font-black text-amber-950">
               {userValue || '?'}
+            </div>
+
+            <div className="mt-3 w-full bg-white/90 border-2 border-dashed border-emerald-300 rounded-2xl px-3 py-2 shadow-inner">
+              <div className="text-[10px] font-black text-emerald-800 text-center mb-1.5">
+                Nhìn vật mẫu để tách – gộp
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-1.5">
+                {Array.from({ length: level.total || 0 }).map((_, index) => (
+                  <span
+                    key={index}
+                    className={`w-8 h-8 rounded-xl flex items-center justify-center text-xl border shadow-xs ${
+                      index < (level.partA || 0)
+                        ? 'bg-sky-50 border-sky-300'
+                        : 'bg-emerald-50 border-emerald-300'
+                    }`}
+                  >
+                    {level.bondIcon || '●'}
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center justify-center gap-2 mt-1.5 text-[9px] font-bold text-slate-600">
+                <span className="px-2 py-0.5 rounded-full bg-sky-100 text-sky-800">Phần 1: {level.partA}</span>
+                <span>+</span>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                  Phần 2: {level.missingPart === 'partB' && !userValue ? '?' : level.partB}
+                </span>
+              </div>
             </div>
           </div>
         </div>

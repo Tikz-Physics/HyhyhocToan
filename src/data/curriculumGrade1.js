@@ -19,6 +19,7 @@ export const CURRICULUM_ZONES = [
         "title": "Bé đếm vịt con bơi lội",
         "question": "Bé hãy đếm xem trong ao có bao nhiêu chú vịt con?",
         "itemIcon": "🦆",
+        "sceneLabel": "Ao vịt con",
         "count": 5,
         "targetNumber": 5,
         "correctAnswer": 5,
@@ -36,6 +37,7 @@ export const CURRICULUM_ZONES = [
         "title": "Vườn dâu tây đỏ mọng",
         "question": "Có bao nhiêu quả dâu tây đỏ mọng trên cành?",
         "itemIcon": "🍓",
+        "sceneLabel": "Vườn dâu tây",
         "count": 8,
         "targetNumber": 8,
         "options": [
@@ -75,6 +77,7 @@ export const CURRICULUM_ZONES = [
         "title": "Hộp kẹo mút ngọt ngào",
         "question": "Bé hãy đếm xem trong hộp có bao nhiêu que kẹo mút?",
         "itemIcon": "🍭",
+        "sceneLabel": "Hộp kẹo sắc màu",
         "count": 10,
         "targetNumber": 10,
         "options": [
@@ -96,6 +99,7 @@ export const CURRICULUM_ZONES = [
         "partA": 3,
         "partB": 2,
         "missingPart": "partB",
+        "bondIcon": "⚽",
         "targetNumber": 2,
         "options": [
           1,
@@ -116,6 +120,7 @@ export const CURRICULUM_ZONES = [
         "partA": 4,
         "partB": 2,
         "missingPart": "total",
+        "bondIcon": "🍊",
         "targetNumber": 6,
         "options": [
           5,
@@ -132,6 +137,7 @@ export const CURRICULUM_ZONES = [
         "title": "Bé đếm củ cà rốt của thỏ con",
         "question": "Bé hãy đếm xem trong vườn có bao nhiêu củ cà rốt 🥕?",
         "itemIcon": "🥕",
+        "sceneLabel": "Vườn cà rốt",
         "count": 7,
         "targetNumber": 7,
         "correctAnswer": 7,
@@ -180,6 +186,7 @@ export const CURRICULUM_ZONES = [
         "partA": 5,
         "partB": 3,
         "missingPart": "partB",
+        "bondIcon": "⭐",
         "targetNumber": 3,
         "options": [
           2,
@@ -200,6 +207,7 @@ export const CURRICULUM_ZONES = [
         "partA": 3,
         "partB": 4,
         "missingPart": "total",
+        "bondIcon": "🍎",
         "targetNumber": 7,
         "options": [
           6,
