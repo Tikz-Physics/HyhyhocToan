@@ -60,9 +60,9 @@ export default function Navbar({
     <>
       {/* Top Header for all devices */}
       <header className="sticky top-0 z-50 bg-gradient-to-r from-amber-300 via-orange-300 to-yellow-300 border-b-4 border-amber-400 shadow-lg px-2.5 sm:px-6 py-1.5 landscape:py-1 sm:py-2 pl-[max(0.6rem,env(safe-area-inset-left))] pr-[max(0.6rem,env(safe-area-inset-right))]">
-        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-1.5 sm:gap-2">
+        <div className="app-header mx-auto flex max-w-[90rem] flex-wrap items-center justify-between gap-1.5 sm:gap-2 lg:flex-nowrap">
           {/* Logo & Brand & Grade Switcher */}
-          <div className="flex items-center gap-2 select-none">
+          <div className="flex shrink-0 items-center gap-2 select-none">
             <div
               onClick={() => {
                 soundManager.playPop();
@@ -73,7 +73,7 @@ export default function Navbar({
               <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-xl flex items-center justify-center text-lg sm:text-xl shadow-xs border-2 border-amber-400 group-hover:rotate-6 transition-transform flex-shrink-0">
                 🦖
               </div>
-              <span className="font-black text-sm sm:text-lg text-amber-950 tracking-tight whitespace-nowrap hidden xs:inline">
+              <span className="brand-name hidden whitespace-nowrap font-black text-sm tracking-tight text-amber-950 xl:inline sm:text-lg">
                 HyhyhocToan
               </span>
             </div>
@@ -133,7 +133,7 @@ export default function Navbar({
           </div>
 
           {/* Desktop, Tablet & Landscape Navigation Tabs */}
-          <nav className="hidden sm:flex landscape:flex items-center gap-1 sm:gap-1.5 md:gap-2">
+          <nav className="header-nav hidden items-center gap-1 sm:flex sm:gap-1.5 landscape:flex xl:gap-2">
             <button
               onClick={() => {
                 soundManager.playClick();
@@ -142,7 +142,7 @@ export default function Navbar({
               className={navBtnClass('map')}
             >
               <Home className="w-4 h-4 text-orange-600" />
-              <span className="whitespace-nowrap">Khu Vườn</span>
+              <span className="header-nav-label whitespace-nowrap">Khu Vườn</span>
             </button>
 
             <button
@@ -157,7 +157,7 @@ export default function Navbar({
               }`}
             >
               <Award className="w-4 h-4 text-amber-400 animate-bounce-slow" />
-              <span className="whitespace-nowrap">Luyện Đề</span>
+              <span className="header-nav-label whitespace-nowrap">Luyện Đề</span>
             </button>
 
             <button
@@ -168,7 +168,7 @@ export default function Navbar({
               className={navBtnClass('trophies')}
             >
               <Trophy className="w-4 h-4 text-yellow-600" />
-              <span className="whitespace-nowrap">Đổi Thưởng</span>
+              <span className="header-nav-label whitespace-nowrap">Đổi Thưởng</span>
             </button>
 
             <button
@@ -179,12 +179,12 @@ export default function Navbar({
               className={navBtnClass('parents')}
             >
               <Users className="w-4 h-4 text-blue-600" />
-              <span className="whitespace-nowrap">Phụ Huynh</span>
+              <span className="header-nav-label whitespace-nowrap">Phụ Huynh</span>
             </button>
           </nav>
 
           {/* Stats & Audio Controls */}
-          <div className="flex w-full items-center justify-between gap-1.5 sm:w-auto sm:justify-end sm:gap-2">
+          <div className="stats-controls flex w-full shrink-0 items-center justify-between gap-1.5 lg:w-auto lg:justify-end lg:gap-2">
             {/* Account Profile Switcher Button */}
             {currentAccount && (
               <button
@@ -197,7 +197,7 @@ export default function Navbar({
                 className="flex min-h-10 min-w-10 items-center justify-center gap-1.5 bg-white/95 hover:bg-white active:scale-95 border-2 border-amber-300 hover:border-amber-400 px-2 py-1 sm:px-3 sm:py-1.5 rounded-2xl shadow-sm text-amber-950 font-black text-xs sm:text-sm btn-kid-3d cursor-pointer"
               >
                 <span className="text-base sm:text-lg">{currentAccount.avatar || '🦁'}</span>
-                <span className="hidden max-w-[100px] truncate sm:inline">{currentAccount.name || 'Tài khoản'}</span>
+                <span className="hidden max-w-[100px] truncate 2xl:inline">{currentAccount.name || 'Tài khoản'}</span>
               </button>
             )}
 
@@ -228,12 +228,12 @@ export default function Navbar({
               {soundOn ? (
                 <>
                   <Volume2 className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 animate-pulse" />
-                  <span className="hidden md:inline">Loa</span>
+                  <span className="hidden 2xl:inline">Loa</span>
                 </>
               ) : (
                 <>
                   <VolumeX className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400" />
-                  <span className="hidden md:inline">Tắt loa</span>
+                  <span className="hidden 2xl:inline">Tắt loa</span>
                 </>
               )}
             </button>
@@ -256,12 +256,12 @@ export default function Navbar({
               {voiceOn ? (
                 <>
                   <Mic className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 animate-pulse" />
-                  <span className="hidden md:inline">Giọng đọc</span>
+                  <span className="hidden 2xl:inline">Giọng đọc</span>
                 </>
               ) : (
                 <>
                   <MicOff className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400" />
-                  <span className="hidden md:inline">Tắt giọng</span>
+                  <span className="hidden 2xl:inline">Tắt giọng</span>
                 </>
               )}
             </button>
@@ -285,7 +285,7 @@ export default function Navbar({
                   updateInfo?.hasUpdate ? 'text-white animate-spin' : ''
                 }`}
               />
-              <span className="hidden md:inline whitespace-nowrap">
+              <span className="hidden whitespace-nowrap 2xl:inline">
                 {updateInfo?.hasUpdate ? 'Có bản mới!' : 'Cập nhật'}
               </span>
               {updateInfo?.hasUpdate && (

@@ -21,6 +21,25 @@
   }
 }
 
+/* Keep the landscape phone header on one compact row. Portrait phones keep
+   the two-row layout so every control remains comfortably tappable. */
+@media (orientation: landscape) and (max-width: 1023px),
+  (min-aspect-ratio: 1/1) and (max-width: 1023px) {
+  .app-header {
+    flex-wrap: nowrap;
+  }
+
+  .app-header .brand-name,
+  .app-header .header-nav-label {
+    display: none;
+  }
+
+  .app-header .stats-controls {
+    width: auto;
+    justify-content: flex-end;
+  }
+}
+
 @keyframes bounceSlow {
   0%, 100% {
     transform: translateY(0);
