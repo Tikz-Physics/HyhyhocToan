@@ -91,11 +91,11 @@ export default function ZoneView({
 
   return (
     <div
-      className={
+      className={`${
         isFocusMode
           ? 'fixed inset-0 z-50 bg-gradient-to-b from-amber-50 via-orange-50/60 to-yellow-50 overflow-y-auto p-2 sm:p-4 landscape:p-2 flex flex-col justify-start'
-          : 'max-w-xl landscape:max-w-4xl mx-auto p-1.5 sm:p-3 pb-8 landscape:pb-4 pl-[max(0.5rem,env(safe-area-inset-left))] pr-[max(0.5rem,env(safe-area-inset-right))] flex flex-col justify-start'
-      }
+          : 'max-w-xl landscape:max-w-4xl mx-auto p-1.5 sm:p-3 pb-20 sm:pb-8 landscape:pb-4 pl-[max(0.5rem,env(safe-area-inset-left))] pr-[max(0.5rem,env(safe-area-inset-right))] flex flex-col justify-start'
+      } ${lastAnswerStatus !== 'idle' ? 'pb-36 sm:pb-8 landscape:pb-4' : ''}`}
     >
       {/* 1-Line Top Navigation: Back + Tabs + Progress Dots + Read Button + Focus Mode Button */}
       <div className="flex items-center justify-between gap-1.5 mb-1.5 flex-wrap">
@@ -110,7 +110,7 @@ export default function ZoneView({
               onBack();
             }
           }}
-          className="flex items-center gap-1 bg-white border border-slate-300 active:scale-95 text-slate-700 font-bold px-2 py-1 rounded-xl shadow-2xs text-xs btn-kid-3d cursor-pointer flex-shrink-0"
+          className="flex min-h-10 items-center gap-1 bg-white border border-slate-300 active:scale-95 text-slate-700 font-bold px-2.5 py-1 rounded-xl shadow-2xs text-xs btn-kid-3d cursor-pointer flex-shrink-0"
         >
           <ArrowLeft className="w-3.5 h-3.5 text-slate-500" />
           <span>{isFocusMode ? 'Thu nhỏ' : 'Về'}</span>
@@ -128,7 +128,7 @@ export default function ZoneView({
               setShowHint(false);
               setLastAnswerStatus('idle');
             }}
-            className={`px-2 py-0.5 rounded-lg font-black text-xs transition-all ${
+              className={`min-h-9 px-2 py-0.5 rounded-lg font-black text-xs transition-all ${
               activeTab === 'basic'
                 ? 'bg-amber-400 text-amber-950 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
@@ -147,7 +147,7 @@ export default function ZoneView({
               setShowHint(false);
               setLastAnswerStatus('idle');
             }}
-            className={`px-2 py-0.5 rounded-lg font-black text-xs transition-all flex items-center gap-0.5 ${
+              className={`min-h-9 px-2 py-0.5 rounded-lg font-black text-xs transition-all flex items-center gap-0.5 ${
               activeTab === 'timo'
                 ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xs'
                 : 'text-blue-700'
@@ -164,7 +164,7 @@ export default function ZoneView({
             type="button"
             onClick={speakCurrent}
             title="Đọc lại đề bài"
-            className="flex items-center gap-1 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-2 py-1 rounded-xl font-black text-xs btn-kid-3d shadow-2xs cursor-pointer"
+            className="flex min-h-10 min-w-10 items-center justify-center gap-1 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-2 py-1 rounded-xl font-black text-xs btn-kid-3d shadow-2xs cursor-pointer"
           >
             <Volume2 className="w-3.5 h-3.5 text-amber-700 animate-pulse" />
             <span className="hidden xs:inline">Đọc đề</span>
@@ -178,7 +178,7 @@ export default function ZoneView({
               setIsFocusMode(!isFocusMode);
             }}
             title={isFocusMode ? 'Thoát chế độ tập trung' : 'Chế độ tập trung vào câu hỏi'}
-            className={`flex items-center gap-1 px-2 py-1 rounded-xl font-black text-xs btn-kid-3d shadow-2xs cursor-pointer border ${
+            className={`flex min-h-10 min-w-10 items-center justify-center gap-1 px-2 py-1 rounded-xl font-black text-xs btn-kid-3d shadow-2xs cursor-pointer border ${
               isFocusMode
                 ? 'bg-rose-500 hover:bg-rose-600 text-white border-rose-600'
                 : 'bg-indigo-100 hover:bg-indigo-200 text-indigo-900 border-indigo-300'
@@ -284,23 +284,30 @@ export default function ZoneView({
       )}
 
       {/* Main Question Navigation Bar (Luôn hiển thị: Câu trước, Vị trí câu, Câu tiếp theo) */}
-      <div className="mt-3 landscape:mt-1.5 pt-2 border-t border-amber-200/80 flex items-center justify-between gap-2 w-full max-w-md mx-auto">
+      <div
+        className={`mt-3 landscape:mt-1.5 pt-2 border-t border-amber-200/80 flex items-center justify-between gap-2 w-full max-w-md mx-auto ${
+          lastAnswerStatus !== 'idle'
+            ? 'fixed inset-x-2 bottom-[calc(4.25rem+env(safe-area-inset-bottom))] landscape:bottom-[max(0.5rem,env(safe-area-inset-bottom))] z-40 rounded-2xl border border-amber-300 bg-white/95 p-2 shadow-xl backdrop-blur sm:static sm:inset-auto sm:rounded-none sm:border-x-0 sm:border-b-0 sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-none'
+            : ''
+        }`}
+      >
         <button
           type="button"
           onClick={handlePrev}
           disabled={levelIndex === 0}
-          className={`flex items-center gap-1 px-3.5 py-2 rounded-2xl font-black text-xs sm:text-sm transition-all btn-kid-3d ${
+          aria-label="Câu trước"
+          className={`flex min-h-12 min-w-12 items-center justify-center gap-1 px-3 py-2 sm:min-h-0 sm:px-3.5 rounded-2xl font-black text-xs sm:text-sm transition-all btn-kid-3d ${
             levelIndex === 0
               ? 'opacity-35 bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed'
               : 'bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-300 shadow-xs cursor-pointer active:scale-95'
           }`}
         >
           <ChevronLeft className="w-4 h-4" />
-          <span>Câu trước</span>
+          <span className="hidden sm:inline">Câu trước</span>
         </button>
 
-        <div className="flex items-center gap-1.5 bg-amber-100/90 border border-amber-300 px-3 py-1.5 rounded-xl text-amber-950 font-black text-xs sm:text-sm shadow-2xs">
-          <span>Câu</span>
+        <div className="flex min-h-12 items-center gap-1.5 bg-amber-100/90 border border-amber-300 px-3 py-1.5 sm:min-h-0 rounded-xl text-amber-950 font-black text-xs sm:text-sm shadow-2xs">
+          <span className="hidden sm:inline">Câu</span>
           <span className="text-rose-600 font-extrabold text-sm sm:text-base">{levelIndex + 1}</span>
           <span className="text-slate-400">/</span>
           <span>{currentList.length}</span>
@@ -309,13 +316,15 @@ export default function ZoneView({
         <button
           type="button"
           onClick={handleNext}
-          className={`flex items-center gap-1.5 px-4 py-2 rounded-2xl font-black text-xs sm:text-sm transition-all shadow-md btn-kid-3d cursor-pointer active:scale-95 ${
+          aria-label={levelIndex < currentList.length - 1 ? 'Câu tiếp theo' : 'Hoàn thành bài học'}
+          className={`flex min-h-12 items-center justify-center gap-1.5 px-4 py-2 sm:min-h-0 rounded-2xl font-black text-xs sm:text-sm transition-all shadow-md btn-kid-3d cursor-pointer active:scale-95 ${
             isCompletedCurrent
               ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-2 border-emerald-600 animate-bounce ring-4 ring-emerald-200'
               : 'bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 text-amber-950 border-2 border-amber-500'
           }`}
         >
-          <span>{levelIndex < currentList.length - 1 ? 'Câu tiếp theo' : 'Hoàn thành 🎉'}</span>
+          <span className="sm:hidden">{levelIndex < currentList.length - 1 ? 'Tiếp' : 'Xong 🎉'}</span>
+          <span className="hidden sm:inline">{levelIndex < currentList.length - 1 ? 'Câu tiếp theo' : 'Hoàn thành 🎉'}</span>
           <ChevronRight className="w-4 h-4" />
         </button>
       </div>

@@ -60,7 +60,7 @@ export default function Navbar({
     <>
       {/* Top Header for all devices */}
       <header className="sticky top-0 z-50 bg-gradient-to-r from-amber-300 via-orange-300 to-yellow-300 border-b-4 border-amber-400 shadow-lg px-2.5 sm:px-6 py-1.5 landscape:py-1 sm:py-2 pl-[max(0.6rem,env(safe-area-inset-left))] pr-[max(0.6rem,env(safe-area-inset-right))]">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-2">
+        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-1.5 sm:gap-2">
           {/* Logo & Brand & Grade Switcher */}
           <div className="flex items-center gap-2 select-none">
             <div
@@ -86,7 +86,7 @@ export default function Navbar({
                   soundManager.playClick();
                   setIsGradeMenuOpen(!isGradeMenuOpen);
                 }}
-                className="bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 active:scale-95 text-white text-[10px] sm:text-xs font-black px-2 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm border border-white/40 cursor-pointer btn-kid-3d"
+                className="min-h-10 sm:min-h-0 bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 active:scale-95 text-white text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm border border-white/40 cursor-pointer btn-kid-3d"
                 title="Bấm để đổi khối lớp học (Lớp 1 đến Lớp 5)"
               >
                 <span>{currentGradeConfig.label}</span>
@@ -184,7 +184,7 @@ export default function Navbar({
           </nav>
 
           {/* Stats & Audio Controls */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex w-full items-center justify-between gap-1.5 sm:w-auto sm:justify-end sm:gap-2">
             {/* Account Profile Switcher Button */}
             {currentAccount && (
               <button
@@ -194,17 +194,17 @@ export default function Navbar({
                   if (onOpenAccountModal) onOpenAccountModal();
                 }}
                 title="Bấm để đổi tài khoản bé học"
-                className="flex items-center gap-1.5 bg-white/95 hover:bg-white active:scale-95 border-2 border-amber-300 hover:border-amber-400 px-2 py-1 sm:px-3 sm:py-1.5 rounded-2xl shadow-sm text-amber-950 font-black text-xs sm:text-sm btn-kid-3d cursor-pointer"
+                className="flex min-h-10 min-w-10 items-center justify-center gap-1.5 bg-white/95 hover:bg-white active:scale-95 border-2 border-amber-300 hover:border-amber-400 px-2 py-1 sm:px-3 sm:py-1.5 rounded-2xl shadow-sm text-amber-950 font-black text-xs sm:text-sm btn-kid-3d cursor-pointer"
               >
                 <span className="text-base sm:text-lg">{currentAccount.avatar || '🦁'}</span>
-                <span className="max-w-[65px] sm:max-w-[100px] truncate">{currentAccount.name || 'Tài khoản'}</span>
+                <span className="hidden max-w-[100px] truncate sm:inline">{currentAccount.name || 'Tài khoản'}</span>
               </button>
             )}
 
             {/* Stars Counter */}
             <div
               title="Số sao bé đã tích lũy"
-              className="flex items-center gap-1 bg-white/95 border-2 border-amber-300 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-2xl shadow-sm text-amber-900 font-black text-xs sm:text-base animate-pop"
+              className="flex min-h-10 items-center justify-center gap-1 bg-white/95 border-2 border-amber-300 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-2xl shadow-sm text-amber-900 font-black text-xs sm:text-base animate-pop"
             >
               <span className="text-base sm:text-xl animate-bounce-slow">⭐</span>
               <span>{stars}</span>
@@ -219,7 +219,7 @@ export default function Navbar({
                   ? 'Âm thanh hiệu ứng: Đang BẬT (Bấm để tắt)'
                   : 'Âm thanh hiệu ứng: Đang TẮT (Bấm để bật)'
               }
-              className={`flex items-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs ${
+              className={`flex min-h-10 min-w-10 items-center justify-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs ${
                 soundOn
                   ? 'bg-amber-100 hover:bg-amber-200 border-amber-400 text-amber-900'
                   : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-400 line-through opacity-70'
@@ -247,7 +247,7 @@ export default function Navbar({
                   ? 'Giọng đọc cô giáo: Đang BẬT (Bấm để tắt)'
                   : 'Giọng đọc cô giáo: Đang TẮT (Bấm để bật)'
               }
-              className={`flex items-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs ${
+              className={`flex min-h-10 min-w-10 items-center justify-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs ${
                 voiceOn
                   ? 'bg-emerald-100 hover:bg-emerald-200 border-emerald-400 text-emerald-900'
                   : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-400 line-through opacity-70'
@@ -274,7 +274,7 @@ export default function Navbar({
                 if (onOpenUpdateModal) onOpenUpdateModal();
               }}
               title="Cập nhật ứng dụng & Tải về máy"
-              className={`relative flex items-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs whitespace-nowrap shrink-0 ${
+              className={`relative flex min-h-10 min-w-10 items-center justify-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-2xl border-2 transition-all cursor-pointer btn-kid-3d shadow-xs font-black text-xs whitespace-nowrap shrink-0 ${
                 updateInfo?.hasUpdate
                   ? 'bg-rose-500 hover:bg-rose-600 text-white border-rose-600 animate-bounce'
                   : 'bg-white hover:bg-amber-100/80 border-amber-400 text-amber-950'
@@ -297,13 +297,13 @@ export default function Navbar({
       </header>
 
       {/* Mobile Bottom Navigation Bar (Visible only on mobile portrait screens) */}
-      <div className="sm:hidden landscape:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t-2 border-amber-300 shadow-2xl px-2 pt-1 pb-[max(0.35rem,env(safe-area-inset-bottom))] flex items-center justify-around">
+      <div className="sm:hidden landscape:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t-2 border-amber-300 shadow-2xl px-2 pt-1 pb-[max(0.35rem,env(safe-area-inset-bottom))] flex min-h-16 items-center justify-around">
         <button
           onClick={() => {
             soundManager.playClick();
             setCurrentView('map');
           }}
-          className={`flex flex-col items-center py-1 px-2 rounded-xl transition-all ${
+          className={`flex min-h-12 flex-1 flex-col items-center justify-center py-1 px-2 rounded-xl transition-all ${
             currentView === 'map' ? 'text-amber-600 font-black scale-105' : 'text-slate-500 font-semibold'
           }`}
         >
@@ -316,7 +316,7 @@ export default function Navbar({
             soundManager.playFanfare();
             setCurrentView('timo_arena');
           }}
-          className={`flex flex-col items-center py-1 px-2 rounded-xl transition-all ${
+          className={`flex min-h-12 flex-1 flex-col items-center justify-center py-1 px-2 rounded-xl transition-all ${
             currentView === 'timo_arena' ? 'text-rose-600 font-black scale-105' : 'text-slate-500 font-semibold'
           }`}
         >
@@ -329,7 +329,7 @@ export default function Navbar({
             soundManager.playStar();
             setCurrentView('trophies');
           }}
-          className={`flex flex-col items-center py-1 px-2 rounded-xl transition-all ${
+          className={`flex min-h-12 flex-1 flex-col items-center justify-center py-1 px-2 rounded-xl transition-all ${
             currentView === 'trophies' ? 'text-amber-600 font-black scale-105' : 'text-slate-500 font-semibold'
           }`}
         >
@@ -342,7 +342,7 @@ export default function Navbar({
             soundManager.playClick();
             setCurrentView('parents');
           }}
-          className={`flex flex-col items-center py-1 px-2 rounded-xl transition-all ${
+          className={`flex min-h-12 flex-1 flex-col items-center justify-center py-1 px-2 rounded-xl transition-all ${
             currentView === 'parents' ? 'text-blue-600 font-black scale-105' : 'text-slate-500 font-semibold'
           }`}
         >
