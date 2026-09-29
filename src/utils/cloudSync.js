@@ -4,6 +4,12 @@
 const STORAGE_ROOM_KEY = 'hyhy_sync_room_code';
 const STORAGE_LEADERBOARD_CACHE = 'hyhy_cloud_leaderboard_cache';
 const DEFAULT_ROOM = 'HYHY_VIP_CHAMPIONS_2026';
+// GitHub Pages is a static host, so /api/sync is unavailable there. Keep the
+// store configurable for deployments with their own API and retain the
+// existing public leaderboard store as a compatibility fallback.
+const DIRECT_CLOUD_STORE_URL =
+  import.meta.env?.VITE_SYNC_STORE_URL ||
+  'https://api.restful-api.dev/objects/ff808181a09d98f701a0e641dd802adb';
 
 // Kênh BroadcastChannel đồng bộ tức thì giữa các tab/cửa sổ trên cùng máy
 let broadcastChannel = null;
@@ -126,6 +132,28 @@ export async function syncAccountToCloud(account, customRoom = null) {
     console.warn('Lưu đám mây qua /api/sync thất bại, chuyển sang direct cloud store:', err);
   }
 
+  // Static deployments (for example GitHub Pages) cannot execute /api/sync.
+  // Only the already-sanitized public leaderboard projection is sent here.
+  if (room === DEFAULT_ROOM && DIRECT_CLOUD_STORE_URL) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
+      const directRes = await fetch(DIRECT_CLOUD_STORE_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: DEFAULT_ROOM,
+          data: { room: DEFAULT_ROOM, updatedAt: Date.now(), students: updatedList },
+        }),
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+      if (directRes.ok) return updatedList;
+    } catch (err) {
+      console.warn('Direct cloud store update error:', err);
+    }
+  }
+
   return updatedList;
 }
 
@@ -161,6 +189,36 @@ export async function fetchCloudLeaderboard(customRoom = null) {
     }
   } catch (err) {
     console.warn('Không thể kết nối /api/sync, thử tầng 2 Direct Cloud Store:', err);
+  }
+
+  if (room === DEFAULT_ROOM && DIRECT_CLOUD_STORE_URL) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
+      const directRes = await fetch(DIRECT_CLOUD_STORE_URL, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
+      if (directRes.ok) {
+        const json = await directRes.json();
+        const remoteList = json?.data?.students;
+        if (Array.isArray(remoteList)) {
+          const sorted = remoteList.slice().sort((a, b) => (b.stars || 0) - (a.stars || 0));
+          setCachedLeaderboard(sorted);
+          return {
+            success: sorted.length > 0,
+            students: sorted,
+            room,
+            updatedAt: json.data.updatedAt || Date.now(),
+          };
+        }
+      }
+    } catch (err) {
+      console.warn('Không thể kết nối Direct Cloud Store, dùng bộ nhớ đệm:', err);
+    }
   }
 
   // Fallback về cache khi backend không sẵn sàng.

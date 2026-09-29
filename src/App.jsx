@@ -124,13 +124,15 @@ export default function App() {
     }
   }, [currentAccountId]);
 
-  // Tự động đẩy tiến trình tài khoản hiện tại lên Đám Mây để thi đua giữa các máy
+  // Tự động đẩy toàn bộ hồ sơ cục bộ lên Bảng Vàng để không phải tạo lại
+  // tài khoản khi mở trên máy khác. Chỉ projection công khai được đồng bộ.
   useEffect(() => {
-    const accountToSync = accounts.find((account) => account.id === currentAccountId);
-    if (accountToSync) {
-      syncAccountToCloud(accountToSync);
+    if (accounts.length > 0) {
+      Promise.all(accounts.map((account) => syncAccountToCloud(account))).catch((err) => {
+        console.warn('Không thể tự đồng bộ toàn bộ hồ sơ lên Bảng Vàng:', err);
+      });
     }
-  }, [accounts, currentAccountId]);
+  }, [accounts]);
 
   // Lắng nghe sự kiện đồng bộ từ các cửa sổ / tab khác
   useEffect(() => {

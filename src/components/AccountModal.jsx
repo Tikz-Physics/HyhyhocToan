@@ -26,6 +26,7 @@ import { isAccountOwnedByDevice } from '../utils/accountStorage';
 import {
   getSyncRoomCode,
   setSyncRoomCode,
+  syncAccountToCloud,
   fetchCloudLeaderboard,
   generateSyncExportCode,
   importSyncExportCode,
@@ -109,6 +110,13 @@ export default function AccountModal({
   // Tải bảng xếp hạng đám mây khi mở modal hoặc đổi tab
   const loadLeaderboardData = useCallback(async (targetRoom = null) => {
     try {
+      // Re-publish every local profile before reading the room. This repairs
+      // devices whose profiles were created while the cloud API was offline,
+      // without ever sending PINs or detailed learning progress.
+      const room = targetRoom || roomCode;
+      await Promise.all(
+        (accounts || []).map((account) => syncAccountToCloud(account, room))
+      );
       const res = await fetchCloudLeaderboard(targetRoom);
       if (res && res.students) {
         // Hợp nhất cả tài khoản cục bộ hiện tại vào danh sách hiển thị
@@ -146,7 +154,7 @@ export default function AccountModal({
     } finally {
       setIsRefreshing(false);
     }
-  }, [accounts]);
+  }, [accounts, roomCode]);
 
   useEffect(() => {
     if (!isOpen) return;
