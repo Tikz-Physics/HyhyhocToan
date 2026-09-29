@@ -1,6 +1,6 @@
 {
-  "version": "2.2.1",
-  "buildTime": 1790653214648,
+  "version": "2.2.2",
+  "buildTime": 1790654089255,
   "releaseDate": "2026-09-29",
-  "changelog": "Tự động đồng bộ toàn bộ tài khoản cục bộ lên Bảng Vàng, khôi phục đồng bộ trên GitHub Pages và sửa cơ chế phát hiện phiên bản mới."
+  "changelog": "Sửa lỗi ghi đè dữ liệu Bảng Vàng: hợp nhất tài khoản từ nhiều máy theo mã tài khoản và đồng bộ tuần tự an toàn hơn."
 }

@@ -128,9 +128,15 @@ export default function App() {
   // tài khoản khi mở trên máy khác. Chỉ projection công khai được đồng bộ.
   useEffect(() => {
     if (accounts.length > 0) {
-      Promise.all(accounts.map((account) => syncAccountToCloud(account))).catch((err) => {
-        console.warn('Không thể tự đồng bộ toàn bộ hồ sơ lên Bảng Vàng:', err);
-      });
+      (async () => {
+        try {
+          for (const account of accounts) {
+            await syncAccountToCloud(account);
+          }
+        } catch (err) {
+          console.warn('Không thể tự đồng bộ toàn bộ hồ sơ lên Bảng Vàng:', err);
+        }
+      })();
     }
   }, [accounts]);
 

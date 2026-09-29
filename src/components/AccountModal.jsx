@@ -114,9 +114,11 @@ export default function AccountModal({
       // devices whose profiles were created while the cloud API was offline,
       // without ever sending PINs or detailed learning progress.
       const room = targetRoom || roomCode;
-      await Promise.all(
-        (accounts || []).map((account) => syncAccountToCloud(account, room))
-      );
+      // Sequential writes avoid two profiles racing through the fallback
+      // read/merge/PUT cycle on static GitHub Pages hosting.
+      for (const account of accounts || []) {
+        await syncAccountToCloud(account, room);
+      }
       const res = await fetchCloudLeaderboard(targetRoom);
       if (res && res.students) {
         // Hợp nhất cả tài khoản cục bộ hiện tại vào danh sách hiển thị

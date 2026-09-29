@@ -62,6 +62,43 @@ export function setCachedLeaderboard(list) {
   } catch {}
 }
 
+// Merge by stable account id so a device with a partial cache can never
+// overwrite students that were already published by another device.
+export function mergeLeaderboardStudents(...lists) {
+  const merged = new Map();
+  lists.flatMap((list) => (Array.isArray(list) ? list : [])).forEach((student) => {
+    if (!student || typeof student.id !== 'string' || !student.id) return;
+    const previous = merged.get(student.id);
+    merged.set(student.id, {
+      ...(previous || {}),
+      ...student,
+      stars: Math.max(previous?.stars || 0, student.stars || 0),
+    });
+  });
+  return Array.from(merged.values()).sort((a, b) => (b.stars || 0) - (a.stars || 0));
+}
+
+async function fetchDirectCloudStudents() {
+  if (!DIRECT_CLOUD_STORE_URL) return [];
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 4000);
+  try {
+    const response = await fetch(DIRECT_CLOUD_STORE_URL, {
+      method: 'GET',
+      headers: { Accept: 'application/json' },
+      signal: controller.signal,
+    });
+    if (!response.ok) return [];
+    const json = await response.json();
+    return Array.isArray(json?.data?.students) ? json.data.students : [];
+  } catch (err) {
+    console.warn('Không thể đọc Direct Cloud Store:', err);
+    return [];
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
 /**
  * Đẩy thông tin tài khoản bé lên Đám Mây để thi đua
  */
@@ -95,19 +132,7 @@ export async function syncAccountToCloud(account, customRoom = null) {
 
   // 2. Cập nhật vào cache cục bộ
   const cached = getCachedLeaderboard();
-  const existingIdx = cached.findIndex((s) => s.id === payloadStudent.id);
-  let updatedList;
-  if (existingIdx >= 0) {
-    updatedList = [...cached];
-    updatedList[existingIdx] = {
-      ...updatedList[existingIdx],
-      ...payloadStudent,
-      stars: Math.max(updatedList[existingIdx].stars || 0, payloadStudent.stars || 0),
-    };
-  } else {
-    updatedList = [...cached, payloadStudent];
-  }
-  updatedList.sort((a, b) => (b.stars || 0) - (a.stars || 0));
+  let updatedList = mergeLeaderboardStudents(cached, [payloadStudent]);
   setCachedLeaderboard(updatedList);
 
   // 3. Gửi lên máy chủ /api/sync
@@ -136,6 +161,10 @@ export async function syncAccountToCloud(account, customRoom = null) {
   // Only the already-sanitized public leaderboard projection is sent here.
   if (room === DEFAULT_ROOM && DIRECT_CLOUD_STORE_URL) {
     try {
+      // Read-before-write is required for static hosting: the fallback store
+      // has no per-student PATCH endpoint, so PUT must preserve other devices.
+      const remoteStudents = await fetchDirectCloudStudents();
+      updatedList = mergeLeaderboardStudents(remoteStudents, updatedList);
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 4000);
       const directRes = await fetch(DIRECT_CLOUD_STORE_URL, {
@@ -148,7 +177,10 @@ export async function syncAccountToCloud(account, customRoom = null) {
         signal: controller.signal,
       });
       clearTimeout(timeoutId);
-      if (directRes.ok) return updatedList;
+      if (directRes.ok) {
+        setCachedLeaderboard(updatedList);
+        return updatedList;
+      }
     } catch (err) {
       console.warn('Direct cloud store update error:', err);
     }
@@ -193,28 +225,16 @@ export async function fetchCloudLeaderboard(customRoom = null) {
 
   if (room === DEFAULT_ROOM && DIRECT_CLOUD_STORE_URL) {
     try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4000);
-      const directRes = await fetch(DIRECT_CLOUD_STORE_URL, {
-        method: 'GET',
-        headers: { Accept: 'application/json' },
-        signal: controller.signal,
-      });
-      clearTimeout(timeoutId);
-
-      if (directRes.ok) {
-        const json = await directRes.json();
-        const remoteList = json?.data?.students;
-        if (Array.isArray(remoteList)) {
-          const sorted = remoteList.slice().sort((a, b) => (b.stars || 0) - (a.stars || 0));
-          setCachedLeaderboard(sorted);
-          return {
-            success: sorted.length > 0,
-            students: sorted,
-            room,
-            updatedAt: json.data.updatedAt || Date.now(),
-          };
-        }
+      const remoteList = await fetchDirectCloudStudents();
+      if (remoteList.length > 0) {
+        const sorted = mergeLeaderboardStudents(remoteList);
+        setCachedLeaderboard(sorted);
+        return {
+          success: true,
+          students: sorted,
+          room,
+          updatedAt: Date.now(),
+        };
       }
     } catch (err) {
       console.warn('Không thể kết nối Direct Cloud Store, dùng bộ nhớ đệm:', err);
