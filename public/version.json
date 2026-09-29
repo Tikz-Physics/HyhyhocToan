@@ -1,6 +1,6 @@
 {
-  "version": "2.2.4",
-  "buildTime": 1790655237021,
+  "version": "2.2.5",
+  "buildTime": 1790655400000,
   "releaseDate": "2026-09-29",
-  "changelog": "Hiển thị Top 10 và các tài khoản trên máy ở cuối bảng; hỗ trợ đổi tên, xóa và tự động cập nhật Bảng Vàng."
+  "changelog": "Sửa xóa tài khoản khỏi Bảng Vàng: tài khoản đã xóa được ghi nhớ cục bộ và không tự xuất hiện lại khi cloud tạm thời giới hạn truy cập."
 }

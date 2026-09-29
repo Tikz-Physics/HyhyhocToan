@@ -3,6 +3,7 @@
 
 const STORAGE_ROOM_KEY = 'hyhy_sync_room_code';
 const STORAGE_LEADERBOARD_CACHE = 'hyhy_cloud_leaderboard_cache';
+const STORAGE_DELETED_ACCOUNTS = 'hyhy_deleted_leaderboard_accounts';
 const DEFAULT_ROOM = 'HYHY_VIP_CHAMPIONS_2026';
 // GitHub Pages is a static host, so /api/sync is unavailable there. Keep the
 // store configurable for deployments with their own API and retain the
@@ -48,10 +49,30 @@ export function getCachedLeaderboard() {
     const raw = localStorage.getItem(STORAGE_LEADERBOARD_CACHE);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) return parsed;
+      if (Array.isArray(parsed)) {
+        const deleted = getDeletedAccountIds();
+        return parsed.filter((student) => !deleted.has(student?.id));
+      }
     }
   } catch {}
   return [];
+}
+
+function getDeletedAccountIds() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(STORAGE_DELETED_ACCOUNTS) || '[]');
+    return new Set(Array.isArray(parsed) ? parsed : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function rememberDeletedAccount(accountId) {
+  try {
+    const deleted = getDeletedAccountIds();
+    deleted.add(accountId);
+    localStorage.setItem(STORAGE_DELETED_ACCOUNTS, JSON.stringify([...deleted]));
+  } catch {}
 }
 
 export function setCachedLeaderboard(list) {
@@ -83,9 +104,10 @@ function sanitizeLeaderboardStudent(student) {
 // overwrite students that were already published by another device.
 export function mergeLeaderboardStudents(...lists) {
   const merged = new Map();
+  const deleted = getDeletedAccountIds();
   lists.flatMap((list) => (Array.isArray(list) ? list : [])).forEach((rawStudent) => {
     const student = sanitizeLeaderboardStudent(rawStudent);
-    if (!student) return;
+    if (!student || deleted.has(student.id)) return;
     const previous = merged.get(student.id);
     merged.set(student.id, {
       ...(previous || {}),
@@ -124,6 +146,7 @@ async function fetchDirectCloudStudents() {
  */
 export async function syncAccountToCloud(account, customRoom = null) {
   if (!account || !account.id) return null;
+  if (getDeletedAccountIds().has(account.id)) return getCachedLeaderboard();
 
   const room = customRoom || getSyncRoomCode();
 
@@ -212,6 +235,8 @@ export async function syncAccountToCloud(account, customRoom = null) {
 /** Remove one local account from the public fallback leaderboard. */
 export async function removeAccountFromCloud(accountId, customRoom = null) {
   if (!accountId) return false;
+  rememberDeletedAccount(accountId);
+  setCachedLeaderboard(getCachedLeaderboard().filter((student) => student.id !== accountId));
   const room = customRoom || getSyncRoomCode();
   if (room !== DEFAULT_ROOM || !DIRECT_CLOUD_STORE_URL) return false;
 
