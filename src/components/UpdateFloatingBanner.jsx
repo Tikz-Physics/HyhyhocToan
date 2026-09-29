@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { RefreshCw, X } from 'lucide-react';
-import { applyAppUpdate } from '../utils/updateManager';
+import { applyAppUpdate, CURRENT_APP_VERSION } from '../utils/updateManager';
 import { soundManager } from '../utils/soundManager';
 
 export default function UpdateFloatingBanner({
@@ -31,7 +31,7 @@ export default function UpdateFloatingBanner({
               Đã có bản cập nhật mới!
             </div>
             <div className="text-[10px] text-amber-100 font-bold truncate">
-              {updateInfo.version || 'v2.2.0'} • Thêm bài tập & sửa lỗi
+              {updateInfo.version || `v${CURRENT_APP_VERSION}`} • Thêm bài tập & sửa lỗi
             </div>
           </div>
         </div>

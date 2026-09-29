@@ -1,6 +1,6 @@
 {
-  "version": "2.2.0",
-  "buildTime": 1790516300000,
-  "releaseDate": "2026-09-27",
-  "changelog": "Cơ chế trò chơi mới: chấm điểm 1 lần, khóa chống bấm mò, phạt trừ sao khi sai, đổi phần thưởng thực tế và đồng hồ đếm ngược."
+  "version": "2.2.1",
+  "buildTime": 1790653214648,
+  "releaseDate": "2026-09-29",
+  "changelog": "Tự động đồng bộ toàn bộ tài khoản cục bộ lên Bảng Vàng, khôi phục đồng bộ trên GitHub Pages và sửa cơ chế phát hiện phiên bản mới."
 }
