@@ -38,6 +38,37 @@
         }
       },
       "updatedAt": "2026-09-29T01:59:23.344Z"
+    },
+    "grade-2-5-concept-illustrations": {
+      "targetKind": "existing-ui",
+      "projectId": "9b162f6a-a93c-4e1b-b110-df7b0537dc95",
+      "baselineDraftId": "e8cee1f7-ea79-44a0-9470-f026e1a14d25",
+      "activeDraftId": "e8cee1f7-ea79-44a0-9470-f026e1a14d25",
+      "designSystemPath": ".superdesign/design-system.md",
+      "contextFiles": [
+        ".superdesign/design-system.md",
+        ".superdesign/init/theme.md",
+        "src/components/InteractiveCanvas.jsx:1080:1363",
+        "src/components/QuestionIllustration.jsx",
+        "src/components/CurriculumConceptIllustration.jsx",
+        "src/index.css"
+      ],
+      "fingerprints": {
+        ".superdesign/design-system.md": "55f205a700911179def7b6c6e9fa2cad361833fa125205a42fd914f1402ef7f3",
+        ".superdesign/init/theme.md": "1a524da4b47f4a73448dc33dcb82858a92a04815c6fc525ac7c8007c6a0f0090",
+        "src/components/InteractiveCanvas.jsx": "ccb8ffc0d6932c679c0bd4fcca33b12523b5032676a4d72fe6bd4bef7e1d8770",
+        "src/components/QuestionIllustration.jsx": "b37981e6eb1ac2498c94dc027e86011b5f5f25d875b01e7bc9c944489c1d4d77",
+        "src/components/CurriculumConceptIllustration.jsx": "a08a86e4a722c40a68cecbd755d22905e1ee0e91bfe93082a14330d1985dd82a",
+        "src/index.css": "ca7e11159f976bac1a8bd02f2d3863b74510a05a6c8144684287f256ce9bef21"
+      },
+      "drafts": {
+        "e8cee1f7-ea79-44a0-9470-f026e1a14d25": {
+          "title": "Grade 2–5 concept illustration system",
+          "visualDirection": "Original warm code-native concept cards for arithmetic, measurement, geometry and data",
+          "currentVersion": 1
+        }
+      },
+      "updatedAt": "2026-09-29T02:10:00.000Z"
     }
   }
 }

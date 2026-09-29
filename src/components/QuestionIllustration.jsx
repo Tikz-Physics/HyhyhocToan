@@ -1,4 +1,5 @@
 import React from 'react';
+import CurriculumConceptIllustration from './CurriculumConceptIllustration';
 
 /**
  * Helper: Bó 10 Que Tính Tre (1 chục)
@@ -1373,6 +1374,7 @@ export default function QuestionIllustration({ level }) {
     );
   }
 
-  // Các câu hỏi không có hình đặc thù: Không hiển thị hình ngẫu nhiên để tránh lệch đề bài
-  return null;
+  // Minh họa khái niệm dùng chung cho toàn bộ câu cơ bản lớp 2–5.
+  // Các nhánh đặc thù phía trên vẫn được ưu tiên khi cần hình chính xác cho từng đề.
+  return <CurriculumConceptIllustration level={level} />;
 }
