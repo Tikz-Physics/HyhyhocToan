@@ -62,12 +62,30 @@ export function setCachedLeaderboard(list) {
   } catch {}
 }
 
+function sanitizeLeaderboardStudent(student) {
+  if (!student || typeof student.id !== 'string' || !student.id) return null;
+  return {
+    id: student.id.slice(0, 128),
+    name: String(student.name || 'Người học').slice(0, 80),
+    avatar: String(student.avatar || '🦁').slice(0, 16),
+    grade: Math.min(5, Math.max(1, Number(student.grade) || 1)),
+    stars: Math.max(0, Math.min(1000000, Number(student.stars) || 0)),
+    completedTasksCount: Math.max(0, Math.min(10000, Number(student.completedTasksCount) || 0)),
+    userMedalsCount: Math.max(0, Math.min(1000, Number(student.userMedalsCount) || 0)),
+    highestTimoScore: Math.max(0, Math.min(100, Number(student.highestTimoScore) || 0)),
+    lastActive: Number(student.lastActive) || Date.now(),
+    lastUpdated: Number(student.lastUpdated) || Date.now(),
+    deviceInfo: String(student.deviceInfo || 'Thiết bị').slice(0, 80),
+  };
+}
+
 // Merge by stable account id so a device with a partial cache can never
 // overwrite students that were already published by another device.
 export function mergeLeaderboardStudents(...lists) {
   const merged = new Map();
-  lists.flatMap((list) => (Array.isArray(list) ? list : [])).forEach((student) => {
-    if (!student || typeof student.id !== 'string' || !student.id) return;
+  lists.flatMap((list) => (Array.isArray(list) ? list : [])).forEach((rawStudent) => {
+    const student = sanitizeLeaderboardStudent(rawStudent);
+    if (!student) return;
     const previous = merged.get(student.id);
     merged.set(student.id, {
       ...(previous || {}),
@@ -90,7 +108,9 @@ async function fetchDirectCloudStudents() {
     });
     if (!response.ok) return [];
     const json = await response.json();
-    return Array.isArray(json?.data?.students) ? json.data.students : [];
+    return Array.isArray(json?.data?.students)
+      ? json.data.students.map(sanitizeLeaderboardStudent).filter(Boolean)
+      : [];
   } catch (err) {
     console.warn('Không thể đọc Direct Cloud Store:', err);
     return [];

@@ -1,6 +1,6 @@
 {
-  "version": "2.2.2",
-  "buildTime": 1790654089255,
+  "version": "2.2.3",
+  "buildTime": 1790654446843,
   "releaseDate": "2026-09-29",
-  "changelog": "Sửa lỗi ghi đè dữ liệu Bảng Vàng: hợp nhất tài khoản từ nhiều máy theo mã tài khoản và đồng bộ tuần tự an toàn hơn."
+  "changelog": "Hợp nhất tài khoản từ nhiều máy, khôi phục dữ liệu không bị ghi đè và lọc PIN/tiến trình chi tiết khỏi Bảng Vàng công khai."
 }

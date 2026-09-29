@@ -75,6 +75,10 @@ export default function AccountModal({
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [syncStatusMsg, setSyncStatusMsg] = useState('');
 
+  // The cloud keeps every account for synchronization, while the UI only
+  // presents the ten highest scores to keep the leaderboard easy to scan.
+  const topLeaderboardStudents = cloudStudents.slice(0, 10);
+
   // Transfer code state
   const [transferCode, setTransferCode] = useState('');
   const [inputTransferCode, setInputTransferCode] = useState('');
@@ -1111,6 +1115,12 @@ export default function AccountModal({
               </span>
             </div>
 
+            {cloudStudents.length > 10 && (
+              <div className="text-center text-[10px] font-black text-slate-500">
+                Đang hiển thị Top 10 · Tổng cộng {cloudStudents.length} tài khoản đã đồng bộ
+              </div>
+            )}
+
             {/* Leaderboard List */}
             <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
               {cloudStudents.length === 0 ? (
@@ -1142,7 +1152,7 @@ export default function AccountModal({
                 )
               ) : (
                 <>
-                  {cloudStudents.map((st, idx) => {
+                  {topLeaderboardStudents.map((st, idx) => {
                     const isCurrent = st.id === currentAccountId && hasLocalAccounts;
                     const isLocal = accounts.some((a) => a.id === st.id);
                     let rankBadge = `${idx + 1}`;
