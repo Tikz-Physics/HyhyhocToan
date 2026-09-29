@@ -124,16 +124,32 @@ export default function AccountModal({
   }, [accounts, onSwitchAccount, onClose]);
 
   // Tải bảng xếp hạng đám mây khi mở modal hoặc đổi tab
-  const loadLeaderboardData = useCallback(async (targetRoom = null) => {
+  const loadLeaderboardData = useCallback(async (targetRoom = null, shouldSyncLocal = true) => {
+    setIsRefreshing(true);
     try {
       // Re-publish every local profile before reading the room. This repairs
       // devices whose profiles were created while the cloud API was offline,
       // without ever sending PINs or detailed learning progress.
       const room = targetRoom || roomCode;
+      if (!shouldSyncLocal) {
+        setSyncStatusMsg('Đang tải dữ liệu Bảng Vàng...');
+      }
       // Sequential writes avoid two profiles racing through the fallback
       // read/merge/PUT cycle on static GitHub Pages hosting.
-      for (const account of accounts || []) {
-        await syncAccountToCloud(account, room);
+      const localAccounts = accounts || [];
+      if (shouldSyncLocal) {
+        setSyncStatusMsg(
+          localAccounts.length > 0
+            ? `Đang gửi ${localAccounts.length} tài khoản trên máy lên Bảng Vàng...`
+            : 'Đang tải dữ liệu Bảng Vàng...'
+        );
+        for (let index = 0; index < localAccounts.length; index += 1) {
+          const account = localAccounts[index];
+          setSyncStatusMsg(
+            `Đang đồng bộ tài khoản ${index + 1}/${localAccounts.length}: ${account.name}...`
+          );
+          await syncAccountToCloud(account, room);
+        }
       }
       const res = await fetchCloudLeaderboard(targetRoom);
       if (res && res.students) {
@@ -166,9 +182,11 @@ export default function AccountModal({
           (a, b) => (b.stars || 0) - (a.stars || 0)
         );
         setCloudStudents(sorted);
+        setSyncStatusMsg(`Đã cập nhật Bảng Vàng: ${sorted.length} tài khoản.`);
       }
     } catch (e) {
       console.error('Lỗi tải bảng xếp hạng:', e);
+      setSyncStatusMsg('Không thể kết nối cloud. Đang hiển thị dữ liệu đã lưu trên máy.');
     } finally {
       setIsRefreshing(false);
     }
@@ -176,7 +194,9 @@ export default function AccountModal({
 
   useEffect(() => {
     if (!isOpen) return;
-    const timerId = window.setTimeout(() => loadLeaderboardData(), 0);
+    // Account changes are already uploaded by App. Only read and render here
+    // so creating an account cannot start competing cloud writes.
+    const timerId = window.setTimeout(() => loadLeaderboardData(null, false), 0);
     return () => window.clearTimeout(timerId);
   }, [isOpen, loadLeaderboardData]);
 
@@ -333,7 +353,8 @@ export default function AccountModal({
     setNewName('');
     setNewPin('1234');
     setIsCreating(false);
-    onClose();
+    setActiveTab('leaderboard');
+    setSyncStatusMsg(`Đã tạo tài khoản ${cleanedName}. Đang cập nhật Bảng Vàng...`);
   };
 
   const handleSaveRoomCode = () => {
@@ -743,7 +764,7 @@ export default function AccountModal({
         {/* Sync notification banner if any */}
         {syncStatusMsg && (
           <div className="mb-3 p-2 bg-emerald-100 border border-emerald-300 rounded-xl text-xs font-bold text-emerald-900 text-center animate-pop">
-            🎉 {syncStatusMsg}
+            {isRefreshing ? '🔄' : '✅'} {syncStatusMsg}
           </div>
         )}
 
@@ -1137,8 +1158,9 @@ export default function AccountModal({
                   type="button"
                   onClick={() => loadLeaderboardData()}
                   disabled={isRefreshing}
-                  title="Làm mới bảng xếp hạng"
-                  className="p-1.5 bg-white hover:bg-indigo-100 border border-indigo-200 rounded-xl text-indigo-800 transition-all cursor-pointer"
+                  title={isRefreshing ? syncStatusMsg : 'Làm mới bảng xếp hạng'}
+                  aria-label={isRefreshing ? syncStatusMsg : 'Làm mới bảng xếp hạng'}
+                  className="p-1.5 bg-white hover:bg-indigo-100 border border-indigo-200 rounded-xl text-indigo-800 transition-all cursor-pointer disabled:cursor-wait disabled:opacity-70"
                 >
                   <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin' : ''}`} />
                 </button>

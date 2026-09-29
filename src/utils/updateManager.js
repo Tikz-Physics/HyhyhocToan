@@ -1,6 +1,6 @@
 // Quản lý kiểm tra và cập nhật tự động cho ứng dụng HyhyhocToan
-export const CURRENT_APP_VERSION = '2.2.5';
-export const CURRENT_BUILD_TIMESTAMP = 1790655400000;
+export const CURRENT_APP_VERSION = '2.2.6';
+export const CURRENT_BUILD_TIMESTAMP = 1790671781823;
 
 let deferredInstallPrompt = null;
 let updateListeners = [];

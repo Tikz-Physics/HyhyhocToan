@@ -294,9 +294,7 @@ export default function App() {
     setSelectedGrade(targetGrade);
     saveAccounts(nextAccounts);
     saveActiveAccountId(newId);
-    setIsAccountModalOpen(false);
-    // Ngay lập tức đồng bộ tài khoản mới lên đám mây để mọi thiết bị khác đều thấy!
-    syncAccountToCloud(newAcc);
+    setIsAccountModalOpen(true);
     return true;
   };
 

@@ -1,6 +1,6 @@
 {
-  "version": "2.2.5",
-  "buildTime": 1790655400000,
+  "version": "2.2.6",
+  "buildTime": 1790671781823,
   "releaseDate": "2026-09-29",
-  "changelog": "Sửa xóa tài khoản khỏi Bảng Vàng: tài khoản đã xóa được ghi nhớ cục bộ và không tự xuất hiện lại khi cloud tạm thời giới hạn truy cập."
+  "changelog": "Hiển thị tiến trình khi cập nhật Bảng Vàng và mở ngay Bảng Vàng sau khi tạo tài khoản mới."
 }
